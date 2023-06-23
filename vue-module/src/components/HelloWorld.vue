@@ -56,13 +56,7 @@
             </router-link>
           </li>
         </ul>
-        <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="search" placeholder="请输入消息搜索关键字" aria-label="Search" v-model="search"
-            @keyup.enter="searchMessage" />
-          <el-button class="btn btn-outline-success my-2 my-sm-0" type="success" size="medium" @click="searchMessage">
-            搜索
-          </el-button>
-        </form>
+
       </div>
     </nav>
 
