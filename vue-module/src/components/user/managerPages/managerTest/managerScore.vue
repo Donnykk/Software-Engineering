@@ -1,8 +1,7 @@
 <template>
   <div>
-    <el-table :data="
-      fileList.slice((currentPage - 1) * pagesize, currentPage * pagesize)
-    " style="width: 100%" :default-sort="{ prop: 'date', order: 'descending' }" v-loading="loading">
+    <el-table :data="fileList.slice((currentPage - 1) * pagesize, currentPage * pagesize)
+      " style="width: 100%" :default-sort="{ prop: 'date', order: 'descending' }" v-loading="loading">
       <el-table-column prop="examDescription" label="考试名称" align="center"></el-table-column>
       <el-table-column prop="examLocation" label="考试地点" align="center"></el-table-column>
       <el-table-column prop="examStartTime" label="开始时间" align="center" sortable></el-table-column>
@@ -19,7 +18,7 @@
     </el-pagination>
 
     <!-- 报名表dialog -->
-    <el-dialog title="报名表" height="500" :visible.sync="userListDialog" v-loading="">
+    <el-dialog title="报名表" height="500" :visible.sync="userListDialog">
       <el-button type="primary" size="mini" @click="beforeSetScore">录入成绩</el-button>
       <el-popconfirm confirm-button-text="好的" cancel-button-text="不用了" icon="el-icon-info" icon-color="red"
         title="这将删除全部同名考试分数，你确定吗？" @onConfirm="deleteScore">

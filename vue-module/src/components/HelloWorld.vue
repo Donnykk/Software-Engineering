@@ -4,30 +4,16 @@
       <img :src="html_top_imgUrl" style="height: 60%; width: 60%" />
     </div>
     <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd">
-
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <router-link class="nav-link" to="/homepage" id="navbarDropdown" role="button" aria-haspopup="true"
-              aria-expanded="false">
-              首页
+            <router-link to="/publicGetExam" class="nav-link" role="button" aria-haspopup="true" aria-expanded="false">
+              考试中心
             </router-link>
-          </li>
-          <li class="nav-item dropdown" v-if="ifShow">
-            <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
-              aria-expanded="false">
-              考试报名
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <router-link class="dropdown-item" to="/publicGetExam">报名中心</router-link>
-              <div class="dropdown-divider"></div>
-              <router-link class="dropdown-item" to="/publicGetChannel">考试频道</router-link>
-            </div>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"

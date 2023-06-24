@@ -13,10 +13,7 @@
               <i class="el-icon-user-solid"></i>
               <span slot="title">个人信息</span>
             </el-menu-item>
-            <el-menu-item index="/usercenter/personalProgram">
-              <i class="el-icon-s-order"></i>
-              <span slot="title">查看考试频道</span>
-            </el-menu-item>
+
             <el-submenu index="/usercenter/personalNotice">
               <template slot="title">
                 <i class="el-icon-s-comment"></i>
