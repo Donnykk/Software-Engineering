@@ -4,62 +4,153 @@
     <el-container>
       <el-header style="text-align: center; height: 100px">
         <div class="block">
-          <el-avatar v-image-preview :src="imageUrl" :size="100"></el-avatar><el-button @click="uploadExamDialog = true"
-            v-if="haveExam" size="small">上传照片</el-button>
-          <el-button v-else type="danger" @click="deleteExam" size="small">删除照片</el-button>
+          <el-avatar v-image-preview :src="imageUrl" :size="100"></el-avatar
+          ><el-button
+            @click="uploadExamDialog = true"
+            v-if="haveExam"
+            size="small"
+            >上传照片</el-button
+          >
+          <el-button v-else type="danger" @click="deleteExam" size="small"
+            >删除照片</el-button
+          >
         </div>
       </el-header>
       <el-main>
         <el-form :model="personInfo" class="demo-ruleForm" v-if="ifUpdate">
+          <div class="form-group">
+            <el-form-item prop="realName"
+              >姓名
+              <el-input
+                type="text"
+                autocomplete="off"
+                v-model="personInfo.realName"
+            /></el-form-item>
+          </div>
           <fieldset disabled>
             <div class="form-group">
-              <el-form-item prop="realName">姓名
-                <el-input type="text" autocomplete="off" v-model="personInfo.realName" /></el-form-item>
+              <el-form-item prop="stuNo"
+                >学号
+                <el-input
+                  type="text"
+                  autocomplete="off"
+                  v-model="personInfo.stuNo"
+              /></el-form-item>
             </div>
             <div class="form-group">
-              <el-form-item prop="stuNo">学号
-                <el-input type="text" autocomplete="off" v-model="personInfo.stuNo" /></el-form-item>
+              <el-form-item prop="major"
+                >专业
+                <el-input
+                  type="text"
+                  autocomplete="off"
+                  v-model="personInfo.major"
+              /></el-form-item>
             </div>
             <div class="form-group">
-              <el-form-item prop="stuNo">所属院校
-                <el-input type="text" autocomplete="off" v-model="personInfo.school" /></el-form-item>
+              <el-form-item prop="className"
+                >专业班级
+                <el-input
+                  type="text"
+                  autocomplete="off"
+                  v-model="personInfo.className"
+              /></el-form-item>
             </div>
             <div class="form-group">
-              <el-form-item prop="identificationNumber">身份证号码
-                <el-input type="text" autocomplete="off" v-model="personInfo.identificationNumber" /></el-form-item>
+              <el-form-item prop="identificationNumber"
+                >身份证号码
+                <el-input
+                  type="text"
+                  autocomplete="off"
+                  v-model="personInfo.identificationNumber"
+              /></el-form-item>
             </div>
           </fieldset>
           <el-button @click="changeIfUpdate">更改信息</el-button>
         </el-form>
 
-        <el-form :model="personInfoUpdate" ref="personInfoUpdate" :rules="rule" class="demo-ruleForm" v-if="!ifUpdate">
+        <el-form
+          :model="personInfoUpdate"
+          ref="personInfoUpdate"
+          :rules="rule"
+          class="demo-ruleForm"
+          v-if="!ifUpdate"
+        >
           <fieldset>
             <div class="form-group">
-              <el-form-item prop="u_realName">姓名
-                <el-input type="text" autocomplete="off" v-model="personInfoUpdate.u_realName" /></el-form-item>
+              <el-form-item prop="u_realName"
+                >姓名
+                <el-input
+                  type="text"
+                  autocomplete="off"
+                  v-model="personInfoUpdate.u_realName"
+              /></el-form-item>
             </div>
             <div class="form-group">
-              <el-form-item prop="u_stuNo">学号
-                <el-input type="text" autocomplete="off" v-model="personInfoUpdate.u_stuNo" /></el-form-item>
+              <el-form-item prop="u_stuNo"
+                >学号
+                <el-input
+                  type="text"
+                  autocomplete="off"
+                  v-model="personInfoUpdate.u_stuNo"
+              /></el-form-item>
             </div>
             <div class="form-group">
-              <el-form-item prop="u_stuNo">所属院校
-                <el-input type="text" autocomplete="off" v-model="personInfoUpdate.u_school" /></el-form-item>
+              <el-form-item prop="u_major"
+                >专业<br />
+                <el-select
+                  v-model="personInfoUpdate.u_major"
+                  placeholder="请选择"
+                  @change="getClassList(personInfoUpdate.u_major)"
+                >
+                  <el-option
+                    v-for="item in majorList"
+                    :key="item.discipline"
+                    :label="item.major + '系' + item.discipline"
+                    :value="item.discipline"
+                  >
+                  </el-option> </el-select
+              ></el-form-item>
+            </div>
+            <div class="form-group" v-if="chooseMajor">
+              <el-form-item prop="u_className"
+                >专业班级<br />
+                <el-select
+                  v-model="personInfoUpdate.u_className"
+                  placeholder="请选择"
+                >
+                  <el-option
+                    v-for="item in classList"
+                    :key="item"
+                    :label="item"
+                    :value="item"
+                  >
+                  </el-option> </el-select
+              ></el-form-item>
             </div>
             <div class="form-group">
-              <el-form-item prop="u_identificationNumber">身份证号码
-                <el-input type="text" autocomplete="off"
-                  v-model="personInfoUpdate.u_identificationNumber" /></el-form-item>
+              <el-form-item prop="u_identificationNumber"
+                >身份证号码
+                <el-input
+                  type="text"
+                  autocomplete="off"
+                  v-model="personInfoUpdate.u_identificationNumber"
+              /></el-form-item>
             </div>
           </fieldset>
           <el-button type="button" @click="changeIfUpdate">取消更改</el-button>
-          <el-button type="button" @click="dialogVisible = true">更改信息</el-button>
+          <el-button type="button" @click="dialogVisible = true"
+            >更改信息</el-button
+          >
 
           <el-dialog title="提示" :visible.sync="dialogVisible" width="30%">
             <span>确认修改个人信息吗？</span>
             <span slot="footer" class="dialog-footer">
               <el-button @click="dialogVisible = false">取 消</el-button>
-              <el-button type="primary" @click="updateInformation('personInfoUpdate')">确 定</el-button>
+              <el-button
+                type="primary"
+                @click="updateInformation('personInfoUpdate')"
+                >确 定</el-button
+              >
             </span>
           </el-dialog>
         </el-form>
@@ -68,10 +159,28 @@
     </el-container>
 
     <el-dialog :visible.sync="uploadExamDialog" width="400px">
-      <el-upload class="upload-demo" ref="upload" action="" accept="image/jpeg, image/png" :on-remove="handleRemove"
-        :auto-upload="false" :on-change="uploadImg" list-type="picture" :file-list="fileUpLoadList" :limit="1">
-        <el-button slot="trigger" size="small" type="primary">选取文件</el-button>
-        <el-button @click="uploadExam" style="margin-left: 10px" size="small" type="success">上传照片</el-button>
+      <el-upload
+        class="upload-demo"
+        ref="upload"
+        action=""
+        accept="image/jpeg, image/png"
+        :on-remove="handleRemove"
+        :auto-upload="false"
+        :on-change="uploadImg"
+        list-type="picture"
+        :file-list="fileUpLoadList"
+        :limit="1"
+      >
+        <el-button slot="trigger" size="small" type="primary"
+          >选取文件</el-button
+        >
+        <el-button
+          @click="uploadExam"
+          style="margin-left: 10px"
+          size="small"
+          type="success"
+          >上传照片</el-button
+        >
         <div slot="tip" class="el-upload__tip">
           只能上传jpg/png文件，且不超过1MB
         </div>
@@ -91,7 +200,8 @@ export default {
       personInfo: {
         realName: "",
         stuNo: "",
-        school: "",
+        major: "",
+        className: "",
         identificationNumber: "",
       },
       ifUpdate: true,
@@ -106,7 +216,8 @@ export default {
       personInfoUpdate: {
         u_realName: "",
         u_stuNo: "",
-        u_school: "",
+        u_major: "",
+        u_className: "",
         u_identificationNumber: "",
       },
       dialogVisible: false,
@@ -136,10 +247,11 @@ export default {
         ],
         u_stuNo: [
           { required: true, message: "请输入学号", trigger: "blur" },
-          { message: "请输入正确的学号", trigger: "blur" },
+          { min: 9, max: 10, message: "请输入正确的学号", trigger: "blur" },
         ],
-        u_school: [
-          { required: true, message: "请输入所属院校", trigger: "blur" },
+        u_major: [{ required: true, message: "请输入专业", trigger: "blur" }],
+        u_className: [
+          { required: true, message: "请输入班级号", trigger: "blur" },
         ],
         u_identificationNumber: [
           { required: true, message: "请输入身份证", trigger: "blur" },
@@ -183,6 +295,8 @@ export default {
 
           that.personInfoUpdate.u_realName = reponse.data.data.realName;
           that.personInfoUpdate.u_stuNo = reponse.data.data.stuNo;
+          that.personInfoUpdate.u_major = reponse.data.data.major;
+          that.personInfoUpdate.u_className = reponse.data.data.className;
           that.personInfoUpdate.u_identificationNumber =
             reponse.data.data.identificationNumber;
         },
@@ -225,7 +339,27 @@ export default {
       this.ifUpdate = !this.ifUpdate;
       this.personInfoUpdate.u_realName = this.personInfo.realName;
       this.personInfoUpdate.u_stuNo = this.personInfo.stuNo;
+      this.personInfoUpdate.u_major = this.personInfo.major;
+      this.personInfoUpdate.u_className = this.personInfo.className;
       this.personInfoUpdate.u_identificationNumber = this.personInfo.identificationNumber;
+      if (this.personInfoUpdate.u_major != "") this.chooseMajor = true;
+      else this.chooseMajor = false;
+
+      //获得专业列表
+      var that = this;
+      axios({
+        headers: { Authorization: this.print.Authorization },
+        method: "get",
+        url: "/api/major/all?pageNum&pageSize=100000",
+      }).then(function (response) {
+        for (var i = 0; i < response.data.data.length; i++) {
+          that.majorList[i] = {
+            major: response.data.data[i].major,
+            discipline: response.data.data[i].discipline,
+          };
+        }
+        that.majorList = that.unique(that.majorList);
+      });
     },
 
     //去掉相同项
@@ -234,6 +368,32 @@ export default {
       return arr.filter(
         (arr) => !res.has(arr.discipline) && res.set(arr.discipline, 1)
       );
+    },
+
+    getClassList: function (major) {
+      this.personInfoUpdate.u_className = ""
+      if (major != "") {
+        this.classList = [];
+        this.chooseMajor = true;
+        let value = "";
+        this.majorList.forEach((item) => {
+          if (item.discipline == major) {
+            this.value = item.major;
+          }
+        });
+        var that = this;
+        axios({
+          headers: { Authorization: this.print.Authorization },
+          method: "get",
+          url: "/api/major?major=" + this.value,
+        }).then(function (reponse) {
+          reponse.data.data.forEach((item) => {
+            if (item.discipline == major) {
+              that.classList.push(item.className);
+            }
+          });
+        });
+      }
     },
 
     updateInformation: function (formName) {
@@ -256,8 +416,11 @@ export default {
               params: {
                 username: this.print.username,
                 realName: this.personInfoUpdate.u_realName,
+                className: this.personInfoUpdate.u_className,
                 stuNo: this.personInfoUpdate.u_stuNo,
-                identificationNumber: this.personInfoUpdate.u_identificationNumber,
+                major: this.personInfoUpdate.u_major,
+                identificationNumber: this.personInfoUpdate
+                  .u_identificationNumber,
               },
             }).then(
               function (reponse) {
@@ -280,8 +443,11 @@ export default {
               params: {
                 username: this.print.username,
                 realName: this.personInfoUpdate.u_realName,
+                className: this.personInfoUpdate.u_className,
                 stuNo: this.personInfoUpdate.u_stuNo,
-                identificationNumber: this.personInfoUpdate.u_identificationNumber,
+                major: this.personInfoUpdate.u_major,
+                identificationNumber: this.personInfoUpdate
+                  .u_identificationNumber,
               },
               headers: {
                 Authorization: this.print.Authorization,

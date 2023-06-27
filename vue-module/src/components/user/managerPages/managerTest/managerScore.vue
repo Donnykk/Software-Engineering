@@ -1,30 +1,84 @@
 <template>
   <div>
-    <el-table :data="fileList.slice((currentPage - 1) * pagesize, currentPage * pagesize)
-      " style="width: 100%" :default-sort="{ prop: 'date', order: 'descending' }" v-loading="loading">
-      <el-table-column prop="examDescription" label="考试名称" align="center"></el-table-column>
-      <el-table-column prop="examLocation" label="考试地点" align="center"></el-table-column>
-      <el-table-column prop="examStartTime" label="开始时间" align="center" sortable></el-table-column>
-      <el-table-column prop="examEndTime" label="结束时间" align="center" sortable></el-table-column>
-      <el-table-column prop="note" label="状态" align="center"></el-table-column>
+    <el-table
+      :data="
+        fileList.slice((currentPage - 1) * pagesize, currentPage * pagesize)
+      "
+      style="width: 100%"
+      :default-sort="{ prop: 'date', order: 'descending' }"
+      v-loading="loading"
+    >
+      <el-table-column
+        prop="examDescription"
+        label="考试名称"
+        align="center"
+      ></el-table-column>
+      <el-table-column
+        prop="examLocation"
+        label="考试地点"
+        align="center"
+      ></el-table-column>
+      <el-table-column
+        prop="examStartTime"
+        label="开始时间"
+        align="center"
+        sortable
+      ></el-table-column>
+      <el-table-column
+        prop="examEndTime"
+        label="结束时间"
+        align="center"
+        sortable
+      ></el-table-column>
+      <el-table-column
+        prop="note"
+        label="状态"
+        align="center"
+      ></el-table-column>
       <el-table-column fixed="right" label="操作" align="center">
         <template slot-scope="scope">
-          <el-button @click="getScore(scope.row)" size="small">查看成绩</el-button>
+          <el-button @click="getScore(scope.row)" size="small"
+            >查看成绩</el-button
+          >
         </template>
       </el-table-column>
     </el-table>
-    <el-pagination align="center" @current-change="handleCurrentChange" :current-page="currentPage" :page-size="pagesize"
-      background layout="total, prev, pager, next, jumper" :total="pageTotal">
+    <el-pagination
+      align="center"
+      @current-change="handleCurrentChange"
+      :current-page="currentPage"
+      :page-size="pagesize"
+      background
+      layout="total, prev, pager, next, jumper"
+      :total="pageTotal"
+    >
     </el-pagination>
 
     <!-- 报名表dialog -->
-    <el-dialog title="报名表" height="500" :visible.sync="userListDialog">
-      <el-button type="primary" size="mini" @click="beforeSetScore">录入成绩</el-button>
-      <el-popconfirm confirm-button-text="好的" cancel-button-text="不用了" icon="el-icon-info" icon-color="red"
-        title="这将删除全部同名考试分数，你确定吗？" @onConfirm="deleteScore">
-        <el-button type="danger" size="mini" slot="reference">删除全部成绩</el-button>
+    <el-dialog
+      title="报名表"
+      height="500"
+      :visible.sync="userListDialog"
+      v-loading=""
+    >
+      <el-button type="primary" size="mini" @click="beforeSetScore"
+        >录入成绩</el-button
+      >
+      <el-popconfirm
+        confirm-button-text="好的"
+        cancel-button-text="不用了"
+        icon="el-icon-info"
+        icon-color="red"
+        title="这将删除全部同名考试分数，你确定吗？"
+        @onConfirm="deleteScore"
+      >
+        <el-button type="danger" size="mini" slot="reference"
+          >删除全部成绩</el-button
+        >
       </el-popconfirm>
-      <el-button type="success" size="mini" @click="showLegendLine">图例显示</el-button>
+      <el-button type="success" size="mini" @click="showLegendLine"
+        >图例显示</el-button
+      >
       <el-table :data="allReg">
         <el-table-column type="index"></el-table-column>
         <el-table-column prop="realName" label="学生姓名"></el-table-column>
@@ -34,9 +88,18 @@
         <el-table-column prop="examScore" label="成绩"></el-table-column>
         <el-table-column>
           <template slot-scope="scope">
-            <el-button type="primary" icon="el-icon-refresh" @click="updateStuScore(scope.row, scope.$index)"
-              size="mini"></el-button>
-            <el-button type="danger" icon="el-icon-delete" @click="deleteStuScore(scope.row)" size="mini"></el-button>
+            <el-button
+              type="primary"
+              icon="el-icon-refresh"
+              @click="updateStuScore(scope.row, scope.$index)"
+              size="mini"
+            ></el-button>
+            <el-button
+              type="danger"
+              icon="el-icon-delete"
+              @click="deleteStuScore(scope.row)"
+              size="mini"
+            ></el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -49,20 +112,35 @@
           <el-input v-model="oneRegForm.examDetailId"></el-input>
         </el-form-item>
         <el-form-item label="用户id" hidden>
-          <el-input v-model="oneRegForm.userId"></el-input></el-form-item>
-        <el-form-item label="学生姓名"><el-input v-model="oneRegForm.realName" readonly></el-input></el-form-item>
-        <el-form-item label="学生专业"><el-input v-model="oneRegForm.major" readonly></el-input></el-form-item>
-        <el-form-item label="学生班级"><el-input v-model="oneRegForm.className" readonly></el-input></el-form-item>
-        <el-form-item label="学生学号"><el-input v-model="oneRegForm.stuNo" readonly></el-input></el-form-item>
+          <el-input v-model="oneRegForm.userId"></el-input
+        ></el-form-item>
+        <el-form-item label="学生姓名"
+          ><el-input v-model="oneRegForm.realName" readonly></el-input
+        ></el-form-item>
+        <el-form-item label="学生专业"
+          ><el-input v-model="oneRegForm.major" readonly></el-input
+        ></el-form-item>
+        <el-form-item label="学生班级"
+          ><el-input v-model="oneRegForm.className" readonly></el-input
+        ></el-form-item>
+        <el-form-item label="学生学号"
+          ><el-input v-model="oneRegForm.stuNo" readonly></el-input
+        ></el-form-item>
         <el-form-item label="考试分数">
           <el-input v-model.number="examScore"></el-input>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="scoreDialog = false">取 消</el-button>
-        <el-button type="primary" @click="prev" v-if="num > 1">上一个</el-button>
-        <el-button type="primary" @click="next" v-if="num < allReg.length">下一个</el-button>
-        <el-button type="primary" @click="last" v-if="num == allReg.length">完成</el-button>
+        <el-button type="primary" @click="prev" v-if="num > 1"
+          >上一个</el-button
+        >
+        <el-button type="primary" @click="next" v-if="num < allReg.length"
+          >下一个</el-button
+        >
+        <el-button type="primary" @click="last" v-if="num == allReg.length"
+          >完成</el-button
+        >
       </div>
     </el-dialog>
 
@@ -73,11 +151,20 @@
           <el-input v-model="oneRegForm.examDetailId"></el-input>
         </el-form-item>
         <el-form-item label="用户id" hidden>
-          <el-input v-model="oneRegForm.userId"></el-input></el-form-item>
-        <el-form-item label="学生姓名"><el-input v-model="oneRegForm.realName" readonly></el-input></el-form-item>
-        <el-form-item label="学生专业"><el-input v-model="oneRegForm.major" readonly></el-input></el-form-item>
-        <el-form-item label="学生班级"><el-input v-model="oneRegForm.className" readonly></el-input></el-form-item>
-        <el-form-item label="学生学号"><el-input v-model="oneRegForm.stuNo" readonly></el-input></el-form-item>
+          <el-input v-model="oneRegForm.userId"></el-input
+        ></el-form-item>
+        <el-form-item label="学生姓名"
+          ><el-input v-model="oneRegForm.realName" readonly></el-input
+        ></el-form-item>
+        <el-form-item label="学生专业"
+          ><el-input v-model="oneRegForm.major" readonly></el-input
+        ></el-form-item>
+        <el-form-item label="学生班级"
+          ><el-input v-model="oneRegForm.className" readonly></el-input
+        ></el-form-item>
+        <el-form-item label="学生学号"
+          ><el-input v-model="oneRegForm.stuNo" readonly></el-input
+        ></el-form-item>
         <el-form-item label="考试分数">
           <el-input v-model.number="examScore"></el-input>
         </el-form-item>
@@ -92,7 +179,11 @@
     </el-dialog>
 
     <!-- 图例dialog -->
-    <el-dialog :visible.sync="legendDataDialog" :before-close="dialogClose" width="640px">
+    <el-dialog
+      :visible.sync="legendDataDialog"
+      :before-close="dialogClose"
+      width="640px"
+    >
       <v-chart :options="legendBar" autoresize theme="light"></v-chart>
     </el-dialog>
   </div>
@@ -546,7 +637,7 @@ export default {
           this.legendDataDialog = false;
           this.userListDialog = true;
         })
-        .catch((_) => { });
+        .catch((_) => {});
     },
   },
 };

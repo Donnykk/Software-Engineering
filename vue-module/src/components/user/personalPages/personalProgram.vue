@@ -179,7 +179,7 @@ export default {
           that.messageList = response.data.data;
           //去掉草稿的部分
           that.messageList = that.messageList.filter(
-            (message) => message.ifPublish == true
+            (message) => message.ifpublish == true
           );
           that.newChannelList.forEach((channel) => {
             that.$set(

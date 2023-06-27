@@ -1,30 +1,105 @@
 <template>
   <div class="container">
-    <el-button type="info" icon="el-icon-delete" @click="toggleSelection()" round>取消选择</el-button>
-    <el-popover popper-class="popoverBGC" placement="bottom" width="150" trigger="hover" content="添加考试" :close-delay=3>
-      <el-button type="primary" icon="el-icon-plus" @click="adddialogFormVisible = true" circle
-        slot="reference"></el-button>
+    <el-button
+      type="info"
+      icon="el-icon-delete"
+      @click="toggleSelection()"
+      round
+      >取消选择</el-button
+    >
+    <el-popover
+      popper-class="popoverBGC"
+      placement="bottom"
+      width="150"
+      trigger="hover"
+      content="添加考试"
+      :close-delay=3
+    >
+      <el-button
+        type="primary"
+        icon="el-icon-plus"
+        @click="adddialogFormVisible = true"
+        circle
+        slot="reference"
+      ></el-button>
     </el-popover>
-    <el-popover popper-class="popoverBGC" placement="bottom" width="150" trigger="hover" content="删除考试" :close-delay=3>
-      <el-button type="danger" icon="el-icon-delete" @click="deleteTestType" circle slot="reference"></el-button>
+    <el-popover
+      popper-class="popoverBGC"
+      placement="bottom"
+      width="150"
+      trigger="hover"
+      content="删除考试"
+      :close-delay=3
+    >
+      <el-button
+        type="danger"
+        icon="el-icon-delete"
+        @click="deleteTestType"
+        circle
+        slot="reference"
+      ></el-button>
     </el-popover>
-    <el-popover popper-class="popoverBGC" placement="bottom" width="150" trigger="hover" content="修改考试信息" :close-delay=3>
-      <el-button type="warning" icon="el-icon-edit" @click="beforeCheck" circle slot="reference"></el-button>
+    <el-popover
+      popper-class="popoverBGC"
+      placement="bottom"
+      width="150"
+      trigger="hover"
+      content="修改考试信息"
+      :close-delay=3
+    >
+      <el-button
+        type="warning"
+        icon="el-icon-edit"
+        @click="beforeCheck"
+        circle
+        slot="reference"
+      ></el-button>
     </el-popover>
-    <el-popover popper-class="popoverBGC" placement="bottom" width="150" trigger="hover" content="添加考试信息" :close-delay=3>
-      <el-button type="info" icon="el-icon-message" @click="beforeSendExamDetail" circle slot="reference"></el-button>
+    <el-popover
+      popper-class="popoverBGC"
+      placement="bottom"
+      width="150"
+      trigger="hover"
+      content="添加考试信息"
+      :close-delay=3
+    >
+      <el-button
+        type="info"
+        icon="el-icon-message"
+        @click="beforeSendExamDetail"
+        circle
+        slot="reference"
+      ></el-button>
+    </el-popover>
+    <el-popover
+      popper-class="popoverBGC"
+      placement="bottom"
+      width="150"
+      trigger="hover"
+      content="查看全部考试"
+      :close-delay=3
+    >
+      <el-button
+        icon="el-icon-search"
+        @click="searchExamDetail"
+        circle
+        slot="reference"
+      ></el-button>
     </el-popover>
 
     <!-- 添加考试的dialog -->
     <el-dialog title="添加考试" :visible.sync="adddialogFormVisible">
       <el-form :model="form">
-        <el-form-item label="考试日期" :label-width="formLabelWidth">
+        <el-form-item label="考试名称" :label-width="formLabelWidth">
           <el-input v-model="form.examTypeName" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="考试场地" :label-width="formLabelWidth">
-          <el-input v-model="form.examTypeDescription" autocomplete="off"></el-input>
+        <el-form-item label="考试描述" :label-width="formLabelWidth">
+          <el-input
+            v-model="form.examTypeDescription"
+            autocomplete="off"
+          ></el-input>
         </el-form-item>
-        <el-form-item label="考试类型" :label-width="formLabelWidth">
+        <el-form-item label="考试限制" :label-width="formLabelWidth">
           <el-input v-model="form.examLimit" autocomplete="off" @keyup.enter.native="addTestType"></el-input>
         </el-form-item>
       </el-form>
@@ -38,13 +113,23 @@
     <el-dialog title="更新考试" :visible.sync="updatedialogFormVisible">
       <el-form :model="u_form">
         <el-form-item label="考试名称" :label-width="formLabelWidth">
-          <el-input v-model="u_form.u_examTypeName" autocomplete="off"></el-input>
+          <el-input
+            v-model="u_form.u_examTypeName"
+            autocomplete="off"
+          ></el-input>
         </el-form-item>
-        <el-form-item label="考试时间" :label-width="formLabelWidth">
-          <el-input v-model="u_form.u_examTypeDescription" autocomplete="off"></el-input>
+        <el-form-item label="考试描述" :label-width="formLabelWidth">
+          <el-input
+            v-model="u_form.u_examTypeDescription"
+            autocomplete="off"
+          ></el-input>
         </el-form-item>
-        <el-form-item label="考试地点" :label-width="formLabelWidth">
-          <el-input v-model="u_form.u_examLimit" autocomplete="off" @keyup.enter.native="updateTestType"></el-input>
+        <el-form-item label="考试限制" :label-width="formLabelWidth">
+          <el-input
+            v-model="u_form.u_examLimit"
+            autocomplete="off"
+            @keyup.enter.native="updateTestType"
+          ></el-input>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -57,28 +142,52 @@
     <el-dialog title="添加考试信息" :visible.sync="sendExamDetailDialog">
       <el-form :model="examdetail_form">
         <el-form-item label="考试ID" :label-width="formLabelWidth">
-          <el-input v-model="examdetail_form.examTypeId" autocomplete="off" disabled></el-input>
+          <el-input
+            v-model="examdetail_form.examTypeId"
+            autocomplete="off"
+            disabled
+          ></el-input>
         </el-form-item>
         <el-form-item label="考试名称" :label-width="formLabelWidth">
-          <el-input v-model="examdetail_form.examDescription" autocomplete="off" disabled></el-input>
+          <el-input
+            v-model="examdetail_form.examDescription"
+            autocomplete="off"
+            disabled
+          ></el-input>
         </el-form-item>
         <el-form-item label="考试时间" :label-width="formLabelWidth">
           <div class="block">
-            <el-date-picker v-model="examdetail_form.examStartTime" type="datetime" placeholder="选择开始日期时间"
-              default-time="12:00:00" value-format="yyyy-MM-dd HH:mm">
+            <el-date-picker
+              v-model="examdetail_form.examStartTime"
+              type="datetime"
+              placeholder="选择开始日期时间"
+              default-time="12:00:00"
+              value-format="yyyy-MM-dd HH:mm"
+            >
             </el-date-picker>
             <span class="demonstration">-</span>
-            <el-date-picker v-model="examdetail_form.examEndTime" type="datetime" placeholder="选择结束日期时间"
-              default-time="12:00:00" value-format="yyyy-MM-dd HH:mm">
+            <el-date-picker
+              v-model="examdetail_form.examEndTime"
+              type="datetime"
+              placeholder="选择结束日期时间"
+              default-time="12:00:00"
+              value-format="yyyy-MM-dd HH:mm"
+            >
             </el-date-picker>
           </div>
         </el-form-item>
         <el-form-item label="考试地点" :label-width="formLabelWidth">
-          <el-input v-model="examdetail_form.examLocation" autocomplete="off"></el-input>
+          <el-input
+            v-model="examdetail_form.examLocation"
+            autocomplete="off"
+          ></el-input>
         </el-form-item>
         <el-form-item label="成绩发布时间" :label-width="formLabelWidth">
-          <el-input v-model="examdetail_form.examAnnounce" autocomplete="off"
-            @keyup.enter.native="sendExamDetail"></el-input>
+          <el-input
+            v-model="examdetail_form.examAnnounce"
+            autocomplete="off"
+            @keyup.enter.native="sendExamDetail"
+          ></el-input>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -89,74 +198,153 @@
 
     <!-- 查看考试信息的drawer -->
     <el-drawer :visible.sync="examDetailDrawer" direction="rtl" size="50%">
-      <el-table :data="detailList" style="width: 100%" :row-key="getRowKeys" :expand-row-keys="expands"
-        @expand-change="exChange" height="700">
+      <el-table
+        :data="detailList"
+        style="width: 100%"
+        :row-key="getRowKeys"
+        :expand-row-keys="expands"
+        @expand-change="exChange"
+        height="700"
+      >
         <el-table-column type="expand">
           <template slot-scope="props">
-            <el-form label-position="left" inline class="demo-table-expand" v-if="ifUpdate" label-width="30%">
+            <el-form
+              label-position="left"
+              inline
+              class="demo-table-expand"
+              v-if="ifUpdate"
+              label-width="30%"
+            >
               <el-form-item label="考试地点">
-                <span>{{ props.row.examLocation }}</span> </el-form-item><br />
+                <span>{{ props.row.examLocation }}</span> </el-form-item
+              ><br />
               <el-form-item label="考试开始时间">
-                <span>{{ props.row.examStartTime }}</span> </el-form-item><br />
+                <span>{{ props.row.examStartTime }}</span> </el-form-item
+              ><br />
               <el-form-item label="考试结束时间">
-                <span>{{ props.row.examEndTime }}</span> </el-form-item><br />
+                <span>{{ props.row.examEndTime }}</span> </el-form-item
+              ><br />
               <el-form-item label="成绩发布时间">
-                <span>{{ props.row.examAnnounce }}</span> </el-form-item><br />
+                <span>{{ props.row.examAnnounce }}</span> </el-form-item
+              ><br />
               <el-form-item>
-                <el-button type="primary" icon="el-icon-refresh" @click="toUpdateForm(props)"></el-button>
-                <el-button type="danger" icon="el-icon-delete" @click="deleteExamDetail(props)"></el-button>
-              </el-form-item><br />
+                <el-button
+                  type="primary"
+                  icon="el-icon-refresh"
+                  @click="toUpdateForm(props)"
+                ></el-button>
+                <el-button
+                  type="danger"
+                  icon="el-icon-delete"
+                  @click="deleteExamDetail(props)"
+                ></el-button> </el-form-item
+              ><br />
             </el-form>
 
             <!-- 更新用表单 -->
-            <el-form :model="examdetail_formUpdate" label-position="left" inline class="demo-table-expand" v-else
-              label-width="30%">
+            <el-form
+              :model="examdetail_formUpdate"
+              label-position="left"
+              inline
+              class="demo-table-expand"
+              v-else
+              label-width="30%"
+            >
               <el-form-item label="考试地点">
-                <el-input v-model="examdetail_formUpdate.u_examLocation" /> </el-form-item><br />
+                <el-input
+                  v-model="examdetail_formUpdate.u_examLocation"
+                /> </el-form-item
+              ><br />
               <el-form-item label="考试开始时间">
                 <div class="block">
-                  <el-date-picker v-model="examdetail_formUpdate.u_examStartTime" type="datetime" placeholder="考试开始时间"
-                    style="width: 87%">
-                  </el-date-picker>
-                </div>
-              </el-form-item><br />
+                  <el-date-picker
+                    v-model="examdetail_formUpdate.u_examStartTime"
+                    type="datetime"
+                    placeholder="考试开始时间"
+                    style="width: 87%"
+                  >
+                  </el-date-picker></div></el-form-item
+              ><br />
               <el-form-item label="考试结束时间">
                 <div class="block">
-                  <el-date-picker v-model="examdetail_formUpdate.u_examEndTime" type="datetime" placeholder="考试结束时间"
-                    style="width: 87%">
-                  </el-date-picker>
-                </div>
-              </el-form-item><br />
+                  <el-date-picker
+                    v-model="examdetail_formUpdate.u_examEndTime"
+                    type="datetime"
+                    placeholder="考试结束时间"
+                    style="width: 87%"
+                  >
+                  </el-date-picker></div></el-form-item
+              ><br />
               <el-form-item label="成绩发布时间">
-                <el-input v-model="examdetail_formUpdate.u_examAnnounce" /> </el-form-item><br />
+                <el-input
+                  v-model="examdetail_formUpdate.u_examAnnounce"
+                /> </el-form-item
+              ><br />
               <el-form-item>
-                <el-button type="primary" icon="el-icon-refresh" @click="toUpdateForm(props)"></el-button>
-                <el-button type="primary" icon="el-icon-check" @click="updateExamDetail"></el-button>
-              </el-form-item><br />
+                <el-button
+                  type="primary"
+                  icon="el-icon-refresh"
+                  @click="toUpdateForm(props)"
+                ></el-button>
+                <el-button
+                  type="primary"
+                  icon="el-icon-check"
+                  @click="updateExamDetail"
+                ></el-button> </el-form-item
+              ><br />
             </el-form>
           </template>
         </el-table-column>
-        <el-table-column property="examDetailId" label="考试细节ID"></el-table-column>
-        <el-table-column property="examDescription" label="考试"></el-table-column>
+        <el-table-column
+          property="examDetailId"
+          label="考试细节ID"
+        ></el-table-column>
+        <el-table-column
+          property="examDescription"
+          label="考试"
+        ></el-table-column>
       </el-table>
     </el-drawer>
 
-    <el-table ref="multipleTable" :data="
-      testList.slice((currentPage - 1) * pagesize, currentPage * pagesize)
-    " style="width: 100%" @selection-change="handleSelectionChange" tooltip-effect="dark">
+    <el-table
+      v-loading="loading"
+      ref="multipleTable"
+      :data="
+        testList.slice((currentPage - 1) * pagesize, currentPage * pagesize)
+      "
+      style="width: 100%"
+      @selection-change="handleSelectionChange"
+      tooltip-effect="dark"
+    >
       <el-table-column type="selection" width="50" align="center" />
-      <el-table-column type="index" label="场次编号" width="80" align="center"></el-table-column>
-      <el-table-column prop="examType" label="考试类型" align="center">
+      <el-table-column
+        type="index"
+        label="序号"
+        width="100"
+        align="center"
+      ></el-table-column>
+      <el-table-column prop="examTypeName" label="考试名称" align="center">
       </el-table-column>
-      <el-table-column prop="examAddress" label="考试场地" width="300" align="center">
+      <el-table-column
+        prop="examTypeDescription"
+        label="考试描述"
+        align="center"
+      >
       </el-table-column>
-      <el-table-column prop="examTime" label="考试时间" align="center">
+      <el-table-column prop="examLimit" label="考试限制" align="center">
       </el-table-column>
-      <el-table-column prop="examNum" label="考试人数" align="center">
+      <el-table-column prop="number" label="考试消息数量" align="center">
       </el-table-column>
     </el-table>
-    <el-pagination align="center" @current-change="handleCurrentChange" :current-page="currentPage" :page-size="pagesize"
-      background layout="total, prev, pager, next, jumper" :total="pageTotal">
+    <el-pagination
+      align="center"
+      @current-change="handleCurrentChange"
+      :current-page="currentPage"
+      :page-size="pagesize"
+      background
+      layout="total, prev, pager, next, jumper"
+      :total="pageTotal"
+    >
     </el-pagination>
   </div>
 </template>
@@ -175,20 +363,20 @@ export default {
       detailList: [],
       loading: false,
       form: {
-        //考试类型
-        examType: "",
-        //考试场地
-        examAdress: "",
-        //考试时间
-        examTime: "",
+        //考试名称
+        examTypeName: "",
+        //考试描述
+        examTypeDescription: "",
+        //考试限制
+        examLimit: "",
       },
       //更新表
       u_form: {
         //需要id更新
         u_examTypeId: "",
         u_examTypeName: "",
-        u_examAddress: "",
-        u_examTime: "",
+        u_examTypeDescription: "",
+        u_examLimit: "",
       },
       //初始页
       currentPage: 1,
@@ -256,20 +444,43 @@ export default {
           Authorization: this.print.Authorization,
         },
         method: "get",
+        //限制页大小，待改善
+        //参数 examTypeName:考试类型 examTypeDescription:考试类型描述 examLimit:考试限制
         url: "/api/exam",
         params: {
           pageNum: 0,
-          pageSize: 10000,
+          pageSize: 1000000,
         },
       }).then(
         function (response) {
           that.testList = response.data.data;
           that.pageTotal = response.data.data.length;
+          that.getExamDetailNum();
         },
         function (err) {
           that.$message.error("获取失败");
         }
       );
+    },
+
+    getExamDetailNum: function () {
+      var that = this;
+      this.testList.forEach((item) => {
+        axios({
+          headers: { Authorization: this.print.Authorization },
+          method: "get",
+          url: "/api/examDetail?examTypeId=" + item.examTypeId,
+        }).then(
+          function (reponse) {
+            that.$set(item, "number", reponse.data.data.length);
+            that.loading = false;
+          },
+          function (err) {
+            that.$message.error("获取信息数量失败");
+            that.loading = false;
+          }
+        );
+      });
     },
 
     handleSelectionChange(val) {
@@ -301,9 +512,9 @@ export default {
         method: "post",
         url: "/api/exam",
         params: {
-          examType: this.form.examType,
-          examAddress: this.form.examAddress,
-          examTime: this.form.examTime,
+          examTypeName: this.form.examTypeName,
+          examTypeDescription: this.form.examTypeDescription,
+          examLimit: this.form.examLimit,
         },
       }).then(
         function (reponse) {
@@ -578,19 +789,16 @@ export default {
 .demo-table-expand {
   font-size: 0;
 }
-
 .demo-table-expand label {
   width: 120px;
   color: #99a9bf;
 }
-
 .demo-table-expand .el-form-item {
   margin-right: 0;
   margin-bottom: 0;
   width: 100%;
 }
-
-.popoverBGC {
+.popoverBGC{
   opacity: 0.7;
   text-align: center;
 }

@@ -4,57 +4,114 @@
     <el-container>
       <el-header style="text-align: center; height: 100px">
         <div class="block">
-          <el-avatar v-image-preview :src="imageUrl" :size="100"></el-avatar><el-button @click="uploadAvatarDialog = true"
-            v-if="haveAvatar" size="small">上传头像</el-button>
-          <el-button v-else type="danger" @click="deleteAvatar" size="small">删除头像</el-button>
+          <el-avatar v-image-preview :src="imageUrl" :size="100"></el-avatar
+          ><el-button
+            @click="uploadAvatarDialog = true"
+            v-if="haveAvatar"
+            size="small"
+            >上传头像</el-button
+          >
+          <el-button v-else type="danger" @click="deleteAvatar" size="small"
+            >删除头像</el-button
+          >
         </div>
       </el-header>
       <el-main>
         <el-form v-if="ifUpdate" :model="personAccount" class="demo-ruleForm">
           <fieldset disabled>
             <div class="form-group">
-              <el-form-item prop="userName">用户名
-                <el-input type="text" autocomplete="off" v-model="personAccount.userName" /></el-form-item>
+              <el-form-item prop="userName"
+                >用户名
+                <el-input
+                  type="text"
+                  autocomplete="off"
+                  v-model="personAccount.userName"
+              /></el-form-item>
             </div>
             <div class="form-group">
-              <el-form-item prop="fullName">别名
-                <el-input type="text" autocomplete="off" v-model="personAccount.fullName" /></el-form-item>
+              <el-form-item prop="fullName"
+                >别名
+                <el-input
+                  type="text"
+                  autocomplete="off"
+                  v-model="personAccount.fullName"
+              /></el-form-item>
             </div>
             <div class="form-group">
-              <el-form-item prop="email">邮箱
-                <el-input type="text" autocomplete="off" v-model="personAccount.email" /></el-form-item>
+              <el-form-item prop="email"
+                >邮箱
+                <el-input
+                  type="text"
+                  autocomplete="off"
+                  v-model="personAccount.email"
+              /></el-form-item>
             </div>
           </fieldset>
           <el-form-item>
-            <el-button class="btn btn-primary" @click="changeIfUpdate">更改信息</el-button>
+            <el-button class="btn btn-primary" @click="changeIfUpdate"
+              >更改信息</el-button
+            >
           </el-form-item>
         </el-form>
 
-        <el-form :model="personAccountUpdate" ref="personAccountUpdate" :rules="rule" v-else>
+        <el-form
+          :model="personAccountUpdate"
+          ref="personAccountUpdate"
+          :rules="rule"
+          v-else
+        >
           <fieldset>
             <div class="form-group">
-              <el-form-item prop="u_userName">用户名
-                <el-input type="text" v-model="personAccountUpdate.u_userName" autocomplete="off"
-                  disabled /></el-form-item>
+              <el-form-item prop="u_userName"
+                >用户名
+                <el-input
+                  type="text"
+                  v-model="personAccountUpdate.u_userName"
+                  autocomplete="off"
+                  disabled
+              /></el-form-item>
             </div>
             <div class="form-group">
-              <el-form-item prop="u_fullName">别名
-                <el-input type="text" autocomplete="off" v-model="personAccountUpdate.u_fullName" /></el-form-item>
+              <el-form-item prop="u_fullName"
+                >别名
+                <el-input
+                  type="text"
+                  autocomplete="off"
+                  v-model="personAccountUpdate.u_fullName"
+              /></el-form-item>
             </div>
             <div class="form-group">
-              <el-form-item prop="password">密码
-                <el-input type="password" autocomplete="off" placeholder="请输入密码" v-model="personAccountUpdate.password"
-                  show-password /></el-form-item>
+              <el-form-item prop="password"
+                >密码
+                <el-input
+                  type="password"
+                  autocomplete="off"
+                  placeholder="请输入密码"
+                  v-model="personAccountUpdate.password"
+                  show-password
+              /></el-form-item>
             </div>
             <div class="form-group">
-              <el-form-item prop="passwordConfirm">再次输入密码
-                <el-input type="password" autocomplete="off" placeholder="请再次输入密码"
-                  v-model="personAccountUpdate.passwordConfirm" show-password /></el-form-item>
+              <el-form-item prop="passwordConfirm"
+                >再次输入密码
+                <el-input
+                  type="password"
+                  autocomplete="off"
+                  placeholder="请再次输入密码"
+                  v-model="personAccountUpdate.passwordConfirm"
+                  show-password
+              /></el-form-item>
             </div>
           </fieldset>
           <el-form-item>
-            <el-button class="btn btn-primary" @click="changeIfUpdate">取消更改</el-button>
-            <el-button class="btn btn-primary" @click="changeAccount('personAccountUpdate')">更改</el-button>
+            <el-button class="btn btn-primary" @click="changeIfUpdate"
+              >取消更改</el-button
+            >
+            <el-button
+              class="btn btn-primary"
+              @click="changeAccount('personAccountUpdate')"
+              >更改</el-button
+            >
           </el-form-item>
         </el-form>
       </el-main>
@@ -62,10 +119,28 @@
     </el-container>
 
     <el-dialog :visible.sync="uploadAvatarDialog" width="400px">
-      <el-upload class="upload-demo" ref="upload" action="" accept="image/jpeg, image/png" :on-remove="handleRemove"
-        :auto-upload="false" :on-change="uploadImg" list-type="picture" :file-list="fileUpLoadList" :limit="1">
-        <el-button slot="trigger" size="small" type="primary">选取文件</el-button>
-        <el-button @click="uploadAvatar" style="margin-left: 10px" size="small" type="success">上传头像</el-button>
+      <el-upload
+        class="upload-demo"
+        ref="upload"
+        action=""
+        accept="image/jpeg, image/png"
+        :on-remove="handleRemove"
+        :auto-upload="false"
+        :on-change="uploadImg"
+        list-type="picture"
+        :file-list="fileUpLoadList"
+        :limit="1"
+      >
+        <el-button slot="trigger" size="small" type="primary"
+          >选取文件</el-button
+        >
+        <el-button
+          @click="uploadAvatar"
+          style="margin-left: 10px"
+          size="small"
+          type="success"
+          >上传头像</el-button
+        >
         <div slot="tip" class="el-upload__tip">
           只能上传jpg/png文件，且不超过1MB
         </div>
