@@ -20,8 +20,7 @@
                 <span>个人通知</span>
               </template>
               <el-menu-item-group>
-                <el-menu-item index="/usercenter/personalNotice/examDetailNotice">考试信息通知</el-menu-item>
-                <el-menu-item index="/usercenter/personalNotice/examRegistration">考试报名阅览</el-menu-item>
+                <el-menu-item index="/usercenter/personalNotice/examRegistration">考试报名查看</el-menu-item>
                 <el-menu-item index="/usercenter/personalNotice/examResultNotice">考试结果通知</el-menu-item>
               </el-menu-item-group>
             </el-submenu>

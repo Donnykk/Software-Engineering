@@ -19,29 +19,36 @@
           </template>
         </template>
       </el-table-column>
-      <el-table-column fixed="right" label="操作" align="center">
+      <el-table-column label="操作" align="center">
         <template slot-scope="scope">
-          <el-button @click="takeIn(scope.row)" size="small">报名</el-button>
+          <el-button @click="RegDialog = true" size="small">报名</el-button>
         </template>
       </el-table-column>
     </el-table>
     <el-pagination @current-change="handleCurrentChange" :current-page="currentPage" background align="center"
       layout="total, prev, pager, next, jumper" :total="pageTotal">
     </el-pagination>
+
+    <el-dialog :visible.sync="RegDialog" width="400px">
+      <el-row style="font-size: medium;">报名信息确认：</el-row>
+      <el-row style="padding-top: 15px;">姓名：唐鹏程</el-row>
+      <el-row>考试地点：南开大学津南校区</el-row>
+      <el-row style="padding-bottom: 15px;">考试时间：2023-04-23</el-row>
+      <el-button size="small" type="primary" style="text-align: center;" @click="RegDialog = false">确定报名</el-button>
+      <el-button @click="RegDialog = false">取消</el-button>
+    </el-dialog>
   </div>
 </template>
 
 <script>
-import axios from "axios";
-import { number } from "echarts/lib/export";
-import { applyTransform } from "echarts/lib/util/graphic";
-import { mapState, mapActions } from "vuex";
+import { mapState } from "vuex";
 export default {
   inject: ["reload"],
   name: "publicGetExam",
   data() {
     return {
       loading: false,
+      RegDialog: false,
       //报名表
       registrationList: [
         {
@@ -128,5 +135,8 @@ export default {
   },
   mounted: function () {
   },
+  methods: {
+
+  }
 };
 </script>

@@ -1,64 +1,16 @@
 <template>
   <div>
-    <el-table
-      :data="
-        fileList.slice((currentPage - 1) * pagesize, currentPage * pagesize)
-      "
-      style="width: 100%"
-      :default-sort="{ prop: 'date', order: 'descending' }"
-      v-loading="loading"
-    >
-      <el-table-column
-        prop="examDescription"
-        label="考试名称"
-        align="center"
-        width="200"
-      ></el-table-column>
-      <el-table-column
-        prop="examLocation"
-        label="考试地点"
-        align="center"
-        width="200"
-      ></el-table-column>
-      <el-table-column
-        prop="examStartTime"
-        label="考试开始时间"
-        align="center"
-        width="150"
-      ></el-table-column>
-      <el-table-column
-        prop="examEndTime"
-        label="考试结束时间"
-        align="center"
-        width="150"
-      ></el-table-column>
-      <el-table-column
-        prop="examAnnounce"
-        label="成绩公布日期"
-        align="center"
-        width="250"
-      ></el-table-column>
-      <el-table-column
-        prop="location"
-        label="座位"
-        align="center"
-        width="100"
-      ></el-table-column>
-      <el-table-column
-        prop="examLocationId"
-        label="准考证"
-        align="center"
-      ></el-table-column>
+    <el-table :data="fileList.slice((currentPage - 1) * pagesize, currentPage * pagesize)
+      " style="width: 100%" :default-sort="{ prop: 'date', order: 'descending' }" v-loading="loading">
+      <el-table-column prop="examDescription" label="考试名称" align="center" width="200"></el-table-column>
+      <el-table-column prop="examLocation" label="考试地点" align="center" width="200"></el-table-column>
+      <el-table-column prop="examStartTime" label="考试开始时间" align="center" width="150"></el-table-column>
+      <el-table-column prop="examRegiTime" label="考试入场时间" align="center" width="150"></el-table-column>
+      <el-table-column prop="seat" label="座位" align="center" width="100"></el-table-column>
+      <el-table-column prop="examId" label="准考证号" align="center"></el-table-column>
     </el-table>
-    <el-pagination
-      @current-change="handleCurrentChange"
-      :current-page="currentPage"
-      :page-size="pagesize"
-      background
-      align="center"
-      layout="total, prev, pager, next, jumper"
-      :total="pageTotal"
-    >
+    <el-pagination @current-change="handleCurrentChange" :current-page="currentPage" :page-size="pagesize" background
+      align="center" layout="total, prev, pager, next, jumper" :total="pageTotal">
     </el-pagination>
   </div>
 </template>
@@ -73,7 +25,16 @@ export default {
     return {
       loading: false,
       //归档表
-      fileList: [],
+      fileList: [
+        {
+          examDescription: '大学生英语六级考试',
+          examLocation: '南开大学津南校区B202',
+          examStartTime: '2023-04-23 9:00',
+          examRegiTime: '2023-04-23 8:30',
+          seat: '24',
+          examId: '201918701'
+        }
+      ],
       //考试信息表
       examList: [],
       //初始页
@@ -95,11 +56,7 @@ export default {
     }),
   },
   mounted: function () {
-    this.getRegistrationList();
-    var that = this;
-    setTimeout(function () {
-      that.getLocation();
-    }, 300);
+
   },
   methods: {
     //获取还在报名的考试信息

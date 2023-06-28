@@ -4,8 +4,8 @@
     <el-container>
       <el-header style="text-align: center; height: 100px">
         <div class="block">
-          <el-avatar v-image-preview :src="imageUrl" :size="100"></el-avatar><el-button @click="uploadExamDialog = true"
-            v-if="haveExam" size="small">上传照片</el-button>
+          <el-avatar v-image-preview :src="imageUrl" :size="100"></el-avatar>
+          <el-button @click="uploadExamDialog = true" v-if="haveExam" size="small">上传照片</el-button>
           <el-button v-else type="danger" @click="deleteExam" size="small">删除照片</el-button>
         </div>
       </el-header>
