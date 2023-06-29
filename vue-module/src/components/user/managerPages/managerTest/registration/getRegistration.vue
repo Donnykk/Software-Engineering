@@ -1,10 +1,9 @@
 <template>
   <div>
-    <el-table :data="
-      examList.slice(
-        (currentPage - 1) * pagesize,
-        currentPage * pagesize
-      )" style="width: 100%" @cell-click="ifUpdateState" v-loading="loading">
+    <el-table :data="examList.slice(
+      (currentPage - 1) * pagesize,
+      currentPage * pagesize
+    )" style="width: 100%" @cell-click="ifUpdateState" v-loading="loading">
       <el-table-column prop="examId" label="考试编号" align="center">
       </el-table-column>
       <el-table-column prop="examTypeName" label="考试名称" align="center" width="200">

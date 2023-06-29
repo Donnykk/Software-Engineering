@@ -1,8 +1,7 @@
 <template>
   <div>
-    <el-table :data="
-      userData.slice((currentPage - 1) * pagesize, currentPage * pagesize)
-    " highlight-current-row style="width: 100%" :row-key="getRowKeys" :expand-row-keys="expands"
+    <el-table :data="userData.slice((currentPage - 1) * pagesize, currentPage * pagesize)
+      " highlight-current-row style="width: 100%" :row-key="getRowKeys" :expand-row-keys="expands"
       @expand-change="getUserDetail" v-loading="loading">
       <el-table-column type="expand">
         <template slot-scope="props">
@@ -43,16 +42,16 @@
       <div class="demo-drawer__content">
         <el-form :model="form">
           <el-form-item label="学生名称" :label-width="formLabelWidth">
-            <el-input v-model="form.realName" autocomplete="off"></el-input>
+            <el-input v-model="form.realName"></el-input>
           </el-form-item>
           <el-form-item label="学生学号" :label-width="formLabelWidth">
-            <el-input v-model="form.stuNo" autocomplete="off"></el-input>
+            <el-input v-model="form.stuNo"></el-input>
           </el-form-item>
           <el-form-item label="所属院校" :label-width="formLabelWidth">
-            <el-input v-model="form.school" autocomplete="off"></el-input>
+            <el-input v-model="form.school"></el-input>
           </el-form-item>
           <el-form-item label="身份证号" :label-width="formLabelWidth">
-            <el-input v-model="form.identificationNumber" autocomplete="off"></el-input>
+            <el-input v-model="form.identificationNumber"></el-input>
           </el-form-item>
         </el-form>
         <center>
@@ -99,15 +98,11 @@ export default {
         userName: "",
         realName: "",
         stuNo: "",
+        school: "",
         identificationNumber: "",
       },
       formLabelWidth: "70px",
       timer: null,
-
-      //获得专业列表
-      majorList: [],
-      //获得班级列表
-      classList: [],
       //是否有个人信息 0无 1有
       ifHaveInfo: 0,
     };
@@ -136,24 +131,14 @@ export default {
           }),
         ])
         .then(
-          axios.spread(function (userListResponse, majorResponse) {
+          axios.spread(function (userListResponse) {
             //用户列表处理
             that.userData = userListResponse.data.data;
             that.pageTotal = that.userData.length;
             that.loading = false;
-
-            for (var i = 0; i < majorResponse.data.data.length; i++) {
-              that.majorList[i] = {
-                major: majorResponse.data.data[i].major,
-                discipline: majorResponse.data.data[i].discipline,
-              };
-            }
-            that.majorList = that.unique(that.majorList);
           })
         )
         .catch((err) => {
-          that.loading = false;
-          that.$message.error("获取失败");
         });
     },
 
@@ -191,8 +176,7 @@ export default {
             if (response.data.data != null) {
               row.realName = response.data.data.realName;
               row.stuNo = response.data.data.stuNo;
-              row.major = response.data.data.major;
-              row.className = response.data.data.className;
+              row.school = response.data.data.school;
               row.identificationNumber =
                 response.data.data.identificationNumber;
             }
@@ -239,9 +223,7 @@ export default {
         data: {
           username: row.userName,
           realName: row.realName,
-          className: row.className,
-          stuNo: row.stuNo,
-          major: row.major,
+          school: row.school,
           identificationNumber: row.identificationNumber,
         },
         transformRequest: [
@@ -357,6 +339,7 @@ export default {
         })
         .catch((_) => { });
     },
+
     cancelForm() {
       this.loading = false;
       this.dialog = false;
@@ -386,7 +369,7 @@ export default {
             //姓名 学号 院校 身份证
             that.form.realName = infoResponse.data.data.realName;
             that.form.stuNo = infoResponse.data.data.stuNo;
-            that.form.stuNo = infoResponse.data.data.school;
+            that.form.school = infoResponse.data.data.school;
             that.form.identificationNumber =
               infoResponse.data.data.identificationNumber;
             that.form.username = row.userName;

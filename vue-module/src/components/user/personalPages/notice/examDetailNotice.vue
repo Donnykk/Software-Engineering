@@ -1,13 +1,7 @@
 <template>
   <div>
-    <el-table
-      :data="
-        examList.slice((currentPage - 1) * pagesize, currentPage * pagesize)
-      "
-      style="width: 100%"
-      :default-sort="{ prop: 'date', order: 'descending' }"
-      v-loading="loading"
-    >
+    <el-table :data="examList.slice((currentPage - 1) * pagesize, currentPage * pagesize)
+      " style="width: 100%" :default-sort="{ prop: 'date', order: 'descending' }" v-loading="loading">
       <el-table-column prop="examDescription" label="考试内容" fixed>
       </el-table-column>
       <el-table-column prop="examLocation" label="考场位置"> </el-table-column>
@@ -19,21 +13,12 @@
       </el-table-column>
       <el-table-column fixed="right" label="操作">
         <template slot-scope="scope">
-          <el-button @click="takeinExam(scope.row)" size="参与考试"
-            >前往报名</el-button
-          >
+          <el-button @click="takeinExam(scope.row)" size="参与考试">前往报名</el-button>
         </template>
       </el-table-column>
     </el-table>
-    <el-pagination
-      align="center"
-      @current-change="handleCurrentChange"
-      :current-page="currentPage"
-      :page-size="pagesize"
-      background
-      layout="total, prev, pager, next, jumper"
-      :total="pageTotal"
-    >
+    <el-pagination align="center" @current-change="handleCurrentChange" :current-page="currentPage" :page-size="pagesize"
+      background layout="total, prev, pager, next, jumper" :total="pageTotal">
     </el-pagination>
   </div>
 </template>

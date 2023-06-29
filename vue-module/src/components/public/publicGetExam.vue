@@ -34,8 +34,9 @@
       <el-row style="padding-top: 15px;">姓名：唐鹏程</el-row>
       <el-row>考试地点：南开大学津南校区</el-row>
       <el-row style="padding-bottom: 15px;">考试时间：2023-04-23</el-row>
-      <el-button size="small" type="primary" style="text-align: center;" @click="RegDialog = false">确定报名</el-button>
-      <el-button @click="RegDialog = false">取消</el-button>
+      <el-button size="small" type="primary" style="margin-left: 200px;margin-top: 20px;"
+        @click="RegDialog = false">确定报名</el-button>
+      <el-button size="small" style="margin-top: 20px;" @click="RegDialog = false">取消</el-button>
     </el-dialog>
   </div>
 </template>
@@ -62,7 +63,7 @@ export default {
         {
           examDescription: '大学生英语六级考试',
           number: '50',
-          last: '0',
+          last: '10',
           place: '南开大学津南校区',
           time: '2023-04-23',
           stateUTF: '正在报名'

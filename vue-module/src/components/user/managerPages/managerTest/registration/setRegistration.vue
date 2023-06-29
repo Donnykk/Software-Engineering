@@ -1,19 +1,18 @@
 <template>
   <div class="container">
-    <el-table :data="
-      examList.slice((currentPage - 1) * pagesize, currentPage * pagesize)
-    " style="width: 100%" v-loading="loading">
+    <el-table :data="examList.slice((currentPage - 1) * pagesize, currentPage * pagesize)
+      " style="width: 100%" v-loading="loading">
       <el-table-column prop="examDescription" label="考试名称">
       </el-table-column>
-      <el-table-column prop="examStartTime" label="考试开始时间" sortable>
+      <el-table-column prop="examTime" label="考试时间" sortable>
       </el-table-column>
-      <el-table-column prop="examEndTime" label="考试结束时间" sortable>
+      <el-table-column prop="examPlace" label="考试地点" sortable>
       </el-table-column>
       <el-table-column fixed="right" label="操作" align="center">
         <template slot-scope="scope">
-          <el-button @click="openRegistrationRelease(scope.row)" size="small">发布报名</el-button>
+          <el-button @click="registrationDialogVisible = true" size="small">发布报名</el-button>
           <el-popconfirm confirmButtonText="是的" cancelButtonText="不用了" icon="el-icon-info" iconColor="red"
-            title="这是一段内容确定删除吗？" @onConfirm="deleteRegistrationRelease(scope.row)">
+            title="这是一段内容确定删除吗？" @onConfirm="registrationRelease">
             <el-button type="danger" size="small" slot="reference">删除报名</el-button>
           </el-popconfirm>
         </template>
@@ -53,7 +52,18 @@ export default {
     return {
       loading: false,
       //考试列表
-      examList: [],
+      examList: [
+        {
+          examDescription: "大学生英语六级考试",
+          examTime: "2023-06-25",
+          examPlace: "南开大学津南校区"
+        },
+        {
+          examDescription: "大学生英语六级考试",
+          examTime: "2023-06-25",
+          examPlace: "南开大学八里台校区"
+        },
+      ],
       //初始页
       currentPage: 1,
       //每页的数据
@@ -82,7 +92,6 @@ export default {
     }),
   },
   mounted: function () {
-    this.getExam();
   },
   methods: {
     getExam: function () {
@@ -117,29 +126,18 @@ export default {
     },
 
     registrationRelease: function () {
-      console.log(this.registrationForm);
-      var that = this;
-      axios({
-        headers: {
-          Authorization: this.print.Authorization,
-          "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+      this.registrationDialogVisible = false;
+      examList = [
+        {
+          examDescription: "大学生英语六级考试",
+          examTime: "2023-06-25",
+          examPlace: "南开大学八里台校区"
         },
-        method: "post",
-        url: "/api/examEntry",
-        params: this.registrationForm,
-      }).then(
-        function (reponse) {
-          that.registrationDialogVisible = false;
-          that.$message({
-            message: "发布报名成功",
-            type: "success",
-          });
-          that.registrationForm.number = "";
-        },
-        function (err) {
-          that.$message.error("发布报名失败");
-        }
-      );
+      ];
+      this.$router.replace({
+        path: './blank',
+        name: 'blankCall'
+      });
     },
 
     deleteRegistrationRelease: function (row) {

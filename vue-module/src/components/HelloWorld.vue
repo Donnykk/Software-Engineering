@@ -189,7 +189,7 @@ export default {
             });
           },
           function (err) {
-            that.student_Name = "唐鹏程";
+            that.student_Name = "个人中心";
             //获得小黑头像
             var _that = that;
             axios({

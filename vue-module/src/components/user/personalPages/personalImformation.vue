@@ -21,7 +21,7 @@
                 <el-input type="text" autocomplete="off" v-model="personInfo.stuNo" /></el-form-item>
             </div>
             <div class="form-group">
-              <el-form-item prop="stuNo">所属院校
+              <el-form-item prop="school">所属院校
                 <el-input type="text" autocomplete="off" v-model="personInfo.school" /></el-form-item>
             </div>
             <div class="form-group">
@@ -43,7 +43,7 @@
                 <el-input type="text" autocomplete="off" v-model="personInfoUpdate.u_stuNo" /></el-form-item>
             </div>
             <div class="form-group">
-              <el-form-item prop="u_stuNo">所属院校
+              <el-form-item prop="u_school">所属院校
                 <el-input type="text" autocomplete="off" v-model="personInfoUpdate.u_school" /></el-form-item>
             </div>
             <div class="form-group">
@@ -95,12 +95,6 @@ export default {
         identificationNumber: "",
       },
       ifUpdate: true,
-
-      //获得专业列表
-      majorList: [],
-      //获得班级列表
-      classList: [],
-      chooseMajor: false,
 
       //更新专用，判断是录入还是更新
       personInfoUpdate: {
@@ -180,9 +174,9 @@ export default {
       }).then(
         function (reponse) {
           that.personInfo = reponse.data.data;
-
           that.personInfoUpdate.u_realName = reponse.data.data.realName;
           that.personInfoUpdate.u_stuNo = reponse.data.data.stuNo;
+          that.personInfoUpdate.u_school = reponse.data.data.school;
           that.personInfoUpdate.u_identificationNumber =
             reponse.data.data.identificationNumber;
         },
@@ -257,6 +251,7 @@ export default {
                 username: this.print.username,
                 realName: this.personInfoUpdate.u_realName,
                 stuNo: this.personInfoUpdate.u_stuNo,
+                school: this.personInfoUpdate.u_school,
                 identificationNumber: this.personInfoUpdate.u_identificationNumber,
               },
             }).then(
@@ -281,6 +276,7 @@ export default {
                 username: this.print.username,
                 realName: this.personInfoUpdate.u_realName,
                 stuNo: this.personInfoUpdate.u_stuNo,
+                school: this.personInfoUpdate.u_school,
                 identificationNumber: this.personInfoUpdate.u_identificationNumber,
               },
               headers: {

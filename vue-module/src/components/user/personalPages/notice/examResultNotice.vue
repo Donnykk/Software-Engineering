@@ -19,7 +19,8 @@
         <el-table-column prop='reading' align="center" label='阅读'></el-table-column>
         <el-table-column prop='writing' align="center" label='写作和翻译'></el-table-column>
       </el-table>
-      <el-button size="small" align="center" type="primary" @click="DetailDialog = false">确定</el-button>
+      <el-button size="small" style="margin-left: 300px;margin-top: 20px;" type="primary"
+        @click="DetailDialog = false">确定</el-button>
     </el-dialog>
     <el-pagination @current-change="handleCurrentChange" :current-page="currentPage" :page-size="pagesize" background
       align="center" layout="total, prev, pager, next, jumper" :total="pageTotal">
@@ -43,6 +44,12 @@ export default {
           examLocation: '南开大学津南校区',
           examTime: '2022-12-12',
           examScore: '610'
+        },
+        {
+          examDescription: '大学生六级英语考试',
+          examLocation: '南开大学津南校区',
+          examTime: '2022-03-01',
+          examScore: '599'
         }
       ],
       score: [

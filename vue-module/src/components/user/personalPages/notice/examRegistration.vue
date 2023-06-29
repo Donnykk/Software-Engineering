@@ -8,7 +8,26 @@
       <el-table-column prop="examRegiTime" label="考试入场时间" align="center" width="150"></el-table-column>
       <el-table-column prop="seat" label="座位" align="center" width="100"></el-table-column>
       <el-table-column prop="examId" label="准考证号" align="center"></el-table-column>
+      <el-table-column prop="pay" label="缴费状态" align="center">
+        <template slot-scope="scope">
+          <el-button @click="ConfirmDialog = true" size="small">前往缴费</el-button>
+        </template>
+      </el-table-column>
     </el-table>
+    <el-dialog :visible.sync="ConfirmDialog" width="400px">
+      <el-row style="font-size: medium;">请确认缴费信息：</el-row>
+      <el-row style="padding-top: 15px;">姓名：唐鹏程</el-row>
+      <el-row>考试名称：大学生英语六级考试</el-row>
+      <el-row>考试地点：南开大学津南校区</el-row>
+      <el-row>考试时间：2023-04-23</el-row>
+      <el-row style="padding-bottom: 15px;">共需缴费：20元</el-row>
+      <el-button size="small" align="center" style="margin-left: 200px;margin-top: 20px;" type="primary"
+        @click="PayDialog = true, ConfirmDialog = false">确认缴费</el-button>
+      <el-button size="small" align="center" style="margin-top: 20px;" @click="ConfirmDialog = false">取消</el-button>
+    </el-dialog>
+    <el-dialog :visible.sync="PayDialog" width="400px">
+      <img :src="require('@/assets/pay.png')" width="300px" height="400px">
+    </el-dialog>
     <el-pagination @current-change="handleCurrentChange" :current-page="currentPage" :page-size="pagesize" background
       align="center" layout="total, prev, pager, next, jumper" :total="pageTotal">
     </el-pagination>
@@ -24,6 +43,8 @@ export default {
   data() {
     return {
       loading: false,
+      ConfirmDialog: false,
+      PayDialog: false,
       //归档表
       fileList: [
         {
