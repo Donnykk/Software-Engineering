@@ -19,7 +19,7 @@
       <el-table-column fixed="right" label="操作" align="center" width="180">
         <template slot-scope="scope">
           <el-button type="danger" @click="deleteRegistrationRelease(scope.row)" size="small">删除</el-button>
-          <el-button type="info" @click="getRegistrationUserList(scope.row)" size="small">报名情况</el-button>
+          <el-button type="info" @click="userListDialog = true" size="small">报名情况</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -32,8 +32,7 @@
         <el-table-column type="index"></el-table-column>
         <el-table-column prop="realName" label="学生姓名"></el-table-column>
         <el-table-column prop="stuNo" label="学生学号"></el-table-column>
-        <el-table-column prop="email" label="联系方式"></el-table-column>
-        <el-table-column prop="location" label="考场"></el-table-column>
+        <el-table-column prop="location" label="考场" width="200px"></el-table-column>
         <el-table-column prop="seat" label="座位"></el-table-column>
         <el-table-column>
           <template slot-scope="scope">
@@ -64,14 +63,72 @@ export default {
       pagesize: 10,
       //数组总数
       pageTotal: 0,
-
-
       state: "",
-
       //全用户表
       allUser: [],
       //全报名表
-      allReg: [],
+      allReg: [
+        {
+          realName: "唐鹏程",
+          stuNo: "2011181",
+          location: "南开大学津南校区 B402",
+          seat: "23",
+        },
+        {
+          realName: "张三",
+          stuNo: "2011188",
+          location: "南开大学津南校区 B402",
+          seat: "28",
+        },
+        {
+          realName: "林俊杰",
+          stuNo: "2011132",
+          location: "南开大学津南校区 B402",
+          seat: "32",
+        },
+        {
+          realName: "陶喆",
+          stuNo: "2029011",
+          location: "南开大学津南校区 B402",
+          seat: "43",
+        },
+        {
+          realName: "怪兽",
+          stuNo: "2011231",
+          location: "南开大学津南校区 B402",
+          seat: "11",
+        },
+        {
+          realName: "陈信宏",
+          stuNo: "2013221",
+          location: "南开大学津南校区 B402",
+          seat: "27",
+        },
+        {
+          realName: "周杰伦",
+          stuNo: "2021181",
+          location: "南开大学津南校区 B402",
+          seat: "22",
+        },
+        {
+          realName: "结巴",
+          stuNo: "2021141",
+          location: "南开大学津南校区 B402",
+          seat: "12",
+        },
+        {
+          realName: "石头",
+          stuNo: "2021141",
+          location: "南开大学津南校区 B402",
+          seat: "12",
+        },
+        {
+          realName: "李四",
+          stuNo: "2021241",
+          location: "南开大学津南校区 B402",
+          seat: "9",
+        },
+      ],
       //考场表
       locationList: [],
       //显示用户报名表dialog

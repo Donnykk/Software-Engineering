@@ -4,12 +4,11 @@
       " style="width: 100%" :default-sort="{ prop: 'date', order: 'descending' }" v-loading="loading">
       <el-table-column prop="examDescription" label="考试名称" align="center"></el-table-column>
       <el-table-column prop="examLocation" label="考试地点" align="center"></el-table-column>
-      <el-table-column prop="examStartTime" label="开始时间" align="center" sortable></el-table-column>
-      <el-table-column prop="examEndTime" label="结束时间" align="center" sortable></el-table-column>
+      <el-table-column prop="examTime" label="考试时间" align="center" sortable></el-table-column>
       <el-table-column prop="note" label="状态" align="center"></el-table-column>
       <el-table-column fixed="right" label="操作" align="center">
         <template slot-scope="scope">
-          <el-button @click="getScore(scope.row)" size="small">查看成绩</el-button>
+          <el-button @click="userListDialog = true" size="small">查看成绩</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -28,15 +27,13 @@
       <el-table :data="allReg">
         <el-table-column type="index"></el-table-column>
         <el-table-column prop="realName" label="学生姓名"></el-table-column>
-        <el-table-column prop="major" label="学生专业"></el-table-column>
-        <el-table-column prop="className" label="学生班级"></el-table-column>
         <el-table-column prop="stuNo" label="学生学号"></el-table-column>
+        <el-table-column prop="school" label="院校"></el-table-column>
         <el-table-column prop="examScore" label="成绩"></el-table-column>
-        <el-table-column>
+        <el-table-column width="150px" label="操作">
           <template slot-scope="scope">
-            <el-button type="primary" icon="el-icon-refresh" @click="updateStuScore(scope.row, scope.$index)"
-              size="mini"></el-button>
-            <el-button type="danger" icon="el-icon-delete" @click="deleteStuScore(scope.row)" size="mini"></el-button>
+            <el-button type="primary" icon="el-icon-refresh" @click="scoreDialogSecond = true" size="mini"></el-button>
+            <el-button type="danger" icon="el-icon-delete" @click="userListDialog = false" size="mini"></el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -50,10 +47,9 @@
         </el-form-item>
         <el-form-item label="用户id" hidden>
           <el-input v-model="oneRegForm.userId"></el-input></el-form-item>
-        <el-form-item label="学生姓名"><el-input v-model="oneRegForm.realName" readonly></el-input></el-form-item>
-        <el-form-item label="学生专业"><el-input v-model="oneRegForm.major" readonly></el-input></el-form-item>
-        <el-form-item label="学生班级"><el-input v-model="oneRegForm.className" readonly></el-input></el-form-item>
-        <el-form-item label="学生学号"><el-input v-model="oneRegForm.stuNo" readonly></el-input></el-form-item>
+        <el-form-item label="学生姓名"><el-input v-model="oneRegForm.realName"></el-input></el-form-item>
+        <el-form-item label="学生院校"><el-input v-model="oneRegForm.school"></el-input></el-form-item>
+        <el-form-item label="学生学号"><el-input v-model="oneRegForm.stuNo"></el-input></el-form-item>
         <el-form-item label="考试分数">
           <el-input v-model.number="examScore"></el-input>
         </el-form-item>
@@ -74,10 +70,9 @@
         </el-form-item>
         <el-form-item label="用户id" hidden>
           <el-input v-model="oneRegForm.userId"></el-input></el-form-item>
-        <el-form-item label="学生姓名"><el-input v-model="oneRegForm.realName" readonly></el-input></el-form-item>
-        <el-form-item label="学生专业"><el-input v-model="oneRegForm.major" readonly></el-input></el-form-item>
-        <el-form-item label="学生班级"><el-input v-model="oneRegForm.className" readonly></el-input></el-form-item>
-        <el-form-item label="学生学号"><el-input v-model="oneRegForm.stuNo" readonly></el-input></el-form-item>
+        <el-form-item label="学生姓名"><el-input v-model="oneRegForm.realName"></el-input></el-form-item>
+        <el-form-item label="学生院校"><el-input v-model="oneRegForm.school"></el-input></el-form-item>
+        <el-form-item label="学生学号"><el-input v-model="oneRegForm.stuNo"></el-input></el-form-item>
         <el-form-item label="考试分数">
           <el-input v-model.number="examScore"></el-input>
         </el-form-item>
@@ -108,7 +103,92 @@ export default {
     return {
       loading: false,
       //归档表
-      fileList: [],
+      fileList: [
+        {
+          examDescription: "大学生英语四级考试",
+          examLocation: "天津大学北洋园校区",
+          examTime: "2022-06-23",
+          note: "成绩已公布"
+        },
+        {
+          examDescription: "大学生英语六级考试",
+          examLocation: "天津大学北洋园校区",
+          examTime: "2022-06-24",
+          note: "成绩已公布"
+        },
+        {
+          examDescription: "大学生英语四级考试",
+          examLocation: "南开大学八里台校区",
+          examTime: "2022-06-23",
+          note: "成绩已公布"
+        },
+        {
+          examDescription: "大学生英语六级考试",
+          examLocation: "南开大学八里台校区",
+          examTime: "2022-06-24",
+          note: "成绩已公布"
+        },
+        {
+          examDescription: "大学生英语四级考试",
+          examLocation: "南开大学津南校区",
+          examTime: "2022-12-12",
+          note: "成绩已公布"
+        },
+        {
+          examDescription: "大学生英语六级考试",
+          examLocation: "南开大学津南校区",
+          examTime: "2022-12-13",
+          note: "成绩已公布"
+        },
+        {
+          examDescription: '大学生英语四级考试',
+          examLocation: '南开大学津南校区',
+          examTime: '2023-04-22',
+          note: '成绩未公布'
+        },
+        {
+          examDescription: '大学生英语六级考试',
+          examLocation: '南开大学津南校区',
+          examTime: '2023-04-23',
+          note: '成绩未公布'
+        },
+        {
+          examDescription: '大学生英语四级考试',
+          examLocation: '南开大学八里台校区',
+          examTime: '2023-04-22',
+          note: '成绩未公布'
+        },
+        {
+          examDescription: '大学生英语六级考试',
+          examLocation: '南开大学八里台校区',
+          examTime: '2023-04-23',
+          note: '成绩未公布'
+        },
+        {
+          examDescription: '大学生英语四级考试',
+          examLocation: '南开大学津南校区',
+          examTime: '2023-06-24',
+          note: '成绩未公布'
+        },
+        {
+          examDescription: '大学生英语六级考试',
+          examLocation: '南开大学津南校区',
+          examTime: '2023-06-25',
+          note: '成绩未公布'
+        },
+        {
+          examDescription: '大学生英语四级考试',
+          examLocation: '南开大学八里台校区',
+          examTime: '2023-06-24',
+          note: '成绩未公布'
+        },
+        {
+          examDescription: '大学生英语六级考试',
+          examLocation: '南开大学八里台校区',
+          examTime: '2023-06-25',
+          note: '成绩未公布'
+        },
+      ],
       //考试信息表
       examList: [],
       //分数表
@@ -122,7 +202,32 @@ export default {
       //全用户表
       allUser: [],
       //全报名表
-      allReg: [],
+      allReg: [
+        {
+          realName: "唐鹏程",
+          stuNo: "2011181",
+          school: "南开大学",
+          examScore: "610"
+        },
+        {
+          realName: "张三",
+          stuNo: "2011183",
+          school: "天津大学",
+          examScore: "520"
+        },
+        {
+          realName: "李四",
+          stuNo: "2011132",
+          school: "南开大学",
+          examScore: "460"
+        },
+        {
+          realName: "王老八",
+          stuNo: "2012732",
+          school: "南京大学",
+          examScore: "660"
+        },
+      ],
       //显示用户报名表dialog
       userListDialog: false,
       //第一个分数dialog 录入用
@@ -136,8 +241,7 @@ export default {
         examDetailId: "",
         userId: "",
         realName: "",
-        major: "",
-        className: "",
+        school: "",
         stuNo: "",
       },
       //第x名学生的表单
@@ -161,7 +265,7 @@ export default {
     }),
   },
   mounted: function () {
-    this.getRegistrationList();
+
   },
   methods: {
     getRegistrationList: function () {
@@ -267,11 +371,7 @@ export default {
                       _that.$set(item, "realName", response.data.data.realName);
                       _that.$set(item, "major", response.data.data.major);
                       _that.$set(item, "stuNo", response.data.data.stuNo);
-                      _that.$set(
-                        item,
-                        "className",
-                        response.data.data.className
-                      );
+                      _that.$set(item, "school", response.data.data.school);
                     });
                     i = that.allUser.length;
                   }
@@ -388,6 +488,7 @@ export default {
             examScore: this.examScore,
             userId: this.oneRegForm.userId,
             stuNo: this.oneRegForm.stuNo,
+            school: this.oneRegForm.school,
           },
         }).then(
           function (response) {
@@ -457,6 +558,7 @@ export default {
         this.getFormData(index + 1);
         this.examScore = row.examScore;
         this.examScoreId = row.examScoreId;
+        this.school = row.school;
         this.scoreDialogSecond = true;
       }
     },
@@ -473,6 +575,7 @@ export default {
           examScoreId: this.examScoreId,
           userId: this.oneRegForm.userId,
           stuNo: this.oneRegForm.stuNo,
+          school: this.oneRegForm.school,
         },
       }).then(
         function (response) {
@@ -506,7 +609,7 @@ export default {
           data: ["分数"],
         },
         xAxis: {
-          data: ["优秀", "及格", "不及格"],
+          data: ["420以下", "420~500", "500~600", "600以上"],
         },
         yAxis: {},
         //工具栏
@@ -528,11 +631,10 @@ export default {
             name: "分数",
             type: "bar",
             data: [
-              this.allReg.filter((item) => item.examScore >= 90).length,
-              this.allReg.filter(
-                (item) => item.examScore >= 60 && item.examScore < 90
-              ).length,
-              this.allReg.filter((item) => item.examScore < 60).length,
+              this.allReg.filter((item) => item.examScore >= 600).length,
+              this.allReg.filter((item) => item.examScore >= 500 && item.examScore < 600).length,
+              this.allReg.filter((item) => item.examScore >= 420 && item.examScore < 500).length,
+              this.allReg.filter((item) => item.examScore < 420).length,
             ],
           },
         ],
