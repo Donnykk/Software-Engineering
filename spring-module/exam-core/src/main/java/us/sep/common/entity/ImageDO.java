@@ -35,9 +35,11 @@ public class ImageDO extends AbstractAuditBase {
     @Column(nullable = false)
     private String tag;
 
+    @Column()
+    private String url;
 
     public ImageBO toImageBO(){
-        return ImageBO.builder().imageId(imageId).imageName(imageName).userId(userId).tag(tag).build();
+        return ImageBO.builder().imageId(imageId).imageName(imageName).userId(userId).tag(tag).url(url).build();
     }
 
 

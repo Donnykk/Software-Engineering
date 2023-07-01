@@ -5,6 +5,9 @@ import usercenter from '../components/user/usercenter'
 /* usercenter子路由 */
 /* 普通用户 */
 import myBill from '../components/user/personalPages/myBill'
+import personalStartExam from '../components/user/personalPages/personalStartExam'
+import personalDoExam from '../components/user/personalPages/personalDoExam'
+import checkScore from '../components/user/personalPages/checkScore'
 import personalAccount from '../components/user/personalPages/personalAccount'
 import personalImformation from '../components/user/personalPages/personalImformation'
 import personalProgram from '../components/user/personalPages/personalProgram'
@@ -21,6 +24,8 @@ import managerGetUserInfo from '../components/user/managerPages/managerGetUserIn
 import managerExam from '../components/user/managerPages/managerTest/managerExam'
 import registrationRelease from '../components/user/managerPages/managerTest/registrationRelease'
 import managerScore from '../components/user/managerPages/managerTest/managerScore'
+import markingPaper from '../components/user/managerPages/managerTest/markingPaper'
+import markingDetail from '../components/user/managerPages/managerTest/markingDetail'
 /* 报名子路由 */
 import getRegistration from '../components/user/managerPages/managerTest/registration/getRegistration'
 import setRegistration from '../components/user/managerPages/managerTest/registration/setRegistration'
@@ -29,6 +34,7 @@ import fileRegistration from '../components/user/managerPages/managerTest/regist
 import managerGetUserInfoList from '../components/user/managerPages/managerUser/managerGetUserInfoList'
 import managerGetUserClassList from '../components/user/managerPages/managerUser/managerGetUserClassList'
 /* 管理员 */
+import adminEdit from '../components/user/adminPages/adminEdit'
 import adminHomepage from '../components/user/adminPages/adminHomepage'
 import adminChangeRole from '../components/user/adminPages/adminChangeRole'
 import adminGetLog from '../components/user/adminPages/adminGetLog'
@@ -77,6 +83,16 @@ const router = new Router({
               component: myBill
             },
             {
+              path: 'personalStartExam',
+              name: 'personalStartExam',
+              component: personalStartExam
+            },
+            {
+              path: 'checkScore',
+              name: 'checkScore',
+              component: checkScore
+            },
+            {
               path: 'personalAccount',
               name: 'personalAccount',
               component: personalAccount
@@ -119,6 +135,11 @@ const router = new Router({
               component: adminHomepage
             },
             {
+              path: 'adminEdit',
+              name: 'adminEdit',
+              component: adminEdit
+            },
+            {
               path: 'adminChangeRole',
               name: 'adminChangeRole',
               component: adminChangeRole
@@ -149,6 +170,16 @@ const router = new Router({
                   path: 'managerExam',
                   name: 'managerExam',
                   component: managerExam,
+                },
+                {
+                  path: 'markingPaper',
+                  name: 'markingPaper',
+                  component: markingPaper,
+                },
+                {
+                  path: 'markingDetail',
+                  name: 'markingDetail',
+                  component: markingDetail,
                 },
                 {
                   path: 'registrationRelease',
@@ -237,6 +268,11 @@ const router = new Router({
           component: htmlUseInfo
         },
       ]
+    },
+    {
+      path: '/personalDoExam',
+      name: 'personalDoExam',
+      component: personalDoExam
     },
     {
       path: '/login',

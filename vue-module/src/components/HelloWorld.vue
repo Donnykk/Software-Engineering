@@ -167,7 +167,6 @@
         </form>
       </div>
     </nav>
-
     <div class="to-text-center">
       <router-view></router-view>
     </div>

@@ -1,6 +1,5 @@
 package us.sep.biz.user.service;
 
-import com.google.common.collect.ImmutableMap;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -65,6 +64,30 @@ public class MyBillService {
             Instant instant = zonedDateTime.toInstant();
             myBillDO.setMyTime(instant);
             myBillRepo.save(myBillDO);
+            return myBillDO.ToMyBillBO();
+        }
+        else
+        {
+            throw new CustomizeException(CommonResultCode.UNFOUNDED,"不存在该账单");
+        }
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    public MyBillBO findMyBillOnly(String userId, String examDetailId, int pageNum , int pageSize){
+        ArrayList<MyBillDO> myBillDOList = new ArrayList<>(myBillRepo.findByUserId(userId, PageRequest.of(pageNum, pageSize)).getContent());
+        MyBillDO myBillDO = new MyBillDO();
+        int flag = 0;
+        for (MyBillDO billDO : myBillDOList)
+        {
+            if (examDetailId.equals(billDO.getExamDetailId()))
+            {
+                myBillDO = billDO;
+                flag = 1;
+                break;
+            }
+        }
+        if(flag == 1)
+        {
             return myBillDO.ToMyBillBO();
         }
         else

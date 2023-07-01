@@ -6,13 +6,13 @@
         <div class="block">
           <el-avatar v-image-preview :src="imageUrl" :size="100"></el-avatar
           ><el-button
-            @click="uploadExamDialog = true"
-            v-if="haveExam"
-            size="small"
-            >上传照片</el-button
-          >
+          @click="uploadExamDialog = true"
+          v-if="haveExam"
+          size="small"
+        >上传照片</el-button
+        >
           <el-button v-else type="danger" @click="deleteExam" size="small"
-            >删除照片</el-button
+          >删除照片</el-button
           >
         </div>
       </el-header>
@@ -20,12 +20,12 @@
         <el-form :model="personInfo" class="demo-ruleForm" v-if="ifUpdate">
           <div class="form-group">
             <el-form-item prop="realName"
-              >姓名
+            >姓名
               <el-input
                 type="text"
                 autocomplete="off"
                 v-model="personInfo.realName"
-            /></el-form-item>
+              /></el-form-item>
           </div>
           <div class="form-group">
             <el-form-item prop="mySex"
@@ -66,30 +66,30 @@
           <fieldset disabled>
             <div class="form-group">
               <el-form-item prop="stuNo"
-                >学号
+              >学号
                 <el-input
                   type="text"
                   autocomplete="off"
                   v-model="personInfo.stuNo"
-              /></el-form-item>
+                /></el-form-item>
             </div>
             <div class="form-group">
               <el-form-item prop="major"
-                >专业
+              >专业
                 <el-input
                   type="text"
                   autocomplete="off"
                   v-model="personInfo.major"
-              /></el-form-item>
+                /></el-form-item>
             </div>
             <div class="form-group">
               <el-form-item prop="className"
-                >专业班级
+              >专业班级
                 <el-input
                   type="text"
                   autocomplete="off"
                   v-model="personInfo.className"
-              /></el-form-item>
+                /></el-form-item>
             </div>
             <div class="form-group">
               <el-form-item prop="myEducation"
@@ -111,12 +111,12 @@
             </div>
             <div class="form-group">
               <el-form-item prop="identificationNumber"
-                >身份证号码
+              >身份证号码
                 <el-input
                   type="text"
                   autocomplete="off"
                   v-model="personInfo.identificationNumber"
-              /></el-form-item>
+                /></el-form-item>
             </div>
           </fieldset>
           <el-button @click="changeIfUpdate">更改信息</el-button>
@@ -132,12 +132,12 @@
           <fieldset>
             <div class="form-group">
               <el-form-item prop="u_realName"
-                >姓名
+              >姓名
                 <el-input
                   type="text"
                   autocomplete="off"
                   v-model="personInfoUpdate.u_realName"
-              /></el-form-item>
+                /></el-form-item>
             </div>
             <div class="form-group">
               <el-form-item prop="u_mySex"
@@ -177,16 +177,16 @@
             </div>
             <div class="form-group">
               <el-form-item prop="u_stuNo"
-                >学号
+              >学号
                 <el-input
                   type="text"
                   autocomplete="off"
                   v-model="personInfoUpdate.u_stuNo"
-              /></el-form-item>
+                /></el-form-item>
             </div>
             <div class="form-group">
               <el-form-item prop="u_major"
-                >专业<br />
+              >专业<br />
                 <el-select
                   v-model="personInfoUpdate.u_major"
                   placeholder="请选择"
@@ -199,11 +199,11 @@
                     :value="item.discipline"
                   >
                   </el-option> </el-select
-              ></el-form-item>
+                ></el-form-item>
             </div>
             <div class="form-group" v-if="chooseMajor">
               <el-form-item prop="u_className"
-                >专业班级<br />
+              >专业班级<br />
                 <el-select
                   v-model="personInfoUpdate.u_className"
                   placeholder="请选择"
@@ -215,7 +215,7 @@
                     :value="item"
                   >
                   </el-option> </el-select
-              ></el-form-item>
+                ></el-form-item>
             </div>
             <div class="form-group">
               <el-form-item prop="u_myEducation"
@@ -237,17 +237,17 @@
             </div>
             <div class="form-group">
               <el-form-item prop="u_identificationNumber"
-                >身份证号码
+              >身份证号码
                 <el-input
                   type="text"
                   autocomplete="off"
                   v-model="personInfoUpdate.u_identificationNumber"
-              /></el-form-item>
+                /></el-form-item>
             </div>
           </fieldset>
           <el-button type="button" @click="changeIfUpdate">取消更改</el-button>
           <el-button type="button" @click="dialogVisible = true"
-            >更改信息</el-button
+          >更改信息</el-button
           >
 
           <el-dialog title="提示" :visible.sync="dialogVisible" width="30%">
@@ -257,7 +257,7 @@
               <el-button
                 type="primary"
                 @click="updateInformation('personInfoUpdate')"
-                >确 定</el-button
+              >确 定</el-button
               >
             </span>
           </el-dialog>
@@ -280,14 +280,14 @@
         :limit="1"
       >
         <el-button slot="trigger" size="small" type="primary"
-          >选取文件</el-button
+        >选取文件</el-button
         >
         <el-button
           @click="uploadExam"
           style="margin-left: 10px"
           size="small"
           type="success"
-          >上传照片</el-button
+        >上传照片</el-button
         >
         <div slot="tip" class="el-upload__tip">
           只能上传jpg/png文件，且不超过1MB
@@ -676,6 +676,8 @@ export default {
               ),
               userId: this.userId.userId,
               tag: "Exam",
+              url: "../../../assets/" + this.fileData.name.slice(0, this.fileData.name.length - 4)
+                + this.userId.userId + ".jpg",
             },
           }),
         ])

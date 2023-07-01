@@ -1,4 +1,4 @@
-package us.sep.exam.controller;
+package us.sep.common.controller;
 
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;

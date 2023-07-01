@@ -27,6 +27,4 @@ public class ImageBO {
     private String url;
 
 
-
-
 }
