@@ -19,4 +19,6 @@ public class StandardAnswerBO {
     private String answer3;
 
     private String answerPath;
+
+    private String answerName;
 }

@@ -32,6 +32,13 @@ public class MyBillController {
         return new Result<>(true, CommonResultCode.SUCCESS.getCode(), CommonResultCode.SUCCESS.getMessage(),myBillService.findByUserId(userId,pageNum,pageSize));
     }
 
+    @GetMapping("/judge")
+    @PreAuthorize("hasAnyRole('ROLE_USER','ROLE_MANAGER','ROLE_ADMIN')")
+    @Log(loggerName = LoggerName.WEB_DIGEST)
+    public Result<MyBillBO> judgeMyBill(String userId, String examDetailId, @RequestParam(value = "pageNum", defaultValue = "0") int pageNum, @RequestParam(value = "pageSize", defaultValue = "10") int pageSize, HttpServletRequest httpServletRequest){
+        return new Result<>(true, CommonResultCode.SUCCESS.getCode(), CommonResultCode.SUCCESS.getMessage(),myBillService.findMyBillOnly(userId,examDetailId,pageNum,pageSize));
+    }
+
     @AvoidRepeatableCommit
     @PostMapping
     @PreAuthorize("hasAnyRole('ROLE_USER','ROLE_MANAGER','ROLE_ADMIN')")
@@ -48,12 +55,5 @@ public class MyBillController {
     @Log(loggerName = LoggerName.WEB_DIGEST)
     public Result<MyBillBO> finishMyBill(@Valid MyBillRequest request , @RequestParam(value = "pageNum", defaultValue = "0") int pageNum, @RequestParam(value = "pageSize", defaultValue = "10") int pageSize, HttpServletRequest httpServletRequest){
         return new Result<>(true, CommonResultCode.SUCCESS.getCode(), CommonResultCode.SUCCESS.getMessage(),myBillService.finishMyBill(request,pageNum,pageSize));
-    }
-
-    @GetMapping("/judge")
-    @PreAuthorize("hasAnyRole('ROLE_USER','ROLE_MANAGER','ROLE_ADMIN')")
-    @Log(loggerName = LoggerName.WEB_DIGEST)
-    public Result<MyBillBO> judgeMyBill(String userId, String examDetailId, @RequestParam(value = "pageNum", defaultValue = "0") int pageNum, @RequestParam(value = "pageSize", defaultValue = "10") int pageSize, HttpServletRequest httpServletRequest){
-        return new Result<>(true, CommonResultCode.SUCCESS.getCode(), CommonResultCode.SUCCESS.getMessage(),myBillService.findMyBillOnly(userId,examDetailId,pageNum,pageSize));
     }
 }

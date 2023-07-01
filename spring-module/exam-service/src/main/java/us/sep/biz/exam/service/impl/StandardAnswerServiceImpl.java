@@ -116,10 +116,11 @@ public class StandardAnswerServiceImpl implements StandardAnswerService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public StandardAnswerBO updateAnswerPath(String examDetailId, String answerPath)
+    public StandardAnswerBO updateAnswerPath(String examDetailId, String answerPath, String answerName)
     {
         StandardAnswerDO standardAnswerDO = standardAnswerRepo.findByExamDetailId(examDetailId);
         standardAnswerDO.setAnswerPath(answerPath);
+        standardAnswerDO.setAnswerName(answerName);
         standardAnswerRepo.save(standardAnswerDO);
         return standardAnswerDO.ToStandardAnswerBO();
     }

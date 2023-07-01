@@ -11,7 +11,7 @@
  Target Server Version : 50726 (5.7.26)
  File Encoding         : 65001
 
- Date: 01/07/2023 21:52:40
+ Date: 01/07/2023 22:53:57
 */
 
 SET NAMES utf8mb4;
@@ -102,14 +102,13 @@ CREATE TABLE `exam_entry`  (
   `version` bigint(20) NULL DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `exam_entry_id`(`exam_entry_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 20 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 24 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of exam_entry
 -- ----------------------------
 INSERT INTO `exam_entry` VALUES (14, '2020-11-03 21:59:42', 'manager1', '2020-11-03 21:59:42', 'manager1', 'manager1', '202010291618393222725510032020', '202011032159429200644410082020', '考试开始报名', 1, 'START', '2020SH', 16);
 INSERT INTO `exam_entry` VALUES (15, '2020-11-05 19:06:06', 'manager1', '2020-11-05 19:06:06', 'manager1', 'manager1', '202011051905265989989910032020', '202011051906051399599710082020', '考试开始报名', 1200, 'START', '2020FH', 0);
-INSERT INTO `exam_entry` VALUES (19, '2023-07-01 21:45:31', 'tpc', '2023-07-01 21:45:31', 'tpc', 'tpc', '202010311930230864211510032020', '202307012145303249825310082023', '考试开始报名', 29, 'START', '2023SH', 1);
 
 -- ----------------------------
 -- Table structure for exam_entry_blacklist
@@ -292,13 +291,13 @@ CREATE TABLE `exam_type_detail`  (
 -- ----------------------------
 -- Records of exam_type_detail
 -- ----------------------------
-INSERT INTO `exam_type_detail` VALUES (6, '2020-10-18 15:05:28', 'kana', '2020-10-18 15:05:28', 'kana', '请等待发布', '英语四级', '202010181505285583262110032020', '2020-12-05 11:00', '明德楼205', '2020-12-05 9:00', '202010150930332534995510022020');
-INSERT INTO `exam_type_detail` VALUES (7, '2020-10-29 16:18:40', 'manager1', '2020-10-30 14:12:51', 'manager1', '考试结束后一周内在个人中心中通知', '英语四六级考试', '202010291618393222725510032020', '2020-10-29 20:30', '另行通知', '2020-10-29 19:00', '202010231640241316026910022020');
-INSERT INTO `exam_type_detail` VALUES (8, '2020-10-31 10:19:33', 'manager1', '2020-11-06 15:04:00', 'life', '考试结束后即可打开观看分数', '英语四六级考试', '202010311019337592289710032020', '2020-10-31 10:19', '网上', '2020-10-31 10:19', '202010231640241316026910022020');
-INSERT INTO `exam_type_detail` VALUES (9, '2020-10-31 19:30:23', 'manager1', '2020-10-31 19:30:23', 'manager1', '三个月后', '英语四六级考试', '202010311930230864211510032020', '2020-11-11 20:30', '仁义楼', '2020-11-11 18:30', '202010102110496607127210022020');
-INSERT INTO `exam_type_detail` VALUES (10, '2020-10-31 19:31:30', 'manager1', '2020-10-31 19:31:30', 'manager1', '五个工作日内', '美国工商管理人才考试', '202010311931296408846910032020', '2020-12-03 12:00', 'C楼', '2020-12-02 12:00', '202010102110496884566610022020');
-INSERT INTO `exam_type_detail` VALUES (11, '2020-11-05 19:05:26', 'manager1', '2020-11-05 19:05:26', 'manager1', '新的考试已经出现，怎么能够停滞不前?', '英语四六级考试', '202011051905265989989910032020', '2020-11-05 19:05', '梦里', '2020-11-05 19:05', '202010231640241316026910022020');
-INSERT INTO `exam_type_detail` VALUES (12, '2020-11-08 16:24:39', 'manager1', '2020-11-08 16:24:39', 'manager1', '考完后页面查看，系统评分', 'bilibili 1024 CTF挑战赛', '202011081624394168434310032020', '2020-12-08 16:24', 'bilibili', '2020-11-08 12:00', '202011061406107455240810022020');
+INSERT INTO `exam_type_detail` VALUES (6, '2020-10-18 15:05:28', 'kana', '2020-10-18 15:05:28', 'kana', '请等待发布', '英语四级', '202010181505285583262110032020', '2020-12-05 11:00', '公教楼B', '2020-12-05 9:00', '202010150930332534995510022020');
+INSERT INTO `exam_type_detail` VALUES (7, '2020-10-29 16:18:40', 'manager1', '2020-10-30 14:12:51', 'manager1', '考试结束后一周内在个人中心中通知', '英语四六级考试', '202010291618393222725510032020', '2020-10-29 20:30', '公教楼A', '2020-10-29 19:00', '202010231640241316026910022020');
+INSERT INTO `exam_type_detail` VALUES (8, '2020-10-31 10:19:33', 'manager1', '2020-11-06 15:04:00', 'life', '考试结束后即可打开观看分数', '英语四六级考试', '202010311019337592289710032020', '2020-10-31 10:19', '公教楼B', '2020-10-31 10:19', '202010231640241316026910022020');
+INSERT INTO `exam_type_detail` VALUES (9, '2020-10-31 19:30:23', 'manager1', '2020-10-31 19:30:23', 'manager1', '三个月后', '英语四六级考试', '202010311930230864211510032020', '2020-11-11 20:30', '公教楼A', '2020-11-11 18:30', '202010102110496607127210022020');
+INSERT INTO `exam_type_detail` VALUES (10, '2020-10-31 19:31:30', 'manager1', '2020-10-31 19:31:30', 'manager1', '五个工作日内', '美国工商管理人才考试', '202010311931296408846910032020', '2020-12-03 12:00', '公教楼C', '2020-12-02 12:00', '202010102110496884566610022020');
+INSERT INTO `exam_type_detail` VALUES (11, '2020-11-05 19:05:26', 'manager1', '2020-11-05 19:05:26', 'manager1', '新的考试已经出现，怎么能够停滞不前?', '英语四六级考试', '202011051905265989989910032020', '2020-11-05 19:05', '公教楼A', '2020-11-05 19:05', '202010231640241316026910022020');
+INSERT INTO `exam_type_detail` VALUES (12, '2020-11-08 16:24:39', 'manager1', '2020-11-08 16:24:39', 'manager1', '考完后页面查看，系统评分', 'bilibili 1024 CTF挑战赛', '202011081624394168434310032020', '2020-12-08 16:24', '公教楼D', '2020-11-08 12:00', '202011061406107455240810022020');
 
 -- ----------------------------
 -- Table structure for image
@@ -343,7 +342,7 @@ CREATE TABLE `log`  (
   `transfer_user_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `transfer_user`(`transfer_user_name`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 6171 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 6691 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of log
@@ -6518,6 +6517,526 @@ INSERT INTO `log` VALUES (6167, '2023-07-01 21:50:03', 'test', '2023-07-01 21:50
 INSERT INTO `log` VALUES (6168, '2023-07-01 21:50:50', 'test', '2023-07-01 21:50:50', 'test', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '3ms', 'test');
 INSERT INTO `log` VALUES (6169, '2023-07-01 21:50:50', 'test', '2023-07-01 21:50:50', 'test', 'getUserEntry', '172.25.112.1', '调用成功', 1, '2ms', 'test');
 INSERT INTO `log` VALUES (6170, '2023-07-01 21:50:50', 'test', '2023-07-01 21:50:50', 'test', 'getExamEntry', '172.25.112.1', '调用成功', 1, '2ms', 'test');
+INSERT INTO `log` VALUES (6171, '2023-07-01 21:55:23', 'test', '2023-07-01 21:55:23', 'test', 'getUserNameByEmail', '172.25.112.1', '调用成功', 1, '14ms', 'test');
+INSERT INTO `log` VALUES (6172, '2023-07-01 21:55:25', 'test', '2023-07-01 21:55:25', 'test', 'getUser', '172.25.112.1', '调用成功', 1, '2ms', 'test');
+INSERT INTO `log` VALUES (6173, '2023-07-01 21:55:25', 'test', '2023-07-01 21:55:25', 'test', 'getUserInfo', '172.25.112.1', '调用成功', 1, '24ms', 'test');
+INSERT INTO `log` VALUES (6174, '2023-07-01 21:55:35', 'test', '2023-07-01 21:55:35', 'test', 'ifAdmin', '172.25.112.1', '调用成功', 1, '12ms', 'test');
+INSERT INTO `log` VALUES (6175, '2023-07-01 21:55:35', 'test', '2023-07-01 21:55:35', 'test', 'ifManager', '172.25.112.1', '调用成功', 1, '12ms', 'test');
+INSERT INTO `log` VALUES (6176, '2023-07-01 21:55:38', 'test', '2023-07-01 21:55:38', 'test', 'ifManager', '172.25.112.1', '调用成功', 1, '10ms', 'test');
+INSERT INTO `log` VALUES (6177, '2023-07-01 21:55:38', 'test', '2023-07-01 21:55:38', 'test', 'ifAdmin', '172.25.112.1', '调用成功', 1, '10ms', 'test');
+INSERT INTO `log` VALUES (6178, '2023-07-01 21:55:41', 'test', '2023-07-01 21:55:41', 'test', 'getUserInfo', '172.25.112.1', '调用成功', 1, '8ms', 'test');
+INSERT INTO `log` VALUES (6179, '2023-07-01 21:56:44', 'test', '2023-07-01 21:56:44', 'test', 'getUserSubByUserId', '172.25.112.1', '调用成功', 1, '19ms', 'test');
+INSERT INTO `log` VALUES (6180, '2023-07-01 21:56:44', 'test', '2023-07-01 21:56:44', 'test', 'getChannel', '172.25.112.1', '调用成功', 1, '57ms', 'test');
+INSERT INTO `log` VALUES (6181, '2023-07-01 21:56:44', 'test', '2023-07-01 21:56:44', 'test', 'getMessageByCondition', '172.25.112.1', '调用成功', 1, '17ms', 'test');
+INSERT INTO `log` VALUES (6182, '2023-07-01 21:56:45', 'test', '2023-07-01 21:56:45', 'test', 'getMyBillByUserId', '172.25.112.1', '调用成功', 1, '12ms', 'test');
+INSERT INTO `log` VALUES (6183, '2023-07-01 21:56:47', 'test', '2023-07-01 21:56:47', 'test', 'getUserSubByUserId', '172.25.112.1', '调用成功', 1, '2ms', 'test');
+INSERT INTO `log` VALUES (6184, '2023-07-01 21:56:47', 'test', '2023-07-01 21:56:47', 'test', 'getChannel', '172.25.112.1', '调用成功', 1, '4ms', 'test');
+INSERT INTO `log` VALUES (6185, '2023-07-01 21:56:47', 'test', '2023-07-01 21:56:47', 'test', 'getMessageByCondition', '172.25.112.1', '调用成功', 1, '2ms', 'test');
+INSERT INTO `log` VALUES (6186, '2023-07-01 21:57:03', 'tpc', '2023-07-01 21:57:03', 'tpc', 'getUserNameByEmail', '172.25.112.1', '调用成功', 1, '4ms', 'tpc');
+INSERT INTO `log` VALUES (6187, '2023-07-01 21:57:05', 'tpc', '2023-07-01 21:57:05', 'tpc', 'getUser', '172.25.112.1', '调用成功', 1, '2ms', 'tpc');
+INSERT INTO `log` VALUES (6188, '2023-07-01 21:57:05', 'tpc', '2023-07-01 21:57:05', 'tpc', 'getUserInfo', '172.25.112.1', '调用成功', 1, '10ms', 'tpc');
+INSERT INTO `log` VALUES (6189, '2023-07-01 21:57:06', 'tpc', '2023-07-01 21:57:06', 'tpc', 'ifManager', '172.25.112.1', '调用成功', 1, '6ms', 'tpc');
+INSERT INTO `log` VALUES (6190, '2023-07-01 21:57:06', 'tpc', '2023-07-01 21:57:06', 'tpc', 'ifAdmin', '172.25.112.1', '调用成功', 1, '6ms', 'tpc');
+INSERT INTO `log` VALUES (6191, '2023-07-01 21:57:09', 'tpc', '2023-07-01 21:57:09', 'tpc', 'getExamTypes', '172.25.112.1', '调用成功', 1, '42ms', 'tpc');
+INSERT INTO `log` VALUES (6192, '2023-07-01 21:57:10', 'tpc', '2023-07-01 21:57:10', 'tpc', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '26ms', 'tpc');
+INSERT INTO `log` VALUES (6193, '2023-07-01 21:57:10', 'tpc', '2023-07-01 21:57:10', 'tpc', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '28ms', 'tpc');
+INSERT INTO `log` VALUES (6194, '2023-07-01 21:57:10', 'tpc', '2023-07-01 21:57:10', 'tpc', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '28ms', 'tpc');
+INSERT INTO `log` VALUES (6195, '2023-07-01 21:57:10', 'tpc', '2023-07-01 21:57:10', 'tpc', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '36ms', 'tpc');
+INSERT INTO `log` VALUES (6196, '2023-07-01 21:57:10', 'tpc', '2023-07-01 21:57:10', 'tpc', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '35ms', 'tpc');
+INSERT INTO `log` VALUES (6197, '2023-07-01 21:57:10', 'tpc', '2023-07-01 21:57:10', 'tpc', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '37ms', 'tpc');
+INSERT INTO `log` VALUES (6198, '2023-07-01 21:57:10', 'tpc', '2023-07-01 21:57:10', 'tpc', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '6ms', 'tpc');
+INSERT INTO `log` VALUES (6199, '2023-07-01 21:57:10', 'tpc', '2023-07-01 21:57:10', 'tpc', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '6ms', 'tpc');
+INSERT INTO `log` VALUES (6200, '2023-07-01 21:57:10', 'tpc', '2023-07-01 21:57:10', 'tpc', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '6ms', 'tpc');
+INSERT INTO `log` VALUES (6201, '2023-07-01 21:57:10', 'tpc', '2023-07-01 21:57:10', 'tpc', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '6ms', 'tpc');
+INSERT INTO `log` VALUES (6202, '2023-07-01 21:57:34', 'tpc', '2023-07-01 21:57:34', 'tpc', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '11ms', 'tpc');
+INSERT INTO `log` VALUES (6203, '2023-07-01 21:57:34', 'tpc', '2023-07-01 21:57:34', 'tpc', 'getExamEntries', '172.25.112.1', '调用成功', 1, '20ms', 'tpc');
+INSERT INTO `log` VALUES (6204, '2023-07-01 21:57:34', 'tpc', '2023-07-01 21:57:34', 'tpc', 'getRemainNumber', '172.25.112.1', '调用成功', 1, '17ms', 'tpc');
+INSERT INTO `log` VALUES (6205, '2023-07-01 21:57:34', 'tpc', '2023-07-01 21:57:34', 'tpc', 'getRemainNumber', '172.25.112.1', '调用成功', 1, '17ms', 'tpc');
+INSERT INTO `log` VALUES (6206, '2023-07-01 21:57:34', 'tpc', '2023-07-01 21:57:34', 'tpc', 'getCacheRemainNumber', '172.25.112.1', '调用成功', 1, '21ms', 'tpc');
+INSERT INTO `log` VALUES (6207, '2023-07-01 21:57:36', 'tpc', '2023-07-01 21:57:36', 'tpc', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '4ms', 'tpc');
+INSERT INTO `log` VALUES (6208, '2023-07-01 21:57:36', 'tpc', '2023-07-01 21:57:36', 'tpc', 'getExamEntryRecord', '172.25.112.1', '调用成功', 1, '14ms', 'tpc');
+INSERT INTO `log` VALUES (6209, '2023-07-01 21:57:37', 'tpc', '2023-07-01 21:57:37', 'tpc', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '3ms', 'tpc');
+INSERT INTO `log` VALUES (6210, '2023-07-01 21:57:37', 'tpc', '2023-07-01 21:57:37', 'tpc', 'getExamEntries', '172.25.112.1', '调用成功', 1, '2ms', 'tpc');
+INSERT INTO `log` VALUES (6211, '2023-07-01 21:57:37', 'tpc', '2023-07-01 21:57:37', 'tpc', 'getRemainNumber', '172.25.112.1', '调用成功', 1, '3ms', 'tpc');
+INSERT INTO `log` VALUES (6212, '2023-07-01 21:57:37', 'tpc', '2023-07-01 21:57:37', 'tpc', 'getRemainNumber', '172.25.112.1', '调用成功', 1, '2ms', 'tpc');
+INSERT INTO `log` VALUES (6213, '2023-07-01 21:57:37', 'tpc', '2023-07-01 21:57:37', 'tpc', 'getCacheRemainNumber', '172.25.112.1', '调用成功', 1, '5ms', 'tpc');
+INSERT INTO `log` VALUES (6214, '2023-07-01 21:57:37', 'tpc', '2023-07-01 21:57:37', 'tpc', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '4ms', 'tpc');
+INSERT INTO `log` VALUES (6215, '2023-07-01 21:57:38', 'tpc', '2023-07-01 21:57:38', 'tpc', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '5ms', 'tpc');
+INSERT INTO `log` VALUES (6216, '2023-07-01 21:57:38', 'tpc', '2023-07-01 21:57:38', 'tpc', 'getExamEntryRecord', '172.25.112.1', '调用成功', 1, '10ms', 'tpc');
+INSERT INTO `log` VALUES (6217, '2023-07-01 21:57:44', 'tpc', '2023-07-01 21:57:44', 'tpc', 'getExamEntries', '172.25.112.1', '调用成功', 1, '5ms', 'tpc');
+INSERT INTO `log` VALUES (6218, '2023-07-01 21:57:44', 'tpc', '2023-07-01 21:57:44', 'tpc', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '7ms', 'tpc');
+INSERT INTO `log` VALUES (6219, '2023-07-01 21:57:44', 'tpc', '2023-07-01 21:57:44', 'tpc', 'getRemainNumber', '172.25.112.1', '调用成功', 1, '2ms', 'tpc');
+INSERT INTO `log` VALUES (6220, '2023-07-01 21:57:44', 'tpc', '2023-07-01 21:57:44', 'tpc', 'getRemainNumber', '172.25.112.1', '调用成功', 1, '2ms', 'tpc');
+INSERT INTO `log` VALUES (6221, '2023-07-01 21:57:44', 'tpc', '2023-07-01 21:57:44', 'tpc', 'getCacheRemainNumber', '172.25.112.1', '调用成功', 1, '5ms', 'tpc');
+INSERT INTO `log` VALUES (6222, '2023-07-01 21:57:44', 'tpc', '2023-07-01 21:57:44', 'tpc', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '6ms', 'tpc');
+INSERT INTO `log` VALUES (6223, '2023-07-01 21:57:44', 'tpc', '2023-07-01 21:57:44', 'tpc', 'getExamEntryRecord', '172.25.112.1', '调用成功', 1, '10ms', 'tpc');
+INSERT INTO `log` VALUES (6224, '2023-07-01 21:57:46', 'tpc', '2023-07-01 21:57:46', 'tpc', 'getAllUser', '172.25.112.1', '调用成功', 1, '4ms', 'tpc');
+INSERT INTO `log` VALUES (6225, '2023-07-01 21:57:47', 'tpc', '2023-07-01 21:57:47', 'tpc', 'getExamEntries', '172.25.112.1', '调用成功', 1, '5ms', 'tpc');
+INSERT INTO `log` VALUES (6226, '2023-07-01 21:57:47', 'tpc', '2023-07-01 21:57:47', 'tpc', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '6ms', 'tpc');
+INSERT INTO `log` VALUES (6227, '2023-07-01 21:57:47', 'tpc', '2023-07-01 21:57:47', 'tpc', 'getRemainNumber', '172.25.112.1', '调用成功', 1, '2ms', 'tpc');
+INSERT INTO `log` VALUES (6228, '2023-07-01 21:57:47', 'tpc', '2023-07-01 21:57:47', 'tpc', 'getRemainNumber', '172.25.112.1', '调用成功', 1, '2ms', 'tpc');
+INSERT INTO `log` VALUES (6229, '2023-07-01 21:57:47', 'tpc', '2023-07-01 21:57:47', 'tpc', 'getCacheRemainNumber', '172.25.112.1', '调用成功', 1, '3ms', 'tpc');
+INSERT INTO `log` VALUES (6230, '2023-07-01 21:57:48', 'tpc', '2023-07-01 21:57:48', 'tpc', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '6ms', 'tpc');
+INSERT INTO `log` VALUES (6231, '2023-07-01 21:57:48', 'tpc', '2023-07-01 21:57:48', 'tpc', 'getExamEntryRecord', '172.25.112.1', '调用成功', 1, '7ms', 'tpc');
+INSERT INTO `log` VALUES (6232, '2023-07-01 21:57:50', 'tpc', '2023-07-01 21:57:50', 'tpc', 'getExamEntries', '172.25.112.1', '调用成功', 1, '2ms', 'tpc');
+INSERT INTO `log` VALUES (6233, '2023-07-01 21:57:50', 'tpc', '2023-07-01 21:57:50', 'tpc', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '2ms', 'tpc');
+INSERT INTO `log` VALUES (6234, '2023-07-01 21:57:50', 'tpc', '2023-07-01 21:57:50', 'tpc', 'getRemainNumber', '172.25.112.1', '调用成功', 1, '3ms', 'tpc');
+INSERT INTO `log` VALUES (6235, '2023-07-01 21:57:50', 'tpc', '2023-07-01 21:57:50', 'tpc', 'getRemainNumber', '172.25.112.1', '调用成功', 1, '3ms', 'tpc');
+INSERT INTO `log` VALUES (6236, '2023-07-01 21:57:50', 'tpc', '2023-07-01 21:57:50', 'tpc', 'getCacheRemainNumber', '172.25.112.1', '调用成功', 1, '5ms', 'tpc');
+INSERT INTO `log` VALUES (6237, '2023-07-01 21:57:50', 'tpc', '2023-07-01 21:57:50', 'tpc', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '2ms', 'tpc');
+INSERT INTO `log` VALUES (6238, '2023-07-01 21:57:51', 'tpc', '2023-07-01 21:57:51', 'tpc', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '4ms', 'tpc');
+INSERT INTO `log` VALUES (6239, '2023-07-01 21:57:51', 'tpc', '2023-07-01 21:57:51', 'tpc', 'getExamEntries', '172.25.112.1', '调用成功', 1, '4ms', 'tpc');
+INSERT INTO `log` VALUES (6240, '2023-07-01 21:57:51', 'tpc', '2023-07-01 21:57:51', 'tpc', 'getRemainNumber', '172.25.112.1', '调用成功', 1, '2ms', 'tpc');
+INSERT INTO `log` VALUES (6241, '2023-07-01 21:57:51', 'tpc', '2023-07-01 21:57:51', 'tpc', 'getRemainNumber', '172.25.112.1', '调用成功', 1, '3ms', 'tpc');
+INSERT INTO `log` VALUES (6242, '2023-07-01 21:57:51', 'tpc', '2023-07-01 21:57:51', 'tpc', 'getCacheRemainNumber', '172.25.112.1', '调用成功', 1, '4ms', 'tpc');
+INSERT INTO `log` VALUES (6243, '2023-07-01 21:57:54', 'tpc', '2023-07-01 21:57:54', 'tpc', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '5ms', 'tpc');
+INSERT INTO `log` VALUES (6244, '2023-07-01 21:57:55', 'tpc', '2023-07-01 21:57:55', 'tpc', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '2ms', 'tpc');
+INSERT INTO `log` VALUES (6245, '2023-07-01 21:57:55', 'tpc', '2023-07-01 21:57:55', 'tpc', 'getExamEntries', '172.25.112.1', '调用成功', 1, '3ms', 'tpc');
+INSERT INTO `log` VALUES (6246, '2023-07-01 21:57:55', 'tpc', '2023-07-01 21:57:55', 'tpc', 'getRemainNumber', '172.25.112.1', '调用成功', 1, '2ms', 'tpc');
+INSERT INTO `log` VALUES (6247, '2023-07-01 21:57:55', 'tpc', '2023-07-01 21:57:55', 'tpc', 'getRemainNumber', '172.25.112.1', '调用成功', 1, '2ms', 'tpc');
+INSERT INTO `log` VALUES (6248, '2023-07-01 21:57:55', 'tpc', '2023-07-01 21:57:55', 'tpc', 'getCacheRemainNumber', '172.25.112.1', '调用成功', 1, '3ms', 'tpc');
+INSERT INTO `log` VALUES (6249, '2023-07-01 21:57:57', 'tpc', '2023-07-01 21:57:57', 'tpc', 'getExamEntryRecord', '172.25.112.1', '调用成功', 1, '2ms', 'tpc');
+INSERT INTO `log` VALUES (6250, '2023-07-01 21:57:57', 'tpc', '2023-07-01 21:57:57', 'tpc', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '4ms', 'tpc');
+INSERT INTO `log` VALUES (6251, '2023-07-01 21:58:01', 'tpc', '2023-07-01 21:58:01', 'tpc', 'getExamTypes', '172.25.112.1', '调用成功', 1, '3ms', 'tpc');
+INSERT INTO `log` VALUES (6252, '2023-07-01 21:58:01', 'tpc', '2023-07-01 21:58:01', 'tpc', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '4ms', 'tpc');
+INSERT INTO `log` VALUES (6253, '2023-07-01 21:58:01', 'tpc', '2023-07-01 21:58:01', 'tpc', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '3ms', 'tpc');
+INSERT INTO `log` VALUES (6254, '2023-07-01 21:58:01', 'tpc', '2023-07-01 21:58:01', 'tpc', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '4ms', 'tpc');
+INSERT INTO `log` VALUES (6255, '2023-07-01 21:58:01', 'tpc', '2023-07-01 21:58:01', 'tpc', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '3ms', 'tpc');
+INSERT INTO `log` VALUES (6256, '2023-07-01 21:58:01', 'tpc', '2023-07-01 21:58:01', 'tpc', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '3ms', 'tpc');
+INSERT INTO `log` VALUES (6257, '2023-07-01 21:58:01', 'tpc', '2023-07-01 21:58:01', 'tpc', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '3ms', 'tpc');
+INSERT INTO `log` VALUES (6258, '2023-07-01 21:58:01', 'tpc', '2023-07-01 21:58:01', 'tpc', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '5ms', 'tpc');
+INSERT INTO `log` VALUES (6259, '2023-07-01 21:58:01', 'tpc', '2023-07-01 21:58:01', 'tpc', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '5ms', 'tpc');
+INSERT INTO `log` VALUES (6260, '2023-07-01 21:58:01', 'tpc', '2023-07-01 21:58:01', 'tpc', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '5ms', 'tpc');
+INSERT INTO `log` VALUES (6261, '2023-07-01 21:58:01', 'tpc', '2023-07-01 21:58:01', 'tpc', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '5ms', 'tpc');
+INSERT INTO `log` VALUES (6262, '2023-07-01 22:00:10', 'test', '2023-07-01 22:00:10', 'test', 'getUserNameByEmail', '172.25.112.1', '调用成功', 1, '7ms', 'test');
+INSERT INTO `log` VALUES (6263, '2023-07-01 22:00:13', 'test', '2023-07-01 22:00:13', 'test', 'getUser', '172.25.112.1', '调用成功', 1, '1ms', 'test');
+INSERT INTO `log` VALUES (6264, '2023-07-01 22:00:13', 'test', '2023-07-01 22:00:13', 'test', 'getUserInfo', '172.25.112.1', '调用成功', 1, '6ms', 'test');
+INSERT INTO `log` VALUES (6265, '2023-07-01 22:00:15', 'test', '2023-07-01 22:00:15', 'test', 'ifManager', '172.25.112.1', '调用成功', 1, '5ms', 'test');
+INSERT INTO `log` VALUES (6266, '2023-07-01 22:00:15', 'test', '2023-07-01 22:00:15', 'test', 'ifAdmin', '172.25.112.1', '调用成功', 1, '5ms', 'test');
+INSERT INTO `log` VALUES (6267, '2023-07-01 22:00:17', 'test', '2023-07-01 22:00:17', 'test', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '4ms', 'test');
+INSERT INTO `log` VALUES (6268, '2023-07-01 22:00:17', 'test', '2023-07-01 22:00:17', 'test', 'getUserEntry', '172.25.112.1', '调用成功', 1, '10ms', 'test');
+INSERT INTO `log` VALUES (6269, '2023-07-01 22:00:17', 'test', '2023-07-01 22:00:17', 'test', 'getExamEntry', '172.25.112.1', '调用成功', 1, '4ms', 'test');
+INSERT INTO `log` VALUES (6270, '2023-07-01 22:00:18', 'test', '2023-07-01 22:00:18', 'test', 'getStandardAnswerBOByExamDetailId', '172.25.112.1', '调用成功', 1, '27ms', 'test');
+INSERT INTO `log` VALUES (6271, '2023-07-01 22:00:18', 'test', '2023-07-01 22:00:18', 'test', 'judgeComplete', '172.25.112.1', '调用成功', 1, '31ms', 'test');
+INSERT INTO `log` VALUES (6272, '2023-07-01 22:00:21', 'test', '2023-07-01 22:00:21', 'test', 'getUser', '172.25.112.1', '调用成功', 1, '7ms', 'test');
+INSERT INTO `log` VALUES (6273, '2023-07-01 22:00:21', 'test', '2023-07-01 22:00:21', 'test', 'getUserEntry', '172.25.112.1', '调用成功', 1, '11ms', 'test');
+INSERT INTO `log` VALUES (6274, '2023-07-01 22:00:21', 'test', '2023-07-01 22:00:21', 'test', 'ifManager', '172.25.112.1', '调用成功', 1, '15ms', 'test');
+INSERT INTO `log` VALUES (6275, '2023-07-01 22:00:21', 'test', '2023-07-01 22:00:21', 'test', 'ifAdmin', '172.25.112.1', '调用成功', 1, '21ms', 'test');
+INSERT INTO `log` VALUES (6276, '2023-07-01 22:00:21', 'test', '2023-07-01 22:00:21', 'test', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '8ms', 'test');
+INSERT INTO `log` VALUES (6277, '2023-07-01 22:00:21', 'test', '2023-07-01 22:00:21', 'test', 'getUserInfo', '172.25.112.1', '调用成功', 1, '27ms', 'test');
+INSERT INTO `log` VALUES (6278, '2023-07-01 22:00:21', 'test', '2023-07-01 22:00:21', 'test', 'getExamEntry', '172.25.112.1', '调用成功', 1, '2ms', 'test');
+INSERT INTO `log` VALUES (6279, '2023-07-01 22:05:23', 'test', '2023-07-01 22:05:23', 'test', 'getStandardAnswerBOByExamDetailId', '172.25.112.1', '调用成功', 1, '5ms', 'test');
+INSERT INTO `log` VALUES (6280, '2023-07-01 22:05:23', 'test', '2023-07-01 22:05:23', 'test', 'judgeComplete', '172.25.112.1', '调用成功', 1, '13ms', 'test');
+INSERT INTO `log` VALUES (6281, '2023-07-01 22:05:26', 'test', '2023-07-01 22:05:26', 'test', 'getUserEntry', '172.25.112.1', '调用成功', 1, '5ms', 'test');
+INSERT INTO `log` VALUES (6282, '2023-07-01 22:05:26', 'test', '2023-07-01 22:05:26', 'test', 'getUser', '172.25.112.1', '调用成功', 1, '5ms', 'test');
+INSERT INTO `log` VALUES (6283, '2023-07-01 22:05:26', 'test', '2023-07-01 22:05:26', 'test', 'ifManager', '172.25.112.1', '调用成功', 1, '23ms', 'test');
+INSERT INTO `log` VALUES (6284, '2023-07-01 22:05:26', 'test', '2023-07-01 22:05:26', 'test', 'ifAdmin', '172.25.112.1', '调用成功', 1, '21ms', 'test');
+INSERT INTO `log` VALUES (6285, '2023-07-01 22:05:26', 'test', '2023-07-01 22:05:26', 'test', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '29ms', 'test');
+INSERT INTO `log` VALUES (6286, '2023-07-01 22:05:26', 'test', '2023-07-01 22:05:26', 'test', 'getUserInfo', '172.25.112.1', '调用成功', 1, '24ms', 'test');
+INSERT INTO `log` VALUES (6287, '2023-07-01 22:05:26', 'test', '2023-07-01 22:05:26', 'test', 'getExamEntry', '172.25.112.1', '调用成功', 1, '3ms', 'test');
+INSERT INTO `log` VALUES (6288, '2023-07-01 22:11:12', 'test', '2023-07-01 22:11:12', 'test', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '147ms', 'test');
+INSERT INTO `log` VALUES (6289, '2023-07-01 22:11:12', 'test', '2023-07-01 22:11:12', 'test', 'getUserInfo', '172.25.112.1', '调用成功', 1, '101ms', 'test');
+INSERT INTO `log` VALUES (6290, '2023-07-01 22:11:12', 'test', '2023-07-01 22:11:12', 'test', 'getUser', '172.25.112.1', '调用成功', 1, '28ms', 'test');
+INSERT INTO `log` VALUES (6291, '2023-07-01 22:11:12', 'test', '2023-07-01 22:11:12', 'test', 'ifManager', '172.25.112.1', '调用成功', 1, '40ms', 'test');
+INSERT INTO `log` VALUES (6292, '2023-07-01 22:11:12', 'test', '2023-07-01 22:11:12', 'test', 'ifAdmin', '172.25.112.1', '调用成功', 1, '57ms', 'test');
+INSERT INTO `log` VALUES (6293, '2023-07-01 22:11:12', 'test', '2023-07-01 22:11:12', 'test', 'getUserEntry', '172.25.112.1', '调用成功', 1, '44ms', 'test');
+INSERT INTO `log` VALUES (6294, '2023-07-01 22:11:12', 'test', '2023-07-01 22:11:12', 'test', 'getExamEntry', '172.25.112.1', '调用成功', 1, '21ms', 'test');
+INSERT INTO `log` VALUES (6295, '2023-07-01 22:11:22', 'tpc', '2023-07-01 22:11:22', 'tpc', 'getUserNameByEmail', '172.25.112.1', '调用成功', 1, '3ms', 'tpc');
+INSERT INTO `log` VALUES (6296, '2023-07-01 22:11:24', 'tpc', '2023-07-01 22:11:24', 'tpc', 'getUser', '172.25.112.1', '调用成功', 1, '2ms', 'tpc');
+INSERT INTO `log` VALUES (6297, '2023-07-01 22:11:24', 'tpc', '2023-07-01 22:11:24', 'tpc', 'getUserInfo', '172.25.112.1', '调用成功', 1, '10ms', 'tpc');
+INSERT INTO `log` VALUES (6298, '2023-07-01 22:11:25', 'tpc', '2023-07-01 22:11:25', 'tpc', 'ifManager', '172.25.112.1', '调用成功', 1, '8ms', 'tpc');
+INSERT INTO `log` VALUES (6299, '2023-07-01 22:11:25', 'tpc', '2023-07-01 22:11:25', 'tpc', 'ifAdmin', '172.25.112.1', '调用成功', 1, '8ms', 'tpc');
+INSERT INTO `log` VALUES (6300, '2023-07-01 22:11:28', 'tpc', '2023-07-01 22:11:28', 'tpc', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '4ms', 'tpc');
+INSERT INTO `log` VALUES (6301, '2023-07-01 22:11:28', 'tpc', '2023-07-01 22:11:28', 'tpc', 'getExamEntries', '172.25.112.1', '调用成功', 1, '10ms', 'tpc');
+INSERT INTO `log` VALUES (6302, '2023-07-01 22:11:30', 'tpc', '2023-07-01 22:11:30', 'tpc', 'getStandardAnswerBOByExamDetailId', '172.25.112.1', '调用成功', 1, '15ms', 'tpc');
+INSERT INTO `log` VALUES (6303, '2023-07-01 22:11:39', 'tpc', '2023-07-01 22:11:39', 'tpc', 'uploadImg', '172.25.112.1', '调用成功', 1, '83ms', 'tpc');
+INSERT INTO `log` VALUES (6304, '2023-07-01 22:11:42', 'tpc', '2023-07-01 22:11:42', 'tpc', 'getUser', '172.25.112.1', '调用成功', 1, '3ms', 'tpc');
+INSERT INTO `log` VALUES (6305, '2023-07-01 22:11:42', 'tpc', '2023-07-01 22:11:42', 'tpc', 'getExamEntries', '172.25.112.1', '调用成功', 1, '5ms', 'tpc');
+INSERT INTO `log` VALUES (6306, '2023-07-01 22:11:42', 'tpc', '2023-07-01 22:11:42', 'tpc', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '5ms', 'tpc');
+INSERT INTO `log` VALUES (6307, '2023-07-01 22:11:42', 'tpc', '2023-07-01 22:11:42', 'tpc', 'ifAdmin', '172.25.112.1', '调用成功', 1, '5ms', 'tpc');
+INSERT INTO `log` VALUES (6308, '2023-07-01 22:11:42', 'tpc', '2023-07-01 22:11:42', 'tpc', 'ifManager', '172.25.112.1', '调用成功', 1, '4ms', 'tpc');
+INSERT INTO `log` VALUES (6309, '2023-07-01 22:11:42', 'tpc', '2023-07-01 22:11:42', 'tpc', 'getUserInfo', '172.25.112.1', '调用成功', 1, '18ms', 'tpc');
+INSERT INTO `log` VALUES (6310, '2023-07-01 22:12:01', 'test', '2023-07-01 22:12:01', 'test', 'getUserNameByEmail', '172.25.112.1', '调用成功', 1, '3ms', 'test');
+INSERT INTO `log` VALUES (6311, '2023-07-01 22:12:03', 'test', '2023-07-01 22:12:03', 'test', 'getUser', '172.25.112.1', '调用成功', 1, '1ms', 'test');
+INSERT INTO `log` VALUES (6312, '2023-07-01 22:12:03', 'test', '2023-07-01 22:12:03', 'test', 'getUserInfo', '172.25.112.1', '调用成功', 1, '5ms', 'test');
+INSERT INTO `log` VALUES (6313, '2023-07-01 22:12:05', 'test', '2023-07-01 22:12:05', 'test', 'ifAdmin', '172.25.112.1', '调用成功', 1, '3ms', 'test');
+INSERT INTO `log` VALUES (6314, '2023-07-01 22:12:05', 'test', '2023-07-01 22:12:05', 'test', 'ifManager', '172.25.112.1', '调用成功', 1, '4ms', 'test');
+INSERT INTO `log` VALUES (6315, '2023-07-01 22:12:07', 'test', '2023-07-01 22:12:07', 'test', 'getUserEntry', '172.25.112.1', '调用成功', 1, '4ms', 'test');
+INSERT INTO `log` VALUES (6316, '2023-07-01 22:12:07', 'test', '2023-07-01 22:12:07', 'test', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '6ms', 'test');
+INSERT INTO `log` VALUES (6317, '2023-07-01 22:12:07', 'test', '2023-07-01 22:12:07', 'test', 'getExamEntry', '172.25.112.1', '调用成功', 1, '3ms', 'test');
+INSERT INTO `log` VALUES (6318, '2023-07-01 22:12:09', 'test', '2023-07-01 22:12:09', 'test', 'getStandardAnswerBOByExamDetailId', '172.25.112.1', '调用成功', 1, '6ms', 'test');
+INSERT INTO `log` VALUES (6319, '2023-07-01 22:12:09', 'test', '2023-07-01 22:12:09', 'test', 'judgeComplete', '172.25.112.1', '调用成功', 1, '18ms', 'test');
+INSERT INTO `log` VALUES (6320, '2023-07-01 22:13:20', 'test', '2023-07-01 22:13:20', 'test', 'getUser', '172.25.112.1', '调用成功', 1, '8ms', 'test');
+INSERT INTO `log` VALUES (6321, '2023-07-01 22:13:20', 'test', '2023-07-01 22:13:20', 'test', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '13ms', 'test');
+INSERT INTO `log` VALUES (6322, '2023-07-01 22:13:20', 'test', '2023-07-01 22:13:20', 'test', 'getUserInfo', '172.25.112.1', '调用成功', 1, '16ms', 'test');
+INSERT INTO `log` VALUES (6323, '2023-07-01 22:13:20', 'test', '2023-07-01 22:13:20', 'test', 'ifAdmin', '172.25.112.1', '调用成功', 1, '6ms', 'test');
+INSERT INTO `log` VALUES (6324, '2023-07-01 22:13:20', 'test', '2023-07-01 22:13:20', 'test', 'ifManager', '172.25.112.1', '调用成功', 1, '11ms', 'test');
+INSERT INTO `log` VALUES (6325, '2023-07-01 22:13:20', 'test', '2023-07-01 22:13:20', 'test', 'getUserEntry', '172.25.112.1', '调用成功', 1, '13ms', 'test');
+INSERT INTO `log` VALUES (6326, '2023-07-01 22:13:20', 'test', '2023-07-01 22:13:20', 'test', 'getExamEntry', '172.25.112.1', '调用成功', 1, '2ms', 'test');
+INSERT INTO `log` VALUES (6327, '2023-07-01 22:15:31', 'test', '2023-07-01 22:15:31', 'test', 'getUserEntry', '172.25.112.1', '调用成功', 1, '2ms', 'test');
+INSERT INTO `log` VALUES (6328, '2023-07-01 22:15:31', 'test', '2023-07-01 22:15:31', 'test', 'ifManager', '172.25.112.1', '调用成功', 1, '5ms', 'test');
+INSERT INTO `log` VALUES (6329, '2023-07-01 22:15:31', 'test', '2023-07-01 22:15:31', 'test', 'getUser', '172.25.112.1', '调用成功', 1, '2ms', 'test');
+INSERT INTO `log` VALUES (6330, '2023-07-01 22:15:31', 'test', '2023-07-01 22:15:31', 'test', 'ifAdmin', '172.25.112.1', '调用成功', 1, '7ms', 'test');
+INSERT INTO `log` VALUES (6331, '2023-07-01 22:15:31', 'test', '2023-07-01 22:15:31', 'test', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '8ms', 'test');
+INSERT INTO `log` VALUES (6332, '2023-07-01 22:15:31', 'test', '2023-07-01 22:15:31', 'test', 'getUserInfo', '172.25.112.1', '调用成功', 1, '20ms', 'test');
+INSERT INTO `log` VALUES (6333, '2023-07-01 22:15:31', 'test', '2023-07-01 22:15:31', 'test', 'getExamEntry', '172.25.112.1', '调用成功', 1, '2ms', 'test');
+INSERT INTO `log` VALUES (6334, '2023-07-01 22:15:33', 'test', '2023-07-01 22:15:33', 'test', 'getUser', '172.25.112.1', '调用成功', 1, '2ms', 'test');
+INSERT INTO `log` VALUES (6335, '2023-07-01 22:15:33', 'test', '2023-07-01 22:15:33', 'test', 'getUserEntry', '172.25.112.1', '调用成功', 1, '1ms', 'test');
+INSERT INTO `log` VALUES (6336, '2023-07-01 22:15:33', 'test', '2023-07-01 22:15:33', 'test', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '13ms', 'test');
+INSERT INTO `log` VALUES (6337, '2023-07-01 22:15:33', 'test', '2023-07-01 22:15:33', 'test', 'ifManager', '172.25.112.1', '调用成功', 1, '6ms', 'test');
+INSERT INTO `log` VALUES (6338, '2023-07-01 22:15:33', 'test', '2023-07-01 22:15:33', 'test', 'ifAdmin', '172.25.112.1', '调用成功', 1, '5ms', 'test');
+INSERT INTO `log` VALUES (6339, '2023-07-01 22:15:33', 'test', '2023-07-01 22:15:33', 'test', 'getUserInfo', '172.25.112.1', '调用成功', 1, '7ms', 'test');
+INSERT INTO `log` VALUES (6340, '2023-07-01 22:15:33', 'test', '2023-07-01 22:15:33', 'test', 'getExamEntry', '172.25.112.1', '调用成功', 1, '1ms', 'test');
+INSERT INTO `log` VALUES (6341, '2023-07-01 22:16:02', 'test', '2023-07-01 22:16:02', 'test', 'getUserInfo', '172.25.112.1', '调用成功', 1, '8ms', 'test');
+INSERT INTO `log` VALUES (6342, '2023-07-01 22:16:03', 'test', '2023-07-01 22:16:03', 'test', 'getUserEntry', '172.25.112.1', '调用成功', 1, '4ms', 'test');
+INSERT INTO `log` VALUES (6343, '2023-07-01 22:16:03', 'test', '2023-07-01 22:16:03', 'test', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '8ms', 'test');
+INSERT INTO `log` VALUES (6344, '2023-07-01 22:16:03', 'test', '2023-07-01 22:16:03', 'test', 'getExamEntry', '172.25.112.1', '调用成功', 1, '2ms', 'test');
+INSERT INTO `log` VALUES (6345, '2023-07-01 22:16:06', 'test', '2023-07-01 22:16:06', 'test', 'getUser', '172.25.112.1', '调用成功', 1, '1ms', 'test');
+INSERT INTO `log` VALUES (6346, '2023-07-01 22:16:06', 'test', '2023-07-01 22:16:06', 'test', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '4ms', 'test');
+INSERT INTO `log` VALUES (6347, '2023-07-01 22:16:06', 'test', '2023-07-01 22:16:06', 'test', 'getUserEntry', '172.25.112.1', '调用成功', 1, '1ms', 'test');
+INSERT INTO `log` VALUES (6348, '2023-07-01 22:16:06', 'test', '2023-07-01 22:16:06', 'test', 'ifAdmin', '172.25.112.1', '调用成功', 1, '3ms', 'test');
+INSERT INTO `log` VALUES (6349, '2023-07-01 22:16:06', 'test', '2023-07-01 22:16:06', 'test', 'ifManager', '172.25.112.1', '调用成功', 1, '3ms', 'test');
+INSERT INTO `log` VALUES (6350, '2023-07-01 22:16:06', 'test', '2023-07-01 22:16:06', 'test', 'getUserInfo', '172.25.112.1', '调用成功', 1, '5ms', 'test');
+INSERT INTO `log` VALUES (6351, '2023-07-01 22:16:06', 'test', '2023-07-01 22:16:06', 'test', 'getExamEntry', '172.25.112.1', '调用成功', 1, '3ms', 'test');
+INSERT INTO `log` VALUES (6352, '2023-07-01 22:17:10', 'test', '2023-07-01 22:17:10', 'test', 'getUserNameByEmail', '172.25.112.1', '调用成功', 1, '4ms', 'test');
+INSERT INTO `log` VALUES (6353, '2023-07-01 22:17:12', 'test', '2023-07-01 22:17:12', 'test', 'getUser', '172.25.112.1', '调用成功', 1, '1ms', 'test');
+INSERT INTO `log` VALUES (6354, '2023-07-01 22:17:12', 'test', '2023-07-01 22:17:12', 'test', 'getUserInfo', '172.25.112.1', '调用成功', 1, '6ms', 'test');
+INSERT INTO `log` VALUES (6355, '2023-07-01 22:17:14', 'test', '2023-07-01 22:17:14', 'test', 'ifManager', '172.25.112.1', '调用成功', 1, '12ms', 'test');
+INSERT INTO `log` VALUES (6356, '2023-07-01 22:17:14', 'test', '2023-07-01 22:17:14', 'test', 'ifAdmin', '172.25.112.1', '调用成功', 1, '7ms', 'test');
+INSERT INTO `log` VALUES (6357, '2023-07-01 22:17:19', 'test', '2023-07-01 22:17:19', 'test', 'getUserEntry', '172.25.112.1', '调用成功', 1, '4ms', 'test');
+INSERT INTO `log` VALUES (6358, '2023-07-01 22:17:19', 'test', '2023-07-01 22:17:19', 'test', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '7ms', 'test');
+INSERT INTO `log` VALUES (6359, '2023-07-01 22:17:19', 'test', '2023-07-01 22:17:19', 'test', 'getExamEntry', '172.25.112.1', '调用成功', 1, '2ms', 'test');
+INSERT INTO `log` VALUES (6360, '2023-07-01 22:18:23', 'test', '2023-07-01 22:18:23', 'test', 'ifAdmin', '172.25.112.1', '调用成功', 1, '6ms', 'test');
+INSERT INTO `log` VALUES (6361, '2023-07-01 22:18:23', 'test', '2023-07-01 22:18:23', 'test', 'ifManager', '172.25.112.1', '调用成功', 1, '7ms', 'test');
+INSERT INTO `log` VALUES (6362, '2023-07-01 22:18:23', 'test', '2023-07-01 22:18:23', 'test', 'getUser', '172.25.112.1', '调用成功', 1, '2ms', 'test');
+INSERT INTO `log` VALUES (6363, '2023-07-01 22:18:23', 'test', '2023-07-01 22:18:23', 'test', 'getUserInfo', '172.25.112.1', '调用成功', 1, '9ms', 'test');
+INSERT INTO `log` VALUES (6364, '2023-07-01 22:18:23', 'test', '2023-07-01 22:18:23', 'test', 'getUserEntry', '172.25.112.1', '调用成功', 1, '2ms', 'test');
+INSERT INTO `log` VALUES (6365, '2023-07-01 22:18:23', 'test', '2023-07-01 22:18:23', 'test', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '12ms', 'test');
+INSERT INTO `log` VALUES (6366, '2023-07-01 22:21:09', 'tpc', '2023-07-01 22:21:09', 'tpc', 'getUserNameByEmail', '172.25.112.1', '调用成功', 1, '3ms', 'tpc');
+INSERT INTO `log` VALUES (6367, '2023-07-01 22:21:11', 'tpc', '2023-07-01 22:21:11', 'tpc', 'getUser', '172.25.112.1', '调用成功', 1, '1ms', 'tpc');
+INSERT INTO `log` VALUES (6368, '2023-07-01 22:21:11', 'tpc', '2023-07-01 22:21:11', 'tpc', 'getUserInfo', '172.25.112.1', '调用成功', 1, '5ms', 'tpc');
+INSERT INTO `log` VALUES (6369, '2023-07-01 22:21:13', 'tpc', '2023-07-01 22:21:13', 'tpc', 'ifManager', '172.25.112.1', '调用成功', 1, '5ms', 'tpc');
+INSERT INTO `log` VALUES (6370, '2023-07-01 22:21:13', 'tpc', '2023-07-01 22:21:13', 'tpc', 'ifAdmin', '172.25.112.1', '调用成功', 1, '4ms', 'tpc');
+INSERT INTO `log` VALUES (6371, '2023-07-01 22:21:18', 'tpc', '2023-07-01 22:21:18', 'tpc', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '8ms', 'tpc');
+INSERT INTO `log` VALUES (6372, '2023-07-01 22:21:18', 'tpc', '2023-07-01 22:21:18', 'tpc', 'getExamEntries', '172.25.112.1', '调用成功', 1, '15ms', 'tpc');
+INSERT INTO `log` VALUES (6373, '2023-07-01 22:21:18', 'tpc', '2023-07-01 22:21:18', 'tpc', 'getRemainNumber', '172.25.112.1', '调用成功', 1, '44ms', 'tpc');
+INSERT INTO `log` VALUES (6374, '2023-07-01 22:21:18', 'tpc', '2023-07-01 22:21:18', 'tpc', 'getCacheRemainNumber', '172.25.112.1', '调用成功', 1, '63ms', 'tpc');
+INSERT INTO `log` VALUES (6375, '2023-07-01 22:21:21', 'tpc', '2023-07-01 22:21:21', 'tpc', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '11ms', 'tpc');
+INSERT INTO `log` VALUES (6376, '2023-07-01 22:21:27', 'tpc', '2023-07-01 22:21:27', 'tpc', 'createExamEntry', '172.25.112.1', '调用成功', 1, '120ms', 'tpc');
+INSERT INTO `log` VALUES (6377, '2023-07-01 22:21:27', 'tpc', '2023-07-01 22:21:27', 'tpc', 'createStandardAnswer', '172.25.112.1', '调用成功', 1, '139ms', 'tpc');
+INSERT INTO `log` VALUES (6378, '2023-07-01 22:21:29', 'tpc', '2023-07-01 22:21:29', 'tpc', 'getExamEntries', '172.25.112.1', '调用成功', 1, '4ms', 'tpc');
+INSERT INTO `log` VALUES (6379, '2023-07-01 22:21:29', 'tpc', '2023-07-01 22:21:29', 'tpc', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '7ms', 'tpc');
+INSERT INTO `log` VALUES (6380, '2023-07-01 22:21:29', 'tpc', '2023-07-01 22:21:29', 'tpc', 'getRemainNumber', '172.25.112.1', '调用成功', 1, '7ms', 'tpc');
+INSERT INTO `log` VALUES (6381, '2023-07-01 22:21:29', 'tpc', '2023-07-01 22:21:29', 'tpc', 'getRemainNumber', '172.25.112.1', '调用成功', 1, '7ms', 'tpc');
+INSERT INTO `log` VALUES (6382, '2023-07-01 22:21:29', 'tpc', '2023-07-01 22:21:29', 'tpc', 'getCacheRemainNumber', '172.25.112.1', '调用成功', 1, '16ms', 'tpc');
+INSERT INTO `log` VALUES (6383, '2023-07-01 22:21:43', 'tpc', '2023-07-01 22:21:43', 'tpc', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '10ms', 'tpc');
+INSERT INTO `log` VALUES (6384, '2023-07-01 22:21:43', 'tpc', '2023-07-01 22:21:43', 'tpc', 'getExamEntries', '172.25.112.1', '调用成功', 1, '10ms', 'tpc');
+INSERT INTO `log` VALUES (6385, '2023-07-01 22:22:01', 'tpc', '2023-07-01 22:22:01', 'tpc', 'getStandardAnswerBOByExamDetailId', '172.25.112.1', '调用成功', 1, '9ms', 'tpc');
+INSERT INTO `log` VALUES (6386, '2023-07-01 22:22:24', 'tpc', '2023-07-01 22:22:24', 'tpc', 'changeStandardAnswer', '172.25.112.1', '调用成功', 1, '129ms', 'tpc');
+INSERT INTO `log` VALUES (6387, '2023-07-01 22:22:24', 'tpc', '2023-07-01 22:22:24', 'tpc', 'getUser', '172.25.112.1', '调用成功', 1, '4ms', 'tpc');
+INSERT INTO `log` VALUES (6388, '2023-07-01 22:22:24', 'tpc', '2023-07-01 22:22:24', 'tpc', 'getExamEntries', '172.25.112.1', '调用成功', 1, '10ms', 'tpc');
+INSERT INTO `log` VALUES (6389, '2023-07-01 22:22:24', 'tpc', '2023-07-01 22:22:24', 'tpc', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '18ms', 'tpc');
+INSERT INTO `log` VALUES (6390, '2023-07-01 22:22:24', 'tpc', '2023-07-01 22:22:24', 'tpc', 'ifAdmin', '172.25.112.1', '调用成功', 1, '12ms', 'tpc');
+INSERT INTO `log` VALUES (6391, '2023-07-01 22:22:24', 'tpc', '2023-07-01 22:22:24', 'tpc', 'ifManager', '172.25.112.1', '调用成功', 1, '12ms', 'tpc');
+INSERT INTO `log` VALUES (6392, '2023-07-01 22:22:24', 'tpc', '2023-07-01 22:22:24', 'tpc', 'getUserInfo', '172.25.112.1', '调用成功', 1, '15ms', 'tpc');
+INSERT INTO `log` VALUES (6393, '2023-07-01 22:22:26', 'tpc', '2023-07-01 22:22:26', 'tpc', 'getStandardAnswerBOByExamDetailId', '172.25.112.1', '调用成功', 1, '3ms', 'tpc');
+INSERT INTO `log` VALUES (6394, '2023-07-01 22:23:18', 'tpc', '2023-07-01 22:23:18', 'tpc', 'uploadImg', '172.25.112.1', '调用成功', 1, '86ms', 'tpc');
+INSERT INTO `log` VALUES (6395, '2023-07-01 22:23:20', 'tpc', '2023-07-01 22:23:20', 'tpc', 'getExamEntries', '172.25.112.1', '调用成功', 1, '6ms', 'tpc');
+INSERT INTO `log` VALUES (6396, '2023-07-01 22:23:20', 'tpc', '2023-07-01 22:23:20', 'tpc', 'getUser', '172.25.112.1', '调用成功', 1, '4ms', 'tpc');
+INSERT INTO `log` VALUES (6397, '2023-07-01 22:23:20', 'tpc', '2023-07-01 22:23:20', 'tpc', 'ifManager', '172.25.112.1', '调用成功', 1, '7ms', 'tpc');
+INSERT INTO `log` VALUES (6398, '2023-07-01 22:23:20', 'tpc', '2023-07-01 22:23:20', 'tpc', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '10ms', 'tpc');
+INSERT INTO `log` VALUES (6399, '2023-07-01 22:23:20', 'tpc', '2023-07-01 22:23:20', 'tpc', 'ifAdmin', '172.25.112.1', '调用成功', 1, '7ms', 'tpc');
+INSERT INTO `log` VALUES (6400, '2023-07-01 22:23:20', 'tpc', '2023-07-01 22:23:20', 'tpc', 'getUserInfo', '172.25.112.1', '调用成功', 1, '8ms', 'tpc');
+INSERT INTO `log` VALUES (6401, '2023-07-01 22:23:48', 'tpc', '2023-07-01 22:23:48', 'tpc', 'getStandardAnswerBOByExamDetailId', '172.25.112.1', '调用成功', 1, '2ms', 'tpc');
+INSERT INTO `log` VALUES (6402, '2023-07-01 22:27:23', 'tpc', '2023-07-01 22:27:23', 'tpc', 'uploadImg', '172.25.112.1', '调用成功', 1, '24ms', 'tpc');
+INSERT INTO `log` VALUES (6403, '2023-07-01 22:27:25', 'tpc', '2023-07-01 22:27:25', 'tpc', 'ifManager', '172.25.112.1', '调用成功', 1, '11ms', 'tpc');
+INSERT INTO `log` VALUES (6404, '2023-07-01 22:27:25', 'tpc', '2023-07-01 22:27:25', 'tpc', 'getExamEntries', '172.25.112.1', '调用成功', 1, '9ms', 'tpc');
+INSERT INTO `log` VALUES (6405, '2023-07-01 22:27:25', 'tpc', '2023-07-01 22:27:25', 'tpc', 'ifAdmin', '172.25.112.1', '调用成功', 1, '10ms', 'tpc');
+INSERT INTO `log` VALUES (6406, '2023-07-01 22:27:25', 'tpc', '2023-07-01 22:27:25', 'tpc', 'getUserInfo', '172.25.112.1', '调用成功', 1, '8ms', 'tpc');
+INSERT INTO `log` VALUES (6407, '2023-07-01 22:27:25', 'tpc', '2023-07-01 22:27:25', 'tpc', 'getUser', '172.25.112.1', '调用成功', 1, '12ms', 'tpc');
+INSERT INTO `log` VALUES (6408, '2023-07-01 22:27:25', 'tpc', '2023-07-01 22:27:25', 'tpc', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '11ms', 'tpc');
+INSERT INTO `log` VALUES (6409, '2023-07-01 22:28:39', 'tpc', '2023-07-01 22:28:39', 'tpc', 'getStandardAnswerBOByExamDetailId', '172.25.112.1', '调用成功', 1, '3ms', 'tpc');
+INSERT INTO `log` VALUES (6410, '2023-07-01 22:28:47', 'tpc', '2023-07-01 22:28:47', 'tpc', 'uploadImg', '172.25.112.1', '调用成功', 1, '85ms', 'tpc');
+INSERT INTO `log` VALUES (6411, '2023-07-01 22:28:49', 'tpc', '2023-07-01 22:28:49', 'tpc', 'ifManager', '172.25.112.1', '调用成功', 1, '6ms', 'tpc');
+INSERT INTO `log` VALUES (6412, '2023-07-01 22:28:49', 'tpc', '2023-07-01 22:28:49', 'tpc', 'ifAdmin', '172.25.112.1', '调用成功', 1, '2ms', 'tpc');
+INSERT INTO `log` VALUES (6413, '2023-07-01 22:28:49', 'tpc', '2023-07-01 22:28:49', 'tpc', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '10ms', 'tpc');
+INSERT INTO `log` VALUES (6414, '2023-07-01 22:28:49', 'tpc', '2023-07-01 22:28:49', 'tpc', 'getExamEntries', '172.25.112.1', '调用成功', 1, '5ms', 'tpc');
+INSERT INTO `log` VALUES (6415, '2023-07-01 22:28:49', 'tpc', '2023-07-01 22:28:49', 'tpc', 'getUser', '172.25.112.1', '调用成功', 1, '4ms', 'tpc');
+INSERT INTO `log` VALUES (6416, '2023-07-01 22:28:49', 'tpc', '2023-07-01 22:28:49', 'tpc', 'getUserInfo', '172.25.112.1', '调用成功', 1, '33ms', 'tpc');
+INSERT INTO `log` VALUES (6417, '2023-07-01 22:28:50', 'tpc', '2023-07-01 22:28:50', 'tpc', 'getStandardAnswerBOByExamDetailId', '172.25.112.1', '调用成功', 1, '2ms', 'tpc');
+INSERT INTO `log` VALUES (6418, '2023-07-01 22:32:21', 'tpc', '2023-07-01 22:32:21', 'tpc', 'getExamEntries', '172.25.112.1', '调用成功', 1, '4ms', 'tpc');
+INSERT INTO `log` VALUES (6419, '2023-07-01 22:32:21', 'tpc', '2023-07-01 22:32:21', 'tpc', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '11ms', 'tpc');
+INSERT INTO `log` VALUES (6420, '2023-07-01 22:32:22', 'tpc', '2023-07-01 22:32:22', 'tpc', 'getRemainNumber', '172.25.112.1', '调用成功', 1, '13ms', 'tpc');
+INSERT INTO `log` VALUES (6421, '2023-07-01 22:32:22', 'tpc', '2023-07-01 22:32:22', 'tpc', 'getCacheRemainNumber', '172.25.112.1', '调用成功', 1, '14ms', 'tpc');
+INSERT INTO `log` VALUES (6422, '2023-07-01 22:32:23', 'tpc', '2023-07-01 22:32:23', 'tpc', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '5ms', 'tpc');
+INSERT INTO `log` VALUES (6423, '2023-07-01 22:32:27', 'tpc', '2023-07-01 22:32:27', 'tpc', 'createExamEntry', '172.25.112.1', '调用成功', 1, '21ms', 'tpc');
+INSERT INTO `log` VALUES (6424, '2023-07-01 22:32:27', 'tpc', '2023-07-01 22:32:27', 'tpc', 'createStandardAnswer', '172.25.112.1', '调用成功', 1, '106ms', 'tpc');
+INSERT INTO `log` VALUES (6425, '2023-07-01 22:32:31', 'tpc', '2023-07-01 22:32:31', 'tpc', 'getExamEntries', '172.25.112.1', '调用成功', 1, '3ms', 'tpc');
+INSERT INTO `log` VALUES (6426, '2023-07-01 22:32:31', 'tpc', '2023-07-01 22:32:31', 'tpc', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '10ms', 'tpc');
+INSERT INTO `log` VALUES (6427, '2023-07-01 22:32:31', 'tpc', '2023-07-01 22:32:31', 'tpc', 'getStandardAnswerBOByExamDetailId', '172.25.112.1', '调用成功', 1, '1ms', 'tpc');
+INSERT INTO `log` VALUES (6428, '2023-07-01 22:32:38', 'tpc', '2023-07-01 22:32:38', 'tpc', 'uploadImg', '172.25.112.1', '调用成功', 1, '67ms', 'tpc');
+INSERT INTO `log` VALUES (6429, '2023-07-01 22:32:40', 'tpc', '2023-07-01 22:32:40', 'tpc', 'getUser', '172.25.112.1', '调用成功', 1, '4ms', 'tpc');
+INSERT INTO `log` VALUES (6430, '2023-07-01 22:32:40', 'tpc', '2023-07-01 22:32:40', 'tpc', 'getExamEntries', '172.25.112.1', '调用成功', 1, '4ms', 'tpc');
+INSERT INTO `log` VALUES (6431, '2023-07-01 22:32:40', 'tpc', '2023-07-01 22:32:40', 'tpc', 'ifAdmin', '172.25.112.1', '调用成功', 1, '7ms', 'tpc');
+INSERT INTO `log` VALUES (6432, '2023-07-01 22:32:40', 'tpc', '2023-07-01 22:32:40', 'tpc', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '13ms', 'tpc');
+INSERT INTO `log` VALUES (6433, '2023-07-01 22:32:40', 'tpc', '2023-07-01 22:32:40', 'tpc', 'ifManager', '172.25.112.1', '调用成功', 1, '16ms', 'tpc');
+INSERT INTO `log` VALUES (6434, '2023-07-01 22:32:40', 'tpc', '2023-07-01 22:32:40', 'tpc', 'getUserInfo', '172.25.112.1', '调用成功', 1, '19ms', 'tpc');
+INSERT INTO `log` VALUES (6435, '2023-07-01 22:33:13', 'tpc', '2023-07-01 22:33:13', 'tpc', 'getUserInfo', '172.25.112.1', '调用成功', 1, '11ms', 'tpc');
+INSERT INTO `log` VALUES (6436, '2023-07-01 22:33:48', 'tpc', '2023-07-01 22:33:48', 'tpc', 'getUserNameByEmail', '172.25.112.1', '调用成功', 1, '3ms', 'tpc');
+INSERT INTO `log` VALUES (6437, '2023-07-01 22:33:51', 'tpc', '2023-07-01 22:33:51', 'tpc', 'getUserInfo', '172.25.112.1', '调用成功', 1, '7ms', 'tpc');
+INSERT INTO `log` VALUES (6438, '2023-07-01 22:33:51', 'tpc', '2023-07-01 22:33:51', 'tpc', 'getUser', '172.25.112.1', '调用成功', 1, '1ms', 'tpc');
+INSERT INTO `log` VALUES (6439, '2023-07-01 22:33:52', 'tpc', '2023-07-01 22:33:52', 'tpc', 'ifManager', '172.25.112.1', '调用成功', 1, '10ms', 'tpc');
+INSERT INTO `log` VALUES (6440, '2023-07-01 22:33:52', 'tpc', '2023-07-01 22:33:52', 'tpc', 'ifAdmin', '172.25.112.1', '调用成功', 1, '11ms', 'tpc');
+INSERT INTO `log` VALUES (6441, '2023-07-01 22:33:56', 'tpc', '2023-07-01 22:33:56', 'tpc', 'getExamEntries', '172.25.112.1', '调用成功', 1, '11ms', 'tpc');
+INSERT INTO `log` VALUES (6442, '2023-07-01 22:33:56', 'tpc', '2023-07-01 22:33:56', 'tpc', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '10ms', 'tpc');
+INSERT INTO `log` VALUES (6443, '2023-07-01 22:33:56', 'tpc', '2023-07-01 22:33:56', 'tpc', 'getRemainNumber', '172.25.112.1', '调用成功', 1, '3ms', 'tpc');
+INSERT INTO `log` VALUES (6444, '2023-07-01 22:33:56', 'tpc', '2023-07-01 22:33:56', 'tpc', 'getCacheRemainNumber', '172.25.112.1', '调用成功', 1, '8ms', 'tpc');
+INSERT INTO `log` VALUES (6445, '2023-07-01 22:33:59', 'tpc', '2023-07-01 22:33:59', 'tpc', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '5ms', 'tpc');
+INSERT INTO `log` VALUES (6446, '2023-07-01 22:34:05', 'tpc', '2023-07-01 22:34:05', 'tpc', 'createExamEntry', '172.25.112.1', '调用成功', 1, '13ms', 'tpc');
+INSERT INTO `log` VALUES (6447, '2023-07-01 22:34:05', 'tpc', '2023-07-01 22:34:05', 'tpc', 'createStandardAnswer', '172.25.112.1', '调用成功', 1, '90ms', 'tpc');
+INSERT INTO `log` VALUES (6448, '2023-07-01 22:34:07', 'tpc', '2023-07-01 22:34:07', 'tpc', 'getExamEntries', '172.25.112.1', '调用成功', 1, '7ms', 'tpc');
+INSERT INTO `log` VALUES (6449, '2023-07-01 22:34:07', 'tpc', '2023-07-01 22:34:07', 'tpc', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '6ms', 'tpc');
+INSERT INTO `log` VALUES (6450, '2023-07-01 22:34:07', 'tpc', '2023-07-01 22:34:07', 'tpc', 'getRemainNumber', '172.25.112.1', '调用成功', 1, '5ms', 'tpc');
+INSERT INTO `log` VALUES (6451, '2023-07-01 22:34:07', 'tpc', '2023-07-01 22:34:07', 'tpc', 'getCacheRemainNumber', '172.25.112.1', '调用成功', 1, '12ms', 'tpc');
+INSERT INTO `log` VALUES (6452, '2023-07-01 22:34:07', 'tpc', '2023-07-01 22:34:07', 'tpc', 'getRemainNumber', '172.25.112.1', '调用成功', 1, '9ms', 'tpc');
+INSERT INTO `log` VALUES (6453, '2023-07-01 22:34:28', 'tpc', '2023-07-01 22:34:28', 'tpc', 'getExamEntries', '172.25.112.1', '调用成功', 1, '4ms', 'tpc');
+INSERT INTO `log` VALUES (6454, '2023-07-01 22:34:28', 'tpc', '2023-07-01 22:34:28', 'tpc', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '8ms', 'tpc');
+INSERT INTO `log` VALUES (6455, '2023-07-01 22:34:33', 'tpc', '2023-07-01 22:34:33', 'tpc', 'getStandardAnswerBOByExamDetailId', '172.25.112.1', '调用成功', 1, '3ms', 'tpc');
+INSERT INTO `log` VALUES (6456, '2023-07-01 22:34:51', 'tpc', '2023-07-01 22:34:51', 'tpc', 'changeStandardAnswer', '172.25.112.1', '调用成功', 1, '91ms', 'tpc');
+INSERT INTO `log` VALUES (6457, '2023-07-01 22:34:51', 'tpc', '2023-07-01 22:34:51', 'tpc', 'getUser', '172.25.112.1', '调用成功', 1, '2ms', 'tpc');
+INSERT INTO `log` VALUES (6458, '2023-07-01 22:34:51', 'tpc', '2023-07-01 22:34:51', 'tpc', 'getExamEntries', '172.25.112.1', '调用成功', 1, '29ms', 'tpc');
+INSERT INTO `log` VALUES (6459, '2023-07-01 22:34:51', 'tpc', '2023-07-01 22:34:51', 'tpc', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '15ms', 'tpc');
+INSERT INTO `log` VALUES (6460, '2023-07-01 22:34:51', 'tpc', '2023-07-01 22:34:51', 'tpc', 'ifManager', '172.25.112.1', '调用成功', 1, '9ms', 'tpc');
+INSERT INTO `log` VALUES (6461, '2023-07-01 22:34:51', 'tpc', '2023-07-01 22:34:51', 'tpc', 'getUserInfo', '172.25.112.1', '调用成功', 1, '11ms', 'tpc');
+INSERT INTO `log` VALUES (6462, '2023-07-01 22:34:51', 'tpc', '2023-07-01 22:34:51', 'tpc', 'ifAdmin', '172.25.112.1', '调用成功', 1, '18ms', 'tpc');
+INSERT INTO `log` VALUES (6463, '2023-07-01 22:34:53', 'tpc', '2023-07-01 22:34:53', 'tpc', 'getStandardAnswerBOByExamDetailId', '172.25.112.1', '调用成功', 1, '2ms', 'tpc');
+INSERT INTO `log` VALUES (6464, '2023-07-01 22:35:17', 'tpc', '2023-07-01 22:35:17', 'tpc', 'uploadImg', '172.25.112.1', '调用成功', 1, '77ms', 'tpc');
+INSERT INTO `log` VALUES (6465, '2023-07-01 22:35:19', 'tpc', '2023-07-01 22:35:19', 'tpc', 'getUser', '172.25.112.1', '调用成功', 1, '2ms', 'tpc');
+INSERT INTO `log` VALUES (6466, '2023-07-01 22:35:19', 'tpc', '2023-07-01 22:35:19', 'tpc', 'getExamEntries', '172.25.112.1', '调用成功', 1, '7ms', 'tpc');
+INSERT INTO `log` VALUES (6467, '2023-07-01 22:35:19', 'tpc', '2023-07-01 22:35:19', 'tpc', 'ifManager', '172.25.112.1', '调用成功', 1, '9ms', 'tpc');
+INSERT INTO `log` VALUES (6468, '2023-07-01 22:35:19', 'tpc', '2023-07-01 22:35:19', 'tpc', 'ifAdmin', '172.25.112.1', '调用成功', 1, '11ms', 'tpc');
+INSERT INTO `log` VALUES (6469, '2023-07-01 22:35:19', 'tpc', '2023-07-01 22:35:19', 'tpc', 'getUserInfo', '172.25.112.1', '调用成功', 1, '11ms', 'tpc');
+INSERT INTO `log` VALUES (6470, '2023-07-01 22:35:19', 'tpc', '2023-07-01 22:35:19', 'tpc', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '7ms', 'tpc');
+INSERT INTO `log` VALUES (6471, '2023-07-01 22:35:20', 'tpc', '2023-07-01 22:35:20', 'tpc', 'getStandardAnswerBOByExamDetailId', '172.25.112.1', '调用成功', 1, '2ms', 'tpc');
+INSERT INTO `log` VALUES (6472, '2023-07-01 22:35:52', 'test', '2023-07-01 22:35:52', 'test', 'getUserNameByEmail', '172.25.112.1', '调用成功', 1, '3ms', 'test');
+INSERT INTO `log` VALUES (6473, '2023-07-01 22:35:54', 'test', '2023-07-01 22:35:54', 'test', 'getUser', '172.25.112.1', '调用成功', 1, '1ms', 'test');
+INSERT INTO `log` VALUES (6474, '2023-07-01 22:35:54', 'test', '2023-07-01 22:35:54', 'test', 'getUserInfo', '172.25.112.1', '调用成功', 1, '7ms', 'test');
+INSERT INTO `log` VALUES (6475, '2023-07-01 22:35:55', 'test', '2023-07-01 22:35:55', 'test', 'ifManager', '172.25.112.1', '调用成功', 1, '6ms', 'test');
+INSERT INTO `log` VALUES (6476, '2023-07-01 22:35:55', 'test', '2023-07-01 22:35:55', 'test', 'ifAdmin', '172.25.112.1', '调用成功', 1, '6ms', 'test');
+INSERT INTO `log` VALUES (6477, '2023-07-01 22:36:02', 'test', '2023-07-01 22:36:02', 'test', 'getExamEntries', '172.25.112.1', '调用成功', 1, '6ms', 'test');
+INSERT INTO `log` VALUES (6478, '2023-07-01 22:36:02', 'test', '2023-07-01 22:36:02', 'test', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '6ms', 'test');
+INSERT INTO `log` VALUES (6479, '2023-07-01 22:36:02', 'test', '2023-07-01 22:36:02', 'test', 'getRemainNumber', '172.25.112.1', '调用成功', 1, '2ms', 'test');
+INSERT INTO `log` VALUES (6480, '2023-07-01 22:36:02', 'test', '2023-07-01 22:36:02', 'test', 'getRemainNumber', '172.25.112.1', '调用成功', 1, '3ms', 'test');
+INSERT INTO `log` VALUES (6481, '2023-07-01 22:36:02', 'test', '2023-07-01 22:36:02', 'test', 'getCacheRemainNumber', '172.25.112.1', '调用成功', 1, '4ms', 'test');
+INSERT INTO `log` VALUES (6482, '2023-07-01 22:36:06', 'test', '2023-07-01 22:36:06', 'test', 'getUserEntry', '172.25.112.1', '调用成功', 1, '7ms', 'test');
+INSERT INTO `log` VALUES (6483, '2023-07-01 22:36:08', 'test', '2023-07-01 22:36:08', 'test', 'getUserInfo', '172.25.112.1', '调用成功', 1, '7ms', 'test');
+INSERT INTO `log` VALUES (6484, '2023-07-01 22:36:10', 'test', '2023-07-01 22:36:10', 'test', 'getRemainNumber', '172.25.112.1', '调用成功', 1, '2ms', 'test');
+INSERT INTO `log` VALUES (6485, '2023-07-01 22:36:10', 'test', '2023-07-01 22:36:10', 'test', 'createUserEntryByCas', '172.25.112.1', '调用成功', 1, '203ms', 'test');
+INSERT INTO `log` VALUES (6486, '2023-07-01 22:36:12', 'test', '2023-07-01 22:36:12', 'test', 'createMyBill', '172.25.112.1', '调用成功', 1, '95ms', 'test');
+INSERT INTO `log` VALUES (6487, '2023-07-01 22:36:14', 'test', '2023-07-01 22:36:14', 'test', 'ifManager', '172.25.112.1', '调用成功', 1, '9ms', 'test');
+INSERT INTO `log` VALUES (6488, '2023-07-01 22:36:14', 'test', '2023-07-01 22:36:14', 'test', 'ifAdmin', '172.25.112.1', '调用成功', 1, '9ms', 'test');
+INSERT INTO `log` VALUES (6489, '2023-07-01 22:36:16', 'test', '2023-07-01 22:36:16', 'test', 'getUserEntry', '172.25.112.1', '调用成功', 1, '3ms', 'test');
+INSERT INTO `log` VALUES (6490, '2023-07-01 22:36:16', 'test', '2023-07-01 22:36:16', 'test', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '7ms', 'test');
+INSERT INTO `log` VALUES (6491, '2023-07-01 22:36:16', 'test', '2023-07-01 22:36:16', 'test', 'getExamEntry', '172.25.112.1', '调用成功', 1, '2ms', 'test');
+INSERT INTO `log` VALUES (6492, '2023-07-01 22:36:19', 'test', '2023-07-01 22:36:19', 'test', 'getStandardAnswerBOByExamDetailId', '172.25.112.1', '调用成功', 1, '2ms', 'test');
+INSERT INTO `log` VALUES (6493, '2023-07-01 22:36:19', 'test', '2023-07-01 22:36:19', 'test', 'judgeComplete', '172.25.112.1', '调用成功', 1, '7ms', 'test');
+INSERT INTO `log` VALUES (6494, '2023-07-01 22:36:23', 'test', '2023-07-01 22:36:23', 'test', 'getUserEntry', '172.25.112.1', '调用成功', 1, '2ms', 'test');
+INSERT INTO `log` VALUES (6495, '2023-07-01 22:36:23', 'test', '2023-07-01 22:36:23', 'test', 'ifManager', '172.25.112.1', '调用成功', 1, '6ms', 'test');
+INSERT INTO `log` VALUES (6496, '2023-07-01 22:36:23', 'test', '2023-07-01 22:36:23', 'test', 'ifAdmin', '172.25.112.1', '调用成功', 1, '5ms', 'test');
+INSERT INTO `log` VALUES (6497, '2023-07-01 22:36:23', 'test', '2023-07-01 22:36:23', 'test', 'getUser', '172.25.112.1', '调用成功', 1, '24ms', 'test');
+INSERT INTO `log` VALUES (6498, '2023-07-01 22:36:23', 'test', '2023-07-01 22:36:23', 'test', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '9ms', 'test');
+INSERT INTO `log` VALUES (6499, '2023-07-01 22:36:23', 'test', '2023-07-01 22:36:23', 'test', 'getUserInfo', '172.25.112.1', '调用成功', 1, '11ms', 'test');
+INSERT INTO `log` VALUES (6500, '2023-07-01 22:36:23', 'test', '2023-07-01 22:36:23', 'test', 'getExamEntry', '172.25.112.1', '调用成功', 1, '2ms', 'test');
+INSERT INTO `log` VALUES (6501, '2023-07-01 22:36:24', 'test', '2023-07-01 22:36:24', 'test', 'getMyBillByUserId', '172.25.112.1', '调用成功', 1, '8ms', 'test');
+INSERT INTO `log` VALUES (6502, '2023-07-01 22:36:29', 'test', '2023-07-01 22:36:29', 'test', 'getUserEntry', '172.25.112.1', '调用成功', 1, '2ms', 'test');
+INSERT INTO `log` VALUES (6503, '2023-07-01 22:36:29', 'test', '2023-07-01 22:36:29', 'test', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '7ms', 'test');
+INSERT INTO `log` VALUES (6504, '2023-07-01 22:36:29', 'test', '2023-07-01 22:36:29', 'test', 'getExamEntry', '172.25.112.1', '调用成功', 1, '2ms', 'test');
+INSERT INTO `log` VALUES (6505, '2023-07-01 22:38:43', 'test', '2023-07-01 22:38:43', 'test', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '3ms', 'test');
+INSERT INTO `log` VALUES (6506, '2023-07-01 22:38:43', 'test', '2023-07-01 22:38:43', 'test', 'getUserEntry', '172.25.112.1', '调用成功', 1, '3ms', 'test');
+INSERT INTO `log` VALUES (6507, '2023-07-01 22:38:43', 'test', '2023-07-01 22:38:43', 'test', 'getExamEntry', '172.25.112.1', '调用成功', 1, '1ms', 'test');
+INSERT INTO `log` VALUES (6508, '2023-07-01 22:38:45', 'test', '2023-07-01 22:38:45', 'test', 'getStandardAnswerBOByExamDetailId', '172.25.112.1', '调用成功', 1, '5ms', 'test');
+INSERT INTO `log` VALUES (6509, '2023-07-01 22:38:45', 'test', '2023-07-01 22:38:45', 'test', 'judgeComplete', '172.25.112.1', '调用成功', 1, '4ms', 'test');
+INSERT INTO `log` VALUES (6510, '2023-07-01 22:38:46', 'test', '2023-07-01 22:38:46', 'test', 'getUser', '172.25.112.1', '调用成功', 1, '2ms', 'test');
+INSERT INTO `log` VALUES (6511, '2023-07-01 22:38:46', 'test', '2023-07-01 22:38:46', 'test', 'getUserEntry', '172.25.112.1', '调用成功', 1, '2ms', 'test');
+INSERT INTO `log` VALUES (6512, '2023-07-01 22:38:46', 'test', '2023-07-01 22:38:46', 'test', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '8ms', 'test');
+INSERT INTO `log` VALUES (6513, '2023-07-01 22:38:46', 'test', '2023-07-01 22:38:46', 'test', 'ifManager', '172.25.112.1', '调用成功', 1, '9ms', 'test');
+INSERT INTO `log` VALUES (6514, '2023-07-01 22:38:46', 'test', '2023-07-01 22:38:46', 'test', 'ifAdmin', '172.25.112.1', '调用成功', 1, '4ms', 'test');
+INSERT INTO `log` VALUES (6515, '2023-07-01 22:38:46', 'test', '2023-07-01 22:38:46', 'test', 'getUserInfo', '172.25.112.1', '调用成功', 1, '8ms', 'test');
+INSERT INTO `log` VALUES (6516, '2023-07-01 22:38:46', 'test', '2023-07-01 22:38:46', 'test', 'getExamEntry', '172.25.112.1', '调用成功', 1, '4ms', 'test');
+INSERT INTO `log` VALUES (6517, '2023-07-01 22:39:05', 'test', '2023-07-01 22:39:05', 'test', 'getUserEntry', '172.25.112.1', '调用成功', 1, '2ms', 'test');
+INSERT INTO `log` VALUES (6518, '2023-07-01 22:39:05', 'test', '2023-07-01 22:39:05', 'test', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '4ms', 'test');
+INSERT INTO `log` VALUES (6519, '2023-07-01 22:39:05', 'test', '2023-07-01 22:39:05', 'test', 'getExamEntry', '172.25.112.1', '调用成功', 1, '1ms', 'test');
+INSERT INTO `log` VALUES (6520, '2023-07-01 22:39:09', 'test', '2023-07-01 22:39:09', 'test', 'getUserEntry', '172.25.112.1', '调用成功', 1, '2ms', 'test');
+INSERT INTO `log` VALUES (6521, '2023-07-01 22:39:09', 'test', '2023-07-01 22:39:09', 'test', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '4ms', 'test');
+INSERT INTO `log` VALUES (6522, '2023-07-01 22:39:09', 'test', '2023-07-01 22:39:09', 'test', 'getExamEntry', '172.25.112.1', '调用成功', 1, '1ms', 'test');
+INSERT INTO `log` VALUES (6523, '2023-07-01 22:39:10', 'test', '2023-07-01 22:39:10', 'test', 'judgeComplete', '172.25.112.1', '调用成功', 1, '1ms', 'test');
+INSERT INTO `log` VALUES (6524, '2023-07-01 22:39:10', 'test', '2023-07-01 22:39:10', 'test', 'getStandardAnswerBOByExamDetailId', '172.25.112.1', '调用成功', 1, '2ms', 'test');
+INSERT INTO `log` VALUES (6525, '2023-07-01 22:39:12', 'test', '2023-07-01 22:39:12', 'test', 'getUser', '172.25.112.1', '调用成功', 1, '1ms', 'test');
+INSERT INTO `log` VALUES (6526, '2023-07-01 22:39:12', 'test', '2023-07-01 22:39:12', 'test', 'getUserEntry', '172.25.112.1', '调用成功', 1, '4ms', 'test');
+INSERT INTO `log` VALUES (6527, '2023-07-01 22:39:12', 'test', '2023-07-01 22:39:12', 'test', 'ifAdmin', '172.25.112.1', '调用成功', 1, '8ms', 'test');
+INSERT INTO `log` VALUES (6528, '2023-07-01 22:39:12', 'test', '2023-07-01 22:39:12', 'test', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '13ms', 'test');
+INSERT INTO `log` VALUES (6529, '2023-07-01 22:39:12', 'test', '2023-07-01 22:39:12', 'test', 'ifManager', '172.25.112.1', '调用成功', 1, '21ms', 'test');
+INSERT INTO `log` VALUES (6530, '2023-07-01 22:39:12', 'test', '2023-07-01 22:39:12', 'test', 'getUserInfo', '172.25.112.1', '调用成功', 1, '8ms', 'test');
+INSERT INTO `log` VALUES (6531, '2023-07-01 22:39:12', 'test', '2023-07-01 22:39:12', 'test', 'getExamEntry', '172.25.112.1', '调用成功', 1, '2ms', 'test');
+INSERT INTO `log` VALUES (6532, '2023-07-01 22:39:18', 'test', '2023-07-01 22:39:18', 'test', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '3ms', 'test');
+INSERT INTO `log` VALUES (6533, '2023-07-01 22:39:18', 'test', '2023-07-01 22:39:18', 'test', 'getUserEntry', '172.25.112.1', '调用成功', 1, '2ms', 'test');
+INSERT INTO `log` VALUES (6534, '2023-07-01 22:39:18', 'test', '2023-07-01 22:39:18', 'test', 'getExamEntry', '172.25.112.1', '调用成功', 1, '1ms', 'test');
+INSERT INTO `log` VALUES (6535, '2023-07-01 22:45:53', 'test', '2023-07-01 22:45:53', 'test', 'getUserEntry', '172.25.112.1', '调用成功', 1, '1ms', 'test');
+INSERT INTO `log` VALUES (6536, '2023-07-01 22:45:53', 'test', '2023-07-01 22:45:53', 'test', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '3ms', 'test');
+INSERT INTO `log` VALUES (6537, '2023-07-01 22:45:53', 'test', '2023-07-01 22:45:53', 'test', 'getExamEntry', '172.25.112.1', '调用成功', 1, '2ms', 'test');
+INSERT INTO `log` VALUES (6538, '2023-07-01 22:45:58', 'test', '2023-07-01 22:45:58', 'test', 'getStandardAnswerBOByExamDetailId', '172.25.112.1', '调用成功', 1, '3ms', 'test');
+INSERT INTO `log` VALUES (6539, '2023-07-01 22:45:59', 'test', '2023-07-01 22:45:59', 'test', 'getUser', '172.25.112.1', '调用成功', 1, '1ms', 'test');
+INSERT INTO `log` VALUES (6540, '2023-07-01 22:45:59', 'test', '2023-07-01 22:45:59', 'test', 'getUserEntry', '172.25.112.1', '调用成功', 1, '2ms', 'test');
+INSERT INTO `log` VALUES (6541, '2023-07-01 22:45:59', 'test', '2023-07-01 22:45:59', 'test', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '11ms', 'test');
+INSERT INTO `log` VALUES (6542, '2023-07-01 22:45:59', 'test', '2023-07-01 22:45:59', 'test', 'ifManager', '172.25.112.1', '调用成功', 1, '7ms', 'test');
+INSERT INTO `log` VALUES (6543, '2023-07-01 22:45:59', 'test', '2023-07-01 22:45:59', 'test', 'ifAdmin', '172.25.112.1', '调用成功', 1, '6ms', 'test');
+INSERT INTO `log` VALUES (6544, '2023-07-01 22:45:59', 'test', '2023-07-01 22:45:59', 'test', 'getUserInfo', '172.25.112.1', '调用成功', 1, '10ms', 'test');
+INSERT INTO `log` VALUES (6545, '2023-07-01 22:45:59', 'test', '2023-07-01 22:45:59', 'test', 'getExamEntry', '172.25.112.1', '调用成功', 1, '1ms', 'test');
+INSERT INTO `log` VALUES (6546, '2023-07-01 22:46:00', 'test', '2023-07-01 22:46:00', 'test', 'getStandardAnswerBOByExamDetailId', '172.25.112.1', '调用成功', 1, '1ms', 'test');
+INSERT INTO `log` VALUES (6547, '2023-07-01 22:46:02', 'test', '2023-07-01 22:46:02', 'test', 'getUser', '172.25.112.1', '调用成功', 1, '7ms', 'test');
+INSERT INTO `log` VALUES (6548, '2023-07-01 22:46:02', 'test', '2023-07-01 22:46:02', 'test', 'getUserEntry', '172.25.112.1', '调用成功', 1, '7ms', 'test');
+INSERT INTO `log` VALUES (6549, '2023-07-01 22:46:02', 'test', '2023-07-01 22:46:02', 'test', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '9ms', 'test');
+INSERT INTO `log` VALUES (6550, '2023-07-01 22:46:02', 'test', '2023-07-01 22:46:02', 'test', 'ifAdmin', '172.25.112.1', '调用成功', 1, '16ms', 'test');
+INSERT INTO `log` VALUES (6551, '2023-07-01 22:46:02', 'test', '2023-07-01 22:46:02', 'test', 'ifManager', '172.25.112.1', '调用成功', 1, '19ms', 'test');
+INSERT INTO `log` VALUES (6552, '2023-07-01 22:46:02', 'test', '2023-07-01 22:46:02', 'test', 'getUserInfo', '172.25.112.1', '调用成功', 1, '23ms', 'test');
+INSERT INTO `log` VALUES (6553, '2023-07-01 22:46:02', 'test', '2023-07-01 22:46:02', 'test', 'getExamEntry', '172.25.112.1', '调用成功', 1, '3ms', 'test');
+INSERT INTO `log` VALUES (6554, '2023-07-01 22:46:13', 'test', '2023-07-01 22:46:13', 'test', 'getUserEntry', '172.25.112.1', '调用成功', 1, '1ms', 'test');
+INSERT INTO `log` VALUES (6555, '2023-07-01 22:46:13', 'test', '2023-07-01 22:46:13', 'test', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '2ms', 'test');
+INSERT INTO `log` VALUES (6556, '2023-07-01 22:46:13', 'test', '2023-07-01 22:46:13', 'test', 'getExamEntry', '172.25.112.1', '调用成功', 1, '0ms', 'test');
+INSERT INTO `log` VALUES (6557, '2023-07-01 22:46:46', 'test', '2023-07-01 22:46:46', 'test', 'getUserEntry', '172.25.112.1', '调用成功', 1, '1ms', 'test');
+INSERT INTO `log` VALUES (6558, '2023-07-01 22:46:46', 'test', '2023-07-01 22:46:46', 'test', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '4ms', 'test');
+INSERT INTO `log` VALUES (6559, '2023-07-01 22:46:46', 'test', '2023-07-01 22:46:46', 'test', 'getExamEntry', '172.25.112.1', '调用成功', 1, '0ms', 'test');
+INSERT INTO `log` VALUES (6560, '2023-07-01 22:46:47', 'test', '2023-07-01 22:46:47', 'test', 'getStandardAnswerBOByExamDetailId', '172.25.112.1', '调用成功', 1, '2ms', 'test');
+INSERT INTO `log` VALUES (6561, '2023-07-01 22:46:47', 'test', '2023-07-01 22:46:47', 'test', 'judgeComplete', '172.25.112.1', '调用成功', 1, '2ms', 'test');
+INSERT INTO `log` VALUES (6562, '2023-07-01 22:46:49', 'test', '2023-07-01 22:46:49', 'test', 'getUser', '172.25.112.1', '调用成功', 1, '2ms', 'test');
+INSERT INTO `log` VALUES (6563, '2023-07-01 22:46:49', 'test', '2023-07-01 22:46:49', 'test', 'getUserEntry', '172.25.112.1', '调用成功', 1, '2ms', 'test');
+INSERT INTO `log` VALUES (6564, '2023-07-01 22:46:49', 'test', '2023-07-01 22:46:49', 'test', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '16ms', 'test');
+INSERT INTO `log` VALUES (6565, '2023-07-01 22:46:49', 'test', '2023-07-01 22:46:49', 'test', 'ifManager', '172.25.112.1', '调用成功', 1, '6ms', 'test');
+INSERT INTO `log` VALUES (6566, '2023-07-01 22:46:49', 'test', '2023-07-01 22:46:49', 'test', 'ifAdmin', '172.25.112.1', '调用成功', 1, '6ms', 'test');
+INSERT INTO `log` VALUES (6567, '2023-07-01 22:46:49', 'test', '2023-07-01 22:46:49', 'test', 'getUserInfo', '172.25.112.1', '调用成功', 1, '8ms', 'test');
+INSERT INTO `log` VALUES (6568, '2023-07-01 22:46:49', 'test', '2023-07-01 22:46:49', 'test', 'getExamEntry', '172.25.112.1', '调用成功', 1, '1ms', 'test');
+INSERT INTO `log` VALUES (6569, '2023-07-01 22:46:58', 'test', '2023-07-01 22:46:58', 'test', 'getUserEntry', '172.25.112.1', '调用成功', 1, '2ms', 'test');
+INSERT INTO `log` VALUES (6570, '2023-07-01 22:46:58', 'test', '2023-07-01 22:46:58', 'test', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '5ms', 'test');
+INSERT INTO `log` VALUES (6571, '2023-07-01 22:46:58', 'test', '2023-07-01 22:46:58', 'test', 'getExamEntry', '172.25.112.1', '调用成功', 1, '1ms', 'test');
+INSERT INTO `log` VALUES (6572, '2023-07-01 22:47:33', 'test', '2023-07-01 22:47:33', 'test', 'getUserEntry', '172.25.112.1', '调用成功', 1, '1ms', 'test');
+INSERT INTO `log` VALUES (6573, '2023-07-01 22:47:33', 'test', '2023-07-01 22:47:33', 'test', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '2ms', 'test');
+INSERT INTO `log` VALUES (6574, '2023-07-01 22:47:33', 'test', '2023-07-01 22:47:33', 'test', 'getExamEntry', '172.25.112.1', '调用成功', 1, '0ms', 'test');
+INSERT INTO `log` VALUES (6575, '2023-07-01 22:47:35', 'test', '2023-07-01 22:47:35', 'test', 'judgeComplete', '172.25.112.1', '调用成功', 1, '3ms', 'test');
+INSERT INTO `log` VALUES (6576, '2023-07-01 22:47:35', 'test', '2023-07-01 22:47:35', 'test', 'getStandardAnswerBOByExamDetailId', '172.25.112.1', '调用成功', 1, '2ms', 'test');
+INSERT INTO `log` VALUES (6577, '2023-07-01 22:47:36', 'test', '2023-07-01 22:47:36', 'test', 'getUserEntry', '172.25.112.1', '调用成功', 1, '4ms', 'test');
+INSERT INTO `log` VALUES (6578, '2023-07-01 22:47:36', 'test', '2023-07-01 22:47:36', 'test', 'getUser', '172.25.112.1', '调用成功', 1, '4ms', 'test');
+INSERT INTO `log` VALUES (6579, '2023-07-01 22:47:36', 'test', '2023-07-01 22:47:36', 'test', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '12ms', 'test');
+INSERT INTO `log` VALUES (6580, '2023-07-01 22:47:36', 'test', '2023-07-01 22:47:36', 'test', 'ifAdmin', '172.25.112.1', '调用成功', 1, '6ms', 'test');
+INSERT INTO `log` VALUES (6581, '2023-07-01 22:47:36', 'test', '2023-07-01 22:47:36', 'test', 'ifManager', '172.25.112.1', '调用成功', 1, '6ms', 'test');
+INSERT INTO `log` VALUES (6582, '2023-07-01 22:47:36', 'test', '2023-07-01 22:47:36', 'test', 'getUserInfo', '172.25.112.1', '调用成功', 1, '9ms', 'test');
+INSERT INTO `log` VALUES (6583, '2023-07-01 22:47:36', 'test', '2023-07-01 22:47:36', 'test', 'getExamEntry', '172.25.112.1', '调用成功', 1, '2ms', 'test');
+INSERT INTO `log` VALUES (6584, '2023-07-01 22:47:51', 'test', '2023-07-01 22:47:51', 'test', 'getUserEntry', '172.25.112.1', '调用成功', 1, '3ms', 'test');
+INSERT INTO `log` VALUES (6585, '2023-07-01 22:47:51', 'test', '2023-07-01 22:47:51', 'test', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '7ms', 'test');
+INSERT INTO `log` VALUES (6586, '2023-07-01 22:47:51', 'test', '2023-07-01 22:47:51', 'test', 'getExamEntry', '172.25.112.1', '调用成功', 1, '2ms', 'test');
+INSERT INTO `log` VALUES (6587, '2023-07-01 22:47:52', 'test', '2023-07-01 22:47:52', 'test', 'judgeComplete', '172.25.112.1', '调用成功', 1, '2ms', 'test');
+INSERT INTO `log` VALUES (6588, '2023-07-01 22:47:52', 'test', '2023-07-01 22:47:52', 'test', 'getStandardAnswerBOByExamDetailId', '172.25.112.1', '调用成功', 1, '2ms', 'test');
+INSERT INTO `log` VALUES (6589, '2023-07-01 22:47:54', 'test', '2023-07-01 22:47:54', 'test', 'getUser', '172.25.112.1', '调用成功', 1, '2ms', 'test');
+INSERT INTO `log` VALUES (6590, '2023-07-01 22:47:54', 'test', '2023-07-01 22:47:54', 'test', 'getUserEntry', '172.25.112.1', '调用成功', 1, '2ms', 'test');
+INSERT INTO `log` VALUES (6591, '2023-07-01 22:47:54', 'test', '2023-07-01 22:47:54', 'test', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '14ms', 'test');
+INSERT INTO `log` VALUES (6592, '2023-07-01 22:47:54', 'test', '2023-07-01 22:47:54', 'test', 'ifManager', '172.25.112.1', '调用成功', 1, '7ms', 'test');
+INSERT INTO `log` VALUES (6593, '2023-07-01 22:47:54', 'test', '2023-07-01 22:47:54', 'test', 'ifAdmin', '172.25.112.1', '调用成功', 1, '5ms', 'test');
+INSERT INTO `log` VALUES (6594, '2023-07-01 22:47:54', 'test', '2023-07-01 22:47:54', 'test', 'getUserInfo', '172.25.112.1', '调用成功', 1, '7ms', 'test');
+INSERT INTO `log` VALUES (6595, '2023-07-01 22:47:54', 'test', '2023-07-01 22:47:54', 'test', 'getExamEntry', '172.25.112.1', '调用成功', 1, '3ms', 'test');
+INSERT INTO `log` VALUES (6596, '2023-07-01 22:48:14', 'test', '2023-07-01 22:48:14', 'test', 'getUserEntry', '172.25.112.1', '调用成功', 1, '0ms', 'test');
+INSERT INTO `log` VALUES (6597, '2023-07-01 22:48:14', 'test', '2023-07-01 22:48:14', 'test', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '2ms', 'test');
+INSERT INTO `log` VALUES (6598, '2023-07-01 22:48:14', 'test', '2023-07-01 22:48:14', 'test', 'getExamEntry', '172.25.112.1', '调用成功', 1, '1ms', 'test');
+INSERT INTO `log` VALUES (6599, '2023-07-01 22:49:32', 'test', '2023-07-01 22:49:32', 'test', 'getUserNameByEmail', '172.25.112.1', '调用成功', 1, '2ms', 'test');
+INSERT INTO `log` VALUES (6600, '2023-07-01 22:49:34', 'test', '2023-07-01 22:49:34', 'test', 'getUser', '172.25.112.1', '调用成功', 1, '1ms', 'test');
+INSERT INTO `log` VALUES (6601, '2023-07-01 22:49:34', 'test', '2023-07-01 22:49:34', 'test', 'getUserInfo', '172.25.112.1', '调用成功', 1, '2ms', 'test');
+INSERT INTO `log` VALUES (6602, '2023-07-01 22:49:36', 'test', '2023-07-01 22:49:36', 'test', 'ifManager', '172.25.112.1', '调用成功', 1, '2ms', 'test');
+INSERT INTO `log` VALUES (6603, '2023-07-01 22:49:36', 'test', '2023-07-01 22:49:36', 'test', 'ifAdmin', '172.25.112.1', '调用成功', 1, '2ms', 'test');
+INSERT INTO `log` VALUES (6604, '2023-07-01 22:49:38', 'test', '2023-07-01 22:49:38', 'test', 'getUserEntry', '172.25.112.1', '调用成功', 1, '1ms', 'test');
+INSERT INTO `log` VALUES (6605, '2023-07-01 22:49:38', 'test', '2023-07-01 22:49:38', 'test', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '6ms', 'test');
+INSERT INTO `log` VALUES (6606, '2023-07-01 22:49:38', 'test', '2023-07-01 22:49:38', 'test', 'getExamEntry', '172.25.112.1', '调用成功', 1, '2ms', 'test');
+INSERT INTO `log` VALUES (6607, '2023-07-01 22:49:41', 'test', '2023-07-01 22:49:41', 'test', 'judgeComplete', '172.25.112.1', '调用成功', 1, '1ms', 'test');
+INSERT INTO `log` VALUES (6608, '2023-07-01 22:49:41', 'test', '2023-07-01 22:49:41', 'test', 'getStandardAnswerBOByExamDetailId', '172.25.112.1', '调用成功', 1, '2ms', 'test');
+INSERT INTO `log` VALUES (6609, '2023-07-01 22:49:42', 'test', '2023-07-01 22:49:42', 'test', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '6ms', 'test');
+INSERT INTO `log` VALUES (6610, '2023-07-01 22:49:42', 'test', '2023-07-01 22:49:42', 'test', 'getUser', '172.25.112.1', '调用成功', 1, '13ms', 'test');
+INSERT INTO `log` VALUES (6611, '2023-07-01 22:49:42', 'test', '2023-07-01 22:49:42', 'test', 'ifAdmin', '172.25.112.1', '调用成功', 1, '2ms', 'test');
+INSERT INTO `log` VALUES (6612, '2023-07-01 22:49:42', 'test', '2023-07-01 22:49:42', 'test', 'getUserInfo', '172.25.112.1', '调用成功', 1, '3ms', 'test');
+INSERT INTO `log` VALUES (6613, '2023-07-01 22:49:42', 'test', '2023-07-01 22:49:42', 'test', 'getUserEntry', '172.25.112.1', '调用成功', 1, '14ms', 'test');
+INSERT INTO `log` VALUES (6614, '2023-07-01 22:49:42', 'test', '2023-07-01 22:49:42', 'test', 'ifManager', '172.25.112.1', '调用成功', 1, '9ms', 'test');
+INSERT INTO `log` VALUES (6615, '2023-07-01 22:49:42', 'test', '2023-07-01 22:49:42', 'test', 'getExamEntry', '172.25.112.1', '调用成功', 1, '2ms', 'test');
+INSERT INTO `log` VALUES (6616, '2023-07-01 22:49:51', 'tpc', '2023-07-01 22:49:51', 'tpc', 'getUserNameByEmail', '172.25.112.1', '调用成功', 1, '2ms', 'tpc');
+INSERT INTO `log` VALUES (6617, '2023-07-01 22:49:55', 'tpc', '2023-07-01 22:49:55', 'tpc', 'getUser', '172.25.112.1', '调用成功', 1, '2ms', 'tpc');
+INSERT INTO `log` VALUES (6618, '2023-07-01 22:49:55', 'tpc', '2023-07-01 22:49:55', 'tpc', 'getUserInfo', '172.25.112.1', '调用成功', 1, '9ms', 'tpc');
+INSERT INTO `log` VALUES (6619, '2023-07-01 22:49:56', 'tpc', '2023-07-01 22:49:56', 'tpc', 'ifAdmin', '172.25.112.1', '调用成功', 1, '5ms', 'tpc');
+INSERT INTO `log` VALUES (6620, '2023-07-01 22:49:56', 'tpc', '2023-07-01 22:49:56', 'tpc', 'ifManager', '172.25.112.1', '调用成功', 1, '3ms', 'tpc');
+INSERT INTO `log` VALUES (6621, '2023-07-01 22:49:59', 'tpc', '2023-07-01 22:49:59', 'tpc', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '3ms', 'tpc');
+INSERT INTO `log` VALUES (6622, '2023-07-01 22:49:59', 'tpc', '2023-07-01 22:49:59', 'tpc', 'getExamEntries', '172.25.112.1', '调用成功', 1, '3ms', 'tpc');
+INSERT INTO `log` VALUES (6623, '2023-07-01 22:49:59', 'tpc', '2023-07-01 22:49:59', 'tpc', 'getRemainNumber', '172.25.112.1', '调用成功', 1, '2ms', 'tpc');
+INSERT INTO `log` VALUES (6624, '2023-07-01 22:49:59', 'tpc', '2023-07-01 22:49:59', 'tpc', 'getCacheRemainNumber', '172.25.112.1', '调用成功', 1, '7ms', 'tpc');
+INSERT INTO `log` VALUES (6625, '2023-07-01 22:49:59', 'tpc', '2023-07-01 22:49:59', 'tpc', 'getRemainNumber', '172.25.112.1', '调用成功', 1, '3ms', 'tpc');
+INSERT INTO `log` VALUES (6626, '2023-07-01 22:50:00', 'tpc', '2023-07-01 22:50:00', 'tpc', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '4ms', 'tpc');
+INSERT INTO `log` VALUES (6627, '2023-07-01 22:50:13', 'tpc', '2023-07-01 22:50:13', 'tpc', 'createExamEntry', '172.25.112.1', '调用成功', 1, '24ms', 'tpc');
+INSERT INTO `log` VALUES (6628, '2023-07-01 22:50:13', 'tpc', '2023-07-01 22:50:13', 'tpc', 'createStandardAnswer', '172.25.112.1', '调用成功', 1, '70ms', 'tpc');
+INSERT INTO `log` VALUES (6629, '2023-07-01 22:50:14', 'tpc', '2023-07-01 22:50:14', 'tpc', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '6ms', 'tpc');
+INSERT INTO `log` VALUES (6630, '2023-07-01 22:50:14', 'tpc', '2023-07-01 22:50:14', 'tpc', 'getExamEntries', '172.25.112.1', '调用成功', 1, '6ms', 'tpc');
+INSERT INTO `log` VALUES (6631, '2023-07-01 22:50:14', 'tpc', '2023-07-01 22:50:14', 'tpc', 'getCacheRemainNumber', '172.25.112.1', '调用成功', 1, '6ms', 'tpc');
+INSERT INTO `log` VALUES (6632, '2023-07-01 22:50:14', 'tpc', '2023-07-01 22:50:14', 'tpc', 'getRemainNumber', '172.25.112.1', '调用成功', 1, '3ms', 'tpc');
+INSERT INTO `log` VALUES (6633, '2023-07-01 22:50:14', 'tpc', '2023-07-01 22:50:14', 'tpc', 'getRemainNumber', '172.25.112.1', '调用成功', 1, '2ms', 'tpc');
+INSERT INTO `log` VALUES (6634, '2023-07-01 22:50:14', 'tpc', '2023-07-01 22:50:14', 'tpc', 'getRemainNumber', '172.25.112.1', '调用成功', 1, '3ms', 'tpc');
+INSERT INTO `log` VALUES (6635, '2023-07-01 22:50:53', 'test', '2023-07-01 22:50:53', 'test', 'getUserNameByEmail', '172.25.112.1', '调用成功', 1, '1ms', 'test');
+INSERT INTO `log` VALUES (6636, '2023-07-01 22:50:54', 'test', '2023-07-01 22:50:54', 'test', 'getUser', '172.25.112.1', '调用成功', 1, '1ms', 'test');
+INSERT INTO `log` VALUES (6637, '2023-07-01 22:50:54', 'test', '2023-07-01 22:50:54', 'test', 'getUserInfo', '172.25.112.1', '调用成功', 1, '5ms', 'test');
+INSERT INTO `log` VALUES (6638, '2023-07-01 22:50:57', 'test', '2023-07-01 22:50:57', 'test', 'getExamEntries', '172.25.112.1', '调用成功', 1, '4ms', 'test');
+INSERT INTO `log` VALUES (6639, '2023-07-01 22:50:57', 'test', '2023-07-01 22:50:57', 'test', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '4ms', 'test');
+INSERT INTO `log` VALUES (6640, '2023-07-01 22:50:57', 'test', '2023-07-01 22:50:57', 'test', 'getRemainNumber', '172.25.112.1', '调用成功', 1, '2ms', 'test');
+INSERT INTO `log` VALUES (6641, '2023-07-01 22:50:57', 'test', '2023-07-01 22:50:57', 'test', 'getRemainNumber', '172.25.112.1', '调用成功', 1, '1ms', 'test');
+INSERT INTO `log` VALUES (6642, '2023-07-01 22:50:57', 'test', '2023-07-01 22:50:57', 'test', 'getCacheRemainNumber', '172.25.112.1', '调用成功', 1, '3ms', 'test');
+INSERT INTO `log` VALUES (6643, '2023-07-01 22:51:00', 'test', '2023-07-01 22:51:00', 'test', 'getUserEntry', '172.25.112.1', '调用成功', 1, '1ms', 'test');
+INSERT INTO `log` VALUES (6644, '2023-07-01 22:51:02', 'test', '2023-07-01 22:51:02', 'test', 'getUserInfo', '172.25.112.1', '调用成功', 1, '4ms', 'test');
+INSERT INTO `log` VALUES (6645, '2023-07-01 22:51:03', 'test', '2023-07-01 22:51:03', 'test', 'getRemainNumber', '172.25.112.1', '调用成功', 1, '2ms', 'test');
+INSERT INTO `log` VALUES (6646, '2023-07-01 22:51:03', 'test', '2023-07-01 22:51:03', 'test', 'createUserEntryByCas', '172.25.112.1', '调用成功', 1, '26ms', 'test');
+INSERT INTO `log` VALUES (6647, '2023-07-01 22:51:04', 'test', '2023-07-01 22:51:04', 'test', 'createMyBill', '172.25.112.1', '用户已经生成过该订单', 1, '6ms', 'test');
+INSERT INTO `log` VALUES (6648, '2023-07-01 22:51:06', 'test', '2023-07-01 22:51:06', 'test', 'ifAdmin', '172.25.112.1', '调用成功', 1, '3ms', 'test');
+INSERT INTO `log` VALUES (6649, '2023-07-01 22:51:06', 'test', '2023-07-01 22:51:06', 'test', 'ifManager', '172.25.112.1', '调用成功', 1, '3ms', 'test');
+INSERT INTO `log` VALUES (6650, '2023-07-01 22:51:07', 'test', '2023-07-01 22:51:07', 'test', 'getUserEntry', '172.25.112.1', '调用成功', 1, '2ms', 'test');
+INSERT INTO `log` VALUES (6651, '2023-07-01 22:51:07', 'test', '2023-07-01 22:51:07', 'test', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '4ms', 'test');
+INSERT INTO `log` VALUES (6652, '2023-07-01 22:51:07', 'test', '2023-07-01 22:51:07', 'test', 'getExamEntry', '172.25.112.1', '调用成功', 1, '1ms', 'test');
+INSERT INTO `log` VALUES (6653, '2023-07-01 22:51:21', 'test', '2023-07-01 22:51:21', 'test', 'getMyBillByUserId', '172.25.112.1', '调用成功', 1, '1ms', 'test');
+INSERT INTO `log` VALUES (6654, '2023-07-01 22:51:22', 'test', '2023-07-01 22:51:22', 'test', 'getUserEntry', '172.25.112.1', '调用成功', 1, '3ms', 'test');
+INSERT INTO `log` VALUES (6655, '2023-07-01 22:51:22', 'test', '2023-07-01 22:51:22', 'test', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '4ms', 'test');
+INSERT INTO `log` VALUES (6656, '2023-07-01 22:51:22', 'test', '2023-07-01 22:51:22', 'test', 'getExamEntry', '172.25.112.1', '调用成功', 1, '2ms', 'test');
+INSERT INTO `log` VALUES (6657, '2023-07-01 22:51:23', 'test', '2023-07-01 22:51:23', 'test', 'getUserEntry', '172.25.112.1', '调用成功', 1, '9ms', 'test');
+INSERT INTO `log` VALUES (6658, '2023-07-01 22:51:23', 'test', '2023-07-01 22:51:23', 'test', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '11ms', 'test');
+INSERT INTO `log` VALUES (6659, '2023-07-01 22:51:23', 'test', '2023-07-01 22:51:23', 'test', 'getExamEntry', '172.25.112.1', '调用成功', 1, '2ms', 'test');
+INSERT INTO `log` VALUES (6660, '2023-07-01 22:51:25', 'test', '2023-07-01 22:51:25', 'test', 'judgeComplete', '172.25.112.1', '调用成功', 1, '2ms', 'test');
+INSERT INTO `log` VALUES (6661, '2023-07-01 22:51:25', 'test', '2023-07-01 22:51:25', 'test', 'getStandardAnswerBOByExamDetailId', '172.25.112.1', '调用成功', 1, '4ms', 'test');
+INSERT INTO `log` VALUES (6662, '2023-07-01 22:51:27', 'test', '2023-07-01 22:51:27', 'test', 'ifManager', '172.25.112.1', '调用成功', 1, '22ms', 'test');
+INSERT INTO `log` VALUES (6663, '2023-07-01 22:51:27', 'test', '2023-07-01 22:51:27', 'test', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '22ms', 'test');
+INSERT INTO `log` VALUES (6664, '2023-07-01 22:51:27', 'test', '2023-07-01 22:51:27', 'test', 'ifAdmin', '172.25.112.1', '调用成功', 1, '22ms', 'test');
+INSERT INTO `log` VALUES (6665, '2023-07-01 22:51:27', 'test', '2023-07-01 22:51:27', 'test', 'getUser', '172.25.112.1', '调用成功', 1, '43ms', 'test');
+INSERT INTO `log` VALUES (6666, '2023-07-01 22:51:27', 'test', '2023-07-01 22:51:27', 'test', 'getUserEntry', '172.25.112.1', '调用成功', 1, '47ms', 'test');
+INSERT INTO `log` VALUES (6667, '2023-07-01 22:51:27', 'test', '2023-07-01 22:51:27', 'test', 'getUserInfo', '172.25.112.1', '调用成功', 1, '9ms', 'test');
+INSERT INTO `log` VALUES (6668, '2023-07-01 22:51:27', 'test', '2023-07-01 22:51:27', 'test', 'getExamEntry', '172.25.112.1', '调用成功', 1, '1ms', 'test');
+INSERT INTO `log` VALUES (6669, '2023-07-01 22:52:13', 'test', '2023-07-01 22:52:13', 'test', 'getUserSubByUserId', '172.25.112.1', '调用成功', 1, '63ms', 'test');
+INSERT INTO `log` VALUES (6670, '2023-07-01 22:52:13', 'test', '2023-07-01 22:52:13', 'test', 'getChannel', '172.25.112.1', '调用成功', 1, '117ms', 'test');
+INSERT INTO `log` VALUES (6671, '2023-07-01 22:52:13', 'test', '2023-07-01 22:52:13', 'test', 'getMessageByCondition', '172.25.112.1', '调用成功', 1, '32ms', 'test');
+INSERT INTO `log` VALUES (6672, '2023-07-01 22:52:14', 'test', '2023-07-01 22:52:14', 'test', 'getMyBillByUserId', '172.25.112.1', '调用成功', 1, '1ms', 'test');
+INSERT INTO `log` VALUES (6673, '2023-07-01 22:52:16', 'test', '2023-07-01 22:52:16', 'test', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '2ms', 'test');
+INSERT INTO `log` VALUES (6674, '2023-07-01 22:52:16', 'test', '2023-07-01 22:52:16', 'test', 'getExamEntries', '172.25.112.1', '调用成功', 1, '3ms', 'test');
+INSERT INTO `log` VALUES (6675, '2023-07-01 22:52:16', 'test', '2023-07-01 22:52:16', 'test', 'getRemainNumber', '172.25.112.1', '调用成功', 1, '1ms', 'test');
+INSERT INTO `log` VALUES (6676, '2023-07-01 22:52:16', 'test', '2023-07-01 22:52:16', 'test', 'getCacheRemainNumber', '172.25.112.1', '调用成功', 1, '2ms', 'test');
+INSERT INTO `log` VALUES (6677, '2023-07-01 22:52:18', 'test', '2023-07-01 22:52:18', 'test', 'getExamEntries', '172.25.112.1', '调用成功', 1, '4ms', 'test');
+INSERT INTO `log` VALUES (6678, '2023-07-01 22:52:18', 'test', '2023-07-01 22:52:18', 'test', 'getUser', '172.25.112.1', '调用成功', 1, '2ms', 'test');
+INSERT INTO `log` VALUES (6679, '2023-07-01 22:52:18', 'test', '2023-07-01 22:52:18', 'test', 'getAllExamDetail', '172.25.112.1', '调用成功', 1, '5ms', 'test');
+INSERT INTO `log` VALUES (6680, '2023-07-01 22:52:18', 'test', '2023-07-01 22:52:18', 'test', 'getUserInfo', '172.25.112.1', '调用成功', 1, '4ms', 'test');
+INSERT INTO `log` VALUES (6681, '2023-07-01 22:52:18', 'test', '2023-07-01 22:52:18', 'test', 'getRemainNumber', '172.25.112.1', '调用成功', 1, '4ms', 'test');
+INSERT INTO `log` VALUES (6682, '2023-07-01 22:52:18', 'test', '2023-07-01 22:52:18', 'test', 'getCacheRemainNumber', '172.25.112.1', '调用成功', 1, '5ms', 'test');
+INSERT INTO `log` VALUES (6683, '2023-07-01 22:52:24', 'test', '2023-07-01 22:52:24', 'test', 'ifAdmin', '172.25.112.1', '调用成功', 1, '3ms', 'test');
+INSERT INTO `log` VALUES (6684, '2023-07-01 22:52:24', 'test', '2023-07-01 22:52:24', 'test', 'ifManager', '172.25.112.1', '调用成功', 1, '3ms', 'test');
+INSERT INTO `log` VALUES (6685, '2023-07-01 22:52:25', 'test', '2023-07-01 22:52:25', 'test', 'getUserInfo', '172.25.112.1', '调用成功', 1, '4ms', 'test');
+INSERT INTO `log` VALUES (6686, '2023-07-01 22:52:38', 'test', '2023-07-01 22:52:38', 'test', 'getUser', '172.25.112.1', '调用成功', 1, '2ms', 'test');
+INSERT INTO `log` VALUES (6687, '2023-07-01 22:52:38', 'test', '2023-07-01 22:52:38', 'test', 'ifManager', '172.25.112.1', '调用成功', 1, '1ms', 'test');
+INSERT INTO `log` VALUES (6688, '2023-07-01 22:52:38', 'test', '2023-07-01 22:52:38', 'test', 'getUserInfo', '172.25.112.1', '调用成功', 1, '4ms', 'test');
+INSERT INTO `log` VALUES (6689, '2023-07-01 22:52:38', 'test', '2023-07-01 22:52:38', 'test', 'ifAdmin', '172.25.112.1', '调用成功', 1, '4ms', 'test');
+INSERT INTO `log` VALUES (6690, '2023-07-01 22:52:38', 'test', '2023-07-01 22:52:38', 'test', 'getUserInfo', '172.25.112.1', '调用成功', 1, '4ms', 'test');
 
 -- ----------------------------
 -- Table structure for major
@@ -6597,12 +7116,11 @@ CREATE TABLE `my_bill`  (
   `exam_description` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '考试描述',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `state_index`(`my_state`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 8 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of my_bill
 -- ----------------------------
-INSERT INTO `my_bill` VALUES (6, '202306031721598378076010012024', '202010231640241316026910022020', '202010291618393222725510032020', 200, b'00000000000000000000000000000001', '2023-07-01 21:43:08', 'zxp', '英语四六级考试');
 
 -- ----------------------------
 -- Table structure for role
@@ -6639,14 +7157,15 @@ CREATE TABLE `standard_answer`  (
   `answer2` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `answer3` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `answer_path` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `answer_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `examId_index`(`exam_detail_id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 13 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 19 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of standard_answer
 -- ----------------------------
-INSERT INTO `standard_answer` VALUES (12, '202010311930230864211510032020', 'ABCDAABCDAABCDAABCDAABCDA', '$$', '$$', NULL);
+INSERT INTO `standard_answer` VALUES (18, '202010181505285583262110032020', '$$$$$$$$$$$$$$$$$$$$$$$$$', '$$', '$$', NULL, NULL);
 
 -- ----------------------------
 -- Table structure for student_answer
@@ -6673,7 +7192,6 @@ CREATE TABLE `student_answer`  (
 -- ----------------------------
 -- Records of student_answer
 -- ----------------------------
-INSERT INTO `student_answer` VALUES (8, '202010311930230864211510032020', 'AA$A$B$AAA$$$$$$$$$$$$$$$', 'xx', 'xx', 'null', 'nulltest', b'00000000000000000000000000000001', b'00000000000000000000000000000001', b'00000000000000000000000000000001', b'00000000000000000000000000000001', '202306031721598378076010012024', 52);
 
 -- ----------------------------
 -- Table structure for user
@@ -6720,12 +7238,11 @@ CREATE TABLE `user_exam_entry`  (
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `user_exam_entry_index`(`exam_entry_id`, `user_id`) USING BTREE,
   INDEX `user_exam_entry_id_index`(`user_exam_entry_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of user_exam_entry
 -- ----------------------------
-INSERT INTO `user_exam_entry` VALUES (3, '2023-07-01 21:47:40', 'test', '2023-07-01 21:47:40', 'test', '202307012145303249825310082023', '202307012147400564158710122023', '202306031721598378076010012024');
 
 -- ----------------------------
 -- Table structure for user_exam_entry_record

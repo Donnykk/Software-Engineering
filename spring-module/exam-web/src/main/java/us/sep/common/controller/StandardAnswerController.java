@@ -66,22 +66,6 @@ public class StandardAnswerController {
         return new Result<>(true, CommonResultCode.SUCCESS.getCode(), CommonResultCode.SUCCESS.getMessage(),standardAnswerService.changeAnswer(standardAnswerRequest));
     }
 
-    @DeleteMapping
-    @PreAuthorize("hasAnyRole('ROLE_MANAGER','ROLE_ADMIN')")
-    @Log(loggerName = LoggerName.WEB_DIGEST)
-    public Result<StandardAnswerBO> deleteByExamDetailId(String examDetailId , HttpServletRequest httpServletRequest)
-    {
-        return new Result<>(true, CommonResultCode.SUCCESS.getCode(), CommonResultCode.SUCCESS.getMessage(),standardAnswerService.deleteByExamDetailId(examDetailId));
-    }
-
-    @DeleteMapping("/real")
-    @PreAuthorize("hasAnyRole('ROLE_MANAGER','ROLE_ADMIN')")
-    @Log(loggerName = LoggerName.WEB_DIGEST)
-    public Result<StandardAnswerBO> realDeleteByExamDetailId(String examDetailId , HttpServletRequest httpServletRequest)
-    {
-        return new Result<>(true, CommonResultCode.SUCCESS.getCode(), CommonResultCode.SUCCESS.getMessage(),standardAnswerService.realDeleteByExamDetailId(examDetailId));
-    }
-
     @AvoidRepeatableCommit
     @PostMapping("/photo")
     @PreAuthorize("hasAnyRole('ROLE_USER','ROLE_MANAGER','ROLE_ADMIN')")
@@ -128,6 +112,22 @@ public class StandardAnswerController {
             }
         }
 
-        return new Result<>(true, CommonResultCode.SUCCESS.getCode(), CommonResultCode.SUCCESS.getMessage(), standardAnswerService.updateAnswerPath(examDetailId, t_path));
+        return new Result<>(true, CommonResultCode.SUCCESS.getCode(), CommonResultCode.SUCCESS.getMessage(), standardAnswerService.updateAnswerPath(examDetailId, t_path, multipartFile.getOriginalFilename()));
+    }
+
+    @DeleteMapping
+    @PreAuthorize("hasAnyRole('ROLE_MANAGER','ROLE_ADMIN')")
+    @Log(loggerName = LoggerName.WEB_DIGEST)
+    public Result<StandardAnswerBO> deleteByExamDetailId(String examDetailId , HttpServletRequest httpServletRequest)
+    {
+        return new Result<>(true, CommonResultCode.SUCCESS.getCode(), CommonResultCode.SUCCESS.getMessage(),standardAnswerService.deleteByExamDetailId(examDetailId));
+    }
+
+    @DeleteMapping("/real")
+    @PreAuthorize("hasAnyRole('ROLE_MANAGER','ROLE_ADMIN')")
+    @Log(loggerName = LoggerName.WEB_DIGEST)
+    public Result<StandardAnswerBO> realDeleteByExamDetailId(String examDetailId , HttpServletRequest httpServletRequest)
+    {
+        return new Result<>(true, CommonResultCode.SUCCESS.getCode(), CommonResultCode.SUCCESS.getMessage(),standardAnswerService.realDeleteByExamDetailId(examDetailId));
     }
 }

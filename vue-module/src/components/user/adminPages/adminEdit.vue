@@ -60,7 +60,7 @@
             ><el-button
             @click="uploadExamDialog = true"
             size="small"
-          >上传照片</el-button
+          >上传试卷</el-button
           >
           </div>
         </template>
@@ -99,7 +99,7 @@
           style="margin-left: 10px"
           size="small"
           type="success"
-        >上传照片</el-button
+        >上传文件</el-button
         >
         <div slot="tip" class="el-upload__tip">
           只能上传jpg/png文件，且不超过1MB
@@ -269,7 +269,7 @@ export default {
             subDate: that.newData,
             answerSheet: response.data.data.answer1,
             text: 'test',
-            path: 'test',
+            path: response.data.data.answerPath,
           };
           that.ifShowMessage = true;
           that.ifMain = false;
@@ -371,7 +371,7 @@ export default {
         .then(
           axios.spread(function (infoResponse) {
             that.$message({
-              message: "上传照片成功",
+              message: "上传试卷成功",
               type: "success",
             });
             that.reload();

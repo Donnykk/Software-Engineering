@@ -23,4 +23,6 @@ public class StandardAnswerRequest {
     private String answer3;
 
     private String answerPath;
+
+    private String answerName;
 }

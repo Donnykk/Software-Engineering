@@ -49,7 +49,7 @@
     <div style="overflow: hidden;">
       <div style="float: left; width: 50%;">
         <div style="height: 1600px;overflow-y: scroll;">
-          <img :src="test" alt=""/>
+          <img :src="require('../../../assets/answers/' + test)" alt=""/>
         </div>
       </div>
       <div style="float: right; width: 50%">
@@ -135,7 +135,7 @@ export default {
     return {
       // 我的测试，-----------------------------------------------------\
       html_top_imgUrl: html_top_imgUrl,
-      test: test,
+      test: null,
       active: 0,
       step: 0,
       questions: [
@@ -272,7 +272,8 @@ export default {
       string_answers3: 'null',
       examDetailId: '',
       userId: '',
-      //testList: [require('../../../assets/answers/2022_12.jpg'), require('../../../assets/answers/22.jpg')]
+      //testList: [require('../../../assets/answers/2022_12.jpg'), require('../../../assets/answers/22.jpg')],
+      //x: 0,
     }
   },
   computed: {
@@ -288,16 +289,12 @@ export default {
   mounted: function () {
     this.examDetailId = this.$route.params.examDetailId
     this.userId = this.$route.params.userId
-    //this.test = this.$route.params.test
+    this.test = this.$route.params.test
     var that = this
   },
   methods: {
     // LHA’s test 分页时handlePageChange(page)
     prev () {
-      this.$message({
-        message: this.test,
-        type: "success",
-      });
       if (this.active == 0) {
         this.active = 0
       } else {

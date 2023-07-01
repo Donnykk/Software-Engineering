@@ -66,135 +66,143 @@
 </template>
 <!--personalStartExam-->
 <script>
-import axios from "axios";
-import { mapState, mapActions } from "vuex";
-import { MessageBox } from 'element-ui';
+import axios from 'axios'
+import { mapState, mapActions } from 'vuex'
+import { MessageBox } from 'element-ui'
 // import router from '@/router';
 export default {
-  inject: ["reload"],
-  name: "personalStartExam",
-  data() {
+  inject: ['reload'],
+  name: 'personalStartExam',
+  data () {
     return {
       loading: false,
-      //归档表
+      // 归档表
       fileList: [],
-      //考试信息表
+      // 考试信息表
       examList: [],
-      //初始页
+      // 初始页
       currentPage: 1,
-      //每页的数据
+      // 每页的数据
       pagesize: 10,
-      //数组总数
+      // 数组总数
       pageTotal: 0,
-      //归档总表
+      // 归档总表
       allFileList: [],
-      //用户报名归档表
+      // 用户报名归档表
       userFileList: [],
-      //缴费状态
+      // 缴费状态
       myState: 0,
-      //考试状态
+      // 考试状态
       examState: 0,
-    };
+      myBillList: [],
+    }
   },
   computed: {
     ...mapState({
       print: (state) => state.print.all,
-      userId: (state) => state.userId.all,
-    }),
+      userId: (state) => state.userId.all
+    })
   },
   mounted: function () {
-    this.getRegistrationList();
-    var that = this;
+    this.getRegistrationList()
+    var that = this
     setTimeout(function () {
-      that.getLocation();
-    }, 300);
+      that.getLocation()
+    }, 300)
   },
   methods: {
     startExam: function (row) {
       // 在这里处理开始考试按钮的点击事件
-      var that = this;
+      var that = this
       MessageBox.confirm('确定开始考试吗？', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
-        type: 'warning',
+        type: 'warning'
       }).then(() => {
         // 用户点击了确定按钮，执行页面跳转的操作
-        // router.push('/usercenter/personalDoExam');
-        //this.$router.push({ name: 'personalDoExam', params: { examId: row.examID,userId:this.userId.userId } });
+        // this.router.push('/usercenter/personalDoExam');
+        // this.$router.push({ name: 'personalDoExam', params: { examId: row.examID,userId:this.userId.userId } });
         axios
           .all([
             axios({
               headers: { Authorization: that.print.Authorization },
-              method: "get",
-              url: "/api/myBill/judge?pageNum&pageSize=100000&userId=" +
-                row.userId + "&examDetailId=" +
-                row.examID,
-            }),
+              method: 'get',
+              url: '/api/studentAnswer/state?userId=' +
+                row.userId + '&examDetailId=' +
+                row.examID
+            })
+          ])
+          .then(axios.spread(function (responseState) {
+            that.examState = responseState.data.data
+            if (that.examState === 2) {
+              MessageBox.alert('该堂考试已结束！', '考试已结束').then(() => {
+                that.$router.push({ name: 'usercenter' })
+              })
+            }
             axios({
               headers: { Authorization: that.print.Authorization },
               method: "get",
-              url: "/api/studentAnswer/state?userId=" +
-                row.userId + "&examDetailId=" +
-                row.examID,
-            }),
-          ])
-          .then(axios.spread(function (response, responseState) {
-            that.myState = response.data.data.myState;
-            if (!that.myState) {
-              MessageBox.alert('您还没有为该堂考试缴费，请缴费后考试！', '缴费未完成').then(() => {
-                that.$router.push({ name: "usercenter" });
-              });
-            }
-            else {
-              that.examState = responseState.data.data;
-              if (that.examState === 2){
-                MessageBox.alert('该堂考试已结束！', '考试已结束').then(() => {
-                  that.$router.push({ name: "usercenter" });
-                });
+              url:
+                "/api/myBill?pageNum&pageSize=100000&userId=" +
+                row.userId,
+            }).then(function (responseBill) {
+              that.myBillList = responseBill.data.data;
+              if (that.myBillList.length !== 0) {
+                for (let i = 0; i < that.myBillList.length; i++) {
+                  if (that.myBillList[i].myState === true)
+                  {
+                    break;
+                  }
+                  else {
+                    MessageBox.alert('还没有缴费，请缴费后再考试！', '未缴费').then(() => {
+                      that.$router.push({ name: 'usercenter' })
+                    })
+                  }
+                }
               }
-            }
-          }),)
+            })
+          }))
         axios({
           headers: { Authorization: that.print.Authorization },
           method: 'get',
-          url: '/api/standardAnswer?examDetailId=' + row.examID,
+          url: '/api/standardAnswer?examDetailId=' + row.examID
         }).then(function (response) {
-          that.$router.push({ name: 'personalDoExam' , params: { examDetailId: row.examID, userId: row.userId, test: response.data.data.answerPath} });
+          that.$router.push({ name: 'personalDoExam', params: { examDetailId: row.examID, userId: row.userId, test: response.data.data.answerName} })
         })
       }).catch(() => {
         // 用户点击了取消按钮，什么都不做
-      });
+      })
     },
-    //获取还在报名的考试信息
+    // 获取还在报名的考试信息
     getRegistrationList: function () {
-      var that = this;
-      this.loading = true;
+      var that = this
+      this.loading = true
       axios
         .all([
-          //报名表
+          // 报名表
           axios({
             headers: { Authorization: this.print.Authorization },
-            method: "get",
-            url: "/api/userExamEntry/user?userId=" + this.userId.userId,
+            method: 'get',
+            url: '/api/userExamEntry/user?userId=' + this.userId.userId
           }),
-          //考试信息表
+          // 考试信息表
           axios({
             headers: { Authorization: this.print.Authorization },
-            method: "get",
-            url: "/api/examDetail",
-          }),
+            method: 'get',
+            url: '/api/examDetail'
+          })
         ])
         .then(
           axios.spread(function (fileResponse, examResponse) {
-            that.fileList = fileResponse.data.data;
-            that.examList = examResponse.data.data;
-            that.pageTotal = fileResponse.data.data.length;
-            var _that = that;
+            that.fileList = fileResponse.data.data
+            that.examList = examResponse.data.data
+            that.pageTotal = fileResponse.data.data.length
+            var _that = that
             that.fileList.forEach((item) => {
               axios({
                 headers: { Authorization: that.print.Authorization },
-                method: "get",
-                url: "/api/examEntry?examEntryId=" + item.examEntryId,
+                method: 'get',
+                url: '/api/examEntry?examEntryId=' + item.examEntryId
               }).then(function (reponse) {
                 for (var i = 0; i < _that.examList.length; i++) {
                   if (
@@ -203,71 +211,71 @@ export default {
                   ) {
                     _that.$set(
                       item,
-                      "examID",
+                      'examID',
                       _that.examList[i].examDetailId
-                    );
+                    )
                     _that.$set(
                       item,
-                      "examDescription",
+                      'examDescription',
                       _that.examList[i].examDescription
-                    );
+                    )
                     _that.$set(
                       item,
-                      "examStartTime",
+                      'examStartTime',
                       _that.examList[i].examStartTime
-                    );
+                    )
                     _that.$set(
                       item,
-                      "examEndTime",
+                      'examEndTime',
                       _that.examList[i].examEndTime
-                    );
+                    )
                     _that.$set(
                       item,
-                      "examLocation",
+                      'examLocation',
                       _that.examList[i].examLocation
-                    );
+                    )
                   }
                 }
-              });
-            });
-            that.loading = false;
+              })
+            })
+            that.loading = false
           })
-        );
+        )
     },
 
     handleCurrentChange: function (currentPage) {
-      this.currentPage = currentPage;
+      this.currentPage = currentPage
     },
 
     getLocation: function () {
-      var that = this;
+      var that = this
       axios({
         headers: { Authorization: this.print.Authorization },
-        method: "get",
-        url: "/api/examLocation/user?userId=" + this.userId.userId,
+        method: 'get',
+        url: '/api/examLocation/user?userId=' + this.userId.userId
       }).then(
         function (response) {
           response.data.data.forEach((item) => {
             for (var i = 0; i < that.fileList.length; i++) {
               if (item.userExamEntryId == that.fileList[i].userExamEntryId) {
-                that.$set(that.fileList[i], "location", item.location);
+                that.$set(that.fileList[i], 'location', item.location)
                 that.$set(
                   // that.fileList[i],
                   // "examLocationId",
                   // item.examLocationId
-                );
+                )
               }
             }
-          });
-          that.loading = false;
+          })
+          that.loading = false
         },
         function (errpr) {
           that.fileList.forEach((item) => {
-            that.$set(item, "location", "未安排座位");
-          });
+            that.$set(item, 'location', '未安排座位')
+          })
         }
-      );
-    },
-  },
-};
+      )
+    }
+  }
+}
 </script>

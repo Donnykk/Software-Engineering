@@ -81,9 +81,9 @@ export default {
           }),
         ])
         .then(
-          axios.spread((reponseBill) => {
+          axios.spread((responseBill) => {
             // 上面两个请求都完成后，才执行这个回调方法
-            that.myBillList = reponseBill.data.data;
+            that.myBillList = responseBill.data.data;
             if (that.myBillList.length !== 0) {
               for (let i = 0; i < that.myBillList.length; i++) {
                 that.billList.push(that.myBillList[i]);

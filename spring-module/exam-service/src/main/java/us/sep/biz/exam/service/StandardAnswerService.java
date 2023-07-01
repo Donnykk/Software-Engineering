@@ -21,5 +21,5 @@ public interface StandardAnswerService {
 
     StandardAnswerBO realDeleteByExamDetailId(String examDetailId);
 
-    StandardAnswerBO updateAnswerPath(String examDetailId, String answerPath);
+    StandardAnswerBO updateAnswerPath(String examDetailId, String answerPath, String answerName);
 }

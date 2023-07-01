@@ -33,8 +33,12 @@ public class StandardAnswerDO {
     @Column()
     private String answerPath;
 
+    @Column()
+    private String answerName;
+
     public StandardAnswerBO ToStandardAnswerBO(){
         return StandardAnswerBO.builder().examDetailId(examDetailId).answer1(answer1)
-                .answer2(answer2).answer3(answer3).answerPath(answerPath).build();
+                .answer2(answer2).answer3(answer3).answerPath(answerPath)
+                .answerName(answerName).build();
     }
 }
