@@ -124,6 +124,32 @@ app.use(async (ctx, next) => {
   ctx.set('Access-Control-Allow-Credentials', 'true'); // 允许凭证
   await next();
 });
+router.get('/api/user/:userId', async (ctx) => {
+  try {
+    const userId = ctx.params.userId;
+
+    // 连接到MySQL数据库
+    const connection = await mysql.createConnection({
+      host: 'localhost',
+      user: 'root',
+      password: 'Top50761',
+      database: 'test-sql'
+    });
+
+    // 执行查询语句获取用户信息
+    const sql = 'SELECT * FROM users WHERE id = ?';
+    const [rows] = await connection.execute(sql, [userId]);
+
+    connection.end();
+
+    ctx.body = { data: rows };
+  } catch (error) {
+    console.error(error);
+    ctx.status = 500;
+    ctx.body = { error: 'Internal server error' };
+  }
+});
+
 const bodyParser = require('koa-bodyparser');
 
 app.use(bodyParser()); // 使用中间件解析请求体
