@@ -174,6 +174,32 @@ router.post('/api/user', async (ctx) => {
     ctx.body = { error: 'Internal server error' };
   }
 });
+router.put('/api/user/:userId', async (ctx) => {
+  try {
+    const userId = ctx.params.userId;
+    const { name, email } = ctx.request.body;
+
+    // 连接到MySQL数据库
+    const connection = await mysql.createConnection({
+      host: 'localhost',
+      user: 'root',
+      password: 'Top50761',
+      database: 'test-sql'
+    });
+
+    // 更新用户信息
+    const sql = 'UPDATE users SET name = ?, email = ? WHERE id = ?';
+    await connection.execute(sql, [name, email, userId]);
+
+    connection.end();
+
+    ctx.body = { message: 'User updated successfully' };
+  } catch (error) {
+    console.error(error);
+    ctx.status = 500;
+    ctx.body = { error: 'Internal server error' };
+  }
+});
 
 const bodyParser = require('koa-bodyparser');
 
