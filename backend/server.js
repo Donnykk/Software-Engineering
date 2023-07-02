@@ -149,6 +149,31 @@ router.get('/api/user/:userId', async (ctx) => {
     ctx.body = { error: 'Internal server error' };
   }
 });
+router.post('/api/user', async (ctx) => {
+  try {
+    const { name, email } = ctx.request.body;
+
+    // 连接到MySQL数据库
+    const connection = await mysql.createConnection({
+      host: 'localhost',
+      user: 'root',
+      password: 'Top50761',
+      database: 'test-sql'
+    });
+
+    // 将新用户插入到数据库
+    const sql = 'INSERT INTO users (name, email) VALUES (?, ?)';
+    await connection.execute(sql, [name, email]);
+
+    connection.end();
+
+    ctx.body = { message: 'User created successfully' };
+  } catch (error) {
+    console.error(error);
+    ctx.status = 500;
+    ctx.body = { error: 'Internal server error' };
+  }
+});
 
 const bodyParser = require('koa-bodyparser');
 
