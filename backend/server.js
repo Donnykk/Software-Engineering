@@ -225,6 +225,54 @@ router.delete('/api/user/:userId', async (ctx) => {
     ctx.body = { error: 'Internal server error' };
   }
 });
+router.get('/api/users', async (ctx) => {
+  try {
+    // 连接到MySQL数据库
+    const connection = await mysql.createConnection({
+      host: 'localhost',
+      user: 'root',
+      password: 'Top50761',
+      database: 'test-sql'
+    });
+
+    // 执行查询语句获取所有用户信息
+    const sql = 'SELECT * FROM users';
+    const [rows] = await connection.execute(sql);
+
+    connection.end();
+
+    ctx.body = { data: rows };
+  } catch (error) {
+    console.error(error);
+    ctx.status = 500;
+    ctx.body = { error: 'Internal server error' };
+  }
+});
+router.get('/api/article/:articleId', async (ctx) => {
+  try {
+    const articleId = ctx.params.articleId;
+
+    // 连接到MySQL数据库
+    const connection = await mysql.createConnection({
+      host: 'localhost',
+      user: 'root',
+      password: 'Top50761',
+      database: 'test-sql'
+    });
+
+    // 执行查询语句获取文章信息
+    const sql = 'SELECT * FROM articles WHERE id = ?';
+    const [rows] = await connection.execute(sql, [articleId]);
+
+    connection.end();
+
+    ctx.body = { data: rows };
+  } catch (error) {
+    console.error(error);
+    ctx.status = 500;
+    ctx.body = { error: 'Internal server error' };
+  }
+});
 
 const bodyParser = require('koa-bodyparser');
 
