@@ -63,6 +63,32 @@ router.post('/api/submit', async (ctx) => {
     ctx.body = { error: 'Internal server error' };
     }
 });
+
+router.get('/api/teacher/getexam', async (ctx) => {
+  try {
+      // 连接到MySQL数据库
+      const connection = await mysql.createConnection({
+      host: 'localhost', // 修改为你的数据库主机名
+      user: 'root', // 修改为你的数据库用户名
+      password: 'Top50761', // 修改为你的数据库密码
+      database: 'test-sql' // 修改为你的数据库名称
+  });
+
+  // 执行查询语句获取考题内容
+  sql = 'SELECT * FROM exam_type_detail'
+  const rows = await connection.execute(sql);
+
+  console.log(sql);
+
+  connection.end(); // 关闭数据库连接
+
+  ctx.body = { data: rows }; // 将查询结果作为JSON响应发送给前端
+  } catch (error) {
+  console.error(error);
+  ctx.status = 500;
+  ctx.body = { error: 'Internal server error' };
+  }
+});
 app.use(router.routes());
 
 
