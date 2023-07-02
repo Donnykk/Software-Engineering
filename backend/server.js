@@ -273,6 +273,57 @@ router.get('/api/article/:articleId', async (ctx) => {
     ctx.body = { error: 'Internal server error' };
   }
 });
+router.post('/api/article', async (ctx) => {
+  try {
+    const { title, content } = ctx.request.body;
+
+    // 连接到MySQL数据库
+    const connection = await mysql.createConnection({
+      host: 'localhost',
+      user: 'root',
+      password: 'Top50761',
+      database: 'test-sql'
+    });
+
+    // 将新文章插入到数据库
+    const sql = 'INSERT INTO articles (title, content) VALUES (?, ?)';
+    await connection.execute(sql, [title, content]);
+
+    connection.end();
+
+    ctx.body = { message: 'Article created successfully' };
+  } catch (error) {
+    console.error(error);
+    ctx.status = 500;
+    ctx.body = { error: 'Internal server error' };
+  }
+});
+router.put('/api/article/:articleId', async (ctx) => {
+  try {
+    const articleId = ctx.params.articleId;
+    const { title, content } = ctx.request.body;
+
+    // 连接到MySQL数据库
+    const connection = await mysql.createConnection({
+      host: 'localhost',
+      user: 'root',
+      password: 'Top50761',
+      database: 'test-sql'
+    });
+
+    // 更新文章信息
+    const sql = 'UPDATE articles SET title = ?, content = ? WHERE id = ?';
+    await connection.execute(sql, [title, content, articleId]);
+
+    connection.end();
+
+    ctx.body = { message: 'Article updated successfully' };
+  } catch (error) {
+    console.error(error);
+    ctx.status = 500;
+    ctx.body = { error: 'Internal server error' };
+  }
+});
 
 const bodyParser = require('koa-bodyparser');
 
