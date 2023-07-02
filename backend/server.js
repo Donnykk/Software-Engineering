@@ -89,6 +89,34 @@ router.get('/api/teacher/getexam', async (ctx) => {
   ctx.body = { error: 'Internal server error' };
   }
 });
+
+router.get('/api/teacher/getstuexam/:examId', async (ctx) => {
+  try {
+      const examId = ctx.params.examId;
+      console.log('Received examId:', examId);
+      // 连接到MySQL数据库
+      const connection = await mysql.createConnection({
+      host: 'localhost', // 修改为你的数据库主机名
+      user: 'root', // 修改为你的数据库用户名
+      password: 'Top50761', // 修改为你的数据库密码
+      database: 'test-sql' // 修改为你的数据库名称
+  });
+  // 执行查询语句获取考题内容
+  sql='SELECT * FROM user_info NATURAL JOIN a_stuanswer WHERE user_info.user_id=a_stuanswer.user_id and exam_entry_id = ?'
+  // sql = 'SELECT * FROM a_stuanswer where exam_entry_id = ?';
+  const rows = await connection.execute(sql,[examId]);
+
+  console.log(sql);
+  // console.log(rows);
+  connection.end(); // 关闭数据库连接
+
+  ctx.body = { data: rows }; // 将查询结果作为JSON响应发送给前端
+  } catch (error) {
+  console.error(error);
+  ctx.status = 500;
+  ctx.body = { error: 'Internal server error' };
+  }
+});
 app.use(async (ctx, next) => {
   ctx.set('Access-Control-Allow-Origin', 'http://localhost:8081');
   ctx.set('Access-Control-Allow-Methods', 'GET, POST');
