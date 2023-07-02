@@ -1,14 +1,25 @@
 <template>
   <div>
-    <el-button @click="dialogFormVisible = true" :disabled="buttonDisabled">详细查询日志</el-button>
-    <el-dialog title="检索条件页面" :visible.sync="dialogFormVisible" v-loading="loading">
+    <el-button @click="dialogFormVisible = true" :disabled="buttonDisabled"
+      >详细查询日志</el-button
+    >
+    <el-dialog
+      title="检索条件页面"
+      :visible.sync="dialogFormVisible"
+      v-loading="loading"
+    >
       <el-form :model="form">
         <el-form-item label="操作用户名" :label-width="formLabelWidth">
           <el-input v-model="form.userName" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="接口名" :label-width="formLabelWidth">
           <el-select v-model="form.operationName" placeholder="请选择接口类型">
-            <el-option v-for="item in apiType" :key="item" :label="item" :value="item">
+            <el-option
+              v-for="item in apiType"
+              :key="item"
+              :label="item"
+              :value="item"
+            >
             </el-option>
           </el-select>
         </el-form-item>
@@ -16,7 +27,10 @@
           <el-input v-model="form.ip" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="调用是否成功" :label-width="formLabelWidth">
-          <el-select v-model="form.ifSuccess" placeholder="请选择是否成功，可空">
+          <el-select
+            v-model="form.ifSuccess"
+            placeholder="请选择是否成功，可空"
+          >
             <el-option lable="不选" value=""></el-option>
             <el-option label="成功" value="Y"></el-option>
             <el-option label="失败" value="N"></el-option>
@@ -27,8 +41,13 @@
         </el-form-item>
         <el-form-item label="创建时间" :label-width="formLabelWidth">
           <div class="block">
-            <el-date-picker v-model="form.createTime" type="date" placeholder="选择日期" format="yyyy 年 MM 月 dd 日"
-              value-format="yyyy-MM-dd">
+            <el-date-picker
+              v-model="form.createTime"
+              type="date"
+              placeholder="选择日期"
+              format="yyyy 年 MM 月 dd 日"
+              value-format="yyyy-MM-dd"
+            >
             </el-date-picker>
           </div>
         </el-form-item>
@@ -40,7 +59,11 @@
     </el-dialog>
 
     <!-- 查看ip归属地dialog -->
-    <el-dialog title="ip归属地" :visible.sync="ipLocationDialog" :v-loading="iploading">
+    <el-dialog
+      title="ip归属地"
+      :visible.sync="ipLocationDialog"
+      :v-loading="iploading"
+    >
       <table width="100%">
         <tr>
           <td width="50%">ip地址</td>
@@ -69,17 +92,55 @@
       </table>
     </el-dialog>
 
-    <el-table :data="log.slice((currentPage - 1) * pagesize, currentPage * pagesize)" style="width: 100%"
-      :row-class-name="tableRowClassName" v-loading="loading" @row-click="getIpLocation">
-      <el-table-column prop="ip" label="ip" width="180" align="center"></el-table-column>
-      <el-table-column prop="name" label="操作者" width="150" align="center"></el-table-column>
-      <el-table-column prop="action" label="请求接口" width="300" align="center"></el-table-column>
-      <el-table-column prop="time" label="请求时间" width="120" align="center"></el-table-column>
-      <el-table-column prop="message" label="请求结果" width="320" align="center"></el-table-column>
+    <el-table
+      :data="log.slice((currentPage - 1) * pagesize, currentPage * pagesize)"
+      style="width: 100%"
+      :row-class-name="tableRowClassName"
+      v-loading="loading"
+      @row-click="getIpLocation"
+    >
+      <el-table-column
+        prop="ip"
+        label="ip"
+        width="180"
+        align="center"
+      ></el-table-column>
+      <el-table-column
+        prop="name"
+        label="操作者"
+        width="150"
+        align="center"
+      ></el-table-column>
+      <el-table-column
+        prop="action"
+        label="请求接口"
+        width="300"
+        align="center"
+      ></el-table-column>
+      <el-table-column
+        prop="time"
+        label="请求时间"
+        width="120"
+        align="center"
+      ></el-table-column>
+      <el-table-column
+        prop="message"
+        label="请求结果"
+        width="320"
+        align="center"
+      ></el-table-column>
     </el-table>
-    <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage"
-      :page-sizes="[10, 20, 30, 40]" :page-size="pagesize" background align="center"
-      layout="total, sizes, prev, pager, next, jumper" :total="pageTotal">
+    <el-pagination
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
+      :current-page="currentPage"
+      :page-sizes="[10, 20, 30, 40]"
+      :page-size="pagesize"
+      background
+      align="center"
+      layout="total, sizes, prev, pager, next, jumper"
+      :total="pageTotal"
+    >
     </el-pagination>
   </div>
 </template>
@@ -254,23 +315,18 @@ export default {
 .el-table .invalid-row {
   background: rgba(247, 101, 101, 0.3);
 }
-
 .el-table .success-row {
   background: rgb(255, 255, 255);
 }
-
 .el-table .miss-row {
   background: rgba(245, 245, 129, 0.2);
 }
-
 .el-table .syserror-row {
   background: rgba(172, 86, 108, 0.3);
 }
-
 .el-table .error-row {
   background: rgba(245, 151, 97, 0.3);
 }
-
 .el-table .new-user {
   background: rgba(148, 160, 238, 0.3);
 }

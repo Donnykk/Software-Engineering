@@ -1,33 +1,84 @@
 <template>
   <div>
-    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd">
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <nav
+      class="navbar navbar-expand-lg navbar-light"
+      style="background-color: #e3f2fd"
+    >
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
         <span class="navbar-toggler-icon"></span>
       </button>
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <router-link class="nav-link" to="/homepage" id="navbarDropdown" role="button" data-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="false">
+            <router-link
+              class="nav-link"
+              to="/homepage"
+              id="navbarDropdown"
+              role="button"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
               主页
             </router-link>
+          </li>
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link"
+              href="#"
+              id="navbarDropdown"
+              role="button"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              其他
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <router-link class="dropdown-item" to="htmlUseInfo"
+                >网站使用须知</router-link
+              >
+            </div>
           </li>
         </ul>
       </div>
     </nav>
 
     <div class="container">
-      <el-form :model="loginForm" ref="loginForm" class="demo-ruleForm" :rules="rule">
+      <el-form
+        :model="loginForm"
+        ref="loginForm"
+        class="demo-ruleForm"
+        :rules="rule"
+      >
         <div class="form-group">
-          <el-form-item prop="username">账号
-            <el-input type="text" v-model="loginForm.username" placeholder="请输入用户名或邮箱" /></el-form-item>
+          <el-form-item prop="username"
+            >账号
+            <el-input
+              type="text"
+              v-model="loginForm.username"
+              placeholder="请输入用户名或邮箱"
+          /></el-form-item>
         </div>
         <div class="form-group">
-          <el-form-item prop="password">密码
-            <el-input type="password" v-model="loginForm.password" placeholder="请输入密码" @keyup.enter="visible = !visible"
-              show-password /></el-form-item>
+          <el-form-item prop="password"
+            >密码
+            <el-input
+              type="password"
+              v-model="loginForm.password"
+              placeholder="请输入密码"
+              @keyup.enter="visible = !visible"
+              show-password
+          /></el-form-item>
         </div>
         <div class="form-group">
           <el-checkbox v-model="loginForm.rememberMe">记住我</el-checkbox>
@@ -36,18 +87,42 @@
         <br />
         <div class="form-group">
           <el-form-item>
-            <el-button type="primary" v-popover:popover @click="visible = !visible">登陆</el-button>
-            <el-button class="btn btn-primary" v-popover:popover @click="returnHistory">返回</el-button>
-            <el-button type="warning" v-popover:popover @click="emailDialog = true">找回密码</el-button>
+            <el-button
+              type="primary"
+              v-popover:popover
+              @click="visible = !visible"
+              >登陆</el-button
+            >
+            <el-button
+              class="btn btn-primary"
+              v-popover:popover
+              @click="returnHistory"
+              >返回</el-button
+            >
+            <el-button
+              type="warning"
+              v-popover:popover
+              @click="emailDialog = true"
+              >找回密码</el-button
+            >
           </el-form-item>
         </div>
       </el-form>
     </div>
 
     <el-dialog title="找回密码" :visible.sync="emailDialog" width="40%">
-      <el-form :model="getPassForm" ref="getPassForm" :rules="rule" label-width="70px" :inline="true">
+      <el-form
+        :model="getPassForm"
+        ref="getPassForm"
+        :rules="rule"
+        label-width="70px"
+        :inline="true"
+      >
         <el-form-item prop="email" label="邮箱">
-          <el-input v-model="getPassForm.email" placeholder="请输入账号注册邮箱"></el-input>
+          <el-input
+            v-model="getPassForm.email"
+            placeholder="请输入账号注册邮箱"
+          ></el-input>
         </el-form-item>
         <el-form-item>
           <el-button @click="sendEmail('getPassForm')" :disabled="isDisabled">{{
@@ -55,7 +130,14 @@
           }}</el-button>
         </el-form-item>
       </el-form>
-      <el-form :model="getPassForm" ref="getPassForm" :rules="rule" label-width="70px" :inline="true" v-if="ifGetCode">
+      <el-form
+        :model="getPassForm"
+        ref="getPassForm"
+        :rules="rule"
+        label-width="70px"
+        :inline="true"
+        v-if="ifGetCode"
+      >
         <el-form-item label="验证码">
           <el-input v-model="getPassForm.verifyCode"></el-input>
         </el-form-item>
@@ -63,9 +145,20 @@
           <el-button @click="checkVerifyCode">验证邮箱</el-button>
         </el-form-item>
       </el-form>
-      <el-form :model="getPassForm" ref="getPassForm" :rules="rule" label-width="70px" :inline="true" v-if="ifRightCode">
+      <el-form
+        :model="getPassForm"
+        ref="getPassForm"
+        :rules="rule"
+        label-width="70px"
+        :inline="true"
+        v-if="ifRightCode"
+      >
         <el-form-item prop="password" label="密码">
-          <el-input type="password" v-model="getPassForm.password" show-password></el-input>
+          <el-input
+            type="password"
+            v-model="getPassForm.password"
+            show-password
+          ></el-input>
         </el-form-item>
         <el-form-item>
           <el-button @click="updatePassword('getPassForm')">修改密码</el-button>
@@ -74,7 +167,13 @@
     </el-dialog>
 
     <!--验证码弹窗-->
-    <el-popover popper-class="slidingPictures" placement="bottom" ref="popover" trigger="manual" v-model="visible">
+    <el-popover
+      popper-class="slidingPictures"
+      placement="bottom"
+      ref="popover"
+      trigger="manual"
+      v-model="visible"
+    >
       <div class="sliding-pictures">
         <div class="vimg">
           <canvas id="sliderBlock"></canvas>
@@ -87,7 +186,11 @@
           <div class="button el-icon-menu" @mousedown.prevent="drag"></div>
         </div>
         <div class="operation">
-          <span title="关闭验证码" @click="visible = false" class="el-icon-circle-close">
+          <span
+            title="关闭验证码"
+            @click="visible = false"
+            class="el-icon-circle-close"
+          >
           </span>
           <span title="刷新验证码" @click="canvasInit" class="el-icon-refresh">
           </span>
@@ -484,19 +587,16 @@ export default {
   width: 300px;
   height: 170px;
 }
-
 #codeImg,
 #sliderBlock {
   padding: 7px 7px 0 7px;
   width: inherit;
   height: inherit;
 }
-
 #sliderBlock {
   position: absolute;
   z-index: 4000;
 }
-
 /* dsdsd */
 
 .slider {
@@ -507,7 +607,6 @@ export default {
   align-items: center;
   justify-content: flex-start;
 }
-
 .track {
   margin-left: 7px;
   width: 286px;
@@ -519,12 +618,10 @@ export default {
   padding-right: 15px;
   padding-left: 70px;
 }
-
 .pintuTrue {
   background: #67c23a;
   color: #ffffff;
 }
-
 .button {
   position: absolute;
   width: 50px;
@@ -538,7 +635,6 @@ export default {
   font-size: 28px;
   color: #3e5d8b;
 }
-
 .operation span {
   color: #9fa3ac;
   display: inline-block;

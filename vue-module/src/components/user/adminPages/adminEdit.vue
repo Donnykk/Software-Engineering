@@ -3,21 +3,40 @@
     <br />
     <br />
     <br />
-    <el-table v-if="ifMain" v-loading="loading" :data="messageList.slice((currentPage - 1) * pagesize, currentPage * pagesize)
-      ">
+    <el-table
+      v-if="ifMain"
+      v-loading="loading"
+      :data="
+        messageList.slice((currentPage - 1) * pagesize, currentPage * pagesize)
+      "
+    >
       <el-table-column prop="examDetailId" label="考试id" align="center">
       </el-table-column>
       <el-table-column prop="examDescription" label="考试描述" width="150" align="center">
       </el-table-column>
       <el-table-column fixed="right" label="操作" align="center">
         <template slot-scope="scope">
-          <el-button size="mini" @click="getMessageDetail(scope.row)">查看</el-button>
-          <el-button type="danger" size="mini" @click="deleteMessage(scope.row, scope.$index)">删除</el-button>
+          <el-button size="mini" @click="getMessageDetail(scope.row)"
+          >查看</el-button
+          >
+          <el-button
+            type="danger"
+            size="mini"
+            @click="deleteMessage(scope.row, scope.$index)"
+          >删除</el-button
+          >
         </template>
       </el-table-column>
     </el-table>
-    <el-pagination @current-change="handleCurrentChange" :current-page="currentPage" background align="center"
-      layout="total, prev, pager, next, jumper" :total="pageTotal" v-if="ifMain">
+    <el-pagination
+      @current-change="handleCurrentChange"
+      :current-page="currentPage"
+      background
+      align="center"
+      layout="total, prev, pager, next, jumper"
+      :total="pageTotal"
+      v-if="ifMain"
+    >
     </el-pagination>
 
     <!-- 显示/更新主页内容 -->
@@ -37,8 +56,12 @@
       <el-form-item label="上传文件">
         <template>
           <div>
-            <el-avatar v-image-preview :src="imageUrl" :size="100"></el-avatar><el-button @click="uploadExamDialog = true"
-              size="small">上传试卷</el-button>
+            <el-avatar v-image-preview :src="imageUrl" :size="100"></el-avatar
+            ><el-button
+            @click="uploadExamDialog = true"
+            size="small"
+          >上传试卷</el-button
+          >
           </div>
         </template>
       </el-form-item>
@@ -48,16 +71,36 @@
       <el-form-item>
         <el-button @click="returnMain">返回</el-button>
         <el-button type="primary" @click="beforeUpdate">{{
-          updateButtonName
-        }}</el-button>
-        <el-button type="success" @click="updateMessage" v-if="!ifReadonly">更新</el-button>
+            updateButtonName
+          }}</el-button>
+        <el-button type="success" @click="updateMessage" v-if="!ifReadonly"
+        >更新</el-button
+        >
       </el-form-item>
     </el-form>
     <el-dialog :visible.sync="uploadExamDialog" width="400px">
-      <el-upload class="upload-demo" ref="upload" action="" accept="image/jpeg, image/png" :on-remove="handleRemove"
-        :auto-upload="false" :on-change="uploadImg" list-type="picture" :file-list="fileUpLoadList" :limit="1">
-        <el-button slot="trigger" size="small" type="primary">选取文件</el-button>
-        <el-button @click="uploadExam" style="margin-left: 10px" size="small" type="success">上传文件</el-button>
+      <el-upload
+        class="upload-demo"
+        ref="upload"
+        action=""
+        accept="image/jpeg, image/png"
+        :on-remove="handleRemove"
+        :auto-upload="false"
+        :on-change="uploadImg"
+        list-type="picture"
+        :file-list="fileUpLoadList"
+        :limit="1"
+      >
+        <el-button slot="trigger" size="small" type="primary"
+        >选取文件</el-button
+        >
+        <el-button
+          @click="uploadExam"
+          style="margin-left: 10px"
+          size="small"
+          type="success"
+        >上传文件</el-button
+        >
         <div slot="tip" class="el-upload__tip">
           只能上传jpg/png文件，且不超过1MB
         </div>
@@ -272,7 +315,7 @@ export default {
     updateMessage: function () {
       var that = this;
       axios({
-        headers: { Authorization: that.print.Authorization, },
+        headers: { Authorization: that.print.Authorization,},
         method: "post",
         url: "/api/standardAnswer/change",
         params: {

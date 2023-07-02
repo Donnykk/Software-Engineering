@@ -1,11 +1,22 @@
 <template>
   <div class="container">
-    <el-button type="primary" size="mini" icon="el-icon-plus" @click="majorDialog = true">添加专业</el-button>
-    <el-table v-loading="loading" :data="allMajorClass.slice(
-      (currentPage - 1) * pagesize,
-      currentPage * pagesize
-    )
-      " style="width: 100%">
+    <el-button
+      type="primary"
+      size="mini"
+      icon="el-icon-plus"
+      @click="majorDialog = true"
+      >添加专业</el-button
+    >
+    <el-table
+      v-loading="loading"
+      :data="
+        allMajorClass.slice(
+          (currentPage - 1) * pagesize,
+          currentPage * pagesize
+        )
+      "
+      style="width: 100%"
+    >
       <el-table-column prop="major" label="院系" sortable> </el-table-column>
       <el-table-column prop="discipline" label="专业" sortable>
       </el-table-column>
@@ -14,17 +25,33 @@
       <el-table-column prop="classNumber" label="人数"> </el-table-column>
       <el-table-column fixed="right" label="操作" align="center">
         <template slot-scope="scope">
-          <el-popconfirm confirm-button-text="好的" cancel-button-text="不用了" icon="el-icon-info" icon-color="red"
-            title="确定删除吗？" @onConfirm="deleteMajor(scope.row)">
-            <el-button type="danger" slot="reference" size="small">删除院系</el-button>
+          <el-popconfirm
+            confirm-button-text="好的"
+            cancel-button-text="不用了"
+            icon="el-icon-info"
+            icon-color="red"
+            title="确定删除吗？"
+            @onConfirm="deleteMajor(scope.row)"
+          >
+            <el-button type="danger" slot="reference" size="small"
+              >删除院系</el-button
+            >
           </el-popconfirm>
 
-          <el-button type="danger" @click="deleteClass(scope.row)" size="small">删除班级</el-button>
+          <el-button type="danger" @click="deleteClass(scope.row)" size="small"
+            >删除班级</el-button
+          >
         </template>
       </el-table-column>
     </el-table>
-    <el-pagination @current-change="handleCurrentChange" :current-page="currentPage" background align="center"
-      layout="total, prev, pager, next, jumper" :total="pageTotal">
+    <el-pagination
+      @current-change="handleCurrentChange"
+      :current-page="currentPage"
+      background
+      align="center"
+      layout="total, prev, pager, next, jumper"
+      :total="pageTotal"
+    >
     </el-pagination>
 
     <!-- 添加专业的dialog -->
@@ -34,13 +61,20 @@
           <el-input v-model="majorForm.major" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="专业">
-          <el-input v-model="majorForm.discipline" autocomplete="off"></el-input>
+          <el-input
+            v-model="majorForm.discipline"
+            autocomplete="off"
+          ></el-input>
         </el-form-item>
         <el-form-item label="班级名">
           <el-input v-model="majorForm.className" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="班级人数">
-          <el-input v-model="majorForm.classNumber" autocomplete="off" @keyup.enter.native="addMajor"></el-input>
+          <el-input
+            v-model="majorForm.classNumber"
+            autocomplete="off"
+            @keyup.enter.native="addMajor"
+          ></el-input>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -87,7 +121,7 @@ export default {
   mounted: function () {
     this.getAllClassList();
     var that = this;
-    setTimeout(function () { }, 300);
+    setTimeout(function () {}, 300);
   },
   methods: {
     getAllClassList: function () {

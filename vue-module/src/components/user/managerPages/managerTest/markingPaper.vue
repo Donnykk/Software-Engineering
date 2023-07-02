@@ -1,17 +1,32 @@
 <template>
   <div>
-    <el-table :data="markList.slice((currentPage - 1) * pagesize, currentPage * pagesize)
-      " style="width: 100%" :default-sort="{ prop: 'date', order: 'descending' }" v-loading="loading">
+    <el-table
+      :data="
+        markList.slice((currentPage - 1) * pagesize, currentPage * pagesize)
+      "
+      style="width: 100%"
+      :default-sort="{ prop: 'date', order: 'descending' }"
+      v-loading="loading"
+    >
       <el-table-column prop="examDetailId" label="考试号"> </el-table-column>
       <el-table-column prop="userId" label="考生号"> </el-table-column>\
       <el-table-column fixed="right" label="操作">
         <template slot-scope="scope">
-          <el-button @click="GetMark(scope.row)" size="阅卷">开始阅卷</el-button>
+          <el-button @click="GetMark(scope.row)" size="阅卷"
+          >开始阅卷</el-button
+          >
         </template>
       </el-table-column>
     </el-table>
-    <el-pagination align="center" @current-change="handleCurrentChange" :current-page="currentPage" :page-size="pagesize"
-      background layout="total, prev, pager, next, jumper" :total="pageTotal">
+    <el-pagination
+      align="center"
+      @current-change="handleCurrentChange"
+      :current-page="currentPage"
+      :page-size="pagesize"
+      background
+      layout="total, prev, pager, next, jumper"
+      :total="pageTotal"
+    >
     </el-pagination>
   </div>
 </template>
@@ -19,11 +34,11 @@
 <script>
 import axios from 'axios'
 import { mapState, mapActions } from 'vuex'
-import { MessageBox } from "element-ui";
+import {MessageBox} from "element-ui";
 export default {
   inject: ['reload'],
   name: 'markingPaper',
-  data() {
+  data () {
     return {
       loading: false,
       // 存放用户账单的列表
@@ -122,7 +137,7 @@ export default {
         message: '开始阅卷',
         type: 'info'
       })
-      that.$router.push({ name: 'markingDetail', params: { examDetailId: row.examDetailId, userId: row.userId } })
+      that.$router.push({ name: 'markingDetail' , params: { examDetailId: row.examDetailId, userId: row.userId }})
     }
   }
 }

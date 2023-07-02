@@ -10,6 +10,8 @@ public interface StudentAnswerService {
 
     StudentAnswerBO findAnswer(String examDetailId, String userId);
 
+    List<StudentAnswerBO> findAnswerTotal(String examDetailId);
+
     int markingPaper1(String examDetailId, String userId, String answer1);
 
     int markingPaper2(String examDetailId, String userId, int score);
@@ -21,4 +23,6 @@ public interface StudentAnswerService {
     List<StudentAnswerBO> findAll(int pageNum , int pageSize);
 
     int isComplete(String examDetailId, String userId);
+
+    StudentAnswerBO updateScore(String examDetailId, String userId, int score);
 }

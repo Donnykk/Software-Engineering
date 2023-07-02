@@ -12,34 +12,30 @@
     <div style="overflow: hidden;">
       <div style="float: left; width: 50%;">
         <div style="height: 1600px;overflow-y: scroll;">
-          <p
-            style="font-family: SimSun,Arial, sans-serif; font-size: 16px; font-weight: bold;color: #090000; text-align: justify;">
+          <p style="font-family: SimSun,Arial, sans-serif; font-size: 16px; font-weight: bold;color: #090000; text-align: justify;">
             翻译部分
-          </p>
+          </p >
           <div>
             <textarea v-model="string_answers2" style="width: 100%; height: 200px;"></textarea>
           </div>
-          <p
-            style="font-family: SimSun,Arial, sans-serif; font-size: 16px; font-weight: bold;color: #090000; text-align: justify;">
+          <p style="font-family: SimSun,Arial, sans-serif; font-size: 16px; font-weight: bold;color: #090000; text-align: justify;">
             翻译打分
-          </p>
+          </p >
           <div>
             <textarea v-model="score2" style="width: 100%; height: 50px;"></textarea>
           </div>
         </div>
       </div>
       <div style="float: right; width: 50%">
-        <p
-          style="font-family: SimSun,Arial, sans-serif; font-size: 16px; font-weight: bold;color: #090000; text-align: justify;">
+        <p style="font-family: SimSun,Arial, sans-serif; font-size: 16px; font-weight: bold;color: #090000; text-align: justify;">
           写作部分
-        </p>
+        </p >
         <div>
           <textarea v-model="string_answers3" style="width: 100%; height: 200px;"></textarea>
         </div>
-        <p
-          style="font-family: SimSun,Arial, sans-serif; font-size: 16px; font-weight: bold;color: #090000; text-align: justify;">
+        <p style="font-family: SimSun,Arial, sans-serif; font-size: 16px; font-weight: bold;color: #090000; text-align: justify;">
           写作打分
-        </p>
+        </p >
         <div>
           <textarea v-model="score3" style="width: 100%; height: 50px;"></textarea>
         </div>
@@ -55,7 +51,7 @@ import axios from 'axios'
 export default {
   inject: ['reload'],
   name: 'markingDetail',
-  data() {
+  data () {
     return {
       examDetailId: '',
       userId: '',
@@ -117,7 +113,7 @@ export default {
             params: {
               examDetailId: that.examDetailId
             }
-          }).then(function (response) { })
+          }).then(function (response) {})
         })
         that.$message({
           message: '分数上报成功',
@@ -125,9 +121,9 @@ export default {
         })
         that.$router.push({ name: 'usercenter' })
       },
-        function (err) {
-          that.$message.error('分数上报失败，请重新尝试')
-        })
+      function (err) {
+        that.$message.error('分数上报失败，请重新尝试')
+      })
     }
   }
 }

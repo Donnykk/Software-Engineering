@@ -3,7 +3,14 @@
     <el-container>
       <el-header>
         <el-tabs v-model="activeName" @tab-click="handleClick">
-          <el-tab-pane label="学生信息表" name="managerGetUserInfoList"></el-tab-pane>
+          <el-tab-pane
+            label="学生信息表"
+            name="managerGetUserInfoList"
+          ></el-tab-pane>
+          <el-tab-pane
+            label="专业班级表"
+            name="managerGetUserClassList"
+          ></el-tab-pane>
         </el-tabs>
       </el-header>
 

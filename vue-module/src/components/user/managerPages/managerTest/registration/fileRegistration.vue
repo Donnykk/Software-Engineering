@@ -1,15 +1,47 @@
 <template>
   <div>
-    <el-table :data="fileList.slice((currentPage - 1) * pagesize, currentPage * pagesize)
-      " style="width: 100%" v-loading="loading">
-      <el-table-column prop="examDescription" label="考试名称" align="center"></el-table-column>
-      <el-table-column prop="examLocation" label="考试地点" align="center"></el-table-column>
-      <el-table-column prop="examStartTime" label="开始时间" align="center" sortable></el-table-column>
-      <el-table-column prop="examEndTime" label="结束时间" align="center" sortable></el-table-column>
-      <el-table-column prop="note" label="状态" align="center"></el-table-column>
+    <el-table
+      :data="
+        fileList.slice((currentPage - 1) * pagesize, currentPage * pagesize)
+      "
+      style="width: 100%"
+      v-loading="loading"
+    >
+      <el-table-column
+        prop="examDescription"
+        label="考试名称"
+        align="center"
+      ></el-table-column>
+      <el-table-column
+        prop="examLocation"
+        label="考试地点"
+        align="center"
+      ></el-table-column>
+      <el-table-column
+        prop="examStartTime"
+        label="开始时间"
+        align="center"
+        sortable
+      ></el-table-column>
+      <el-table-column
+        prop="examEndTime"
+        label="结束时间"
+        align="center"
+        sortable
+      ></el-table-column>
+      <el-table-column
+        prop="note"
+        label="状态"
+        align="center"
+      ></el-table-column>
       <el-table-column fixed="right" label="操作" align="center">
         <template slot-scope="scope">
-          <el-button type="info" @click="getRegistrationUserList(scope.row)" size="small">查看报名用户</el-button>
+          <el-button
+            type="info"
+            @click="getRegistrationUserList(scope.row)"
+            size="small"
+            >查看报名用户</el-button
+          >
         </template>
       </el-table-column>
     </el-table>
@@ -19,6 +51,7 @@
         <el-table-column type="index"></el-table-column>
         <el-table-column prop="realName" label="学生姓名"></el-table-column>
         <el-table-column prop="major" label="学生专业"></el-table-column>
+        <el-table-column prop="className" label="学生班级"></el-table-column>
         <el-table-column prop="stuNo" label="学生学号"></el-table-column>
         <el-table-column prop="email" label="联系方式"></el-table-column>
       </el-table>

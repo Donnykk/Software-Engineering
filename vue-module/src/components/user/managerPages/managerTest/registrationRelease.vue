@@ -3,7 +3,10 @@
     <el-container>
       <el-header>
         <el-tabs v-model="activeName" @tab-click="handleClick">
-          <el-tab-pane label="考试报名发布" name="setRegistration"></el-tab-pane>
+          <el-tab-pane
+            label="考试报名发布"
+            name="setRegistration"
+          ></el-tab-pane>
           <el-tab-pane label="考试报名查询" name="getRegistration">
           </el-tab-pane>
           <el-tab-pane label="考试报名归档" name="fileRegistration">

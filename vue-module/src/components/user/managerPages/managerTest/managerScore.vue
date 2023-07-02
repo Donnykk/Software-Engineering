@@ -1,30 +1,72 @@
 <template>
   <div>
-    <el-table :data="fileList.slice((currentPage - 1) * pagesize, currentPage * pagesize)
-      " style="width: 100%" :default-sort="{ prop: 'date', order: 'descending' }" v-loading="loading">
-      <el-table-column prop="examDescription" label="考试名称" align="center"></el-table-column>
-      <el-table-column prop="examLocation" label="考试地点" align="center"></el-table-column>
-      <el-table-column prop="examStartTime" label="开始时间" align="center" sortable></el-table-column>
-      <el-table-column prop="examEndTime" label="结束时间" align="center" sortable></el-table-column>
-      <el-table-column prop="note" label="状态" align="center"></el-table-column>
+    <el-table
+      :data="
+        fileList.slice((currentPage - 1) * pagesize, currentPage * pagesize)
+      "
+      style="width: 100%"
+      :default-sort="{ prop: 'date', order: 'descending' }"
+      v-loading="loading"
+    >
+      <el-table-column
+        prop="examDescription"
+        label="考试名称"
+        align="center"
+      ></el-table-column>
+      <el-table-column
+        prop="examLocation"
+        label="考试地点"
+        align="center"
+      ></el-table-column>
+      <el-table-column
+        prop="examStartTime"
+        label="开始时间"
+        align="center"
+        sortable
+      ></el-table-column>
+      <el-table-column
+        prop="examEndTime"
+        label="结束时间"
+        align="center"
+        sortable
+      ></el-table-column>
+      <el-table-column
+        prop="note"
+        label="状态"
+        align="center"
+      ></el-table-column>
       <el-table-column fixed="right" label="操作" align="center">
         <template slot-scope="scope">
-          <el-button @click="getScore(scope.row)" size="small">查看成绩</el-button>
+          <el-button @click="getScore(scope.row)" size="small"
+            >查看成绩</el-button
+          >
         </template>
       </el-table-column>
     </el-table>
-    <el-pagination align="center" @current-change="handleCurrentChange" :current-page="currentPage" :page-size="pagesize"
-      background layout="total, prev, pager, next, jumper" :total="pageTotal">
+    <el-pagination
+      align="center"
+      @current-change="handleCurrentChange"
+      :current-page="currentPage"
+      :page-size="pagesize"
+      background
+      layout="total, prev, pager, next, jumper"
+      :total="pageTotal"
+    >
     </el-pagination>
 
     <!-- 报名表dialog -->
-    <el-dialog title="报名表" height="500" :visible.sync="userListDialog" v-loading="">
-      <el-button type="primary" size="mini" @click="beforeSetScore">录入成绩</el-button>
-      <el-popconfirm confirm-button-text="好的" cancel-button-text="不用了" icon="el-icon-info" icon-color="red"
-        title="这将删除全部同名考试分数，你确定吗？" @onConfirm="deleteScore">
-        <el-button type="danger" size="mini" slot="reference">删除全部成绩</el-button>
-      </el-popconfirm>
-      <el-button type="success" size="mini" @click="showLegendLine">图例显示</el-button>
+    <el-dialog
+      title="报名表"
+      height="500"
+      :visible.sync="userListDialog"
+      v-loading=""
+    >
+      <el-button type="primary" size="mini" @click="beforeSetScore"
+        >录入成绩</el-button
+      >
+      <el-button type="success" size="mini" @click="showLegendLine"
+        >图例显示</el-button
+      >
       <el-table :data="allReg">
         <el-table-column type="index"></el-table-column>
         <el-table-column prop="realName" label="学生姓名"></el-table-column>
@@ -34,9 +76,12 @@
         <el-table-column prop="examScore" label="成绩"></el-table-column>
         <el-table-column>
           <template slot-scope="scope">
-            <el-button type="primary" icon="el-icon-refresh" @click="updateStuScore(scope.row, scope.$index)"
-              size="mini"></el-button>
-            <el-button type="danger" icon="el-icon-delete" @click="deleteStuScore(scope.row)" size="mini"></el-button>
+            <el-button
+              type="primary"
+              icon="el-icon-refresh"
+              @click="updateStuScore(scope.row, scope.$index)"
+              size="mini"
+            ></el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -49,20 +94,35 @@
           <el-input v-model="oneRegForm.examDetailId"></el-input>
         </el-form-item>
         <el-form-item label="用户id" hidden>
-          <el-input v-model="oneRegForm.userId"></el-input></el-form-item>
-        <el-form-item label="学生姓名"><el-input v-model="oneRegForm.realName" readonly></el-input></el-form-item>
-        <el-form-item label="学生专业"><el-input v-model="oneRegForm.major" readonly></el-input></el-form-item>
-        <el-form-item label="学生班级"><el-input v-model="oneRegForm.className" readonly></el-input></el-form-item>
-        <el-form-item label="学生学号"><el-input v-model="oneRegForm.stuNo" readonly></el-input></el-form-item>
+          <el-input v-model="oneRegForm.userId"></el-input
+        ></el-form-item>
+        <el-form-item label="学生姓名"
+          ><el-input v-model="oneRegForm.realName" readonly></el-input
+        ></el-form-item>
+        <el-form-item label="学生专业"
+          ><el-input v-model="oneRegForm.major" readonly></el-input
+        ></el-form-item>
+        <el-form-item label="学生班级"
+          ><el-input v-model="oneRegForm.className" readonly></el-input
+        ></el-form-item>
+        <el-form-item label="学生学号"
+          ><el-input v-model="oneRegForm.stuNo" readonly></el-input
+        ></el-form-item>
         <el-form-item label="考试分数">
           <el-input v-model.number="examScore"></el-input>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="scoreDialog = false">取 消</el-button>
-        <el-button type="primary" @click="prev" v-if="num > 1">上一个</el-button>
-        <el-button type="primary" @click="next" v-if="num < allReg.length">下一个</el-button>
-        <el-button type="primary" @click="last" v-if="num == allReg.length">完成</el-button>
+        <el-button type="primary" @click="prev" v-if="num > 1"
+          >上一个</el-button
+        >
+        <el-button type="primary" @click="next" v-if="num < allReg.length"
+          >下一个</el-button
+        >
+        <el-button type="primary" @click="last" v-if="num == allReg.length"
+          >完成</el-button
+        >
       </div>
     </el-dialog>
 
@@ -73,16 +133,22 @@
           <el-input v-model="oneRegForm.examDetailId"></el-input>
         </el-form-item>
         <el-form-item label="用户id" hidden>
-          <el-input v-model="oneRegForm.userId"></el-input></el-form-item>
-        <el-form-item label="学生姓名"><el-input v-model="oneRegForm.realName" readonly></el-input></el-form-item>
-        <el-form-item label="学生专业"><el-input v-model="oneRegForm.major" readonly></el-input></el-form-item>
-        <el-form-item label="学生班级"><el-input v-model="oneRegForm.className" readonly></el-input></el-form-item>
-        <el-form-item label="学生学号"><el-input v-model="oneRegForm.stuNo" readonly></el-input></el-form-item>
+          <el-input v-model="oneRegForm.userId"></el-input
+        ></el-form-item>
+        <el-form-item label="学生姓名"
+          ><el-input v-model="oneRegForm.realName" readonly></el-input
+        ></el-form-item>
+        <el-form-item label="学生专业"
+          ><el-input v-model="oneRegForm.major" readonly></el-input
+        ></el-form-item>
+        <el-form-item label="学生班级"
+          ><el-input v-model="oneRegForm.className" readonly></el-input
+        ></el-form-item>
+        <el-form-item label="学生学号"
+          ><el-input v-model="oneRegForm.stuNo" readonly></el-input
+        ></el-form-item>
         <el-form-item label="考试分数">
           <el-input v-model.number="examScore"></el-input>
-        </el-form-item>
-        <el-form-item label="考试分数id" hidden>
-          <el-input v-model="examScoreId"></el-input>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -92,7 +158,11 @@
     </el-dialog>
 
     <!-- 图例dialog -->
-    <el-dialog :visible.sync="legendDataDialog" :before-close="dialogClose" width="640px">
+    <el-dialog
+      :visible.sync="legendDataDialog"
+      :before-close="dialogClose"
+      width="640px"
+    >
       <v-chart :options="legendBar" autoresize theme="light"></v-chart>
     </el-dialog>
   </div>
@@ -173,7 +243,7 @@ export default {
           axios({
             headers: { Authorization: this.print.Authorization },
             method: "get",
-            url: "/api/examEntry/record?pageNum&pageSize",
+            url: "/api/examEntry/all?pageNum&pageSize",
           }),
           //考试信息表
           axios({
@@ -215,90 +285,78 @@ export default {
     },
 
     getScore: function (row) {
-      if (row.note == "考试报名完成") {
-        var that = this;
-        this.examDetailId = row.examDetailId;
-        this.userList = [];
-        axios
-          .all([
-            //获取用户表
-            axios({
-              headers: {
-                Authorization: this.print.Authorization,
-              },
-              method: "get",
-              url: "/api/users?pageNum&pageSize=1000000",
-            }),
-            //获取归档考试报名用户表
-            axios({
-              headers: { Authorization: this.print.Authorization },
-              method: "get",
-              url:
-                "/api/userExamEntry/recordByExam?examEntryId=" +
-                row.examEntryId,
-            }),
-            //获取成绩
-            axios({
-              headers: { Authorization: this.print.Authorization },
-              method: "get",
-              url: "/api/examScore/examDetail?examDetailId=" + row.examDetailId,
-            }),
-          ])
-          .then(
-            axios.spread(function (
-              userResponse,
-              userEntryReponse,
-              scoreResponse
-            ) {
-              that.allUser = userResponse.data.data;
-              that.allReg = userEntryReponse.data.data;
-              that.scoreList = scoreResponse.data.data;
-              that.userListDialog = true;
-              //显示报名人姓名
-              that.allReg.forEach((item) => {
-                for (var i = 0; i < that.allUser.length; i++) {
-                  if (item.userId == that.allUser[i].userId) {
-                    var _that = that;
-                    axios({
-                      headers: { Authorization: that.print.Authorization },
-                      method: "get",
-                      url: "/api/userInfo?username=" + that.allUser[i].userName,
-                    }).then(function (response) {
-                      _that.$set(item, "realName", response.data.data.realName);
-                      _that.$set(item, "major", response.data.data.major);
-                      _that.$set(item, "stuNo", response.data.data.stuNo);
-                      _that.$set(
-                        item,
-                        "className",
-                        response.data.data.className
-                      );
-                    });
-                    i = that.allUser.length;
-                  }
+      var that = this;
+      this.examDetailId = row.examDetailId;
+      this.userList = [];
+      axios
+        .all([
+          //获取用户表
+          axios({
+            headers: {
+              Authorization: this.print.Authorization,
+            },
+            method: "get",
+            url: "/api/users?pageNum&pageSize=1000000",
+          }),
+          //获取归档考试报名用户表
+          axios({
+            headers: {Authorization: this.print.Authorization},
+            method: "get",
+            url:
+              "/api/userExamEntry?examEntryId=" +
+              row.examEntryId,
+          }),
+          //获取成绩
+          axios({
+            headers: {Authorization: this.print.Authorization},
+            method: "get",
+            url: "/api/studentAnswer/detail?examDetailId=" + row.examDetailId,
+          }),
+        ])
+        .then(
+          axios.spread(function (
+            userResponse,
+            userEntryReponse,
+            scoreResponse
+          ) {
+            that.allUser = userResponse.data.data;
+            that.allReg = userEntryReponse.data.data;
+            that.scoreList = scoreResponse.data.data;
+            that.userListDialog = true;
+            //显示报名人姓名
+            that.allReg.forEach((item) => {
+              for (var i = 0; i < that.allUser.length; i++) {
+                if (item.userId == that.allUser[i].userId) {
+                  var _that = that;
+                  axios({
+                    headers: {Authorization: that.print.Authorization},
+                    method: "get",
+                    url: "/api/userInfo?username=" + that.allUser[i].userName,
+                  }).then(function (response) {
+                    _that.$set(item, "realName", response.data.data.realName);
+                    _that.$set(item, "major", response.data.data.major);
+                    _that.$set(item, "stuNo", response.data.data.stuNo);
+                    _that.$set(
+                      item,
+                      "className",
+                      response.data.data.className
+                    );
+                  });
+                  i = that.allUser.length;
                 }
+              }
 
-                if (that.scoreList != null) {
-                  for (var i = 0; i < that.scoreList.length; i++) {
-                    if (item.userId == that.scoreList[i].userId) {
-                      that.$set(item, "examScore", that.scoreList[i].examScore);
-                      that.$set(
-                        item,
-                        "examScoreId",
-                        that.scoreList[i].examScoreId
-                      );
-                      i = that.scoreList.length;
-                    }
+              if (that.scoreList != null) {
+                for (var i = 0; i < that.scoreList.length; i++) {
+                  if (item.userId == that.scoreList[i].userId) {
+                    that.$set(item, "examScore", that.scoreList[i].score);
+                    i = that.scoreList.length;
                   }
                 }
-              });
-            })
-          );
-      } else {
-        this.$message({
-          message: "不是已经完成的报名，无法录入成绩",
-          type: "warning",
-        });
-      }
+              }
+            });
+          })
+        );
     },
 
     beforeSetScore: function () {
@@ -382,12 +440,11 @@ export default {
             "content-type": "application/x-www-form-urlencoded",
           },
           method: "post",
-          url: "/api/examScore",
+          url: "/api/studentAnswer/getScore",
           params: {
             examDetailId: this.oneRegForm.examDetailId,
-            examScore: this.examScore,
             userId: this.oneRegForm.userId,
-            stuNo: this.oneRegForm.stuNo,
+            score: this.examScore,
           },
         }).then(
           function (response) {
@@ -402,61 +459,12 @@ export default {
         );
     },
 
-    deleteScore: function () {
-      var that = this;
-      axios({
-        headers: { Authorization: this.print.Authorization },
-        method: "delete",
-        url: "/api/examScore/examDetail?examDetailId=" + this.examDetailId,
-      }).then(
-        function (response) {
-          that.$message({
-            message: "删除学生成绩成功",
-            type: "success",
-          });
-          that.allReg.forEach((item) => {
-            that.$set(item, "examScore", "");
-          });
-        },
-        function (err) {
-          that.$message.error("删除全部成绩失败");
-        }
-      );
-    },
-
-    deleteStuScore: function (row) {
-      var that = this;
-      console.log(row);
-      axios({
-        headers: { Authorization: this.print.Authorization },
-        method: "delete",
-        url: "/api/examScore?examScoreId=" + row.examScoreId,
-      }).then(
-        function (response) {
-          that.$message({
-            message: "删除学生成绩成功",
-            type: "success",
-          });
-          that.allReg.forEach((item) => {
-            if (item.userId == row.userId) {
-              that.$set(item, "examScore", "");
-              return false;
-            }
-          });
-        },
-        function (err) {
-          that.$message.error("删除学生成绩失败");
-        }
-      );
-    },
-
     updateStuScore: function (row, index) {
       if (typeof row.examScore == "undefined") {
         this.$message.error("没有分数，无法更新");
       } else {
         this.getFormData(index + 1);
         this.examScore = row.examScore;
-        this.examScoreId = row.examScoreId;
         this.scoreDialogSecond = true;
       }
     },
@@ -465,14 +473,12 @@ export default {
       var that = this;
       axios({
         headers: { Authorization: this.print.Authorization },
-        method: "put",
-        url: "/api/examScore",
+        method: "post",
+        url: "/api/studentAnswer/getScore",
         params: {
           examDetailId: this.examDetailId,
-          examScore: this.examScore,
-          examScoreId: this.examScoreId,
           userId: this.oneRegForm.userId,
-          stuNo: this.oneRegForm.stuNo,
+          score: this.examScore,
         },
       }).then(
         function (response) {
@@ -506,7 +512,7 @@ export default {
           data: ["分数"],
         },
         xAxis: {
-          data: ["420以下", "420~500", "500~600", "600以上"],
+          data: ["优秀", "及格", "不及格"],
         },
         yAxis: {},
         //工具栏
@@ -528,10 +534,11 @@ export default {
             name: "分数",
             type: "bar",
             data: [
-              this.allReg.filter((item) => item.examScore >= 600).length,
-              this.allReg.filter((item) => item.examScore >= 500 && item.examScore < 600).length,
-              this.allReg.filter((item) => item.examScore >= 420 && item.examScore < 500).length,
-              this.allReg.filter((item) => item.examScore < 420).length,
+              this.allReg.filter((item) => item.examScore >= 90).length,
+              this.allReg.filter(
+                (item) => item.examScore >= 60 && item.examScore < 90
+              ).length,
+              this.allReg.filter((item) => item.examScore < 60).length,
             ],
           },
         ],
@@ -545,7 +552,7 @@ export default {
           this.legendDataDialog = false;
           this.userListDialog = true;
         })
-        .catch((_) => { });
+        .catch((_) => {});
     },
   },
 };

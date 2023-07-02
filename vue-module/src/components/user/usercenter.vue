@@ -4,7 +4,12 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-3" @mouseenter="showMenu" @mouseleave="hideMenu">
-          <el-menu :default-active="this.$route.path" class="el-menu-vertical-demo" :collapse="isCollapse" router>
+          <el-menu
+            :default-active="this.$route.path"
+            class="el-menu-vertical-demo"
+            :collapse="isCollapse"
+            router
+          >
             <el-menu-item index="/usercenter/personalAccount">
               <i class="el-icon-user"></i>
               <span slot="title">账户信息</span>
@@ -23,26 +28,35 @@
                 <span>个人通知</span>
               </template>
               <el-menu-item-group>
-                <el-menu-item index="/usercenter/personalNotice/examDetailNotice">考试信息通知</el-menu-item>
-                <el-menu-item index="/usercenter/personalNotice/examRegistration">考试报名阅览</el-menu-item>
-                <el-menu-item index="/usercenter/personalNotice/examResultNotice">考试结果通知</el-menu-item>
+                <el-menu-item
+                  index="/usercenter/personalNotice/examDetailNotice"
+                  >考试信息通知</el-menu-item
+                >
+                <el-menu-item
+                  index="/usercenter/personalNotice/examRegistration"
+                  >考试报名阅览</el-menu-item
+                >
+                <el-menu-item
+                  index="/usercenter/personalNotice/examResultNotice"
+                  >考试结果通知</el-menu-item
+                >
               </el-menu-item-group>
             </el-submenu>
             <!-- 教师页面 -->
             <template v-if="teacher">
               <div class="dropdown-divider"></div>
-              <el-menu-item index="/usercenter/managerGetUserInfo">
-                <i class="el-icon-document-copy"></i>
-                <span slot="title">学生信息</span>
-              </el-menu-item>
               <el-submenu index="/usercenter/managerTestType">
                 <template slot="title">
                   <i class="el-icon-edit-outline"></i>
                   <span>考试管理</span>
                 </template>
                 <el-menu-item-group>
-                  <el-menu-item index="/usercenter/managerTestType/managerScore">考试分数管理</el-menu-item>
-                  <el-menu-item index="/usercenter/managerTestType/markingPaper">阅卷查询</el-menu-item>
+                  <el-menu-item index="/usercenter/managerTestType/managerScore"
+                    >考试分数管理</el-menu-item
+                  >
+                  <el-menu-item index="/usercenter/managerTestType/markingPaper"
+                  >阅卷查询</el-menu-item
+                  >
                 </el-menu-item-group>
               </el-submenu>
             </template>
@@ -50,9 +64,21 @@
             <!-- 管理员页面 -->
             <template v-else-if="admin">
               <div class="dropdown-divider"></div>
+              <el-menu-item index="/usercenter/adminHomepage">
+                <i class="el-icon-reading"></i>
+                <span slot="title">主页编辑</span>
+              </el-menu-item>
               <el-menu-item index="/usercenter/adminChangeRole">
                 <i class="el-icon-help"></i>
                 <span slot="title">用户角色</span>
+              </el-menu-item>
+              <el-menu-item index="/usercenter/managerGetUserInfo">
+                <i class="el-icon-document-copy"></i>
+                <span slot="title">用户信息</span>
+              </el-menu-item>
+              <el-menu-item index="/usercenter/adminGetLog">
+                <i class="el-icon-printer"></i>
+                <span slot="title">获取日志</span>
               </el-menu-item>
               <el-menu-item index="/usercenter/adminEdit">
                 <i class="el-icon-printer"></i>
@@ -64,9 +90,16 @@
                   <span>考试管理</span>
                 </template>
                 <el-menu-item-group>
-                  <el-menu-item index="/usercenter/managerTestType/managerExam">考试信息管理</el-menu-item>
-                  <el-menu-item index="/usercenter/managerTestType/registrationRelease">报名发布管理</el-menu-item>
-                  <el-menu-item index="/usercenter/managerTestType/managerScore">考试分数管理</el-menu-item>
+                  <el-menu-item index="/usercenter/managerTestType/managerExam"
+                  >考试信息管理</el-menu-item
+                  >
+                  <el-menu-item
+                    index="/usercenter/managerTestType/registrationRelease"
+                  >报名发布管理</el-menu-item
+                  >
+                  <el-menu-item index="/usercenter/managerTestType/managerScore"
+                  >考试分数管理</el-menu-item
+                  >
                 </el-menu-item-group>
               </el-submenu>
             </template>

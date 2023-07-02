@@ -1,7 +1,12 @@
 <template>
   <div class="container">
-    <el-table :data="examList.slice((currentPage - 1) * pagesize, currentPage * pagesize)
-      " style="width: 100%" v-loading="loading">
+    <el-table
+      :data="
+        examList.slice((currentPage - 1) * pagesize, currentPage * pagesize)
+      "
+      style="width: 100%"
+      v-loading="loading"
+    >
       <el-table-column prop="examDescription" label="考试名称">
       </el-table-column>
       <el-table-column prop="examStartTime" label="考试开始时间" sortable>
@@ -10,19 +15,40 @@
       </el-table-column>
       <el-table-column fixed="right" label="操作" align="center">
         <template slot-scope="scope">
-          <el-button @click="openRegistrationRelease(scope.row)" size="small">发布报名</el-button>
-          <el-popconfirm confirmButtonText="是的" cancelButtonText="不用了" icon="el-icon-info" iconColor="red"
-            title="这是一段内容确定删除吗？" @onConfirm="deleteRegistrationRelease(scope.row)">
-            <el-button type="danger" size="small" slot="reference">删除报名</el-button>
+          <el-button @click="openRegistrationRelease(scope.row)" size="small"
+            >发布报名</el-button
+          >
+          <el-popconfirm
+            confirmButtonText="是的"
+            cancelButtonText="不用了"
+            icon="el-icon-info"
+            iconColor="red"
+            title="这是一段内容确定删除吗？"
+            @onConfirm="deleteRegistrationRelease(scope.row)"
+          >
+            <el-button type="danger" size="small" slot="reference"
+              >删除报名</el-button
+            >
           </el-popconfirm>
         </template>
       </el-table-column>
     </el-table>
-    <el-pagination @current-change="handleCurrentChange" :current-page="currentPage" background align="center"
-      layout="total, prev, pager, next, jumper" :total="pageTotal">
+    <el-pagination
+      @current-change="handleCurrentChange"
+      :current-page="currentPage"
+      background
+      align="center"
+      layout="total, prev, pager, next, jumper"
+      :total="pageTotal"
+    >
     </el-pagination>
 
-    <el-dialog :title="registrationDialogVisibleTitle" :visible.sync="registrationDialogVisible" width="30%" center>
+    <el-dialog
+      :title="registrationDialogVisibleTitle"
+      :visible.sync="registrationDialogVisible"
+      width="30%"
+      center
+    >
       <el-form ref="form" :model="registrationForm" label-width="80px">
         <el-form-item label="考试ID" hidden>
           <el-input v-model="registrationForm.examDetailId"></el-input>
@@ -135,7 +161,7 @@ export default {
       }).then(
         function (reponse) {
           axios({
-            headers: { Authorization: that.print.Authorization, },
+            headers: {Authorization: that.print.Authorization,},
             method: "post",
             url: "/api/standardAnswer",
             params: {
@@ -152,9 +178,9 @@ export default {
             });
             that.registrationForm.number = "";
           },
-            function (err) {
-              that.$message.error("发布报名失败");
-            }
+          function (err) {
+            that.$message.error("发布报名失败");
+          }
           )
         },
         function (err) {

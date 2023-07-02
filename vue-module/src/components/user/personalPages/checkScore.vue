@@ -1,18 +1,41 @@
 <template>
   <div>
-    <el-table :data="fileList.slice((currentPage - 1) * pagesize, currentPage * pagesize)
-      " style="width: 100%" :default-sort="{ prop: 'date', order: 'descending' }" v-loading="loading">
+    <el-table
+      :data="
+        fileList.slice((currentPage - 1) * pagesize, currentPage * pagesize)
+      "
+      style="width: 100%"
+      :default-sort="{ prop: 'date', order: 'descending' }"
+      v-loading="loading"
+    >
       <!--考试ID-->
-      <el-table-column prop="examID" label="考试ID" align="center" width="200"></el-table-column>
-      <el-table-column prop="examDescription" label="考试名称" align="center" width="200"></el-table-column>
+      <el-table-column
+        prop="examID"
+        label="考试ID"
+        align="center"
+        width="200"
+      ></el-table-column>
+      <el-table-column
+        prop="examDescription"
+        label="考试名称"
+        align="center"
+        width="200"
+      ></el-table-column>
       <el-table-column label="操作" align="center">
         <template slot-scope="scope">
           <el-button type="primary" size="mini" @click="checkPoint(scope.row)">查看成绩</el-button>
         </template>
       </el-table-column>
     </el-table>
-    <el-pagination @current-change="handleCurrentChange" :current-page="currentPage" :page-size="pagesize" background
-      align="center" layout="total, prev, pager, next, jumper" :total="pageTotal">
+    <el-pagination
+      @current-change="handleCurrentChange"
+      :current-page="currentPage"
+      :page-size="pagesize"
+      background
+      align="center"
+      layout="total, prev, pager, next, jumper"
+      :total="pageTotal"
+    >
     </el-pagination>
 
   </div>

@@ -5,23 +5,47 @@
     <br />
     <br />
     <br />
-    <el-table v-if="ifMain" v-loading="loading" :data="messageList.slice((currentPage - 1) * pagesize, currentPage * pagesize)
-      ">
+    <el-table
+      v-if="ifMain"
+      v-loading="loading"
+      :data="
+        messageList.slice((currentPage - 1) * pagesize, currentPage * pagesize)
+      "
+    >
       <el-table-column prop="title" label="标题" align="center">
       </el-table-column>
       <el-table-column prop="label" label="标签" width="150" align="center">
       </el-table-column>
-      <el-table-column prop="subDate" label="发布日期" width="150" align="center">
+      <el-table-column
+        prop="subDate"
+        label="发布日期"
+        width="150"
+        align="center"
+      >
       </el-table-column>
       <el-table-column fixed="right" label="操作" align="center">
         <template slot-scope="scope">
-          <el-button size="mini" @click="getMessageDetail(scope.row)">详细</el-button>
-          <el-button type="danger" size="mini" @click="deleteMessage(scope.row, scope.$index)">删除</el-button>
+          <el-button size="mini" @click="getMessageDetail(scope.row)"
+            >详细</el-button
+          >
+          <el-button
+            type="danger"
+            size="mini"
+            @click="deleteMessage(scope.row, scope.$index)"
+            >删除</el-button
+          >
         </template>
       </el-table-column>
     </el-table>
-    <el-pagination @current-change="handleCurrentChange" :current-page="currentPage" background align="center"
-      layout="total, prev, pager, next, jumper" :total="pageTotal" v-if="ifMain">
+    <el-pagination
+      @current-change="handleCurrentChange"
+      :current-page="currentPage"
+      background
+      align="center"
+      layout="total, prev, pager, next, jumper"
+      :total="pageTotal"
+      v-if="ifMain"
+    >
     </el-pagination>
 
     <!-- 编辑主页内容 -->
@@ -33,11 +57,19 @@
         <el-input v-model="messageForm.subDate" readonly></el-input>
       </el-form-item>
       <el-form-item label="标签">
-        <el-select v-model="messageForm.label" placeholder="请选择活动区域" v-if="!teacher">
+        <el-select
+          v-model="messageForm.label"
+          placeholder="请选择活动区域"
+          v-if="!teacher"
+        >
           <el-option label="考试相关" value="考试相关"></el-option>
           <el-option label="其他" value="其他"></el-option>
         </el-select>
-        <el-select v-model="messageForm.label" placeholder="请选择活动区域" v-else>
+        <el-select
+          v-model="messageForm.label"
+          placeholder="请选择活动区域"
+          v-else
+        >
           <el-option label="考试相关" value="考试相关"></el-option>
           <el-option label="其他" value="其他"></el-option>
         </el-select>
@@ -66,7 +98,11 @@
         <el-input v-model="messageForm.label" readonly></el-input>
       </el-form-item>
       <el-form-item label="内容">
-        <el-input type="textarea" v-model="messageForm.text" :readonly="ifReadonly"></el-input>
+        <el-input
+          type="textarea"
+          v-model="messageForm.text"
+          :readonly="ifReadonly"
+        ></el-input>
       </el-form-item>
       <el-form-item label="备注">
         <el-input v-model="messageForm.note" :readonly="ifReadonly"></el-input>
@@ -76,17 +112,37 @@
         <el-button type="primary" @click="beforeUpdate">{{
           updateButtonName
         }}</el-button>
-        <el-button type="success" @click="updateMessage" v-if="!ifReadonly">更新</el-button>
+        <el-button type="success" @click="updateMessage" v-if="!ifReadonly"
+          >更新</el-button
+        >
       </el-form-item>
     </el-form>
 
     <!-- 编辑主页图片 -->
     <div v-if="ifImg" v-loading="loading">
-      <el-upload class="upload-demo" ref="upload" action="" accept="image/jpeg, image/png" :on-preview="handlePreview"
-        :on-remove="handleRemove" :auto-upload="false" :on-change="onUploadChange" list-type="picture"
-        :file-list="fileUpLoadList" :limit="1">
-        <el-button slot="trigger" size="small" type="primary">选取文件</el-button>
-        <el-button style="margin-left: 10px" size="small" type="success" @click="uploadFile">上传到服务器</el-button>
+      <el-upload
+        class="upload-demo"
+        ref="upload"
+        action=""
+        accept="image/jpeg, image/png"
+        :on-preview="handlePreview"
+        :on-remove="handleRemove"
+        :auto-upload="false"
+        :on-change="onUploadChange"
+        list-type="picture"
+        :file-list="fileUpLoadList"
+        :limit="1"
+      >
+        <el-button slot="trigger" size="small" type="primary"
+          >选取文件</el-button
+        >
+        <el-button
+          style="margin-left: 10px"
+          size="small"
+          type="success"
+          @click="uploadFile"
+          >上传到服务器</el-button
+        >
         <div slot="tip" class="el-upload__tip">
           只能上传jpg/png文件，且不超过1MB
         </div>
@@ -95,17 +151,34 @@
       <el-tabs v-model="activeName" type="border-card" @tab-click="handleClick">
         <el-tab-pane label="全部" name="all">
           <el-row>
-            <el-col :span="4" v-for="item in imageList" :key="item.imageId" :offset="1">
+            <el-col
+              :span="4"
+              v-for="item in imageList"
+              :key="item.imageId"
+              :offset="1"
+            >
               <div style="margin-top: 15px">
                 <el-card :body-style="{ padding: '0px' }" shadow="hover">
-                  <img v-image-preview :src="item.url" class="image" height="200px" width="190px" />
+                  <img
+                    v-image-preview
+                    :src="item.url"
+                    class="image"
+                    height="200px"
+                    width="190px"
+                  />
                   <div>
-                    <span>{{ item.imageName }}</span><br />
+                    <span>{{ item.imageName }}</span
+                    ><br />
                     <div class="bottom clearfix">
                       <small>类型：{{ item.tagUTF }} </small><br />
                       <small>上传人：{{ item.username }} </small>
                       <br />
-                      <el-button type="text" @click="deleteImg(item)" size="mini">删除</el-button>
+                      <el-button
+                        type="text"
+                        @click="deleteImg(item)"
+                        size="mini"
+                        >删除</el-button
+                      >
                     </div>
                   </div>
                 </el-card>
@@ -116,17 +189,34 @@
 
         <el-tab-pane label="主页展示" name="Show">
           <el-row>
-            <el-col :span="4" v-for="item in imageList" :key="item.imageId" :offset="1">
+            <el-col
+              :span="4"
+              v-for="item in imageList"
+              :key="item.imageId"
+              :offset="1"
+            >
               <div style="margin-top: 15px">
                 <el-card :body-style="{ padding: '0px' }" shadow="hover">
-                  <img v-image-preview :src="item.url" class="image" height="200px" width="190px" />
+                  <img
+                    v-image-preview
+                    :src="item.url"
+                    class="image"
+                    height="200px"
+                    width="190px"
+                  />
                   <div>
-                    <span>{{ item.imageName }}</span><br />
+                    <span>{{ item.imageName }}</span
+                    ><br />
                     <div class="bottom clearfix">
                       <small>类型：{{ item.tagUTF }} </small><br />
                       <small>上传人：{{ item.username }} </small>
                       <br />
-                      <el-button type="text" @click="deleteImg(item)" size="mini">删除</el-button>
+                      <el-button
+                        type="text"
+                        @click="deleteImg(item)"
+                        size="mini"
+                        >删除</el-button
+                      >
                     </div>
                   </div>
                 </el-card>
@@ -137,17 +227,34 @@
 
         <el-tab-pane label="个人头像" name="Avatar">
           <el-row>
-            <el-col :span="4" v-for="item in imageList" :key="item.imageId" :offset="1">
+            <el-col
+              :span="4"
+              v-for="item in imageList"
+              :key="item.imageId"
+              :offset="1"
+            >
               <div style="margin-top: 15px">
                 <el-card :body-style="{ padding: '0px' }" shadow="hover">
-                  <img v-image-preview :src="item.url" class="image" height="200px" width="190px" />
+                  <img
+                    v-image-preview
+                    :src="item.url"
+                    class="image"
+                    height="200px"
+                    width="190px"
+                  />
                   <div>
-                    <span>{{ item.imageName }}</span><br />
+                    <span>{{ item.imageName }}</span
+                    ><br />
                     <div class="bottom clearfix">
                       <small>类型：{{ item.tagUTF }} </small><br />
                       <small>上传人：{{ item.username }} </small>
                       <br />
-                      <el-button type="text" @click="deleteImg(item)" size="mini">删除</el-button>
+                      <el-button
+                        type="text"
+                        @click="deleteImg(item)"
+                        size="mini"
+                        >删除</el-button
+                      >
                     </div>
                   </div>
                 </el-card>
@@ -158,17 +265,34 @@
 
         <el-tab-pane label="准考证照片" name="Exam">
           <el-row>
-            <el-col :span="4" v-for="item in imageList" :key="item.imageId" :offset="1">
+            <el-col
+              :span="4"
+              v-for="item in imageList"
+              :key="item.imageId"
+              :offset="1"
+            >
               <div style="margin-top: 15px">
                 <el-card :body-style="{ padding: '0px' }" shadow="hover">
-                  <img v-image-preview :src="item.url" class="image" height="200px" width="190px" />
+                  <img
+                    v-image-preview
+                    :src="item.url"
+                    class="image"
+                    height="200px"
+                    width="190px"
+                  />
                   <div>
-                    <span>{{ item.imageName }}</span><br />
+                    <span>{{ item.imageName }}</span
+                    ><br />
                     <div class="bottom clearfix">
                       <small>类型：{{ item.tagUTF }} </small><br />
                       <small>上传人：{{ item.username }} </small>
                       <br />
-                      <el-button type="text" @click="deleteImg(item)" size="mini">删除</el-button>
+                      <el-button
+                        type="text"
+                        @click="deleteImg(item)"
+                        size="mini"
+                        >删除</el-button
+                      >
                     </div>
                   </div>
                 </el-card>
@@ -440,7 +564,7 @@ export default {
         function (response) {
           that.messageList.splice(index, 1);
           that.pageTotal--;
-          if (index == 0 && that.currentPage != 1) that.currentPage--;
+          if (index == 0 && that.currentPage!= 1) that.currentPage--;
           that.$message({
             message: "删除成功",
             type: "success",

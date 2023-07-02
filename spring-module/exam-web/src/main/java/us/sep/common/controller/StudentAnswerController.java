@@ -31,6 +31,14 @@ public class StudentAnswerController {
         return new Result<>(true, CommonResultCode.SUCCESS.getCode(), CommonResultCode.SUCCESS.getMessage(),studentAnswerService.findAnswer(examDetailId,userId));
     }
 
+    @GetMapping("/detail")
+    @PreAuthorize("hasAnyRole('ROLE_USER','ROLE_MANAGER','ROLE_ADMIN')")
+    @Log(loggerName = LoggerName.WEB_DIGEST)
+    public Result<List<StudentAnswerBO>> getTotalAnswer(String examDetailId, HttpServletRequest httpServletRequest)
+    {
+        return new Result<>(true, CommonResultCode.SUCCESS.getCode(), CommonResultCode.SUCCESS.getMessage(),studentAnswerService.findAnswerTotal(examDetailId));
+    }
+
     @GetMapping("/all")
     @PreAuthorize("hasAnyRole('ROLE_USER','ROLE_MANAGER','ROLE_ADMIN')")
     @Log(loggerName = LoggerName.WEB_DIGEST)
@@ -53,6 +61,14 @@ public class StudentAnswerController {
     public Result<StudentAnswerBO> updateAnswer(@Valid StudentAnswerRequest request, HttpServletRequest httpServletRequest)
     {
         return new Result<>(true, CommonResultCode.SUCCESS.getCode(), CommonResultCode.SUCCESS.getMessage(),studentAnswerService.updateAnswer(request));
+    }
+
+    @PostMapping("/getScore")
+    @PreAuthorize("hasAnyRole('ROLE_USER','ROLE_MANAGER','ROLE_ADMIN')")
+    @Log(loggerName = LoggerName.WEB_DIGEST)
+    public Result<StudentAnswerBO> updateScore(String examDetailId, String userId, int score, HttpServletRequest httpServletRequest)
+    {
+        return new Result<>(true, CommonResultCode.SUCCESS.getCode(), CommonResultCode.SUCCESS.getMessage(),studentAnswerService.updateScore(examDetailId, userId, score));
     }
 
     @PostMapping("/scoreOut")

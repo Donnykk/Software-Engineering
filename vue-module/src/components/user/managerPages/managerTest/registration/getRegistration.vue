@@ -1,19 +1,43 @@
 <template>
   <div>
-    <el-table :data="registrationList.slice(
-      (currentPage - 1) * pagesize,
-      currentPage * pagesize
-    )
-      " style="width: 100%" @cell-click="ifUpdateState" v-loading="loading">
+    <el-table
+      :data="
+        registrationList.slice(
+          (currentPage - 1) * pagesize,
+          currentPage * pagesize
+        )
+      "
+      style="width: 100%"
+      @cell-click="ifUpdateState"
+      v-loading="loading"
+    >
       <el-table-column prop="contact" label="联系人" align="center" width="100">
       </el-table-column>
       <el-table-column prop="examDescription" label="考试内容" align="center">
       </el-table-column>
-      <el-table-column prop="number" label="可报名总人数" sortable align="center" width="150">
+      <el-table-column
+        prop="number"
+        label="可报名总人数"
+        sortable
+        align="center"
+        width="150"
+      >
       </el-table-column>
-      <el-table-column prop="last" label="剩余人数" sortable align="center" width="120">
+      <el-table-column
+        prop="last"
+        label="剩余人数"
+        sortable
+        align="center"
+        width="120"
+      >
       </el-table-column>
-      <el-table-column prop="term" label="学期" :formatter="termFormatter" sortable align="center">
+      <el-table-column
+        prop="term"
+        label="学期"
+        :formatter="termFormatter"
+        sortable
+        align="center"
+      >
       </el-table-column>
       <el-table-column label="状态" width="150" align="center">
         <template slot-scope="scope">
@@ -22,7 +46,12 @@
           </template>
           <template v-else>
             <el-select v-model="state" placeholder="请选择">
-              <el-option v-for="item in stateOptions" :key="item.value" :label="item.label" :value="item.value">
+              <el-option
+                v-for="item in stateOptions"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value"
+              >
               </el-option>
             </el-select>
           </template>
@@ -30,23 +59,51 @@
       </el-table-column>
       <el-table-column fixed="right" label="操作" align="center">
         <template slot-scope="scope">
-          <el-button @click="updateState(scope.row)" size="small" v-if="!scope.row.ifUpdate">修改</el-button>
-          <el-button type="danger" @click="deleteRegistrationRelease(scope.row)" size="small">删除</el-button>
-          <el-button type="info" @click="getRegistrationUserList(scope.row)" size="small">报名进度</el-button>
+          <el-button
+            @click="updateState(scope.row)"
+            size="small"
+            v-if="!scope.row.ifUpdate"
+            >修改</el-button
+          >
+          <el-button
+            type="danger"
+            @click="deleteRegistrationRelease(scope.row)"
+            size="small"
+            >删除</el-button
+          >
+          <el-button
+            type="info"
+            @click="getRegistrationUserList(scope.row)"
+            size="small"
+            >报名进度</el-button
+          >
         </template>
       </el-table-column>
     </el-table>
-    <el-pagination @current-change="handleCurrentChange" :current-page="currentPage" background align="center"
-      layout="total, prev, pager, next, jumper" :total="pageTotal">
+    <el-pagination
+      @current-change="handleCurrentChange"
+      :current-page="currentPage"
+      background
+      align="center"
+      layout="total, prev, pager, next, jumper"
+      :total="pageTotal"
+    >
     </el-pagination>
 
-    <el-dialog title="报名表" height="500" :visible.sync="userListDialog" v-loading="examLoading">
+    <el-dialog
+      title="报名表"
+      height="500"
+      :visible.sync="userListDialog"
+      v-loading="examLoading"
+    >
       <el-form :inline="true" class="demo-form-inline">
         <el-form-item label="任课教师">
           <el-input v-model="teacher" placeholder="任课教师"></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="arrangeSeat">一键添加考场位置</el-button>
+          <el-button type="primary" @click="arrangeSeat"
+            >一键添加考场位置</el-button
+          >
         </el-form-item>
       </el-form>
       <el-table :data="allReg">
@@ -59,7 +116,12 @@
         <el-table-column prop="location" label="考场座位"></el-table-column>
         <el-table-column>
           <template slot-scope="scope">
-            <el-button icon="el-icon-delete" size="mini" type="danger" @click="deleteUserReg(scope.row)"></el-button>
+            <el-button
+              icon="el-icon-delete"
+              size="mini"
+              type="danger"
+              @click="deleteUserReg(scope.row)"
+            ></el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -336,9 +398,9 @@ export default {
             });
             that.reload();
           },
-            function (err) {
-              that.$message.error("删除失败");
-            }
+          function (err) {
+            that.$message.error("删除失败");
+          }
           )
         },
         function (err) {

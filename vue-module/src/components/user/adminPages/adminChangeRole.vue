@@ -5,32 +5,74 @@
 
     <el-dialog title="角色列表" :visible.sync="roleDialog">
       <el-table :data="roleList">
-        <el-table-column v-model="name" property="name" label="权限"></el-table-column>
+        <el-table-column
+          v-model="name"
+          property="name"
+          label="权限"
+        ></el-table-column>
 
-        <el-table-column property="description" label="注解 身份"></el-table-column>
+        <el-table-column
+          property="description"
+          label="注解 身份"
+        ></el-table-column>
         <el-table-column label="操作">
           <template slot-scope="scope">
-            <el-button type="danger" icon="el-icon-delete" @click="deleteRole(scope.$index, scope.row)"></el-button>
-            <el-button type="warning" icon="el-icon-share" @click="beforeUpdateRole(scope.$index, scope.row)"></el-button>
+            <el-button
+              type="danger"
+              icon="el-icon-delete"
+              @click="deleteRole(scope.$index, scope.row)"
+            ></el-button>
+            <el-button
+              type="warning"
+              icon="el-icon-share"
+              @click="beforeUpdateRole(scope.$index, scope.row)"
+            ></el-button>
           </template>
-        </el-table-column> </el-table><br />
+        </el-table-column> </el-table
+      ><br />
 
       <el-form>
         <el-form-item>
-          <el-input v-model="name" placeholder="請輸入权限" :readonly="ifUpdate"></el-input>
+          <el-input
+            v-model="name"
+            placeholder="請輸入權限"
+            :readonly="ifUpdate"
+          ></el-input>
         </el-form-item>
         <el-form-item>
-          <el-input v-model="description" placeholder="請輸入描述的内容"></el-input>
+          <el-input
+            v-model="description"
+            placeholder="請輸入描述的内容"
+          ></el-input>
         </el-form-item>
-        <el-button type="primary" icon="el-icon-circle-plus" @click="addRole" v-if="!ifUpdate">添加角色</el-button>
-        <el-button type="warning" icon="el-icon-share" @click="updateRole" v-if="ifUpdate">修改角色</el-button>
-        <el-button icon="el-icon-share" @click="cancelUpdate" v-if="ifUpdate">取消修改</el-button>
+        <el-button
+          type="primary"
+          icon="el-icon-circle-plus"
+          @click="addRole"
+          v-if="!ifUpdate"
+          >添加角色</el-button
+        >
+        <el-button
+          type="warning"
+          icon="el-icon-share"
+          @click="updateRole"
+          v-if="ifUpdate"
+          >修改角色</el-button
+        >
+        <el-button icon="el-icon-share" @click="cancelUpdate" v-if="ifUpdate"
+          >取消修改</el-button
+        >
       </el-form>
     </el-dialog>
 
     <template>
-      <el-table :data="userList.slice((currentPage - 1) * pagesize, currentPage * pagesize)
-        " style="width: 100%" v-loading="loading">
+      <el-table
+        :data="
+          userList.slice((currentPage - 1) * pagesize, currentPage * pagesize)
+        "
+        style="width: 100%"
+        v-loading="loading"
+      >
         <el-table-column prop="userName" label="用户名" align="center">
         </el-table-column>
         <el-table-column prop="fullName" label="昵称" align="center">
@@ -42,7 +84,12 @@
             </template>
             <template v-else>
               <el-select v-model="scope.row.description" placeholder="请选择">
-                <el-option v-for="item in roleList" :key="item.name" :label="item.description" :value="item.name">
+                <el-option
+                  v-for="item in roleList"
+                  :key="item.name"
+                  :label="item.description"
+                  :value="item.name"
+                >
                 </el-option>
               </el-select>
             </template>
@@ -50,24 +97,59 @@
         </el-table-column>
         <el-table-column label="操作" align="center">
           <template slot-scope="scope">
-            <el-button @click="scope.row.ifChange = false" v-if="scope.row.ifChange" size="mini">取消更改</el-button>
-            <el-button size="mini" @click="changeRole(scope.$index, scope.row)">更改权限</el-button>
-            <el-popconfirm confirm-button-text="好的" cancel-button-text="不用了" icon="el-icon-info" icon-color="red"
-              title="你确定要封掉这个账号吗？" @onConfirm="prohibitAccount(scope.row, false)">
-              <el-button type="danger" size="mini" slot="reference" v-if="scope.row.enable">封禁账号</el-button>
+            <el-button
+              @click="scope.row.ifChange = false"
+              v-if="scope.row.ifChange"
+              size="mini"
+              >取消更改</el-button
+            >
+            <el-button size="mini" @click="changeRole(scope.$index, scope.row)"
+              >更改权限</el-button
+            >
+            <el-popconfirm
+              confirm-button-text="好的"
+              cancel-button-text="不用了"
+              icon="el-icon-info"
+              icon-color="red"
+              title="你确定要封掉这个账号吗？"
+              @onConfirm="prohibitAccount(scope.row, false)"
+            >
+              <el-button
+                type="danger"
+                size="mini"
+                slot="reference"
+                v-if="scope.row.enable"
+                >封禁账号</el-button
+              >
             </el-popconfirm>
-            <el-button size="mini" slot="reference" v-if="!scope.row.enable"
-              @click="prohibitAccount(scope.row, true)">解封账号</el-button>
+            <el-button
+              size="mini"
+              slot="reference"
+              v-if="!scope.row.enable"
+              @click="prohibitAccount(scope.row, true)"
+              >解封账号</el-button
+            >
           </template>
         </el-table-column>
       </el-table>
-      <el-pagination align="center" @current-change="handleCurrentChange" :current-page="currentPage"
-        :page-size="pagesize" background layout="total, prev, pager, next, jumper" :total="pageTotal">
+      <el-pagination
+        align="center"
+        @current-change="handleCurrentChange"
+        :current-page="currentPage"
+        :page-size="pagesize"
+        background
+        layout="total, prev, pager, next, jumper"
+        :total="pageTotal"
+      >
       </el-pagination>
     </template>
 
     <!-- 图例dialog -->
-    <el-dialog :visible.sync="legendDataDialog" width="640px" :before-close="dialogClose">
+    <el-dialog
+      :visible.sync="legendDataDialog"
+      width="640px"
+      :before-close="dialogClose"
+    >
       <v-chart :options="legendPie" autoresize theme="light"></v-chart>
     </el-dialog>
   </div>
@@ -519,7 +601,7 @@ export default {
         .then((_) => {
           this.legendDataDialog = false;
         })
-        .catch((_) => { });
+        .catch((_) => {});
     },
   },
 };

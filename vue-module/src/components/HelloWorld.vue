@@ -3,67 +3,143 @@
     <div>
       <img :src="html_top_imgUrl" style="height: 100%; width: 100%" />
     </div>
-    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd">
+    <nav
+      class="navbar navbar-expand-lg navbar-light"
+      style="background-color: #e3f2fd"
+    >
 
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
         <span class="navbar-toggler-icon"></span>
       </button>
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <router-link class="nav-link" to="/homepage" id="navbarDropdown" role="button" aria-haspopup="true"
-              aria-expanded="false">
+            <router-link
+              class="nav-link"
+              to="/homepage"
+              id="navbarDropdown"
+              role="button"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
               首页
             </router-link>
           </li>
           <li class="nav-item dropdown" v-if="ifShow">
-            <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
-              aria-expanded="false">
+            <a
+              class="nav-link"
+              href="#"
+              id="navbarDropdown"
+              role="button"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
               考试报名
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <router-link class="dropdown-item" to="/publicGetExam">报名中心</router-link>
+              <router-link class="dropdown-item" to="/publicGetExam"
+                >报名中心</router-link
+              >
               <div class="dropdown-divider"></div>
-              <router-link class="dropdown-item" to="/examTips">报名提示</router-link>
+              <router-link class="dropdown-item" to="/examTips"
+              >报名提示</router-link
+              >
               <div class="dropdown-divider"></div>
-              <router-link class="dropdown-item" to="/tranScript">成绩报告单</router-link>
+              <router-link class="dropdown-item" to="/tranScript"
+              >成绩报告单</router-link
+              >
               <div class="dropdown-divider"></div>
-              <router-link class="dropdown-item" to="/commonQuestions">常见问题</router-link>
+              <router-link class="dropdown-item" to="/commonQuestions"
+              >常见问题</router-link
+              >
             </div>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
-              aria-expanded="false">
+            <a
+              class="nav-link"
+              href="#"
+              id="navbarDropdown"
+              role="button"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
               {{ student_Name }}
             </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown" v-if="ifShow">
-              <router-link class="dropdown-item" style="text-align: center" to="">
-                <el-avatar v-image-preview :src="userAvatar" :size="70"></el-avatar>
+            <div
+              class="dropdown-menu"
+              aria-labelledby="navbarDropdown"
+              v-if="ifShow"
+            >
+              <router-link
+                class="dropdown-item"
+                style="text-align: center"
+                to=""
+              >
+                <el-avatar
+                  v-image-preview
+                  :src="userAvatar"
+                  :size="70"
+                ></el-avatar>
               </router-link>
               <div class="dropdown-divider"></div>
-              <router-link class="dropdown-item" to="usercenter">个人中心</router-link>
-              <router-link class="dropdown-item" @click.native="logout" to="">退出</router-link>
+              <router-link class="dropdown-item" to="usercenter"
+                >个人中心</router-link
+              >
+              <router-link class="dropdown-item" @click.native="logout" to=""
+                >退出</router-link
+              >
             </div>
 
             <div class="dropdown-menu" aria-labelledby="navbarDropdown" v-else>
-              <router-link class="dropdown-item" to="login">前往登陆界面</router-link>
+              <router-link class="dropdown-item" to="login"
+                >前往登陆界面</router-link
+              >
               <div class="dropdown-divider"></div>
-              <router-link class="dropdown-item" to="register">前往注册界面</router-link>
+              <router-link class="dropdown-item" to="register"
+                >前往注册界面</router-link
+              >
             </div>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="" id="navbarDropdown" role="button" aria-haspopup="true"
-              aria-expanded="false" @click.native="toChinaEdu">
+            <router-link
+              class="nav-link"
+              to=""
+              id="navbarDropdown"
+              role="button"
+              aria-haspopup="true"
+              aria-expanded="false"
+              @click.native="toChinaEdu"
+            >
               中国教育考试网
             </router-link>
           </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="search" placeholder="请输入消息搜索关键字" aria-label="Search" v-model="search"
-            @keyup.enter="searchMessage" />
-          <el-button class="btn btn-outline-success my-2 my-sm-0" type="success" size="medium" @click="searchMessage">
+          <input
+            class="form-control mr-sm-2"
+            type="search"
+            placeholder="请输入消息搜索关键字"
+            aria-label="Search"
+            v-model="search"
+            @keyup.enter="searchMessage"
+          />
+          <el-button
+            class="btn btn-outline-success my-2 my-sm-0"
+            type="success"
+            size="medium"
+            @click="searchMessage"
+          >
             搜索
           </el-button>
         </form>
@@ -245,7 +321,7 @@ export default {
             });
           },
           function (err) {
-            that.student_Name = "你不配有名字";
+            that.student_Name = "未命名";
             //获得小黑头像
             var _that = that;
             axios({

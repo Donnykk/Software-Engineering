@@ -1,23 +1,91 @@
 <template>
   <div>
-    <el-button type="info" icon="el-icon-delete" @click="toggleSelection()" round>取消选择</el-button>
-    <el-popover popper-class="popoverBGC" placement="bottom" width="150" trigger="hover" content="添加频道" :close-delay="3">
-      <el-button type="primary" icon="el-icon-plus" @click="adddialogFormVisible = true" circle
-        slot="reference"></el-button>
+    <el-button
+      type="info"
+      icon="el-icon-delete"
+      @click="toggleSelection()"
+      round
+      >取消选择</el-button
+    >
+    <el-popover
+      popper-class="popoverBGC"
+      placement="bottom"
+      width="150"
+      trigger="hover"
+      content="添加频道"
+      :close-delay="3"
+    >
+      <el-button
+        type="primary"
+        icon="el-icon-plus"
+        @click="adddialogFormVisible = true"
+        circle
+        slot="reference"
+      ></el-button>
     </el-popover>
 
-    <el-popover popper-class="popoverBGC" placement="bottom" width="150" trigger="hover" content="删除频道" :close-delay="3">
-      <el-button type="danger" icon="el-icon-delete" @click="deleteChannel" circle slot="reference"></el-button>
+    <el-popover
+      popper-class="popoverBGC"
+      placement="bottom"
+      width="150"
+      trigger="hover"
+      content="删除频道"
+      :close-delay="3"
+    >
+      <el-button
+        type="danger"
+        icon="el-icon-delete"
+        @click="deleteChannel"
+        circle
+        slot="reference"
+      ></el-button>
     </el-popover>
-    <el-popover popper-class="popoverBGC" placement="bottom" width="150" trigger="hover" content="频道编辑" :close-delay="3">
-      <el-button type="warning" icon="el-icon-edit" @click="beforeCheck" circle slot="reference"></el-button>
+    <el-popover
+      popper-class="popoverBGC"
+      placement="bottom"
+      width="150"
+      trigger="hover"
+      content="频道编辑"
+      :close-delay="3"
+    >
+      <el-button
+        type="warning"
+        icon="el-icon-edit"
+        @click="beforeCheck"
+        circle
+        slot="reference"
+      ></el-button>
     </el-popover>
-    <el-popover popper-class="popoverBGC" placement="bottom" width="150" trigger="hover" content="发布消息" :close-delay="3">
-      <el-button type="info" icon="el-icon-message" @click="beforeSendMessage" circle slot="reference"></el-button>
+    <el-popover
+      popper-class="popoverBGC"
+      placement="bottom"
+      width="150"
+      trigger="hover"
+      content="发布消息"
+      :close-delay="3"
+    >
+      <el-button
+        type="info"
+        icon="el-icon-message"
+        @click="beforeSendMessage"
+        circle
+        slot="reference"
+      ></el-button>
     </el-popover>
-    <el-popover popper-class="popoverBGC" placement="bottom" width="150" trigger="hover" content="查看发布消息"
-      :close-delay="3">
-      <el-button icon="el-icon-search" @click="lookForMessage" circle slot="reference"></el-button>
+    <el-popover
+      popper-class="popoverBGC"
+      placement="bottom"
+      width="150"
+      trigger="hover"
+      content="查看发布消息"
+      :close-delay="3"
+    >
+      <el-button
+        icon="el-icon-search"
+        @click="lookForMessage"
+        circle
+        slot="reference"
+      ></el-button>
     </el-popover>
     <!-- 添加频道的dialog -->
     <el-dialog title="频道发布" :visible.sync="adddialogFormVisible">
@@ -27,8 +95,12 @@
         </el-form-item>
         <el-form-item label="考试名称" :label-width="formLabelWidth">
           <el-select v-model="form.examTypeId" placeholder="请选择">
-            <el-option v-for="item in examTypeList" :key="item.examTypeId" :label="item.examTypeDescription"
-              :value="item.examTypeId">
+            <el-option
+              v-for="item in examTypeList"
+              :key="item.examTypeId"
+              :label="item.examTypeDescription"
+              :value="item.examTypeId"
+            >
             </el-option>
           </el-select>
         </el-form-item>
@@ -47,8 +119,12 @@
         </el-form-item>
         <el-form-item label="考试id" :label-width="formLabelWidth">
           <el-select v-model="u_form.u_examTypeId" placeholder="请选择">
-            <el-option v-for="item in examTypeList" :key="item.examTypeId" :label="item.examTypeDescription"
-              :value="item.examTypeId">
+            <el-option
+              v-for="item in examTypeList"
+              :key="item.examTypeId"
+              :label="item.examTypeDescription"
+              :value="item.examTypeId"
+            >
             </el-option>
           </el-select>
         </el-form-item>
@@ -63,19 +139,39 @@
     <el-dialog title="发布频道消息" :visible.sync="messagedialogFormVisible">
       <el-form :model="message_form">
         <el-form-item label="推送人" :label-width="formLabelWidth">
-          <el-input v-model="message_form.publisher" autocomplete="off" disabled></el-input>
+          <el-input
+            v-model="message_form.publisher"
+            autocomplete="off"
+            disabled
+          ></el-input>
         </el-form-item>
         <el-form-item label="频道" :label-width="formLabelWidth">
-          <el-input v-model="message_form.channel" autocomplete="off" disabled></el-input>
+          <el-input
+            v-model="message_form.channel"
+            autocomplete="off"
+            disabled
+          ></el-input>
         </el-form-item>
         <el-form-item label="考试类型" :label-width="formLabelWidth">
-          <el-input v-model="message_form.examType" autocomplete="off" disabled></el-input>
+          <el-input
+            v-model="message_form.examType"
+            autocomplete="off"
+            disabled
+          ></el-input>
         </el-form-item>
         <el-form-item label="考试具体描述" :label-width="formLabelWidth">
-          <el-input v-model="message_form.examDescription" autocomplete="off" disabled></el-input>
+          <el-input
+            v-model="message_form.examDescription"
+            autocomplete="off"
+            disabled
+          ></el-input>
         </el-form-item>
         <el-form-item label="消息内容" :label-width="formLabelWidth">
-          <el-input type="textarea" v-model="message_form.content" @keyup.enter.native="saveMessage"></el-input>
+          <el-input
+            type="textarea"
+            v-model="message_form.content"
+            @keyup.enter.native="saveMessage"
+          ></el-input>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -86,19 +182,33 @@
     </el-dialog>
 
     <!-- 查看消息的drawer -->
-    <el-drawer :visible.sync="messageDrawer" direction="rtl" size="40%" v-loading="loading">
+    <el-drawer
+      :visible.sync="messageDrawer"
+      direction="rtl"
+      size="40%"
+      v-loading="loading"
+    >
       <el-table :data="selectMessage" height="600">
         <el-table-column type="expand">
           <template slot-scope="props">
-            <el-form label-position="left" inline class="demo-table-expand" label-width="30%">
+            <el-form
+              label-position="left"
+              inline
+              class="demo-table-expand"
+              label-width="30%"
+            >
               <el-form-item label="推送人">
-                <span>{{ props.row.publisher }}</span> </el-form-item><br />
+                <span>{{ props.row.publisher }}</span> </el-form-item
+              ><br />
               <el-form-item label="推送频道">
-                <span>{{ props.row.channel }}</span> </el-form-item><br />
+                <span>{{ props.row.channel }}</span> </el-form-item
+              ><br />
               <el-form-item label="考试类型">
-                <span>{{ props.row.examType }}</span> </el-form-item><br />
+                <span>{{ props.row.examType }}</span> </el-form-item
+              ><br />
               <el-form-item label="考试具体描述">
-                <span>{{ props.row.examDescription }}</span> </el-form-item><br />
+                <span>{{ props.row.examDescription }}</span> </el-form-item
+              ><br />
               <el-form-item label="推送消息">
                 <span>{{ props.row.content }}</span>
               </el-form-item>
@@ -109,9 +219,19 @@
               </el-form-item>
               <br />
               <el-form-item>
-                <el-button type="danger" icon="el-icon-delete" @click="deleteMessage(props)">删除</el-button>
-                <el-button type="primary" icon="el-icon-share" v-if="!props.row.ifPublish"
-                  @click="saveToSend(props)">发布</el-button>
+                <el-button
+                  type="danger"
+                  icon="el-icon-delete"
+                  @click="deleteMessage(props)"
+                  >删除</el-button
+                >
+                <el-button
+                  type="primary"
+                  icon="el-icon-share"
+                  v-if="!props.row.ifPublish"
+                  @click="saveToSend(props)"
+                  >发布</el-button
+                >
               </el-form-item>
             </el-form>
           </template>
@@ -121,8 +241,16 @@
       </el-table>
     </el-drawer>
 
-    <el-table v-loading="loading" ref="multipleTable" :data="channelList.slice((currentPage - 1) * pagesize, currentPage * pagesize)
-      " style="width: 100%" @selection-change="handleSelectionChange" tooltip-effect="dark">
+    <el-table
+      v-loading="loading"
+      ref="multipleTable"
+      :data="
+        channelList.slice((currentPage - 1) * pagesize, currentPage * pagesize)
+      "
+      style="width: 100%"
+      @selection-change="handleSelectionChange"
+      tooltip-effect="dark"
+    >
       <el-table-column type="selection" width="50" align="center" />
       <el-table-column type="index" label="序号" align="center">
       </el-table-column>
@@ -131,8 +259,15 @@
       <el-table-column prop="number" label="频道消息数量" align="center">
       </el-table-column>
     </el-table>
-    <el-pagination align="center" @current-change="handleCurrentChange" :current-page="currentPage" :page-size="pagesize"
-      background layout="total, prev, pager, next, jumper" :total="pageTotal">
+    <el-pagination
+      align="center"
+      @current-change="handleCurrentChange"
+      :current-page="currentPage"
+      :page-size="pagesize"
+      background
+      layout="total, prev, pager, next, jumper"
+      :total="pageTotal"
+    >
     </el-pagination>
   </div>
 </template>
@@ -633,18 +768,15 @@ export default {
 .demo-table-expand {
   font-size: 0;
 }
-
 .demo-table-expand label {
   width: 120px;
   color: #99a9bf;
 }
-
 .demo-table-expand .el-form-item {
   margin-right: 0;
   margin-bottom: 0;
   width: 100%;
 }
-
 .popoverBGC {
   opacity: 0.7;
   text-align: center;
