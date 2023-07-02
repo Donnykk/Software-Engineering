@@ -200,6 +200,31 @@ router.put('/api/user/:userId', async (ctx) => {
     ctx.body = { error: 'Internal server error' };
   }
 });
+router.delete('/api/user/:userId', async (ctx) => {
+  try {
+    const userId = ctx.params.userId;
+
+    // 连接到MySQL数据库
+    const connection = await mysql.createConnection({
+      host: 'localhost',
+      user: 'root',
+      password: 'Top50761',
+      database: 'test-sql'
+    });
+
+    // 删除用户
+    const sql = 'DELETE FROM users WHERE id = ?';
+    await connection.execute(sql, [userId]);
+
+    connection.end();
+
+    ctx.body = { message: 'User deleted successfully' };
+  } catch (error) {
+    console.error(error);
+    ctx.status = 500;
+    ctx.body = { error: 'Internal server error' };
+  }
+});
 
 const bodyParser = require('koa-bodyparser');
 
