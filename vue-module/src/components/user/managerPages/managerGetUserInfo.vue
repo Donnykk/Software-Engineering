@@ -28,6 +28,8 @@ export default {
   },
   methods: {
     handleClick(tab) {
+      //managerUser/managerGetUserInfoList
+      //managerUser/managerGetUserClassList
       console.log(tab.name);
       this.$router.push({
         name: tab.name,

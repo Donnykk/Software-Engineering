@@ -17,7 +17,7 @@
                 <el-input type="text" autocomplete="off" v-model="personAccount.userName" /></el-form-item>
             </div>
             <div class="form-group">
-              <el-form-item prop="fullName">别名
+              <el-form-item prop="fullName">真实姓名
                 <el-input type="text" autocomplete="off" v-model="personAccount.fullName" /></el-form-item>
             </div>
             <div class="form-group">
@@ -38,7 +38,7 @@
                   disabled /></el-form-item>
             </div>
             <div class="form-group">
-              <el-form-item prop="u_fullName">别名
+              <el-form-item prop="u_fullName">真实姓名
                 <el-input type="text" autocomplete="off" v-model="personAccountUpdate.u_fullName" /></el-form-item>
             </div>
             <div class="form-group">

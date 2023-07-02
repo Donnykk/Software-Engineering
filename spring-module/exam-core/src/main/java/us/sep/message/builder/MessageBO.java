@@ -25,6 +25,6 @@ public class MessageBO {
     private String examType;
 
     private String examDescription;
-	
+
     private boolean ifPublish;
 }

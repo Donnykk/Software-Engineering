@@ -186,7 +186,7 @@ public class ExamScoreServiceImpl implements ExamScoreService {
         if (!userRepo.existsByUserId(request.getUserId())) {
             throw new CustomizeException(CommonResultCode.UNFOUNDED,"找不到该用户");
         }
-        if (!examDetailRepo.existsByExamId(request.getExamDetailId())) {
+        if (!examDetailRepo.existsByExamDetailId(request.getExamDetailId())) {
             throw new CustomizeException(CommonResultCode.UNFOUNDED,"找不到该次考试");
         }
 

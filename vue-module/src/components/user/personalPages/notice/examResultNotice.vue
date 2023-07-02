@@ -1,29 +1,37 @@
 <template>
   <div>
-    <el-table :data="scoreList.slice((currentPage - 1) * pagesize, currentPage * pagesize)
-      " style="width: 100%" :default-sort="{ prop: 'date', order: 'descending' }" v-loading="loading">
-      <el-table-column prop="examDescription" label="考试名称" align="center"></el-table-column>
-      <el-table-column prop="examLocation" label="考试地点" align="center"></el-table-column>
-      <el-table-column prop="examTime" label="考试时间" align="center"></el-table-column>
-      <el-table-column prop="examScore" label="成绩" align="center"></el-table-column>
-      <el-table-column prop="examDetail" label="成绩详情" align="center">
-        <template slot-scope="scope">
-          <el-button @click="DetailDialog = true" size="small">查看</el-button>
-        </template>
-      </el-table-column>
+    <el-table
+      :data="
+        scoreList.slice((currentPage - 1) * pagesize, currentPage * pagesize)
+      "
+      style="width: 100%"
+      :default-sort="{ prop: 'date', order: 'descending' }"
+      v-loading="loading"
+    >
+      <el-table-column
+        prop="examDescription"
+        label="考试名称"
+      ></el-table-column>
+      <el-table-column prop="examLocation" label="考试地点"></el-table-column>
+      <el-table-column
+        prop="examStartTime"
+        label="考试开始时间"
+      ></el-table-column>
+      <el-table-column
+        prop="examEndTime"
+        label="考试结束时间"
+      ></el-table-column>
+      <el-table-column prop="examScore" label="成绩"></el-table-column>
     </el-table>
-    <el-dialog :visible.sync="DetailDialog" width="400px">
-      <el-table :data='score'>
-        <el-table-column prop='total' align="center" label='总分'></el-table-column>
-        <el-table-column prop='listening' align="center" label='听力'></el-table-column>
-        <el-table-column prop='reading' align="center" label='阅读'></el-table-column>
-        <el-table-column prop='writing' align="center" label='写作和翻译'></el-table-column>
-      </el-table>
-      <el-button size="small" style="margin-left: 300px;margin-top: 20px;" type="primary"
-        @click="DetailDialog = false">确定</el-button>
-    </el-dialog>
-    <el-pagination @current-change="handleCurrentChange" :current-page="currentPage" :page-size="pagesize" background
-      align="center" layout="total, prev, pager, next, jumper" :total="pageTotal">
+    <el-pagination
+      @current-change="handleCurrentChange"
+      :current-page="currentPage"
+      :page-size="pagesize"
+      background
+      align="center"
+      layout="total, prev, pager, next, jumper"
+      :total="pageTotal"
+    >
     </el-pagination>
   </div>
 </template>
@@ -36,36 +44,15 @@ export default {
   name: "examResultNotice",
   data() {
     return {
-      DetailDialog: false,
+      loading: false,
       //分数表
-      scoreList: [
-        {
-          examDescription: '大学生四级英语考试',
-          examLocation: '南开大学津南校区',
-          examTime: '2022-12-12',
-          examScore: '610'
-        },
-        {
-          examDescription: '大学生六级英语考试',
-          examLocation: '南开大学津南校区',
-          examTime: '2022-03-01',
-          examScore: '599'
-        }
-      ],
-      score: [
-        {
-          total: '610',
-          listening: '180',
-          reading: '220',
-          writing: '210'
-        }
-      ],
+      scoreList: [],
       //初始页
       currentPage: 1,
       //每页的数据
       pagesize: 10,
       //数组总数
-      pageTotal: 1,
+      pageTotal: 100000,
     };
   },
   computed: {
@@ -75,6 +62,9 @@ export default {
     }),
   },
   mounted: function () {
+    this.getScoreList();
+    var that = this;
+    setTimeout(function () {}, 300);
   },
   methods: {
     getScoreList: function () {

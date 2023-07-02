@@ -22,7 +22,7 @@ import javax.validation.Valid;
 
 /**
  * @Author kana-cr
- * @Date 2020/10/11
+ * @Date  2020/10/11
  **/
 
 @CrossOrigin
@@ -42,15 +42,15 @@ public class UserInfoController {
     @GetMapping
     @PreAuthorize("hasAnyRole('ROLE_USER','ROLE_MANAGER','ROLE_ADMIN')")
     @Log(loggerName = LoggerName.WEB_DIGEST)
-    public Result<UserInfoBO> getUserInfo(String username, HttpServletRequest httpServletRequest) {
-        AssertUtil.assertStringNotBlank(username, "用户名不能为空");
+    public Result<UserInfoBO> getUserInfo(String username, HttpServletRequest httpServletRequest){
+        AssertUtil.assertStringNotBlank(username,"用户名不能为空");
         String name = currentUserUtils.getCurrentUser().getUserName();
-        if (!name.equals(username) && !roleService.IsManagerOrAdmin(name)) {
+        if (!name.equals(username) && !roleService.IsManagerOrAdmin(name)){
             return new Result<>(false, CommonResultCode.FORBIDDEN.getCode(), CommonResultCode.FORBIDDEN.getMessage());
         }
         UserInfoBO userInfoBO = userInfoService.findByName(username);
         if (!StringUtils.isEmpty(userInfoBO))
-            return new Result<>(true, CommonResultCode.SUCCESS.getCode(), CommonResultCode.SUCCESS.getMessage(), userInfoBO);
+        return new Result<>(true, CommonResultCode.SUCCESS.getCode(), CommonResultCode.SUCCESS.getMessage(),userInfoBO);
 
         return new Result<>(false, CommonResultCode.UNFOUNDED.getCode(), CommonResultCode.UNFOUNDED.getMessage());
     }
@@ -59,9 +59,9 @@ public class UserInfoController {
     @PostMapping
     @PreAuthorize("hasAnyRole('ROLE_USER','ROLE_MANAGER','ROLE_ADMIN')")
     @Log(loggerName = LoggerName.WEB_DIGEST)
-    public Result<UserInfoBO> SaveUserInfo(@Valid UserInfoRequest request, HttpServletRequest httpServletRequest) {
-        String name = currentUserUtils.getCurrentUser().getUserName();
-        if (!roleService.IsManagerOrAdmin(name)) {
+    public Result<UserInfoBO> SaveUserInfo(@Valid UserInfoRequest request, HttpServletRequest httpServletRequest){
+       String name = currentUserUtils.getCurrentUser().getUserName();
+        if (!name.equals(request.getUsername()) && !roleService.IsManagerOrAdmin(name)){
             return new Result<>(false, CommonResultCode.FORBIDDEN.getCode(), CommonResultCode.FORBIDDEN.getMessage());
         }
         return new Result<>(true, CommonResultCode.SUCCESS.getCode(), CommonResultCode.SUCCESS.getMessage(), userInfoService.Save(request));
@@ -71,11 +71,11 @@ public class UserInfoController {
     @PutMapping
     @PreAuthorize("hasAnyRole('ROLE_USER','ROLE_MANAGER','ROLE_ADMIN')")
     @Log(loggerName = LoggerName.WEB_DIGEST)
-    public Result<UserInfoBO> UpdateUserInfo(UserInfoRequest request, HttpServletRequest httpServletRequest) {
-        AssertUtil.assertNotNull(request, "请求体不能为空");
-        AssertUtil.assertStringNotBlank(request.getUsername(), "用户名不能为空");
+    public Result<UserInfoBO> UpdateUserInfo(UserInfoRequest request, HttpServletRequest httpServletRequest){
+        AssertUtil.assertNotNull(request,"请求体不能为空");
+        AssertUtil.assertStringNotBlank(request.getUsername(),"用户名不能为空");
         String name = currentUserUtils.getCurrentUser().getUserName();
-        if (!name.equals(request.getUsername()) && !roleService.IsManagerOrAdmin(name)) {
+        if (!name.equals(request.getUsername()) && !roleService.IsManagerOrAdmin(name)){
             return new Result<>(false, CommonResultCode.FORBIDDEN.getCode(), CommonResultCode.FORBIDDEN.getMessage());
         }
 
@@ -86,15 +86,15 @@ public class UserInfoController {
     @DeleteMapping
     @PreAuthorize("hasAnyRole('ROLE_USER','ROLE_MANAGER','ROLE_ADMIN')")
     @Log(loggerName = LoggerName.WEB_DIGEST)
-    public Result<UserInfoRequest> DeleteUserInfo(UserInfoRequest request, HttpServletRequest httpServletRequest) {
-        AssertUtil.assertNotNull(request, "请求体不能为空");
-        AssertUtil.assertStringNotBlank(request.getUsername(), "用户名不能为空");
+    public Result<UserInfoRequest> DeleteUserInfo(UserInfoRequest request, HttpServletRequest httpServletRequest){
+        AssertUtil.assertNotNull(request,"请求体不能为空");
+        AssertUtil.assertStringNotBlank(request.getUsername(),"用户名不能为空");
         String name = currentUserUtils.getCurrentUser().getUserName();
-        if (!name.equals(request.getUsername()) && !roleService.IsManagerOrAdmin(name)) {
+        if (!name.equals(request.getUsername()) && !roleService.IsManagerOrAdmin(name)){
             return new Result<>(false, CommonResultCode.FORBIDDEN.getCode(), CommonResultCode.FORBIDDEN.getMessage());
         }
         userInfoService.delete(request.getUsername());
-        return new Result<>(true, CommonResultCode.SUCCESS.getCode(), CommonResultCode.SUCCESS.getMessage(), request);
+        return new Result<>(true, CommonResultCode.SUCCESS.getCode(), CommonResultCode.SUCCESS.getMessage(),request);
 
     }
 

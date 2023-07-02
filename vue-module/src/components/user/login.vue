@@ -14,12 +14,6 @@
               主页
             </router-link>
           </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
-              aria-expanded="false">
-              其他
-            </a>
-          </li>
         </ul>
       </div>
     </nav>

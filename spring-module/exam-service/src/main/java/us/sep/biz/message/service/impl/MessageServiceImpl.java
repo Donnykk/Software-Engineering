@@ -40,9 +40,9 @@ public class MessageServiceImpl implements MessageService {
     public void save(MessageRequest request) {
         MessageDO message = new MessageDO();
         BeanUtils.copyProperties(request,message);
-        Optional<ExamTypeDO> optionalExamTypeDO = examTypeRepo.findByExamType(request.getExamType());
+        Optional<ExamTypeDO> optionalExamTypeDO = examTypeRepo.findByExamTypeName(request.getExamType());
         if (optionalExamTypeDO.isPresent()) {
-            message.setExamTypeId(optionalExamTypeDO.get().getExamId());
+            message.setExamTypeId(optionalExamTypeDO.get().getExamTypeId());
             messageRepo.save(message);
         }
     }
@@ -70,8 +70,8 @@ public class MessageServiceImpl implements MessageService {
             message.setContent(request.getContent());
 
         if (!StringUtils.isEmpty(request.getExamType())) {
-            Optional<ExamTypeDO> optional = examTypeRepo.findByExamType(request.getExamType());
-            optional.ifPresent(examTypeDO -> message.setExamTypeId(examTypeDO.getExamId()));
+            Optional<ExamTypeDO> optional = examTypeRepo.findByExamTypeName(request.getExamType());
+            optional.ifPresent(examTypeDO -> message.setExamTypeId(examTypeDO.getExamTypeId()));
         }
 
         if (!StringUtils.isEmpty(request.getExamDescription()))
@@ -115,8 +115,8 @@ public class MessageServiceImpl implements MessageService {
             if (!checkExamTypeUtil.checkExamType(request.getExamType())) {
             throw new CustomizeException(CommonResultCode.ILLEGAL_PARAMETERS,"该类型不存在");
             }
-            Optional<ExamTypeDO> optionalExamTypeDO = examTypeRepo.findByExamType(request.getExamType());
-            optionalExamTypeDO.ifPresent(examTypeDO -> message.setExamTypeId(examTypeDO.getExamId()));
+            Optional<ExamTypeDO> optionalExamTypeDO = examTypeRepo.findByExamTypeName(request.getExamType());
+            optionalExamTypeDO.ifPresent(examTypeDO -> message.setExamTypeId(examTypeDO.getExamTypeId()));
         }
 
         if (!StringUtils.isEmpty(request.getExamDescription()))

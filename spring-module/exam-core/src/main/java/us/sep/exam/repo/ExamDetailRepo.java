@@ -10,11 +10,15 @@ import java.util.Optional;
 @Repository
 public interface ExamDetailRepo extends JpaRepository<ExamDetailDO,Long> {
 
-    List<ExamDetailDO> findByExamId(String id);
+    List<ExamDetailDO> findByExamTypeId(String id);
 
-    void deleteAllByExamId(String id);
+    Optional<ExamDetailDO> findByExamDetailId(String id);
 
-    void deleteByExamId(String id);
+    void deleteAllByExamTypeId(String id);
 
-    boolean existsByExamId(String id);
+    void deleteByExamDetailId(String id);
+
+    boolean existsByExamTypeId(String id);
+
+    boolean existsByExamDetailId(String id);
 }

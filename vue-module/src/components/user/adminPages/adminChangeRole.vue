@@ -17,7 +17,7 @@
 
       <el-form>
         <el-form-item>
-          <el-input v-model="name" placeholder="請輸入權限" :readonly="ifUpdate"></el-input>
+          <el-input v-model="name" placeholder="請輸入权限" :readonly="ifUpdate"></el-input>
         </el-form-item>
         <el-form-item>
           <el-input v-model="description" placeholder="請輸入描述的内容"></el-input>

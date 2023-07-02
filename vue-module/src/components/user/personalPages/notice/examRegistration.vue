@@ -1,35 +1,64 @@
 <template>
   <div>
-    <el-table :data="fileList.slice((currentPage - 1) * pagesize, currentPage * pagesize)
-      " style="width: 100%" :default-sort="{ prop: 'date', order: 'descending' }" v-loading="loading">
-      <el-table-column prop="examDescription" label="考试名称" align="center" width="200"></el-table-column>
-      <el-table-column prop="examLocation" label="考试地点" align="center" width="200"></el-table-column>
-      <el-table-column prop="examStartTime" label="考试开始时间" align="center" width="150"></el-table-column>
-      <el-table-column prop="examRegiTime" label="考试入场时间" align="center" width="150"></el-table-column>
-      <el-table-column prop="seat" label="座位" align="center" width="100"></el-table-column>
-      <el-table-column prop="examId" label="准考证号" align="center"></el-table-column>
-      <el-table-column prop="pay" label="缴费状态" align="center">
-        <template slot-scope="scope">
-          <el-button @click="ConfirmDialog = true" size="small">前往缴费</el-button>
-        </template>
-      </el-table-column>
+    <el-table
+      :data="
+        fileList.slice((currentPage - 1) * pagesize, currentPage * pagesize)
+      "
+      style="width: 100%"
+      :default-sort="{ prop: 'date', order: 'descending' }"
+      v-loading="loading"
+    >
+      <el-table-column
+        prop="examDescription"
+        label="考试名称"
+        align="center"
+        width="200"
+      ></el-table-column>
+      <el-table-column
+        prop="examLocation"
+        label="考试地点"
+        align="center"
+        width="200"
+      ></el-table-column>
+      <el-table-column
+        prop="examStartTime"
+        label="考试开始时间"
+        align="center"
+        width="150"
+      ></el-table-column>
+      <el-table-column
+        prop="examEndTime"
+        label="考试结束时间"
+        align="center"
+        width="150"
+      ></el-table-column>
+      <el-table-column
+        prop="examAnnounce"
+        label="成绩公布日期"
+        align="center"
+        width="250"
+      ></el-table-column>
+      <el-table-column
+        prop="location"
+        label="座位"
+        align="center"
+        width="100"
+      ></el-table-column>
+      <el-table-column
+        prop="examLocationId"
+        label="准考证"
+        align="center"
+      ></el-table-column>
     </el-table>
-    <el-dialog :visible.sync="ConfirmDialog" width="400px">
-      <el-row style="font-size: medium;">请确认缴费信息：</el-row>
-      <el-row style="padding-top: 15px;">姓名：唐鹏程</el-row>
-      <el-row>考试名称：大学生英语六级考试</el-row>
-      <el-row>考试地点：南开大学津南校区</el-row>
-      <el-row>考试时间：2023-04-23</el-row>
-      <el-row style="padding-bottom: 15px;">共需缴费：20元</el-row>
-      <el-button size="small" align="center" style="margin-left: 200px;margin-top: 20px;" type="primary"
-        @click="PayDialog = true, ConfirmDialog = false">确认缴费</el-button>
-      <el-button size="small" align="center" style="margin-top: 20px;" @click="ConfirmDialog = false">取消</el-button>
-    </el-dialog>
-    <el-dialog :visible.sync="PayDialog" width="400px">
-      <img :src="require('@/assets/pay.png')" width="300px" height="400px">
-    </el-dialog>
-    <el-pagination @current-change="handleCurrentChange" :current-page="currentPage" :page-size="pagesize" background
-      align="center" layout="total, prev, pager, next, jumper" :total="pageTotal">
+    <el-pagination
+      @current-change="handleCurrentChange"
+      :current-page="currentPage"
+      :page-size="pagesize"
+      background
+      align="center"
+      layout="total, prev, pager, next, jumper"
+      :total="pageTotal"
+    >
     </el-pagination>
   </div>
 </template>
@@ -43,19 +72,8 @@ export default {
   data() {
     return {
       loading: false,
-      ConfirmDialog: false,
-      PayDialog: false,
       //归档表
-      fileList: [
-        {
-          examDescription: '大学生英语六级考试',
-          examLocation: '南开大学津南校区B202',
-          examStartTime: '2023-04-23 9:00',
-          examRegiTime: '2023-04-23 8:30',
-          seat: '24',
-          examId: '201918701'
-        }
-      ],
+      fileList: [],
       //考试信息表
       examList: [],
       //初始页
@@ -77,7 +95,11 @@ export default {
     }),
   },
   mounted: function () {
-
+    this.getRegistrationList();
+    var that = this;
+    setTimeout(function () {
+      that.getLocation();
+    }, 300);
   },
   methods: {
     //获取还在报名的考试信息

@@ -63,6 +63,33 @@ public class InitServiceImpl implements InitService {
 
     @Override
     public void init() {
+
+        //初始化考试大类信息以及对应频道
+        for (ExamTypeEnum examType:ExamTypeEnum.values()) {
+
+            if (!examTypeRepo.findByExamTypeName(examType.getName()).isPresent()) {
+                ExamTypeDO examTypeDO =  new ExamTypeDO();
+                examTypeDO.setExamTypeId(bizIdFactory.getExamTypeId());
+                examTypeDO.setExamLimit("本校大一至大四学生");
+                examTypeDO.setExamTypeName(examType.getName());
+                examTypeDO.setExamTypeDescription(examType.getDescription());
+                examTypeRepo.save(examTypeDO);
+            }
+
+            //存在该考试类型 录入频道
+            Optional<ExamTypeDO> optional = examTypeRepo.findByExamTypeName(examType.getName());
+            if (optional.isPresent()){
+                String examTypeId = optional.get().getExamTypeId();
+                if (!channelRepo.existsByExamTypeId(examTypeId)) {
+                    ChannelDO channelDO = new ChannelDO();
+                    channelDO.setExamTypeId(examTypeId);
+                    channelDO.setChannel(examType.getName());
+                    channelDO.setChannelId(bizIdFactory.getChannelId());
+                    channelRepo.save(channelDO);
+                }
+            }
+
+        }
         //初始化角色信息
         for (RoleTypeEnum roleType : RoleTypeEnum.values()) {
             if (!roleRepo.findByName(roleType.getName()).isPresent())
@@ -92,15 +119,15 @@ public class InitServiceImpl implements InitService {
        List<ExamTypeDO> examTypes =  examTypeRepo.findAll();
 
         for (ExamTypeDO examType:examTypes) {
-            redisUtil.zAdd(EXAM_TYPE_PAGE,EXAM_TYPE_ID + examType.getExamId() ,examType.getId());
-            redisUtil.hPut(EXAM_TYPE,EXAM_TYPE_ID + examType.getExamId(), JSON.toJSONString(examType.ToExamTypeBO()));
+            redisUtil.zAdd(EXAM_TYPE_PAGE,EXAM_TYPE_ID + examType.getExamTypeId() ,examType.getId());
+            redisUtil.hPut(EXAM_TYPE,EXAM_TYPE_ID + examType.getExamTypeId(), JSON.toJSONString(examType.ToExamTypeBO()));
         }
 
        List<ExamDetailDO> examDetails =  examDetailRepo.findAll();
         for (ExamDetailDO examDetailDO:examDetails) {
             //写入cache
-            redisUtil.zAdd(EXAM_DETAIL_PAGE, EXAM_DETAIL_ID + examDetailDO.getExamId(),examDetailDO.getId());
-            redisUtil.hPut(EXAM_DETAIL, EXAM_DETAIL_ID + examDetailDO.getExamId() , JSON.toJSONString(examDetailDO.ToExamDetailBO()));
+            redisUtil.zAdd(EXAM_DETAIL_PAGE, EXAM_DETAIL_ID + examDetailDO.getExamDetailId(),examDetailDO.getId());
+            redisUtil.hPut(EXAM_DETAIL, EXAM_DETAIL_ID + examDetailDO.getExamDetailId() , JSON.toJSONString(examDetailDO.ToExamDetailBO()));
 
         }
 

@@ -14,17 +14,20 @@
     <el-popover popper-class="popoverBGC" placement="bottom" width="150" trigger="hover" content="添加考试信息" :close-delay=3>
       <el-button type="info" icon="el-icon-message" @click="beforeSendExamDetail" circle slot="reference"></el-button>
     </el-popover>
+    <el-popover popper-class="popoverBGC" placement="bottom" width="150" trigger="hover" content="查看全部考试" :close-delay=3>
+      <el-button icon="el-icon-search" @click="searchExamDetail" circle slot="reference"></el-button>
+    </el-popover>
 
     <!-- 添加考试的dialog -->
     <el-dialog title="添加考试" :visible.sync="adddialogFormVisible">
       <el-form :model="form">
-        <el-form-item label="考试日期" :label-width="formLabelWidth">
+        <el-form-item label="考试名称" :label-width="formLabelWidth">
           <el-input v-model="form.examTypeName" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="考试场地" :label-width="formLabelWidth">
+        <el-form-item label="考试描述" :label-width="formLabelWidth">
           <el-input v-model="form.examTypeDescription" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="考试类型" :label-width="formLabelWidth">
+        <el-form-item label="考试限制" :label-width="formLabelWidth">
           <el-input v-model="form.examLimit" autocomplete="off" @keyup.enter.native="addTestType"></el-input>
         </el-form-item>
       </el-form>
@@ -40,10 +43,10 @@
         <el-form-item label="考试名称" :label-width="formLabelWidth">
           <el-input v-model="u_form.u_examTypeName" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="考试时间" :label-width="formLabelWidth">
+        <el-form-item label="考试描述" :label-width="formLabelWidth">
           <el-input v-model="u_form.u_examTypeDescription" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="考试地点" :label-width="formLabelWidth">
+        <el-form-item label="考试限制" :label-width="formLabelWidth">
           <el-input v-model="u_form.u_examLimit" autocomplete="off" @keyup.enter.native="updateTestType"></el-input>
         </el-form-item>
       </el-form>
@@ -141,18 +144,17 @@
       </el-table>
     </el-drawer>
 
-    <el-table ref="multipleTable" :data="
-      testList.slice((currentPage - 1) * pagesize, currentPage * pagesize)
-    " style="width: 100%" @selection-change="handleSelectionChange" tooltip-effect="dark">
+    <el-table v-loading="loading" ref="multipleTable" :data="testList.slice((currentPage - 1) * pagesize, currentPage * pagesize)
+      " style="width: 100%" @selection-change="handleSelectionChange" tooltip-effect="dark">
       <el-table-column type="selection" width="50" align="center" />
-      <el-table-column type="index" label="场次编号" width="80" align="center"></el-table-column>
-      <el-table-column prop="examType" label="考试类型" align="center">
+      <el-table-column type="index" label="序号" width="100" align="center"></el-table-column>
+      <el-table-column prop="examTypeName" label="考试名称" align="center">
       </el-table-column>
-      <el-table-column prop="examAddress" label="考试场地" width="300" align="center">
+      <el-table-column prop="examTypeDescription" label="考试描述" align="center">
       </el-table-column>
-      <el-table-column prop="examTime" label="考试时间" align="center">
+      <el-table-column prop="examLimit" label="考试限制" align="center">
       </el-table-column>
-      <el-table-column prop="examNum" label="考试人数" align="center">
+      <el-table-column prop="number" label="考试消息数量" align="center">
       </el-table-column>
     </el-table>
     <el-pagination align="center" @current-change="handleCurrentChange" :current-page="currentPage" :page-size="pagesize"
@@ -175,20 +177,20 @@ export default {
       detailList: [],
       loading: false,
       form: {
-        //考试类型
-        examType: "",
-        //考试场地
-        examAdress: "",
-        //考试时间
-        examTime: "",
+        //考试名称
+        examTypeName: "",
+        //考试描述
+        examTypeDescription: "",
+        //考试限制
+        examLimit: "",
       },
       //更新表
       u_form: {
         //需要id更新
         u_examTypeId: "",
         u_examTypeName: "",
-        u_examAddress: "",
-        u_examTime: "",
+        u_examTypeDescription: "",
+        u_examLimit: "",
       },
       //初始页
       currentPage: 1,
@@ -256,20 +258,43 @@ export default {
           Authorization: this.print.Authorization,
         },
         method: "get",
+        //限制页大小，待改善
+        //参数 examTypeName:考试类型 examTypeDescription:考试类型描述 examLimit:考试限制
         url: "/api/exam",
         params: {
           pageNum: 0,
-          pageSize: 10000,
+          pageSize: 1000000,
         },
       }).then(
         function (response) {
           that.testList = response.data.data;
           that.pageTotal = response.data.data.length;
+          that.getExamDetailNum();
         },
         function (err) {
           that.$message.error("获取失败");
         }
       );
+    },
+
+    getExamDetailNum: function () {
+      var that = this;
+      this.testList.forEach((item) => {
+        axios({
+          headers: { Authorization: this.print.Authorization },
+          method: "get",
+          url: "/api/examDetail?examTypeId=" + item.examTypeId,
+        }).then(
+          function (reponse) {
+            that.$set(item, "number", reponse.data.data.length);
+            that.loading = false;
+          },
+          function (err) {
+            that.$message.error("获取信息数量失败");
+            that.loading = false;
+          }
+        );
+      });
     },
 
     handleSelectionChange(val) {
@@ -301,9 +326,9 @@ export default {
         method: "post",
         url: "/api/exam",
         params: {
-          examType: this.form.examType,
-          examAddress: this.form.examAddress,
-          examTime: this.form.examTime,
+          examTypeName: this.form.examTypeName,
+          examTypeDescription: this.form.examTypeDescription,
+          examLimit: this.form.examLimit,
         },
       }).then(
         function (reponse) {

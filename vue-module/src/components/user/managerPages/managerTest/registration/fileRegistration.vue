@@ -1,8 +1,7 @@
 <template>
   <div>
-    <el-table :data="
-      fileList.slice((currentPage - 1) * pagesize, currentPage * pagesize)
-    " style="width: 100%" v-loading="loading">
+    <el-table :data="fileList.slice((currentPage - 1) * pagesize, currentPage * pagesize)
+      " style="width: 100%" v-loading="loading">
       <el-table-column prop="examDescription" label="考试名称" align="center"></el-table-column>
       <el-table-column prop="examLocation" label="考试地点" align="center"></el-table-column>
       <el-table-column prop="examStartTime" label="开始时间" align="center" sortable></el-table-column>
@@ -20,7 +19,6 @@
         <el-table-column type="index"></el-table-column>
         <el-table-column prop="realName" label="学生姓名"></el-table-column>
         <el-table-column prop="major" label="学生专业"></el-table-column>
-        <el-table-column prop="className" label="学生班级"></el-table-column>
         <el-table-column prop="stuNo" label="学生学号"></el-table-column>
         <el-table-column prop="email" label="联系方式"></el-table-column>
       </el-table>

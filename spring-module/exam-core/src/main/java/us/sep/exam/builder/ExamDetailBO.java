@@ -11,16 +11,18 @@ import lombok.NoArgsConstructor;
 @Builder
 public class ExamDetailBO  {
 
-    private String examId;
+    private String examTypeId;
 
-    private String examTypeName;
+    private String examDescription;
 
-    private String examTime;
+    private String examDetailId;
 
-    private String examTotalNum;
+    private String examStartTime;
 
-    private String examPresentNum;
+    private String examEndTime;
 
-    private String examState;
+    private String examLocation;
+
+    private String examAnnounce;
 
 }

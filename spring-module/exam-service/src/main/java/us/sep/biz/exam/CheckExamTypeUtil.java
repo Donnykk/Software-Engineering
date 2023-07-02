@@ -18,7 +18,7 @@ public class CheckExamTypeUtil {
         if (examTypeEnum.getName().equals(examType))
             return true;
         }
-        return examTypeRepo.existsByExamType(examType);
+        return examTypeRepo.existsByExamTypeName(examType);
     }
 
     /**
@@ -44,6 +44,6 @@ public class CheckExamTypeUtil {
             if (examTypeEnum.getName().equals(name))
                 return false;
         }
-        return examTypeRepo.existsByExamType(name);
+        return examTypeRepo.existsByExamTypeName(name);
     }
 }

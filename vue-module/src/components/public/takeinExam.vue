@@ -135,8 +135,8 @@
                 学号： {{ personInfo.stuNo }}<br />
                 身份证号： {{ personInfo.identificationNumber }}<br />
                 考试科目： {{ examDescription }}<br />
-                考生学校： 杭电信工<br />
-                考试地点: 杭州电子科技大学信息工程学院<br />
+                考生学校： 南开大学<br />
+                考试地点: 南开大学津南校区<br />
                 专 业： {{ personInfo.major }}<br />
                 专业班级：{{ personInfo.className }}
               </td>
@@ -443,12 +443,31 @@ export default {
     },
 
     finishRegistration: function () {
-      this.$notify({
-        title: "报名成功",
-        message: "请记住考试信息，忘记可前往个人中心个人通知的考试报名中查询",
-        duration: 0,
+      let that = this;
+      axios({
+        headers: { Authorization: this.print.Authorization },
+        method: "post",
+        url: "/api/myBill",
+        params: {
+          userId: '202306031721598378076010012024',
+          examTypeId: '202010231640241316026910022020',
+          examDetailId: '202010291618393222725510032020',
+          realName: 'zxp',
+          examDescription: '英语四六级考试',
+          myMoney: 200,
+          myState: false,
+        },
+      }).then(function (response) {
+        that.$message({
+          message: "报名成功，请及时缴费",
+          type: "success",
+        });
+        that.$router.push({ name: "homepage" });
+      },
+      function (err) {
+        that.$message.error("报名失败，请重新尝试");
+        that.$router.push({ name: "homepage" });
       });
-      this.$router.push({ name: "homepage" });
     },
   },
 };

@@ -4,10 +4,16 @@
       <el-header></el-header>
       <el-main>
         <el-timeline reverse>
-          <el-timeline-item v-for="(item, index) in $parent.messageList" :key="index" :timestamp="item.subData"
-            placement="top">{{ item.subDate }}<br /><small><el-tag effect="plain" :type="item.type">{{
-              item.label
-            }}</el-tag></small>
+          <el-timeline-item
+            v-for="(item, index) in $parent.messageList"
+            :key="index"
+            :timestamp="item.subData"
+            placement="top"
+            >{{ item.subDate }}<br /><small
+              ><el-tag effect="plain" :type="item.type">{{
+                item.label
+              }}</el-tag></small
+            >
             <el-card>
               <h4>
                 {{ item.title }}
@@ -33,9 +39,9 @@ export default {
   data() {
     return {};
   },
-  created: function () { },
+  created: function () {},
   watch: {},
-  mounted: function () { },
+  mounted: function () {},
   methods: {},
 };
 </script>

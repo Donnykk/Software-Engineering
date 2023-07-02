@@ -24,7 +24,7 @@ public interface BizIdFactory {
      *
      * @return
      */
-    String getExamId();
+    String getExamTypeId();
 
 
     /**

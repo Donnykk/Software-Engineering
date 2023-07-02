@@ -9,15 +9,15 @@ import java.util.Optional;
 @Repository
 public interface ExamTypeRepo extends JpaRepository<ExamTypeDO,Long> {
 
-    Optional<ExamTypeDO> findByExamId(String examTypeId);
+    Optional<ExamTypeDO> findByExamTypeId(String examTypeId);
 
-    Optional<ExamTypeDO> findByExamType(String name);
+    Optional<ExamTypeDO> findByExamTypeName(String name);
 
-    boolean existsByExamId(String examTypeId);
+    boolean existsByExamTypeId(String examTypeId);
 
-    boolean existsByExamType(String examType);
+    boolean existsByExamTypeName(String examTypeName);
 
-    void deleteByExamId(String examTypeId);
+    void deleteByExamTypeId(String examTypeId);
 
-    void deleteByExamType(String examType);
+    void deleteByExamTypeName(String examTypeName);
 }

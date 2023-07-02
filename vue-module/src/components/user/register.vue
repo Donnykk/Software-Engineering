@@ -23,25 +23,24 @@
           </el-form-item>
         </div>
         <div class="form-group">
-          <el-form-item prop="fullName">别名
-            <el-input type="text" v-model="registerForm.fullName" autocomplete="off" placeholder="请输入别名" />
+          <el-form-item prop="fullName">真实姓名
+            <el-input type="text" v-model="registerForm.fullName" placeholder="请输入真实姓名" />
           </el-form-item>
         </div>
         <div class="form-group">
           <el-form-item prop="email">邮箱
-            <el-input type="text" v-model="registerForm.email" autocomplete="off" placeholder="请输入邮箱" />
+            <el-input type="text" v-model="registerForm.email" placeholder="请输入邮箱" />
           </el-form-item>
         </div>
         <div class="form-group">
           <el-form-item prop="password">密码
-            <el-input type="password" v-model="registerForm.password" autocomplete="off" placeholder="请输入密码"
-              show-password />
+            <el-input type="password" v-model="registerForm.password" placeholder="请输入密码" show-password />
           </el-form-item>
         </div>
         <div class="form-group">
           <el-form-item prop="password_confirm">密码验证
-            <el-input type="password" v-model="registerForm.password_confirm" autocomplete="off" placeholder="请再次输入密码"
-              show-password @keyup.enter="register" />
+            <el-input type="password" v-model="registerForm.password_confirm" placeholder="请再次输入密码" show-password
+              @keyup.enter="register" />
           </el-form-item>
         </div>
         <br />
@@ -91,7 +90,7 @@ export default {
         userName: [
           { required: true, message: "请输入用户名", trigger: "blur" },
         ],
-        fullName: [{ required: true, message: "请输入别名", trigger: "blur" }],
+        fullName: [{ required: true, message: "请输入真实姓名", trigger: "blur" }],
         email: [
           { required: true, message: "请输入邮箱地址", trigger: "blur" },
           {

@@ -87,7 +87,7 @@ public class ExamLocationServiceImpl implements ExamLocationService {
 
     @Override
     public List<ExamLocationBO> findByExamDetailId(ExamLocationRequest request) {
-        if (!examDetailRepo.existsByExamId(request.getExamDetailId()) )
+        if (!examDetailRepo.existsByExamDetailId(request.getExamDetailId()) )
             throw new CustomizeException(CommonResultCode.UNFOUNDED,"不存在该次考试");
         if (!examLocationRepo.existsByExamDetailId(request.getExamDetailId()))
             throw new CustomizeException(CommonResultCode.UNFOUNDED,"该次考试尚未录入座位");
@@ -128,7 +128,7 @@ public class ExamLocationServiceImpl implements ExamLocationService {
         if (!userExamEntryRepo.existsByUserExamEntryId(request.getUserExamEntryId()))
             throw new CustomizeException(CommonResultCode.UNFOUNDED,"不存在该用户报名id");
 
-        if (!examDetailRepo.existsByExamId(request.getExamDetailId()) )
+        if (!examDetailRepo.existsByExamDetailId(request.getExamDetailId()) )
             throw new CustomizeException(CommonResultCode.UNFOUNDED,"不存在该次考试");
 
         if (!userRepo.existsByUserId(request.getUserId()))
@@ -189,7 +189,7 @@ public class ExamLocationServiceImpl implements ExamLocationService {
     @Transactional(rollbackFor = Exception.class)
     public List<ExamLocationBO> deleteByExamDetailId(String examDetailId) {
 
-        if (!examDetailRepo.existsByExamId(examDetailId) )
+        if (!examDetailRepo.existsByExamDetailId(examDetailId) )
             throw new CustomizeException(CommonResultCode.UNFOUNDED,"不存在该次考试");
         if (!examLocationRepo.existsByExamDetailId(examDetailId))
             throw new CustomizeException(CommonResultCode.UNFOUNDED,"该次考试尚未录入座位");

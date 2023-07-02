@@ -24,7 +24,7 @@ Vue.config.productionTip = false
 Vue.prototype.$http = axios
 axios.defaults.withCredentials = true
 Vue.use(Element, axios)
-Vue.use(VueDirectiveImagePreviewer) 
+Vue.use(VueDirectiveImagePreviewer)
 Vue.use(VueCookies)
 Vue.prototype.$echarts = echarts
 Vue.component('v-chart', ECharts)

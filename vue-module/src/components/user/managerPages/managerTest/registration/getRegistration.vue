@@ -1,25 +1,38 @@
 <template>
   <div>
-    <el-table :data="examList.slice(
+    <el-table :data="registrationList.slice(
       (currentPage - 1) * pagesize,
       currentPage * pagesize
-    )" style="width: 100%" @cell-click="ifUpdateState" v-loading="loading">
-      <el-table-column prop="examId" label="考试编号" align="center">
+    )
+      " style="width: 100%" @cell-click="ifUpdateState" v-loading="loading">
+      <el-table-column prop="contact" label="联系人" align="center" width="100">
       </el-table-column>
-      <el-table-column prop="examTypeName" label="考试名称" align="center" width="200">
+      <el-table-column prop="examDescription" label="考试内容" align="center">
       </el-table-column>
-      <el-table-column prop="examTotalNum" label="总名额" align="center">
+      <el-table-column prop="number" label="可报名总人数" sortable align="center" width="150">
       </el-table-column>
-      <el-table-column prop="examPresentNum" label="剩余名额" align="center">
+      <el-table-column prop="last" label="剩余人数" sortable align="center" width="120">
       </el-table-column>
-      <el-table-column prop="examTime" label="时间" align="center">
+      <el-table-column prop="term" label="学期" :formatter="termFormatter" sortable align="center">
       </el-table-column>
-      <el-table-column prop="examState" label="状态" align="center">
-      </el-table-column>
-      <el-table-column fixed="right" label="操作" align="center" width="180">
+      <el-table-column label="状态" width="150" align="center">
         <template slot-scope="scope">
+          <template v-if="scope.row.ifUpdate">
+            <el-tag :type="scope.row.type">{{ scope.row.stateUTF }}</el-tag>
+          </template>
+          <template v-else>
+            <el-select v-model="state" placeholder="请选择">
+              <el-option v-for="item in stateOptions" :key="item.value" :label="item.label" :value="item.value">
+              </el-option>
+            </el-select>
+          </template>
+        </template>
+      </el-table-column>
+      <el-table-column fixed="right" label="操作" align="center">
+        <template slot-scope="scope">
+          <el-button @click="updateState(scope.row)" size="small" v-if="!scope.row.ifUpdate">修改</el-button>
           <el-button type="danger" @click="deleteRegistrationRelease(scope.row)" size="small">删除</el-button>
-          <el-button type="info" @click="userListDialog = true" size="small">报名情况</el-button>
+          <el-button type="info" @click="getRegistrationUserList(scope.row)" size="small">报名进度</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -28,12 +41,22 @@
     </el-pagination>
 
     <el-dialog title="报名表" height="500" :visible.sync="userListDialog" v-loading="examLoading">
-      <el-table :data="allReg" align="center">
+      <el-form :inline="true" class="demo-form-inline">
+        <el-form-item label="任课教师">
+          <el-input v-model="teacher" placeholder="任课教师"></el-input>
+        </el-form-item>
+        <el-form-item>
+          <el-button type="primary" @click="arrangeSeat">一键添加考场位置</el-button>
+        </el-form-item>
+      </el-form>
+      <el-table :data="allReg">
         <el-table-column type="index"></el-table-column>
         <el-table-column prop="realName" label="学生姓名"></el-table-column>
+        <el-table-column prop="major" label="学生专业"></el-table-column>
+        <el-table-column prop="className" label="学生班级"></el-table-column>
         <el-table-column prop="stuNo" label="学生学号"></el-table-column>
-        <el-table-column prop="location" label="考场" width="200px"></el-table-column>
-        <el-table-column prop="seat" label="座位"></el-table-column>
+        <el-table-column prop="email" label="联系方式"></el-table-column>
+        <el-table-column prop="location" label="考场座位"></el-table-column>
         <el-table-column>
           <template slot-scope="scope">
             <el-button icon="el-icon-delete" size="mini" type="danger" @click="deleteUserReg(scope.row)"></el-button>
@@ -63,72 +86,32 @@ export default {
       pagesize: 10,
       //数组总数
       pageTotal: 0,
+
+      //状态表
+      stateOptions: [
+        {
+          value: "START",
+          label: "报名开始",
+        },
+        {
+          value: "FINISH",
+          label: "报名结束",
+        },
+        {
+          value: "CANCEL",
+          label: "报名取消",
+        },
+        {
+          value: "PREPARE",
+          label: "报名准备",
+        },
+      ],
       state: "",
+
       //全用户表
       allUser: [],
       //全报名表
-      allReg: [
-        {
-          realName: "唐鹏程",
-          stuNo: "2011181",
-          location: "南开大学津南校区 B402",
-          seat: "23",
-        },
-        {
-          realName: "张三",
-          stuNo: "2011188",
-          location: "南开大学津南校区 B402",
-          seat: "28",
-        },
-        {
-          realName: "林俊杰",
-          stuNo: "2011132",
-          location: "南开大学津南校区 B402",
-          seat: "32",
-        },
-        {
-          realName: "陶喆",
-          stuNo: "2029011",
-          location: "南开大学津南校区 B402",
-          seat: "43",
-        },
-        {
-          realName: "怪兽",
-          stuNo: "2011231",
-          location: "南开大学津南校区 B402",
-          seat: "11",
-        },
-        {
-          realName: "陈信宏",
-          stuNo: "2013221",
-          location: "南开大学津南校区 B402",
-          seat: "27",
-        },
-        {
-          realName: "周杰伦",
-          stuNo: "2021181",
-          location: "南开大学津南校区 B402",
-          seat: "22",
-        },
-        {
-          realName: "结巴",
-          stuNo: "2021141",
-          location: "南开大学津南校区 B402",
-          seat: "12",
-        },
-        {
-          realName: "石头",
-          stuNo: "2021141",
-          location: "南开大学津南校区 B402",
-          seat: "12",
-        },
-        {
-          realName: "李四",
-          stuNo: "2021241",
-          location: "南开大学津南校区 B402",
-          seat: "9",
-        },
-      ],
+      allReg: [],
       //考场表
       locationList: [],
       //显示用户报名表dialog
@@ -155,6 +138,12 @@ export default {
       this.loading = true;
       axios
         .all([
+          //报名表
+          axios({
+            headers: { Authorization: this.print.Authorization },
+            method: "get",
+            url: "/api/examEntry/all?pageNum&pageSize=1000000",
+          }),
           //考试信息表
           axios({
             headers: { Authorization: this.print.Authorization },
@@ -163,15 +152,104 @@ export default {
           }),
         ])
         .then(
-          axios.spread(function (examResponse) {
+          axios.spread(function (regResponse, examResponse) {
+            that.registrationList = regResponse.data.data;
+            that.pageTotal = regResponse.data.data.length;
             that.examList = examResponse.data.data;
-            that.loading = false;
+            that.getListToge();
           })
         )
         .catch((err) => {
           that.$message.error("获取失败");
-          that.loading = false;
         });
+    },
+
+    getListToge: function () {
+      this.registrationList.forEach((item) => {
+        for (var i = 0; i < this.examList.length; i++) {
+          if (this.examList[i].examDetailId == item.examDetailId) {
+            this.$set(
+              item,
+              "examDescription",
+              this.examList[i].examDescription
+            );
+
+            if (item.state == "START") {
+              this.$set(item, "stateUTF", "可报名");
+              this.$set(item, "type", "success");
+            } else if (item.state == "FINISH") {
+              this.$set(item, "stateUTF", "报名结束");
+              this.$set(item, "type", "danger");
+            } else if (item.state == "CANCEL") {
+              this.$set(item, "stateUTF", "报名取消");
+              this.$set(item, "type", "info");
+            } else if (item.state == "PREPARE") {
+              this.$set(item, "stateUTF", "准备中");
+              this.$set(item, "type", "primary");
+            }
+            //是否可编辑单元格
+            this.$set(item, "ifUpdate", true);
+          }
+        }
+
+        //获取报名考试剩余人数
+        var that = this;
+        if (item.number == 0) {
+          this.$set(item, "last", 0);
+        } else if (item.number <= 1000) {
+          axios({
+            headers: { Authorization: this.print.Authorization },
+            method: "get",
+            url: "/api/userExamEntry/remain?examEntryId=" + item.examEntryId,
+          }).then(
+            function (reponse) {
+              that.$set(item, "last", reponse.data.data);
+            },
+            function (err) {
+              that.$set(item, "last", "不可报名状态");
+            }
+          );
+        } else {
+          axios({
+            headers: { Authorization: this.print.Authorization },
+            method: "get",
+            url:
+              "/api/userExamEntry/cache/remain?examEntryId=" + item.examEntryId,
+          }).then(
+            function (reponse) {
+              that.$set(item, "last", reponse.data.data);
+            },
+            function (err) {
+              that.$set(item, "last", item.number);
+            }
+          );
+        }
+
+        //判断剩余人数是否为0，如果为0提示
+        if (item.state == "START" && item.last == 0) {
+          this.$notify({
+            title: "提示",
+            message:
+              item.contact +
+              "发布的" +
+              item.term +
+              item.examDescription +
+              "报名人数已满",
+            duration: 0,
+          });
+        }
+      });
+      this.loading = false;
+    },
+
+    //表格数据转换
+    termFormatter(row, column) {
+      let term = row.term;
+      if (term.indexOf("SH") > 0) {
+        return term.replace("SH", "上学期");
+      } else {
+        return term.replace("FH", "下学期");
+      }
     },
 
     handleCurrentChange: function (currentPage) {
@@ -247,11 +325,21 @@ export default {
         url: "/api/examEntry?examEntryId=" + row.examEntryId,
       }).then(
         function (reponse) {
-          that.$message({
-            message: "删除成功",
-            type: "success",
-          });
-          that.reload();
+          axios({
+            headers: { Authorization: that.print.Authorization },
+            method: "delete",
+            url: "/api/standardAnswer/real?examDetailId=" + row.examDetailId,
+          }).then(function (response) {
+            that.$message({
+              message: "删除成功",
+              type: "success",
+            });
+            that.reload();
+          },
+            function (err) {
+              that.$message.error("删除失败");
+            }
+          )
         },
         function (err) {
           that.$message.error("删除失败");

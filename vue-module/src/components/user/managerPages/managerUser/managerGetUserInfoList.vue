@@ -1,8 +1,16 @@
 <template>
   <div>
-    <el-table :data="userData.slice((currentPage - 1) * pagesize, currentPage * pagesize)
-      " highlight-current-row style="width: 100%" :row-key="getRowKeys" :expand-row-keys="expands"
-      @expand-change="getUserDetail" v-loading="loading">
+    <el-table
+      :data="
+        userData.slice((currentPage - 1) * pagesize, currentPage * pagesize)
+      "
+      highlight-current-row
+      style="width: 100%"
+      :row-key="getRowKeys"
+      :expand-row-keys="expands"
+      @expand-change="getUserDetail"
+      v-loading="loading"
+    >
       <el-table-column type="expand">
         <template slot-scope="props">
           <el-form label-position="left" inline class="demo-table-expand">
@@ -12,52 +20,122 @@
             <el-form-item label="学生学号">
               <span> {{ props.row.stuNo }} </span>
             </el-form-item>
-            <el-form-item label="所属院校">
-              <span> {{ props.row.school }} </span>
+            <el-form-item label="学生专业">
+              <span> {{ props.row.major }} </span>
             </el-form-item>
-            <el-form-item label="身份证号">
-              <span> {{ props.row.identificationNumber }} </span> </el-form-item><br />
-            <el-button type="danger" size="small" @click="deleteUserImformation(props.row)"
-              v-if="ifHaveDetail">删除信息</el-button>
+            <el-form-item label="所属班级">
+              <span> {{ props.row.className }} </span>
+            </el-form-item>
+            <el-form-item label="身份证">
+              <span> {{ props.row.identificationNumber }} </span> </el-form-item
+            ><br />
+            <el-button
+              type="danger"
+              size="small"
+              @click="deleteUserImformation(props.row)"
+              v-if="ifHaveDetail"
+              >删除信息</el-button
+            >
           </el-form>
         </template>
       </el-table-column>
       <el-table-column type="index" width="50"> </el-table-column>
-      <el-table-column align="center" prop="userName" label="用户名" width="180"></el-table-column>
-      <el-table-column align="center" prop="fullName" label="真名" width="180"></el-table-column>
-      <el-table-column align="center" prop="email" label="用户Email"></el-table-column>
+      <el-table-column
+        align="center"
+        prop="userName"
+        label="用户名"
+        width="180"
+      ></el-table-column>
+      <el-table-column
+        align="center"
+        prop="fullName"
+        label="别名"
+        width="180"
+      ></el-table-column>
+      <el-table-column
+        align="center"
+        prop="email"
+        label="用户Email"
+      ></el-table-column>
       <el-table-column fixed="right" label="操作" width="200">
         <template slot-scope="scope">
-          <el-button @click="getFormData(scope.row), (dialog = true)" size="small">编辑</el-button>
-          <el-button type="danger" @click="deleteUser(scope.row)" size="small">删除</el-button>
+          <el-button
+            @click="getFormData(scope.row), (dialog = true)"
+            size="small"
+            >编辑</el-button
+          >
+          <el-button type="danger" @click="deleteUser(scope.row)" size="small"
+            >删除</el-button
+          >
         </template>
       </el-table-column>
     </el-table>
-    <el-pagination @current-change="handleCurrentChange" :current-page="currentPage" background align="center"
-      layout="total, prev, pager, next, jumper" :total="pageTotal">
+    <el-pagination
+      @current-change="handleCurrentChange"
+      :current-page="currentPage"
+      background
+      align="center"
+      layout="total, prev, pager, next, jumper"
+      :total="pageTotal"
+    >
     </el-pagination>
 
-    <el-drawer title="" v-loading="loading" :before-close="handleClose" :visible.sync="dialog" direction="rtl"
-      custom-class="demo-drawer" ref="drawer">
+    <el-drawer
+      title=""
+      v-loading="loading"
+      :before-close="handleClose"
+      :visible.sync="dialog"
+      direction="rtl"
+      custom-class="demo-drawer"
+      ref="drawer"
+    >
       <div class="demo-drawer__content">
         <el-form :model="form">
           <el-form-item label="学生名称" :label-width="formLabelWidth">
-            <el-input v-model="form.realName"></el-input>
+            <el-input v-model="form.realName" autocomplete="off"></el-input>
           </el-form-item>
           <el-form-item label="学生学号" :label-width="formLabelWidth">
-            <el-input v-model="form.stuNo"></el-input>
+            <el-input v-model="form.stuNo" autocomplete="off"></el-input>
           </el-form-item>
-          <el-form-item label="所属院校" :label-width="formLabelWidth">
-            <el-input v-model="form.school"></el-input>
-          </el-form-item>
+          <el-form-item label="学生专业" :label-width="formLabelWidth">
+            <el-select
+              v-model="form.major"
+              placeholder="请选择"
+              @change="getClassList(form.major)"
+            >
+              <el-option
+                v-for="item in majorList"
+                :key="item.discipline"
+                :label="item.major + '系' + item.discipline"
+                :value="item.discipline"
+              >
+              </el-option> </el-select
+          ></el-form-item>
+          <el-form-item label="专业班级" :label-width="formLabelWidth">
+            <el-select v-model="form.className" placeholder="请选择">
+              <el-option
+                v-for="item in classList"
+                :key="item"
+                :label="item"
+                :value="item"
+              >
+              </el-option> </el-select
+          ></el-form-item>
           <el-form-item label="身份证号" :label-width="formLabelWidth">
-            <el-input v-model="form.identificationNumber"></el-input>
+            <el-input
+              v-model="form.identificationNumber"
+              autocomplete="off"
+            ></el-input>
           </el-form-item>
         </el-form>
         <center>
           <el-button @click="cancelForm">取 消</el-button>
-          <el-button type="primary" @click="$refs.drawer.closeDrawer()" :loading="loading">{{ loading ? "提交中 ..." : "确 定"
-          }}</el-button>
+          <el-button
+            type="primary"
+            @click="$refs.drawer.closeDrawer()"
+            :loading="loading"
+            >{{ loading ? "提交中 ..." : "确 定" }}</el-button
+          >
         </center>
       </div>
     </el-drawer>
@@ -98,11 +176,17 @@ export default {
         userName: "",
         realName: "",
         stuNo: "",
-        school: "",
+        major: "",
+        className: "",
         identificationNumber: "",
       },
       formLabelWidth: "70px",
       timer: null,
+
+      //获得专业列表
+      majorList: [],
+      //获得班级列表
+      classList: [],
       //是否有个人信息 0无 1有
       ifHaveInfo: 0,
     };
@@ -129,16 +213,32 @@ export default {
             method: "get",
             url: "/api/users?pageNum=0&pageSize=100000",
           }),
+          //获取全专业表
+          axios({
+            headers: { Authorization: this.print.Authorization },
+            method: "get",
+            url: "/api/major/all?pageNum&pageSize=100000",
+          }),
         ])
         .then(
-          axios.spread(function (userListResponse) {
+          axios.spread(function (userListResponse, majorResponse) {
             //用户列表处理
             that.userData = userListResponse.data.data;
             that.pageTotal = that.userData.length;
             that.loading = false;
+            //专业表处理
+            for (var i = 0; i < majorResponse.data.data.length; i++) {
+              that.majorList[i] = {
+                major: majorResponse.data.data[i].major,
+                discipline: majorResponse.data.data[i].discipline,
+              };
+            }
+            that.majorList = that.unique(that.majorList);
           })
         )
         .catch((err) => {
+          that.loading = false;
+          that.$message.error("获取失败");
         });
     },
 
@@ -176,7 +276,8 @@ export default {
             if (response.data.data != null) {
               row.realName = response.data.data.realName;
               row.stuNo = response.data.data.stuNo;
-              row.school = response.data.data.school;
+              row.major = response.data.data.major;
+              row.className = response.data.data.className;
               row.identificationNumber =
                 response.data.data.identificationNumber;
             }
@@ -223,7 +324,9 @@ export default {
         data: {
           username: row.userName,
           realName: row.realName,
-          school: row.school,
+          className: row.className,
+          stuNo: row.stuNo,
+          major: row.major,
           identificationNumber: row.identificationNumber,
         },
         transformRequest: [
@@ -337,9 +440,8 @@ export default {
             }, 400);
           }, 2000);
         })
-        .catch((_) => { });
+        .catch((_) => {});
     },
-
     cancelForm() {
       this.loading = false;
       this.dialog = false;
@@ -352,7 +454,8 @@ export default {
         username: "",
         realName: "",
         stuNo: "",
-        school: "",
+        major: "",
+        className: "",
         identificationNumber: "",
       };
       this.loading = true;
@@ -366,12 +469,14 @@ export default {
         function (infoResponse) {
           //个人信息结果处理
           if (infoResponse.data.data != null) {
-            //姓名 学号 院校 身份证
+            //姓名 学号 专业 班级 身份证
             that.form.realName = infoResponse.data.data.realName;
             that.form.stuNo = infoResponse.data.data.stuNo;
-            that.form.school = infoResponse.data.data.school;
+            that.form.major = infoResponse.data.data.major;
+            that.form.className = infoResponse.data.data.className;
             that.form.identificationNumber =
               infoResponse.data.data.identificationNumber;
+
             that.form.username = row.userName;
           }
           that.ifHaveInfo = 1;
@@ -384,13 +489,39 @@ export default {
             username: row.userName,
             realName: "",
             stuNo: "",
-            school: "",
+            major: "",
+            className: "",
             identificationNumber: "",
           };
           that.loading = false;
           that.ifHaveInfo = 0;
         }
       );
+    },
+
+    getClassList: function (major) {
+      this.form.className = "";
+      if (major != "") {
+        this.classList = [];
+        let value = "";
+        this.majorList.forEach((item) => {
+          if (item.discipline == major) {
+            this.value = item.major;
+          }
+        });
+        var that = this;
+        axios({
+          headers: { Authorization: this.print.Authorization },
+          method: "get",
+          url: "/api/major?major=" + this.value,
+        }).then(function (reponse) {
+          reponse.data.data.forEach((item) => {
+            if (item.discipline == major) {
+              that.classList.push(item.className);
+            }
+          });
+        });
+      }
     },
   },
 };
@@ -400,12 +531,10 @@ export default {
 .demo-table-expand {
   font-size: 0;
 }
-
 .demo-table-expand label {
   width: 90px;
   color: #99a9bf;
 }
-
 .demo-table-expand .el-form-item {
   margin-right: 0;
   margin-bottom: 0;
