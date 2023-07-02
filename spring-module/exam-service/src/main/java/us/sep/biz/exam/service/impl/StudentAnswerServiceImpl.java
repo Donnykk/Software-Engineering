@@ -61,6 +61,22 @@ public class StudentAnswerServiceImpl implements StudentAnswerService {
     }
 
     @Transactional(rollbackFor = Exception.class)
+    public List<StudentAnswerBO> findAnswerTotal(String examDetailId)
+    {
+        List<StudentAnswerDO> studentAnswerDOS = studentAnswerRepo.findByExamDetailId(examDetailId);
+        return studentAnswerDOS.stream().map(StudentAnswerDO::ToStudentAnswerBO).collect(Collectors.toList());
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    public StudentAnswerBO updateScore(String examDetailId, String userId, int score)
+    {
+        StudentAnswerDO studentAnswerDO = studentAnswerRepo.findByExamDetailIdAndUserId(examDetailId, userId);
+        studentAnswerDO.setScore(score);
+        studentAnswerRepo.save(studentAnswerDO);
+        return studentAnswerDO.ToStudentAnswerBO();
+    }
+
+    @Transactional(rollbackFor = Exception.class)
     public List<StudentAnswerBO> findAll(int pageNum , int pageSize)
     {
         return studentAnswerRepo.findAll(PageRequest.of(pageNum,pageSize)).stream()

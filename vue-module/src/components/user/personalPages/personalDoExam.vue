@@ -126,7 +126,6 @@
 import { mapState, mapActions } from 'vuex'
 import axios from 'axios'
 // 主页标题图片
-import test from '../../../assets/answers/2022_12.jpg'
 import html_top_imgUrl from '../../../assets/html_top.png'
 export default {
   inject: ['reload'],

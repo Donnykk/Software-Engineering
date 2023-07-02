@@ -24,7 +24,7 @@ public class UserInfoRequest {
     private String className;
 
     @NotBlank
-    @Size(message = "学号需要九位" ,min = 9 ,max = 9)
+    @Size(message = "学号需要七位" ,min = 7 ,max = 7)
     //学号
     private String stuNo;
 

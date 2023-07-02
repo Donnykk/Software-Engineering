@@ -51,10 +51,6 @@
                 >报名中心</router-link
               >
               <div class="dropdown-divider"></div>
-              <router-link class="dropdown-item" to="/publicGetChannel"
-                >考试频道</router-link
-              >
-              <div class="dropdown-divider"></div>
               <router-link class="dropdown-item" to="/examTips"
               >报名提示</router-link
               >
@@ -112,24 +108,6 @@
               <div class="dropdown-divider"></div>
               <router-link class="dropdown-item" to="register"
                 >前往注册界面</router-link
-              >
-            </div>
-          </li>
-          <li class="nav-item dropdown">
-            <a
-              class="nav-link"
-              href="#"
-              id="navbarDropdown"
-              role="button"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-            >
-              其他
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <router-link class="dropdown-item" to="/htmlUseInfo"
-                >网站使用须知</router-link
               >
             </div>
           </li>
@@ -343,7 +321,7 @@ export default {
             });
           },
           function (err) {
-            that.student_Name = "你不配有名字";
+            that.student_Name = "未命名";
             //获得小黑头像
             var _that = that;
             axios({

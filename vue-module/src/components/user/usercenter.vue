@@ -22,10 +22,6 @@
               <i class="el-icon-circle-check"></i>
               <span slot="title">缴费信息</span>
             </el-menu-item>
-            <el-menu-item index="/usercenter/personalProgram">
-              <i class="el-icon-s-order"></i>
-              <span slot="title">查看考试频道</span>
-            </el-menu-item>
             <el-submenu index="/usercenter/personalNotice">
               <template slot="title">
                 <i class="el-icon-s-comment"></i>
@@ -49,14 +45,6 @@
             <!-- 教师页面 -->
             <template v-if="teacher">
               <div class="dropdown-divider"></div>
-              <el-menu-item index="/usercenter/adminHomepage">
-                <i class="el-icon-reading"></i>
-                <span slot="title">主页编辑</span>
-              </el-menu-item>
-              <el-menu-item index="/usercenter/managerGetUserInfo">
-                <i class="el-icon-document-copy"></i>
-                <span slot="title">学生信息</span>
-              </el-menu-item>
               <el-submenu index="/usercenter/managerTestType">
                 <template slot="title">
                   <i class="el-icon-edit-outline"></i>
@@ -71,10 +59,6 @@
                   >
                 </el-menu-item-group>
               </el-submenu>
-              <el-menu-item index="/usercenter/managerChannel">
-                <i class="el-icon-monitor"></i>
-                <span slot="title">频道管理</span>
-              </el-menu-item>
             </template>
 
             <!-- 管理员页面 -->
@@ -87,6 +71,10 @@
               <el-menu-item index="/usercenter/adminChangeRole">
                 <i class="el-icon-help"></i>
                 <span slot="title">用户角色</span>
+              </el-menu-item>
+              <el-menu-item index="/usercenter/managerGetUserInfo">
+                <i class="el-icon-document-copy"></i>
+                <span slot="title">用户信息</span>
               </el-menu-item>
               <el-menu-item index="/usercenter/adminGetLog">
                 <i class="el-icon-printer"></i>
