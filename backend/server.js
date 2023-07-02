@@ -324,6 +324,31 @@ router.put('/api/article/:articleId', async (ctx) => {
     ctx.body = { error: 'Internal server error' };
   }
 });
+router.delete('/api/article/:articleId', async (ctx) => {
+  try {
+    const articleId = ctx.params.articleId;
+
+    // 连接到MySQL数据库
+    const connection = await mysql.createConnection({
+      host: 'localhost',
+      user: 'root',
+      password: 'Top50761',
+      database: 'test-sql'
+    });
+
+    // 删除文章
+    const sql = 'DELETE FROM articles WHERE id = ?';
+    await connection.execute(sql, [articleId]);
+
+    connection.end();
+
+    ctx.body = { message: 'Article deleted successfully' };
+  } catch (error) {
+    console.error(error);
+    ctx.status = 500;
+    ctx.body = { error: 'Internal server error' };
+  }
+});
 
 const bodyParser = require('koa-bodyparser');
 
