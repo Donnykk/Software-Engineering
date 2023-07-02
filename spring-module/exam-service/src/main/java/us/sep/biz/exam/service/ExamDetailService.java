@@ -1,6 +1,5 @@
 package us.sep.biz.exam.service;
 
-import org.springframework.transaction.annotation.Transactional;
 import us.sep.biz.exam.request.ExamDetailRequest;
 import us.sep.exam.builder.ExamDetailBO;
 
@@ -20,6 +19,6 @@ public interface ExamDetailService {
 
     void deleteByExamTypeId(String examTypeId);
 
-    @Transactional(rollbackFor = Exception.class)
-    void deleteByExamId(String ExamId);
+    void deleteByExamDetailId(String examDetailId);
+
 }

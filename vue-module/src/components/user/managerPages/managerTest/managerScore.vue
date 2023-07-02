@@ -64,18 +64,6 @@
       <el-button type="primary" size="mini" @click="beforeSetScore"
         >录入成绩</el-button
       >
-      <el-popconfirm
-        confirm-button-text="好的"
-        cancel-button-text="不用了"
-        icon="el-icon-info"
-        icon-color="red"
-        title="这将删除全部同名考试分数，你确定吗？"
-        @onConfirm="deleteScore"
-      >
-        <el-button type="danger" size="mini" slot="reference"
-          >删除全部成绩</el-button
-        >
-      </el-popconfirm>
       <el-button type="success" size="mini" @click="showLegendLine"
         >图例显示</el-button
       >
@@ -92,12 +80,6 @@
               type="primary"
               icon="el-icon-refresh"
               @click="updateStuScore(scope.row, scope.$index)"
-              size="mini"
-            ></el-button>
-            <el-button
-              type="danger"
-              icon="el-icon-delete"
-              @click="deleteStuScore(scope.row)"
               size="mini"
             ></el-button>
           </template>
@@ -167,9 +149,6 @@
         ></el-form-item>
         <el-form-item label="考试分数">
           <el-input v-model.number="examScore"></el-input>
-        </el-form-item>
-        <el-form-item label="考试分数id" hidden>
-          <el-input v-model="examScoreId"></el-input>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -264,7 +243,7 @@ export default {
           axios({
             headers: { Authorization: this.print.Authorization },
             method: "get",
-            url: "/api/examEntry/record?pageNum&pageSize",
+            url: "/api/examEntry/all?pageNum&pageSize",
           }),
           //考试信息表
           axios({
@@ -306,90 +285,78 @@ export default {
     },
 
     getScore: function (row) {
-      if (row.note == "考试报名完成") {
-        var that = this;
-        this.examDetailId = row.examDetailId;
-        this.userList = [];
-        axios
-          .all([
-            //获取用户表
-            axios({
-              headers: {
-                Authorization: this.print.Authorization,
-              },
-              method: "get",
-              url: "/api/users?pageNum&pageSize=1000000",
-            }),
-            //获取归档考试报名用户表
-            axios({
-              headers: { Authorization: this.print.Authorization },
-              method: "get",
-              url:
-                "/api/userExamEntry/recordByExam?examEntryId=" +
-                row.examEntryId,
-            }),
-            //获取成绩
-            axios({
-              headers: { Authorization: this.print.Authorization },
-              method: "get",
-              url: "/api/examScore/examDetail?examDetailId=" + row.examDetailId,
-            }),
-          ])
-          .then(
-            axios.spread(function (
-              userResponse,
-              userEntryReponse,
-              scoreResponse
-            ) {
-              that.allUser = userResponse.data.data;
-              that.allReg = userEntryReponse.data.data;
-              that.scoreList = scoreResponse.data.data;
-              that.userListDialog = true;
-              //显示报名人姓名
-              that.allReg.forEach((item) => {
-                for (var i = 0; i < that.allUser.length; i++) {
-                  if (item.userId == that.allUser[i].userId) {
-                    var _that = that;
-                    axios({
-                      headers: { Authorization: that.print.Authorization },
-                      method: "get",
-                      url: "/api/userInfo?username=" + that.allUser[i].userName,
-                    }).then(function (response) {
-                      _that.$set(item, "realName", response.data.data.realName);
-                      _that.$set(item, "major", response.data.data.major);
-                      _that.$set(item, "stuNo", response.data.data.stuNo);
-                      _that.$set(
-                        item,
-                        "className",
-                        response.data.data.className
-                      );
-                    });
-                    i = that.allUser.length;
-                  }
+      var that = this;
+      this.examDetailId = row.examDetailId;
+      this.userList = [];
+      axios
+        .all([
+          //获取用户表
+          axios({
+            headers: {
+              Authorization: this.print.Authorization,
+            },
+            method: "get",
+            url: "/api/users?pageNum&pageSize=1000000",
+          }),
+          //获取归档考试报名用户表
+          axios({
+            headers: {Authorization: this.print.Authorization},
+            method: "get",
+            url:
+              "/api/userExamEntry?examEntryId=" +
+              row.examEntryId,
+          }),
+          //获取成绩
+          axios({
+            headers: {Authorization: this.print.Authorization},
+            method: "get",
+            url: "/api/studentAnswer/detail?examDetailId=" + row.examDetailId,
+          }),
+        ])
+        .then(
+          axios.spread(function (
+            userResponse,
+            userEntryReponse,
+            scoreResponse
+          ) {
+            that.allUser = userResponse.data.data;
+            that.allReg = userEntryReponse.data.data;
+            that.scoreList = scoreResponse.data.data;
+            that.userListDialog = true;
+            //显示报名人姓名
+            that.allReg.forEach((item) => {
+              for (var i = 0; i < that.allUser.length; i++) {
+                if (item.userId == that.allUser[i].userId) {
+                  var _that = that;
+                  axios({
+                    headers: {Authorization: that.print.Authorization},
+                    method: "get",
+                    url: "/api/userInfo?username=" + that.allUser[i].userName,
+                  }).then(function (response) {
+                    _that.$set(item, "realName", response.data.data.realName);
+                    _that.$set(item, "major", response.data.data.major);
+                    _that.$set(item, "stuNo", response.data.data.stuNo);
+                    _that.$set(
+                      item,
+                      "className",
+                      response.data.data.className
+                    );
+                  });
+                  i = that.allUser.length;
                 }
+              }
 
-                if (that.scoreList != null) {
-                  for (var i = 0; i < that.scoreList.length; i++) {
-                    if (item.userId == that.scoreList[i].userId) {
-                      that.$set(item, "examScore", that.scoreList[i].examScore);
-                      that.$set(
-                        item,
-                        "examScoreId",
-                        that.scoreList[i].examScoreId
-                      );
-                      i = that.scoreList.length;
-                    }
+              if (that.scoreList != null) {
+                for (var i = 0; i < that.scoreList.length; i++) {
+                  if (item.userId == that.scoreList[i].userId) {
+                    that.$set(item, "examScore", that.scoreList[i].score);
+                    i = that.scoreList.length;
                   }
                 }
-              });
-            })
-          );
-      } else {
-        this.$message({
-          message: "不是已经完成的报名，无法录入成绩",
-          type: "warning",
-        });
-      }
+              }
+            });
+          })
+        );
     },
 
     beforeSetScore: function () {
@@ -473,12 +440,11 @@ export default {
             "content-type": "application/x-www-form-urlencoded",
           },
           method: "post",
-          url: "/api/examScore",
+          url: "/api/studentAnswer/getScore",
           params: {
             examDetailId: this.oneRegForm.examDetailId,
-            examScore: this.examScore,
             userId: this.oneRegForm.userId,
-            stuNo: this.oneRegForm.stuNo,
+            score: this.examScore,
           },
         }).then(
           function (response) {
@@ -493,61 +459,12 @@ export default {
         );
     },
 
-    deleteScore: function () {
-      var that = this;
-      axios({
-        headers: { Authorization: this.print.Authorization },
-        method: "delete",
-        url: "/api/examScore/examDetail?examDetailId=" + this.examDetailId,
-      }).then(
-        function (response) {
-          that.$message({
-            message: "删除学生成绩成功",
-            type: "success",
-          });
-          that.allReg.forEach((item) => {
-            that.$set(item, "examScore", "");
-          });
-        },
-        function (err) {
-          that.$message.error("删除全部成绩失败");
-        }
-      );
-    },
-
-    deleteStuScore: function (row) {
-      var that = this;
-      console.log(row);
-      axios({
-        headers: { Authorization: this.print.Authorization },
-        method: "delete",
-        url: "/api/examScore?examScoreId=" + row.examScoreId,
-      }).then(
-        function (response) {
-          that.$message({
-            message: "删除学生成绩成功",
-            type: "success",
-          });
-          that.allReg.forEach((item) => {
-            if (item.userId == row.userId) {
-              that.$set(item, "examScore", "");
-              return false;
-            }
-          });
-        },
-        function (err) {
-          that.$message.error("删除学生成绩失败");
-        }
-      );
-    },
-
     updateStuScore: function (row, index) {
       if (typeof row.examScore == "undefined") {
         this.$message.error("没有分数，无法更新");
       } else {
         this.getFormData(index + 1);
         this.examScore = row.examScore;
-        this.examScoreId = row.examScoreId;
         this.scoreDialogSecond = true;
       }
     },
@@ -556,14 +473,12 @@ export default {
       var that = this;
       axios({
         headers: { Authorization: this.print.Authorization },
-        method: "put",
-        url: "/api/examScore",
+        method: "post",
+        url: "/api/studentAnswer/getScore",
         params: {
           examDetailId: this.examDetailId,
-          examScore: this.examScore,
-          examScoreId: this.examScoreId,
           userId: this.oneRegForm.userId,
-          stuNo: this.oneRegForm.stuNo,
+          score: this.examScore,
         },
       }).then(
         function (response) {

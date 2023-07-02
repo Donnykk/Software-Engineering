@@ -18,11 +18,10 @@
               <i class="el-icon-user-solid"></i>
               <span slot="title">个人信息</span>
             </el-menu-item>
-            <el-menu-item index="/usercenter/personalProgram">
-              <i class="el-icon-s-order"></i>
-              <span slot="title">查看考试频道</span>
+            <el-menu-item index="/usercenter/myBill">
+              <i class="el-icon-circle-check"></i>
+              <span slot="title">缴费信息</span>
             </el-menu-item>
-
             <el-submenu index="/usercenter/personalNotice">
               <template slot="title">
                 <i class="el-icon-s-comment"></i>
@@ -45,41 +44,21 @@
             </el-submenu>
             <!-- 教师页面 -->
             <template v-if="teacher">
-              <el-menu-item index="/usercenter/teacherStartCorrect">
-                <i class="el-icon-s-order"></i>
-                <span slot="title">开始批卷</span>
-              </el-menu-item>
               <div class="dropdown-divider"></div>
-              <el-menu-item index="/usercenter/adminHomepage">
-                <i class="el-icon-reading"></i>
-                <span slot="title">主页编辑</span>
-              </el-menu-item>
-              <el-menu-item index="/usercenter/managerGetUserInfo">
-                <i class="el-icon-document-copy"></i>
-                <span slot="title">学生信息</span>
-              </el-menu-item>
               <el-submenu index="/usercenter/managerTestType">
                 <template slot="title">
                   <i class="el-icon-edit-outline"></i>
                   <span>考试管理</span>
                 </template>
                 <el-menu-item-group>
-                  <el-menu-item index="/usercenter/managerTestType/managerExam"
-                    >考试信息管理</el-menu-item
-                  >
-                  <el-menu-item
-                    index="/usercenter/managerTestType/registrationRelease"
-                    >报名发布管理</el-menu-item
-                  >
                   <el-menu-item index="/usercenter/managerTestType/managerScore"
                     >考试分数管理</el-menu-item
                   >
+                  <el-menu-item index="/usercenter/managerTestType/markingPaper"
+                  >阅卷查询</el-menu-item
+                  >
                 </el-menu-item-group>
               </el-submenu>
-              <el-menu-item index="/usercenter/managerChannel">
-                <i class="el-icon-monitor"></i>
-                <span slot="title">频道管理</span>
-              </el-menu-item>
             </template>
 
             <!-- 管理员页面 -->
@@ -93,17 +72,47 @@
                 <i class="el-icon-help"></i>
                 <span slot="title">用户角色</span>
               </el-menu-item>
+              <el-menu-item index="/usercenter/managerGetUserInfo">
+                <i class="el-icon-document-copy"></i>
+                <span slot="title">用户信息</span>
+              </el-menu-item>
               <el-menu-item index="/usercenter/adminGetLog">
                 <i class="el-icon-printer"></i>
                 <span slot="title">获取日志</span>
               </el-menu-item>
+              <el-menu-item index="/usercenter/adminEdit">
+                <i class="el-icon-printer"></i>
+                <span slot="title">编辑考试内容</span>
+              </el-menu-item>
+              <el-submenu index="/usercenter/managerTestType">
+                <template slot="title">
+                  <i class="el-icon-edit-outline"></i>
+                  <span>考试管理</span>
+                </template>
+                <el-menu-item-group>
+                  <el-menu-item index="/usercenter/managerTestType/managerExam"
+                  >考试信息管理</el-menu-item
+                  >
+                  <el-menu-item
+                    index="/usercenter/managerTestType/registrationRelease"
+                  >报名发布管理</el-menu-item
+                  >
+                  <el-menu-item index="/usercenter/managerTestType/managerScore"
+                  >考试分数管理</el-menu-item
+                  >
+                </el-menu-item-group>
+              </el-submenu>
             </template>
-              
+
             <template v-else>
               <el-menu-item index="/usercenter/personalStartExam">
-              <i class="el-icon-s-order"></i>
-              <span slot="title">开始考试</span>
-            </el-menu-item>
+                <i class="el-icon-s-order"></i>
+                <span slot="title">开始考试</span>
+              </el-menu-item>
+              <el-menu-item index="/usercenter/checkScore">
+                <i class="el-icon-s-order"></i>
+                <span slot="title">分数查询</span>
+              </el-menu-item>
             </template>
 
             <div class="dropdown-divider"></div>

@@ -12,15 +12,24 @@ import javax.validation.constraints.Size;
 @NoArgsConstructor
 public class ExamDetailRequest {
 
-    private String examId;
+    private String examDetailId;
 
-    private String examTypeName;
+    @NotBlank(message = "考试类型id不能为空")
+    @Size(min = 30 , max = 30 ,message = "考试类型id长度为32位")
+    private String examTypeId;
 
-    private String examTime;
+    @NotBlank(message = "考试说明不能为空")
+    private String examDescription;
 
-    private String examTotalNum;
+    @NotBlank(message = "考试开始时间不能为空")
+    private String examStartTime;
 
-    private String examPresentNum;
+    @NotBlank(message = "考试结束时间不能为空")
+    private String examEndTime;
 
-    private String examState;
+    @NotBlank(message = "考场位置不能为空")
+    private String examLocation;
+
+    @NotBlank(message = "成绩发布时间公告")
+    private String examAnnounce;
 }

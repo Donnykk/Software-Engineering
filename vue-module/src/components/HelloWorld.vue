@@ -1,51 +1,150 @@
 <template>
   <div>
     <div>
-      <img :src="html_top_imgUrl" style="height: 60%; width: 60%" />
+      <img :src="html_top_imgUrl" style="height: 100%; width: 100%" />
     </div>
-    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd">
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <nav
+      class="navbar navbar-expand-lg navbar-light"
+      style="background-color: #e3f2fd"
+    >
+
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
         <span class="navbar-toggler-icon"></span>
       </button>
+
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <router-link to="/publicGetExam" class="nav-link" role="button" aria-haspopup="true" aria-expanded="false">
-              考试中心
+            <router-link
+              class="nav-link"
+              to="/homepage"
+              id="navbarDropdown"
+              role="button"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              首页
             </router-link>
           </li>
+          <li class="nav-item dropdown" v-if="ifShow">
+            <a
+              class="nav-link"
+              href="#"
+              id="navbarDropdown"
+              role="button"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              考试报名
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <router-link class="dropdown-item" to="/publicGetExam"
+                >报名中心</router-link
+              >
+              <div class="dropdown-divider"></div>
+              <router-link class="dropdown-item" to="/examTips"
+              >报名提示</router-link
+              >
+              <div class="dropdown-divider"></div>
+              <router-link class="dropdown-item" to="/tranScript"
+              >成绩报告单</router-link
+              >
+              <div class="dropdown-divider"></div>
+              <router-link class="dropdown-item" to="/commonQuestions"
+              >常见问题</router-link
+              >
+            </div>
+          </li>
           <li class="nav-item dropdown">
-            <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
-              aria-expanded="false">
+            <a
+              class="nav-link"
+              href="#"
+              id="navbarDropdown"
+              role="button"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
               {{ student_Name }}
             </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown" v-if="ifShow">
-              <router-link class="dropdown-item" style="text-align: center" to="">
-                <el-avatar v-image-preview :src="userAvatar" :size="70"></el-avatar>
+            <div
+              class="dropdown-menu"
+              aria-labelledby="navbarDropdown"
+              v-if="ifShow"
+            >
+              <router-link
+                class="dropdown-item"
+                style="text-align: center"
+                to=""
+              >
+                <el-avatar
+                  v-image-preview
+                  :src="userAvatar"
+                  :size="70"
+                ></el-avatar>
               </router-link>
               <div class="dropdown-divider"></div>
-              <router-link class="dropdown-item" to="usercenter">个人中心</router-link>
-              <router-link class="dropdown-item" @click.native="logout" to="">退出</router-link>
+              <router-link class="dropdown-item" to="usercenter"
+                >个人中心</router-link
+              >
+              <router-link class="dropdown-item" @click.native="logout" to=""
+                >退出</router-link
+              >
             </div>
 
             <div class="dropdown-menu" aria-labelledby="navbarDropdown" v-else>
-              <router-link class="dropdown-item" to="login">前往登陆界面</router-link>
+              <router-link class="dropdown-item" to="login"
+                >前往登陆界面</router-link
+              >
               <div class="dropdown-divider"></div>
-              <router-link class="dropdown-item" to="register">前往注册界面</router-link>
+              <router-link class="dropdown-item" to="register"
+                >前往注册界面</router-link
+              >
             </div>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="" id="navbarDropdown" role="button" aria-haspopup="true"
-              aria-expanded="false" @click.native="toChinaEdu">
+            <router-link
+              class="nav-link"
+              to=""
+              id="navbarDropdown"
+              role="button"
+              aria-haspopup="true"
+              aria-expanded="false"
+              @click.native="toChinaEdu"
+            >
               中国教育考试网
             </router-link>
           </li>
         </ul>
-
+        <form class="form-inline my-2 my-lg-0">
+          <input
+            class="form-control mr-sm-2"
+            type="search"
+            placeholder="请输入消息搜索关键字"
+            aria-label="Search"
+            v-model="search"
+            @keyup.enter="searchMessage"
+          />
+          <el-button
+            class="btn btn-outline-success my-2 my-sm-0"
+            type="success"
+            size="medium"
+            @click="searchMessage"
+          >
+            搜索
+          </el-button>
+        </form>
       </div>
     </nav>
-
     <div class="to-text-center">
       <router-view></router-view>
     </div>
@@ -62,7 +161,10 @@ import axios from "axios";
 import html_top_imgUrl from "../assets/html_top.png";
 //homepageMessage子组件注册
 import homepageMessage from "./public/message/homepagemessage";
-
+//创建一个函数来增加月日时小于10在前面加0
+var padaDate = function (value) {
+  return value < 10 ? "0" + value : value;
+};
 export default {
   inject: ["reload"],
   name: "HelloWorld",
@@ -90,6 +192,8 @@ export default {
       rememberMe: this.$route.params.rememberMe,
       //主页标题图片
       html_top_imgUrl: html_top_imgUrl,
+      //实时时间
+      date: new Date(),
     };
   },
   computed: {
@@ -116,6 +220,34 @@ export default {
     if (this.timer) {
       clearInterval(this.timer); // 在Vue实例销毁前，清除我们的定时器
     }
+  },
+  filters: {
+    //设置一个函数来进行过滤
+    formDate: function (value) {
+      //创建一个时间日期对象
+      var date = new Date();
+      var year = date.getFullYear(); //存储年
+      var month = padaDate(date.getMonth() + 1); //存储月份
+      var day = padaDate(date.getDate()); //存储日期
+      var hours = padaDate(date.getHours()); //存储时
+      var minutes = padaDate(date.getMinutes()); //存储分
+      var seconds = padaDate(date.getSeconds()); //存储秒
+      //返回格式化后的日期
+      return (
+        year +
+        "年" +
+        month +
+        "月" +
+        day +
+        "日" +
+        hours +
+        "时" +
+        minutes +
+        "分" +
+        seconds +
+        "秒"
+      );
+    },
   },
   created: function () {
     //cookie操作
@@ -189,7 +321,7 @@ export default {
             });
           },
           function (err) {
-            that.student_Name = "唐鹏程";
+            that.student_Name = "未命名";
             //获得小黑头像
             var _that = that;
             axios({

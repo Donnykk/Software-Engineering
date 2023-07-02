@@ -63,7 +63,6 @@
           v-if="!teacher"
         >
           <el-option label="考试相关" value="考试相关"></el-option>
-          <el-option label="网站相关" value="网站相关"></el-option>
           <el-option label="其他" value="其他"></el-option>
         </el-select>
         <el-select

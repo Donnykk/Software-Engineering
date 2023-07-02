@@ -60,7 +60,7 @@ public class ImageService {
         image.setImageId(bizIdFactory.getImage());
         imageRepo.save(image);
         ImageBO imageBO = image.toImageBO();
-        imageBO.setUrl(url + image.getImageName() + imageBO.getUserId() + suffix );
+        //imageBO.setUrl(image.getUrl() + image.getImageName() + imageBO.getUserId() + suffix );
         //help gc
         image = null;
         return imageBO;
@@ -105,8 +105,8 @@ public class ImageService {
         return imageRepo.findByTag(tag).stream().map(ImageDO::toImageBO).peek(imageBO -> imageBO.setUrl(url + imageBO.getImageName() + imageBO.getUserId() + suffix )).collect(Collectors.toList());
     }
 
-     @Transactional(rollbackFor = Exception.class)
-     public  ImageBO modifyImage(ImageRequest request){
+    @Transactional(rollbackFor = Exception.class)
+    public  ImageBO modifyImage(ImageRequest request){
 
         if (!imageRepo.existsByImageId(request.getImageId()))
             throw new CustomizeException(CommonResultCode.UNFOUNDED,"图片id不存在");
@@ -129,9 +129,9 @@ public class ImageService {
         if (!StringUtils.isEmpty(request.getImageName()))
             image.setImageName(request.getImageName());
 
-       imageRepo.save(image);
+        imageRepo.save(image);
 
-       return image.toImageBO();
+        return image.toImageBO();
     }
 
     @Transactional(rollbackFor = Exception.class)

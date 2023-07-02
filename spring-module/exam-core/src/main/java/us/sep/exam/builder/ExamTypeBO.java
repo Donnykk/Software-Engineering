@@ -16,13 +16,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ExamTypeBO {
 
-    private String examId;
+    private String examTypeId;
 
-    private String examTime;
+    private String examLimit;
 
-    private String examType;
+    private String examTypeName;
 
-    private String examAddress;
-
-    private int examNum;
+    private String examTypeDescription;
 }

@@ -43,7 +43,7 @@ public class ExamEntryServiceImpl implements ExamEntryService {
         if (request.getTerm().equals(ExamTermEnum.FirstHalf.getTerm()) && request.getTerm().equals(ExamTermEnum.SecondHalf.getTerm()))
             throw new CustomizeException(CommonResultCode.ILLEGAL_PARAMETERS,"学期参数不正确");
 
-        if (!examDetailRepo.existsByExamId(request.getExamDetailId()) )
+        if (!examDetailRepo.existsByExamDetailId(request.getExamDetailId()) )
             throw new CustomizeException(CommonResultCode.UNFOUNDED,"不存在该次考试");
 
         if (examEntryRepo.existsByExamDetailId(request.getExamDetailId()) )

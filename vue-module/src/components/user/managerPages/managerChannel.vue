@@ -214,7 +214,7 @@
               </el-form-item>
               <br />
               <el-form-item label="状态">
-                <span v-if="props.row.ifpublish">已发布</span>
+                <span v-if="props.row.ifPublish">已发布</span>
                 <span v-else>草稿件</span>
               </el-form-item>
               <br />
@@ -228,7 +228,7 @@
                 <el-button
                   type="primary"
                   icon="el-icon-share"
-                  v-if="!props.row.ifpublish"
+                  v-if="!props.row.ifPublish"
                   @click="saveToSend(props)"
                   >发布</el-button
                 >
@@ -332,7 +332,7 @@ export default {
         //考试具体描述
         examDescription: "",
         //是否发布 0保存 1发布， 默认保存
-        ifpublish: 0,
+        ifPublish: 0,
       },
 
       formLabelWidth: "120px",
@@ -638,7 +638,7 @@ export default {
 
     sendMessage: function () {
       var that = this;
-      this.message_form.ifpublish = 1;
+      this.message_form.ifPublish = 1;
       axios({
         headers: {
           Authorization: this.print.Authorization,
@@ -665,12 +665,12 @@ export default {
             message: "发布成功",
             type: "success",
           });
-          (that.message_form.content = ""), (that.message_form.ifpublish = 0);
+          (that.message_form.content = ""), (that.message_form.ifPublish = 0);
           that.messagedialogFormVisible = false;
         },
         function (err) {
           that.$message.error("发布失败，请重新尝试");
-          that.message_form.ifpublish = 0;
+          that.message_form.ifPublish = 0;
           that.messagedialogFormVisible = false;
         }
       );
@@ -698,8 +698,8 @@ export default {
     deleteMessage: function (row) {
       var that = this;
       var publish = 0;
-      if (typeof row.row.ifpublish == "boolean")
-        if (row.row.ifpublish == true) publish = 1;
+      if (typeof row.row.ifPublish == "boolean")
+        if (row.row.ifPublish == true) publish = 1;
         else publish = 0;
       axios({
         headers: {
@@ -715,7 +715,7 @@ export default {
           channel: row.row.channel,
           examType: row.row.examType,
           examDescription: row.row.examDescription,
-          ifpublish: publish,
+          ifPublish: publish,
         },
       }).then(function (response) {
         if (response.data.success != false) {
@@ -746,11 +746,11 @@ export default {
           channel: row.row.channel,
           examType: row.row.examType,
           examDescription: row.row.examDescription,
-          ifpublish: 1,
+          ifPublish: 1,
         },
       }).then(function (response) {
         if (response.data.success != false) {
-          row.row.ifpublish = true;
+          row.row.ifPublish = true;
           that.$message({
             message: "发布成功",
             type: "success",

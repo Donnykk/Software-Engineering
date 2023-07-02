@@ -28,7 +28,6 @@ public class ImageRequest {
     @NotBlank
     private String tag;
 
-
-
+    private String url;
 
 }

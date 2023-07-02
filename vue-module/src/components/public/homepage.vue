@@ -1,6 +1,14 @@
 <template>
   <div>
-
+    <el-carousel :interval="4000" type="card" height="420px">
+      <el-carousel-item
+        v-for="(item, index) in fiveImage"
+        :key="index"
+        class="carousel_image_type"
+      >
+        <img :src="item.url" style="height: 100%; width: 100%" />
+      </el-carousel-item>
+    </el-carousel>
   </div>
 </template>
 

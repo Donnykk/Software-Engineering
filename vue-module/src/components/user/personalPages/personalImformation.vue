@@ -6,13 +6,13 @@
         <div class="block">
           <el-avatar v-image-preview :src="imageUrl" :size="100"></el-avatar
           ><el-button
-            @click="uploadExamDialog = true"
-            v-if="haveExam"
-            size="small"
-            >上传照片</el-button
-          >
+          @click="uploadExamDialog = true"
+          v-if="haveExam"
+          size="small"
+        >上传照片</el-button
+        >
           <el-button v-else type="danger" @click="deleteExam" size="small"
-            >删除照片</el-button
+          >删除照片</el-button
           >
         </div>
       </el-header>
@@ -20,49 +20,103 @@
         <el-form :model="personInfo" class="demo-ruleForm" v-if="ifUpdate">
           <div class="form-group">
             <el-form-item prop="realName"
-              >姓名
+            >姓名
               <el-input
                 type="text"
                 autocomplete="off"
                 v-model="personInfo.realName"
-            /></el-form-item>
+              /></el-form-item>
+          </div>
+          <div class="form-group">
+            <el-form-item prop="mySex"
+            >性别
+              <el-input
+                type="text"
+                autocomplete="off"
+                v-model="personInfo.mySex"
+              /></el-form-item>
+          </div>
+          <div class="form-group">
+            <el-form-item prop="mySchool"
+            >学校
+              <el-input
+                type="text"
+                autocomplete="off"
+                v-model="personInfo.mySchool"
+              /></el-form-item>
+          </div>
+          <div class="form-group">
+            <el-form-item prop="myArea"
+            >校区
+              <el-input
+                type="text"
+                autocomplete="off"
+                v-model="personInfo.myArea"
+              /></el-form-item>
+          </div>
+          <div class="form-group">
+            <el-form-item prop="myDepartment"
+            >院系
+              <el-input
+                type="text"
+                autocomplete="off"
+                v-model="personInfo.myDepartment"
+              /></el-form-item>
           </div>
           <fieldset disabled>
             <div class="form-group">
               <el-form-item prop="stuNo"
-                >学号
+              >学号
                 <el-input
                   type="text"
                   autocomplete="off"
                   v-model="personInfo.stuNo"
-              /></el-form-item>
+                /></el-form-item>
             </div>
             <div class="form-group">
               <el-form-item prop="major"
-                >专业
+              >专业
                 <el-input
                   type="text"
                   autocomplete="off"
                   v-model="personInfo.major"
-              /></el-form-item>
+                /></el-form-item>
             </div>
             <div class="form-group">
               <el-form-item prop="className"
-                >专业班级
+              >专业班级
                 <el-input
                   type="text"
                   autocomplete="off"
                   v-model="personInfo.className"
-              /></el-form-item>
+                /></el-form-item>
+            </div>
+            <div class="form-group">
+              <el-form-item prop="myEducation"
+              >学历
+                <el-input
+                  type="text"
+                  autocomplete="off"
+                  v-model="personInfo.myEducation"
+                /></el-form-item>
+            </div>
+            <div class="form-group">
+              <el-form-item prop="myIdType"
+              >证件类型
+                <el-input
+                  type="text"
+                  autocomplete="off"
+                  v-model="personInfo.myIdType"
+                /></el-form-item>
             </div>
             <div class="form-group">
               <el-form-item prop="identificationNumber"
-                >身份证号码
+              >身份证号码
                 <el-input
                   type="text"
                   autocomplete="off"
                   v-model="personInfo.identificationNumber"
-              /></el-form-item>
+                /></el-form-item>
             </div>
           </fieldset>
           <el-button @click="changeIfUpdate">更改信息</el-button>
@@ -78,25 +132,61 @@
           <fieldset>
             <div class="form-group">
               <el-form-item prop="u_realName"
-                >姓名
+              >姓名
                 <el-input
                   type="text"
                   autocomplete="off"
                   v-model="personInfoUpdate.u_realName"
-              /></el-form-item>
+                /></el-form-item>
+            </div>
+            <div class="form-group">
+              <el-form-item prop="u_mySex"
+              >性别
+                <el-input
+                  type="text"
+                  autocomplete="off"
+                  v-model="personInfoUpdate.u_mySex"
+                /></el-form-item>
+            </div>
+            <div class="form-group">
+              <el-form-item prop="u_mySchool"
+              >学校
+                <el-input
+                  type="text"
+                  autocomplete="off"
+                  v-model="personInfoUpdate.u_mySchool"
+                /></el-form-item>
+            </div>
+            <div class="form-group">
+              <el-form-item prop="u_myArea"
+              >校区
+                <el-input
+                  type="text"
+                  autocomplete="off"
+                  v-model="personInfoUpdate.u_myArea"
+                /></el-form-item>
+            </div>
+            <div class="form-group">
+              <el-form-item prop="u_myDepartment"
+              >院系
+                <el-input
+                  type="text"
+                  autocomplete="off"
+                  v-model="personInfoUpdate.u_myDepartment"
+                /></el-form-item>
             </div>
             <div class="form-group">
               <el-form-item prop="u_stuNo"
-                >学号
+              >学号
                 <el-input
                   type="text"
                   autocomplete="off"
                   v-model="personInfoUpdate.u_stuNo"
-              /></el-form-item>
+                /></el-form-item>
             </div>
             <div class="form-group">
               <el-form-item prop="u_major"
-                >专业<br />
+              >专业<br />
                 <el-select
                   v-model="personInfoUpdate.u_major"
                   placeholder="请选择"
@@ -109,11 +199,11 @@
                     :value="item.discipline"
                   >
                   </el-option> </el-select
-              ></el-form-item>
+                ></el-form-item>
             </div>
             <div class="form-group" v-if="chooseMajor">
               <el-form-item prop="u_className"
-                >专业班级<br />
+              >专业班级<br />
                 <el-select
                   v-model="personInfoUpdate.u_className"
                   placeholder="请选择"
@@ -125,21 +215,39 @@
                     :value="item"
                   >
                   </el-option> </el-select
-              ></el-form-item>
+                ></el-form-item>
+            </div>
+            <div class="form-group">
+              <el-form-item prop="u_myEducation"
+              >学历
+                <el-input
+                  type="text"
+                  autocomplete="off"
+                  v-model="personInfoUpdate.u_myEducation"
+                /></el-form-item>
+            </div>
+            <div class="form-group">
+              <el-form-item prop="u_myIdType"
+              >证件类型
+                <el-input
+                  type="text"
+                  autocomplete="off"
+                  v-model="personInfoUpdate.u_myIdType"
+                /></el-form-item>
             </div>
             <div class="form-group">
               <el-form-item prop="u_identificationNumber"
-                >身份证号码
+              >身份证号码
                 <el-input
                   type="text"
                   autocomplete="off"
                   v-model="personInfoUpdate.u_identificationNumber"
-              /></el-form-item>
+                /></el-form-item>
             </div>
           </fieldset>
           <el-button type="button" @click="changeIfUpdate">取消更改</el-button>
           <el-button type="button" @click="dialogVisible = true"
-            >更改信息</el-button
+          >更改信息</el-button
           >
 
           <el-dialog title="提示" :visible.sync="dialogVisible" width="30%">
@@ -149,7 +257,7 @@
               <el-button
                 type="primary"
                 @click="updateInformation('personInfoUpdate')"
-                >确 定</el-button
+              >确 定</el-button
               >
             </span>
           </el-dialog>
@@ -172,14 +280,14 @@
         :limit="1"
       >
         <el-button slot="trigger" size="small" type="primary"
-          >选取文件</el-button
+        >选取文件</el-button
         >
         <el-button
           @click="uploadExam"
           style="margin-left: 10px"
           size="small"
           type="success"
-          >上传照片</el-button
+        >上传照片</el-button
         >
         <div slot="tip" class="el-upload__tip">
           只能上传jpg/png文件，且不超过1MB
@@ -200,9 +308,15 @@ export default {
       personInfo: {
         realName: "",
         stuNo: "",
-        major: "",
-        className: "",
+        major: "计算机科学与技术",
+        className: "软件工程徐思涵老师班",
         identificationNumber: "",
+        mySchool: '南开大学',
+        myArea: '南开大学津南校区',
+        myEducation: '本科',
+        myDepartment: '计算机科学与技术',
+        mySex: '',
+        myIdType: '中华人民共和国居民身份证',
       },
       ifUpdate: true,
 
@@ -216,9 +330,15 @@ export default {
       personInfoUpdate: {
         u_realName: "",
         u_stuNo: "",
-        u_major: "",
-        u_className: "",
+        u_major: "计算机科学与技术",
+        u_className: "软件工程徐思涵老师班",
         u_identificationNumber: "",
+        u_mySchool: '南开大学',
+        u_myArea: '南开大学津南校区',
+        u_myEducation: '本科',
+        u_myDepartment: '计算机科学与技术',
+        u_mySex: '',
+        u_myIdType: '中华人民共和国居民身份证',
       },
       dialogVisible: false,
       //头像dialog
@@ -247,7 +367,7 @@ export default {
         ],
         u_stuNo: [
           { required: true, message: "请输入学号", trigger: "blur" },
-          { min: 9, max: 10, message: "请输入正确的学号", trigger: "blur" },
+          { min: 7, max: 7, message: "请输入正确的学号", trigger: "blur" },
         ],
         u_major: [{ required: true, message: "请输入专业", trigger: "blur" }],
         u_className: [
@@ -256,7 +376,7 @@ export default {
         u_identificationNumber: [
           { required: true, message: "请输入身份证", trigger: "blur" },
           {
-            min: 15,
+            min: 18,
             max: 18,
             message: "请如实填写18位身份证号码",
             trigger: "blur",
@@ -267,6 +387,24 @@ export default {
             message: "身份证格式错误，请输入正确的身份证号码",
             trigger: "blur",
           },
+        ],
+        u_mySchool: [
+          { required: true, message: "请输入你的大学", trigger: "blur" },
+        ],
+        u_myArea: [
+          { required: true, message: "请输入你所在校区", trigger: "blur" },
+        ],
+        u_myEducation: [
+          { required: true, message: "请输入你的学历", trigger: "blur" },
+        ],
+        u_myDepartment: [
+          { required: true, message: "请输入你的院系", trigger: "blur" },
+        ],
+        u_mySex: [
+          { required: true, message: "请输入你的性别", trigger: "blur" },
+        ],
+        u_myIdType: [
+          { required: true, message: "请输入你的证件类型", trigger: "blur" },
         ],
       },
     };
@@ -299,6 +437,12 @@ export default {
           that.personInfoUpdate.u_className = reponse.data.data.className;
           that.personInfoUpdate.u_identificationNumber =
             reponse.data.data.identificationNumber;
+          that.personInfoUpdate.u_mySchool = reponse.data.data.mySchool;
+          that.personInfoUpdate.u_myArea = reponse.data.data.myArea;
+          that.personInfoUpdate.u_myEducation = reponse.data.data.myEducation;
+          that.personInfoUpdate.u_myDepartment = reponse.data.data.myDepartment;
+          that.personInfoUpdate.u_mySex = reponse.data.data.mySex;
+          that.personInfoUpdate.u_myIdType = reponse.data.data.myIdType;
         },
         function (err) {
           that.$message.error("你没有信息，请尽快填写");
@@ -342,6 +486,12 @@ export default {
       this.personInfoUpdate.u_major = this.personInfo.major;
       this.personInfoUpdate.u_className = this.personInfo.className;
       this.personInfoUpdate.u_identificationNumber = this.personInfo.identificationNumber;
+      this.personInfoUpdate.u_mySchool = this.personInfo.mySchool;
+      this.personInfoUpdate.u_myArea = this.personInfo.myArea;
+      this.personInfoUpdate.u_myEducation = this.personInfo.myEducation;
+      this.personInfoUpdate.u_myDepartment = this.personInfo.myDepartment;
+      this.personInfoUpdate.u_mySex = this.personInfo.mySex;
+      this.personInfoUpdate.u_myIdType = this.personInfo.myIdType;
       if (this.personInfoUpdate.u_major != "") this.chooseMajor = true;
       else this.chooseMajor = false;
 
@@ -421,6 +571,12 @@ export default {
                 major: this.personInfoUpdate.u_major,
                 identificationNumber: this.personInfoUpdate
                   .u_identificationNumber,
+                mySchool: this.personInfoUpdate.u_mySchool,
+                myArea: this.personInfoUpdate.u_myArea,
+                myEducation: this.personInfoUpdate.u_myEducation,
+                myDepartment: this.personInfoUpdate.u_myDepartment,
+                mySex: this.personInfoUpdate.u_mySex,
+                myIdType: this.personInfoUpdate.u_myIdType,
               },
             }).then(
               function (reponse) {
@@ -448,6 +604,12 @@ export default {
                 major: this.personInfoUpdate.u_major,
                 identificationNumber: this.personInfoUpdate
                   .u_identificationNumber,
+                mySchool: this.personInfoUpdate.u_mySchool,
+                myArea: this.personInfoUpdate.u_myArea,
+                myEducation: this.personInfoUpdate.u_myEducation,
+                myDepartment: this.personInfoUpdate.u_myDepartment,
+                mySex: this.personInfoUpdate.u_mySex,
+                myIdType: this.personInfoUpdate.u_myIdType,
               },
               headers: {
                 Authorization: this.print.Authorization,
@@ -514,6 +676,8 @@ export default {
               ),
               userId: this.userId.userId,
               tag: "Exam",
+              url: "../../../assets/" + this.fileData.name.slice(0, this.fileData.name.length - 4)
+                + this.userId.userId + ".jpg",
             },
           }),
         ])

@@ -116,6 +116,7 @@ public class UserService {
     }
 	
     @Transactional(rollbackFor = Exception.class)
+	//todo 加个邮箱登录
     public User find(String userName) {
         //return userRepo.findByUserName(userName).orElseThrow(() -> new UserNameNotFoundException(ImmutableMap.of(USERNAME, userName)));
         Optional<User> userByName = userRepo.findByUserName(userName);

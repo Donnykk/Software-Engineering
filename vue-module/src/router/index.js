@@ -4,6 +4,10 @@ import HelloWorld from '@/components/HelloWorld'
 import usercenter from '../components/user/usercenter'
 /* usercenter子路由 */
 /* 普通用户 */
+import myBill from '../components/user/personalPages/myBill'
+import personalStartExam from '../components/user/personalPages/personalStartExam'
+import personalDoExam from '../components/user/personalPages/personalDoExam'
+import checkScore from '../components/user/personalPages/checkScore'
 import personalAccount from '../components/user/personalPages/personalAccount'
 import personalImformation from '../components/user/personalPages/personalImformation'
 import personalProgram from '../components/user/personalPages/personalProgram'
@@ -20,17 +24,24 @@ import managerGetUserInfo from '../components/user/managerPages/managerGetUserIn
 import managerExam from '../components/user/managerPages/managerTest/managerExam'
 import registrationRelease from '../components/user/managerPages/managerTest/registrationRelease'
 import managerScore from '../components/user/managerPages/managerTest/managerScore'
+import markingPaper from '../components/user/managerPages/managerTest/markingPaper'
+import markingDetail from '../components/user/managerPages/managerTest/markingDetail'
 /* 报名子路由 */
 import getRegistration from '../components/user/managerPages/managerTest/registration/getRegistration'
 import setRegistration from '../components/user/managerPages/managerTest/registration/setRegistration'
 import fileRegistration from '../components/user/managerPages/managerTest/registration/fileRegistration'
 /* 用户管理子路由 */
 import managerGetUserInfoList from '../components/user/managerPages/managerUser/managerGetUserInfoList'
+import managerGetUserClassList from '../components/user/managerPages/managerUser/managerGetUserClassList'
 /* 管理员 */
+import adminEdit from '../components/user/adminPages/adminEdit'
 import adminHomepage from '../components/user/adminPages/adminHomepage'
 import adminChangeRole from '../components/user/adminPages/adminChangeRole'
 import adminGetLog from '../components/user/adminPages/adminGetLog'
 /* 主页菜单子路由 */
+import commonQuestions from '../components/public/commonQuestions'
+import tranScript from '../components/public/tranScript'
+import examTips from '../components/public/examTips'
 import homepage from '../components/public/homepage'
 import publicGetChannel from '../components/public/publicGetChannel'
 import publicGetExam from '../components/public/publicGetExam'
@@ -40,8 +51,12 @@ import homepagemessage from '../components/public/message/homepagemessage'
 /* 登陆注册 */
 import login from '../components/user/login'
 import register from '../components/user/register'
-
+/* 登陆跳转中间页
+  url不一致无法做，暂时放弃
+*/
 import authorize from '../components/user/authorize.vue'
+/** 其他网站页面 */
+import htmlUseInfo from '../components/public/otherpages/htmlUseInfo'
 
 // 解决ElementUI导航栏中的vue-router在3.0版本以上重复点菜单报错问题
 const originalPush = Router.prototype.push
@@ -62,6 +77,21 @@ const router = new Router({
           name: 'usercenter',
           component: usercenter,
           children: [
+            {
+              path: 'myBill',
+              name: 'myBill',
+              component: myBill
+            },
+            {
+              path: 'personalStartExam',
+              name: 'personalStartExam',
+              component: personalStartExam
+            },
+            {
+              path: 'checkScore',
+              name: 'checkScore',
+              component: checkScore
+            },
             {
               path: 'personalAccount',
               name: 'personalAccount',
@@ -105,6 +135,11 @@ const router = new Router({
               component: adminHomepage
             },
             {
+              path: 'adminEdit',
+              name: 'adminEdit',
+              component: adminEdit
+            },
+            {
               path: 'adminChangeRole',
               name: 'adminChangeRole',
               component: adminChangeRole
@@ -119,6 +154,11 @@ const router = new Router({
                   name: 'managerGetUserInfoList',
                   component: managerGetUserInfoList
                 },
+                {
+                  path: 'managerGetUserClassList',
+                  name: 'managerGetUserClassList',
+                  component: managerGetUserClassList
+                },
               ]
             },
             {
@@ -130,6 +170,16 @@ const router = new Router({
                   path: 'managerExam',
                   name: 'managerExam',
                   component: managerExam,
+                },
+                {
+                  path: 'markingPaper',
+                  name: 'markingPaper',
+                  component: markingPaper,
+                },
+                {
+                  path: 'markingDetail',
+                  name: 'markingDetail',
+                  component: markingDetail,
                 },
                 {
                   path: 'registrationRelease',
@@ -183,6 +233,21 @@ const router = new Router({
           component: homepagemessage
         },
         {
+          path: '/examTips',
+          name: 'examTips',
+          component: examTips
+        },
+        {
+          path: '/tranScript',
+          name: 'tranScript',
+          component: tranScript
+        },
+        {
+          path: '/commonQuestions',
+          name: 'commonQuestions',
+          component: commonQuestions
+        },
+        {
           path: '/publicGetChannel',
           name: 'publicGetChannel',
           component: publicGetChannel
@@ -197,7 +262,17 @@ const router = new Router({
           name: 'takeinExam',
           component: takeinExam
         },
+        {
+          path: '/htmlUseInfo',
+          name: 'htmlUseInfo',
+          component: htmlUseInfo
+        },
       ]
+    },
+    {
+      path: '/personalDoExam',
+      name: 'personalDoExam',
+      component: personalDoExam
     },
     {
       path: '/login',

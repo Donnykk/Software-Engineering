@@ -18,9 +18,9 @@ import javax.annotation.Resource;
 import java.util.Optional;
 
 /**
- * @Author kana-cr
- * @Date 2020/10/11 9:41
- **/
+  * @Author kana-cr
+  * @Date  2020/10/11 9:41
+  **/
 @Service
 @Slf4j
 public class UserInfoService {
@@ -35,7 +35,7 @@ public class UserInfoService {
     @Transactional(rollbackFor = Exception.class)
     public UserInfoBO Save(UserInfoRequest request) {
         //该用户注册过才能完成用户信息的补充录入
-        if (userRepo.existsByUserName(request.getUsername())) {
+        if (userRepo.existsByUserName(request.getUsername()) ) {
             String userId = userRepo.findByUserName(request.getUsername()).get().getUserId();
             if (!userInfoRepo.existsByUserId(userId)) {
                 UserInfoDO userInfo = new UserInfoDO();
@@ -45,40 +45,60 @@ public class UserInfoService {
                 return userInfo.ToUserInfoBO();
             }
         }
-        throw new CustomizeException(CommonResultCode.UNFOUNDED, "用户名不存在");
+        throw new CustomizeException(CommonResultCode.UNFOUNDED,"用户名不存在");
     }
+        //更新详细信息
+        @Transactional(rollbackFor = Exception.class)
+        public UserInfoBO Update(UserInfoRequest request) {
+            //存在该用户才能完成信息的更新
+            if (userRepo.existsByUserName(request.getUsername()) ) {
+                String userId = userRepo.findByUserName(request.getUsername()).get().getUserId();
+                if (userInfoRepo.existsByUserId(userId)) {
+                    UserInfoDO userInfo = userInfoRepo.findByUserId(userId).get();
 
-    //更新详细信息
-    @Transactional(rollbackFor = Exception.class)
-    public UserInfoBO Update(UserInfoRequest request) {
-        //存在该用户才能完成信息的更新
-        if (userRepo.existsByUserName(request.getUsername())) {
-            String userId = userRepo.findByUserName(request.getUsername()).get().getUserId();
-            if (userInfoRepo.existsByUserId(userId)) {
-                UserInfoDO userInfo = userInfoRepo.findByUserId(userId).get();
+                    if (!StringUtils.isEmpty(request.getClassName()))
+                        userInfo.setClassName(request.getClassName());
 
-                if (!StringUtils.isEmpty(request.getSchool()))
-                    userInfo.setSchool(request.getSchool());
+                    if (!StringUtils.isEmpty(request.getIdentificationNumber()))
+                        userInfo.setIdentificationNumber(request.getIdentificationNumber());
 
-                if (!StringUtils.isEmpty(request.getIdentificationNumber()))
-                    userInfo.setIdentificationNumber(request.getIdentificationNumber());
+                    if (!StringUtils.isEmpty(request.getMajor()))
+                        userInfo.setMajor(request.getMajor());
 
-                if (!StringUtils.isEmpty(request.getRealName()))
-                    userInfo.setRealName(request.getRealName());
+                    if (!StringUtils.isEmpty(request.getRealName()))
+                        userInfo.setRealName(request.getRealName());
 
-                if (!StringUtils.isEmpty(request.getStuNo()))
-                    userInfo.setStuNo(request.getStuNo());
+                    if (!StringUtils.isEmpty(request.getStuNo()))
+                        userInfo.setStuNo(request.getStuNo());
 
-                userInfoRepo.save(userInfo);
-                return userInfo.ToUserInfoBO();
+                    if (!StringUtils.isEmpty(request.getMyEducation()))
+                        userInfo.setMyEducation(request.getMyEducation());
+
+                    if (!StringUtils.isEmpty(request.getMyArea()))
+                        userInfo.setMyArea(request.getMyArea());
+
+                    if (!StringUtils.isEmpty(request.getMySchool()))
+                        userInfo.setMySchool(request.getMySchool());
+
+                    if (!StringUtils.isEmpty(request.getMyDepartment()))
+                        userInfo.setMyDepartment(request.getMyDepartment());
+
+                    if (!StringUtils.isEmpty(request.getMySex()))
+                        userInfo.setMySex(request.getMySex());
+
+                    if (!StringUtils.isEmpty(request.getMyIdType()))
+                        userInfo.setMyIdType(request.getMyIdType());
+
+                    userInfoRepo.save(userInfo);
+                    return userInfo.ToUserInfoBO();
+                }
+                throw new CustomizeException(CommonResultCode.UNFOUNDED,"用户信息未曾录入");
             }
-            throw new CustomizeException(CommonResultCode.UNFOUNDED, "用户信息未曾录入");
+            throw new CustomizeException(CommonResultCode.UNFOUNDED,"不存在该用户");
         }
-        throw new CustomizeException(CommonResultCode.UNFOUNDED, "不存在该用户");
-    }
 
-    //通过用户名查找
-    public UserInfoBO findByName(String username) {
+        //通过用户名查找
+        public UserInfoBO findByName(String username){
         Optional<User> userDO = userRepo.findByUserName(username);
         if (userDO.isPresent()) {
             String userid = userDO.get().getUserId();
@@ -90,26 +110,26 @@ public class UserInfoService {
                 return userInfoBO;
             }
         }
-        throw new CustomizeException(CommonResultCode.UNFOUNDED, "用户名不存在");
+            throw new CustomizeException(CommonResultCode.UNFOUNDED,"用户名不存在");
 
-    }
-
-
-    //通过userid查找
-    public UserInfoBO findById(String userid) {
-        Optional<UserInfoDO> userInfo = userInfoRepo.findByUserId(userid);
-        if (userInfo.isPresent()) {
-            UserInfoDO user = userInfo.get();
-            UserInfoBO userInfoBO = new UserInfoBO();
-            BeanUtils.copyProperties(user, userInfoBO);
-            return userInfoBO;
         }
-        throw new CustomizeException(CommonResultCode.UNFOUNDED, "用户id不存在");
+
+
+       //通过userid查找
+        public UserInfoBO findById(String userid){
+        Optional<UserInfoDO> userInfo = userInfoRepo.findByUserId(userid);
+       if (userInfo.isPresent()) {
+          UserInfoDO user = userInfo.get();
+          UserInfoBO userInfoBO = new UserInfoBO();
+          BeanUtils.copyProperties(user,userInfoBO);
+          return userInfoBO;
+       }
+           throw new CustomizeException(CommonResultCode.UNFOUNDED,"用户id不存在");
 
     }
 
     @Transactional(rollbackFor = Exception.class)
-    public void delete(String username) {
+    public void delete(String username){
         Optional<User> userDO = userRepo.findByUserName(username);
         if (userDO.isPresent()) {
             String userid = userDO.get().getUserId();
@@ -118,10 +138,10 @@ public class UserInfoService {
                 userInfoRepo.deleteByUserId(userid);
                 return;
             }
-            throw new CustomizeException(CommonResultCode.UNFOUNDED, "用户信息未录入,无法删除");
+            throw new CustomizeException(CommonResultCode.UNFOUNDED,"用户信息未录入,无法删除");
         }
 
-        throw new CustomizeException(CommonResultCode.UNFOUNDED, "要删除的用户账号名不存在");
+        throw new CustomizeException(CommonResultCode.UNFOUNDED,"要删除的用户账号名不存在");
     }
 
 

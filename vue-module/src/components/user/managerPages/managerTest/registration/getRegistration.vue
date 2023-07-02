@@ -387,11 +387,21 @@ export default {
         url: "/api/examEntry?examEntryId=" + row.examEntryId,
       }).then(
         function (reponse) {
-          that.$message({
-            message: "删除成功",
-            type: "success",
-          });
-          that.reload();
+          axios({
+            headers: { Authorization: that.print.Authorization },
+            method: "delete",
+            url: "/api/standardAnswer/real?examDetailId=" + row.examDetailId,
+          }).then(function (response) {
+            that.$message({
+              message: "删除成功",
+              type: "success",
+            });
+            that.reload();
+          },
+          function (err) {
+            that.$message.error("删除失败");
+          }
+          )
         },
         function (err) {
           that.$message.error("删除失败");

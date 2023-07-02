@@ -65,14 +65,14 @@ public class ScheduleServiceImpl implements  ScheduleService {
     public void finishExamDetail() {
         Date now = new Date();
         //过滤没结束的单类考试数据
-        List<ExamDetailDO> examDetailDOList = examDetailRepo.findAll().stream().filter(examDetailDO -> DateUtil.parse(examDetailDO.getExamTime(), "yyyy年MM月dd日 HH:mm")
+        List<ExamDetailDO> examDetailDOList = examDetailRepo.findAll().stream().filter(examDetailDO -> DateUtil.parse(examDetailDO.getExamEndTime(), "yyyy年MM月dd日 HH:mm")
                 .before(now)).collect(Collectors.toList());
         if (!CollectionUtils.isEmpty(examDetailDOList)) {
             for (ExamDetailDO examDetailDO : examDetailDOList) {
                 //todo del redis cache
                 examDetailRepo.delete(examDetailDO);
-                redisUtil.hDelete(EXAM_DETAIL, EXAM_DETAIL_ID + examDetailDO.getExamId());
-                redisUtil.zRemove(EXAM_DETAIL_PAGE, EXAM_DETAIL_ID + examDetailDO.getExamId());
+                redisUtil.hDelete(EXAM_DETAIL, EXAM_DETAIL_ID + examDetailDO.getExamDetailId());
+                redisUtil.zRemove(EXAM_DETAIL_PAGE, EXAM_DETAIL_ID + examDetailDO.getExamDetailId());
                 ExamRecordDO examRecordDO = new ExamRecordDO();
                 BeanUtils.copyProperties(examDetailDO, examRecordDO);
                 examRecordDO.setExamRecordId(bizIdFactory.getExamRecordId());

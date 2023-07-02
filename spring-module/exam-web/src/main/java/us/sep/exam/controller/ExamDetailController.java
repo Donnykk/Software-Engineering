@@ -28,45 +28,45 @@ public class ExamDetailController {
     @GetMapping
     @PreAuthorize("hasAnyRole('ROLE_USER','ROLE_MANAGER','ROLE_ADMIN')")
     @Log(loggerName = LoggerName.WEB_DIGEST)
-    public Result<List<ExamDetailBO>> getAllExamDetail(ExamDetailRequest request, @RequestParam(value = "pageNum", defaultValue = "0") int pageNum,
-                                                       @RequestParam(value = "pageSize", defaultValue = "10") int pageSize, HttpServletRequest httpServletRequest) {
-        System.out.println("!!!!!!!");
-        return new Result<>(true, CommonResultCode.SUCCESS.getCode(), CommonResultCode.SUCCESS.getMessage(), examDetailService.find(request, pageNum, pageSize));
+    public Result<List<ExamDetailBO>> getAllExamDetail(ExamDetailRequest request , @RequestParam(value = "pageNum", defaultValue = "0") int pageNum,
+                                                       @RequestParam(value = "pageSize", defaultValue = "10") int pageSize , HttpServletRequest httpServletRequest){
+        return new Result<>(true, CommonResultCode.SUCCESS.getCode(), CommonResultCode.SUCCESS.getMessage(),examDetailService.find(request,pageNum,pageSize));
     }
 
     @AvoidRepeatableCommit
     @PostMapping
     @PreAuthorize("hasAnyRole('ROLE_MANAGER','ROLE_ADMIN')")
     @Log(loggerName = LoggerName.WEB_DIGEST)
-    public Result<ExamDetailBO> publishExamDetail(@Valid ExamDetailRequest request, HttpServletRequest httpServletRequest) {
-        return new Result<>(true, CommonResultCode.SUCCESS.getCode(), CommonResultCode.SUCCESS.getMessage(), examDetailService.save(request));
+    public Result<ExamDetailBO> publishExamDetail(@Valid ExamDetailRequest request , HttpServletRequest httpServletRequest){
+        return new Result<>(true, CommonResultCode.SUCCESS.getCode(), CommonResultCode.SUCCESS.getMessage(),examDetailService.save(request));
     }
 
 
     @PutMapping
     @PreAuthorize("hasAnyRole('ROLE_MANAGER','ROLE_ADMIN')")
     @Log(loggerName = LoggerName.WEB_DIGEST)
-    public Result<ExamDetailRequest> updateExamDetail(ExamDetailRequest request, HttpServletRequest httpServletRequest) throws InterruptedException {
-        AssertUtil.assertStringNotBlank(request.getExamId(), "考试信息id不能为空");
+    public Result<ExamDetailRequest> updateExamDetail(ExamDetailRequest request , HttpServletRequest httpServletRequest) throws InterruptedException {
+        AssertUtil.assertStringNotBlank(request.getExamDetailId(),"考试信息id不能为空");
         examDetailService.update(request);
-        return new Result<>(true, CommonResultCode.SUCCESS.getCode(), CommonResultCode.SUCCESS.getMessage(), request);
+        return new Result<>(true, CommonResultCode.SUCCESS.getCode(), CommonResultCode.SUCCESS.getMessage(),request);
     }
 
 
     @DeleteMapping
     @PreAuthorize("hasAnyRole('ROLE_MANAGER','ROLE_ADMIN')")
     @Log(loggerName = LoggerName.WEB_DIGEST)
-    public Result<String> deleteExamDetailByDetailId(String examDetailId, HttpServletRequest httpServletRequest) {
-        examDetailService.deleteByExamId(examDetailId);
-        return new Result<>(true, CommonResultCode.SUCCESS.getCode(), CommonResultCode.SUCCESS.getMessage(), examDetailId);
+    public Result<String> deleteExamDetailByDetailId(String examDetailId , HttpServletRequest httpServletRequest){
+        examDetailService.deleteByExamDetailId(examDetailId);
+        return new Result<>(true, CommonResultCode.SUCCESS.getCode(), CommonResultCode.SUCCESS.getMessage(),examDetailId);
     }
 
     @AvoidRepeatableCommit
     @DeleteMapping("/examType")
     @PreAuthorize("hasAnyRole('ROLE_MANAGER','ROLE_ADMIN')")
     @Log(loggerName = LoggerName.WEB_DIGEST)
-    public Result<String> deleteExamDetailByExamTypeId(String examTypeId, HttpServletRequest httpServletRequest) {
+    public Result<String> deleteExamDetailByExamTypeId(String examTypeId , HttpServletRequest httpServletRequest){
         examDetailService.deleteByExamTypeId(examTypeId);
-        return new Result<>(true, CommonResultCode.SUCCESS.getCode(), CommonResultCode.SUCCESS.getMessage(), examTypeId);
+        return new Result<>(true, CommonResultCode.SUCCESS.getCode(), CommonResultCode.SUCCESS.getMessage(),examTypeId);
     }
+
 }

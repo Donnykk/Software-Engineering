@@ -160,12 +160,28 @@ export default {
         params: this.registrationForm,
       }).then(
         function (reponse) {
-          that.registrationDialogVisible = false;
-          that.$message({
-            message: "发布报名成功",
-            type: "success",
-          });
-          that.registrationForm.number = "";
+          axios({
+            headers: {Authorization: that.print.Authorization,},
+            method: "post",
+            url: "/api/standardAnswer",
+            params: {
+              examDetailId: that.registrationForm.examDetailId,
+              answer1: "$$$$$$$$$$$$$$$$$$$$$$$$$",
+              answer2: "$$",
+              answer3: "$$",
+            }
+          }).then(function (response) {
+            that.registrationDialogVisible = false;
+            that.$message({
+              message: "发布报名成功",
+              type: "success",
+            });
+            that.registrationForm.number = "";
+          },
+          function (err) {
+            that.$message.error("发布报名失败");
+          }
+          )
         },
         function (err) {
           that.$message.error("发布报名失败");
