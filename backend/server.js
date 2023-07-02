@@ -349,6 +349,29 @@ router.delete('/api/article/:articleId', async (ctx) => {
     ctx.body = { error: 'Internal server error' };
   }
 });
+router.get('/api/articles', async (ctx) => {
+  try {
+    // 连接到MySQL数据库
+    const connection = await mysql.createConnection({
+      host: 'localhost',
+      user: 'root',
+      password: 'Top50761',
+      database: 'test-sql'
+    });
+
+    // 执行查询语句获取所有文章信息
+    const sql = 'SELECT * FROM articles';
+    const [rows] = await connection.execute(sql);
+
+    connection.end();
+
+    ctx.body = { data: rows };
+  } catch (error) {
+    console.error(error);
+    ctx.status = 500;
+    ctx.body = { error: 'Internal server error' };
+  }
+});
 
 const bodyParser = require('koa-bodyparser');
 
