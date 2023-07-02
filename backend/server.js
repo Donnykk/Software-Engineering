@@ -89,9 +89,20 @@ router.get('/api/teacher/getexam', async (ctx) => {
   ctx.body = { error: 'Internal server error' };
   }
 });
-app.use(router.routes());
+app.use(async (ctx, next) => {
+  ctx.set('Access-Control-Allow-Origin', 'http://localhost:8081');
+  ctx.set('Access-Control-Allow-Methods', 'GET, POST');
+  ctx.set('Access-Control-Allow-Headers', 'Content-Type');
+  ctx.set('Access-Control-Allow-Credentials', 'true'); // 允许凭证
+  await next();
+});
+const bodyParser = require('koa-bodyparser');
 
+app.use(bodyParser()); // 使用中间件解析请求体
+app.use(router.routes());
+app.use(router.allowedMethods());
 
 app.listen(3000, () => {
-  console.log('Server is running on port 3000');
+console.log('Server is running on port 3000');
 });
+
